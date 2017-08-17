@@ -1,0 +1,17 @@
+bin/
+.metadata/
+tmp/
+cache/
+res/
+/user.settings.xml
+/target/
+/recent.files.xml
+/recent.files.json
+/user.settings.json
+/.settings/
+/previous.readsj
+/dependency-reduced-pom.xml
+/doc/
+/out.log
+/out.log.*
+/user.setj
