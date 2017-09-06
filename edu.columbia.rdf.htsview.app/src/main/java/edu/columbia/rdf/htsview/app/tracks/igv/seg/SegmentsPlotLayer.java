@@ -26,6 +26,7 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.IterMap;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.colormap.ColorMap;
@@ -58,8 +59,6 @@ public class SegmentsPlotLayer extends AxesLayer {
 	 * @param colorMap the color map
 	 */
 	public SegmentsPlotLayer(ColorMap colorMap) {
-		super("Segments");
-		
 		mColorMap = colorMap; //ColorMap.createBlueWhiteRedMap();
 	}
 
@@ -89,9 +88,10 @@ public class SegmentsPlotLayer extends AxesLayer {
 	 * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plot(Graphics2D g2, 
+	public void drawPlot(Graphics2D g2, 
 			DrawingContext context, 
-			SubFigure figure, 
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 
 		if (CollectionUtils.isNullOrEmpty(mRegions)) {

@@ -25,7 +25,7 @@ import edu.columbia.rdf.htsview.tracks.Track;
 import org.jebtk.core.collections.ArrayListCreator;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.IterMap;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
@@ -68,11 +68,11 @@ public class SegmentsSubFigure extends FixedSubFigure {
 		setColorMap(colorMap);
 		
 		// set the graph limits
-		getCurrentAxes().getX1Axis().getTitle().setText(null);
-		getCurrentAxes().getY1Axis().setLimits(0, 1);
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().getX1Axis().getTitle().setText(null);
+		currentAxes().getY1Axis().setLimits(0, 1);
+		currentAxes().putZ(mLayer);
 	
-		Track.setTitle(segments.getName(), titlePosition, getCurrentAxes());
+		Track.setTitle(segments.getName(), titlePosition, currentAxes());
 	}
 	
 	/**
@@ -147,10 +147,10 @@ public class SegmentsSubFigure extends FixedSubFigure {
 
 		 //GenesPlotCanvasLayer.GAP;
 		
-		Axes2D.disableAllFeatures(getCurrentAxes());
+		Axes.disableAllFeatures(currentAxes());
 		
 		// Need to make the title visible
-		getCurrentAxes().getTitle().getFontStyle().setVisible(true);
+		currentAxes().getTitle().getFontStyle().setVisible(true);
 	}
 	
 	/*

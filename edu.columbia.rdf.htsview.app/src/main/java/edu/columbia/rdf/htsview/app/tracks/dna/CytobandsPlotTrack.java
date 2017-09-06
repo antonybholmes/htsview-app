@@ -24,7 +24,7 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -67,17 +67,17 @@ public class CytobandsPlotTrack extends AnnotationPlotTrack {
 		switch(titlePosition.getPosition()) {
 		case RIGHT:
 		case COMPACT_RIGHT:
-			mSubFigure.getCurrentAxes().setMargins(SMALL_MARGIN, 
+			mSubFigure.currentAxes().setMargins(SMALL_MARGIN, 
 					MARGINS.getLeft(), 
 					SMALL_MARGIN, 
 					HUGE_MARGIN);
 			break;
 		default:
-			mSubFigure.getCurrentAxes().setMargins(MARGINS);
+			mSubFigure.currentAxes().setMargins(MARGINS);
 			break;
 		}
 		
-		Axes2D.disableAllFeatures(mSubFigure.getCurrentAxes());
+		Axes.disableAllFeatures(mSubFigure.currentAxes());
 		
 		return mSubFigure;
 	}

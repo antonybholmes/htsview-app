@@ -70,13 +70,13 @@ public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
 		switch(titlePosition.getPosition()) {
 		case RIGHT:
 		case COMPACT_RIGHT:
-			mSubFigure.getCurrentAxes().setMargins(SMALL_MARGIN, 
+			mSubFigure.currentAxes().setMargins(SMALL_MARGIN, 
 					MARGINS.getLeft(), 
 					SMALL_MARGIN, 
 					HUGE_MARGIN);
 			break;
 		default:
-			mSubFigure.getCurrentAxes().setMargins(MARGINS);
+			mSubFigure.currentAxes().setMargins(MARGINS);
 		}
 		
 		return mSubFigure;

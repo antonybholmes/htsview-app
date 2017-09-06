@@ -25,6 +25,7 @@ import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.colormap.ColorMap;
@@ -63,8 +64,6 @@ public class ConservationCanvasLayer extends AxesClippedLayer {
 	public ConservationCanvasLayer(String title,
 			ConservationAssembly assembly,
 			double max) {
-		super(title);
-
 		mAssembly = assembly;
 		mMax = max;
 	}
@@ -79,12 +78,13 @@ public class ConservationCanvasLayer extends AxesClippedLayer {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotClipped(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
+	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plotClipped(Graphics2D g2,
+	public void plotLayer(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure,
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 		
 		// So that we don't attempt to pull a whole chromosome
@@ -93,7 +93,7 @@ public class ConservationCanvasLayer extends AxesClippedLayer {
 		}
 
 		int y = 0;
-		int h = axes.getInternalPlotSize().getH();
+		int h = axes.getInternalSize().getH();
 
 		try {
 			List<Double> scores = mAssembly.getScores(mDisplayRegion);

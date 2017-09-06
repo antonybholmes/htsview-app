@@ -34,6 +34,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.batik.transcoder.TranscoderException;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
@@ -41,30 +42,12 @@ import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
-import edu.columbia.rdf.htsview.ngs.BctGuiFileFilter;
-import edu.columbia.rdf.htsview.ngs.Brt2GuiFileFilter;
-import edu.columbia.rdf.htsview.ngs.Brt3GuiFileFilter;
-import edu.columbia.rdf.htsview.ngs.BvtGuiFileFilter;
-import edu.columbia.rdf.htsview.tracks.AxisLimitsModel;
-import edu.columbia.rdf.htsview.tracks.HeightModel;
-import edu.columbia.rdf.htsview.tracks.LayoutRibbonSection;
-import edu.columbia.rdf.htsview.tracks.MarginModel;
-import edu.columbia.rdf.htsview.tracks.MarginRibbonSection;
-import edu.columbia.rdf.htsview.tracks.ResolutionModel;
-import edu.columbia.rdf.htsview.tracks.ResolutionService;
-import edu.columbia.rdf.htsview.tracks.ScaleRibbonSection;
-import edu.columbia.rdf.htsview.tracks.SizeRibbonSection;
-import edu.columbia.rdf.htsview.tracks.TitlePositionModel;
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.TrackTree;
-import edu.columbia.rdf.htsview.tracks.TracksFigure;
-import edu.columbia.rdf.htsview.tracks.WidthModel;
-import edu.columbia.rdf.htsview.tracks.abi.ABIGuiFileFilter;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
-import edu.columbia.rdf.htsview.tracks.locations.LocationsPanel;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
-import edu.columbia.rdf.htsview.tracks.view.TrackView;
-import org.apache.batik.transcoder.TranscoderException;
+import org.jebtk.bioinformatics.ui.GenomeModel;
+import org.jebtk.bioinformatics.ui.external.samtools.BamGuiFileFilter;
+import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
+import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
+import org.jebtk.bioinformatics.ui.filters.GFFGuiFileFilter;
+import org.jebtk.bioinformatics.ui.filters.SegGuiFileFilter;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
@@ -75,12 +58,6 @@ import org.jebtk.core.json.Json;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.core.tree.TreeNodeEventListener;
-import org.jebtk.bioinformatics.ui.GenomeModel;
-import org.jebtk.bioinformatics.ui.external.samtools.BamGuiFileFilter;
-import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
-import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
-import org.jebtk.bioinformatics.ui.filters.GFFGuiFileFilter;
-import org.jebtk.bioinformatics.ui.filters.SegGuiFileFilter;
 import org.jebtk.graphplot.Image;
 import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.Graph2dStyleModel;
@@ -125,10 +102,6 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.zoom.ModernStatusZoomSlider;
 import org.jebtk.modern.zoom.ZoomModel;
 import org.jebtk.modern.zoom.ZoomRibbonSection;
-import edu.columbia.rdf.matcalc.MainMatCalc;
-import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleRibbonSection;
-
 import org.rdf.bedgraph.MainBedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -142,7 +115,34 @@ import edu.columbia.rdf.htsview.app.modules.dist.ReadDistTask;
 import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapDialog;
 import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapTask;
 import edu.columbia.rdf.htsview.app.tracks.HTSTracksPanel;
+import edu.columbia.rdf.htsview.ngs.BctGuiFileFilter;
+import edu.columbia.rdf.htsview.ngs.Brt2GuiFileFilter;
+import edu.columbia.rdf.htsview.ngs.Brt3GuiFileFilter;
+import edu.columbia.rdf.htsview.ngs.BvtGuiFileFilter;
+import edu.columbia.rdf.htsview.tracks.AxisLimitsModel;
+import edu.columbia.rdf.htsview.tracks.HeightModel;
+import edu.columbia.rdf.htsview.tracks.LayoutRibbonSection;
+import edu.columbia.rdf.htsview.tracks.MarginModel;
+import edu.columbia.rdf.htsview.tracks.MarginRibbonSection;
+import edu.columbia.rdf.htsview.tracks.ResolutionModel;
+import edu.columbia.rdf.htsview.tracks.ResolutionService;
+import edu.columbia.rdf.htsview.tracks.ScaleRibbonSection;
+import edu.columbia.rdf.htsview.tracks.SizeRibbonSection;
+import edu.columbia.rdf.htsview.tracks.TitlePositionModel;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.TrackTree;
+import edu.columbia.rdf.htsview.tracks.TracksFigure;
+import edu.columbia.rdf.htsview.tracks.TracksFigurePanel;
+import edu.columbia.rdf.htsview.tracks.WidthModel;
+import edu.columbia.rdf.htsview.tracks.abi.ABIGuiFileFilter;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
+import edu.columbia.rdf.htsview.tracks.locations.LocationsPanel;
+import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
+import edu.columbia.rdf.htsview.tracks.view.TrackView;
+import edu.columbia.rdf.matcalc.MainMatCalc;
+import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
+import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleRibbonSection;
 
 
 // TODO: Auto-generated Javadoc
@@ -265,6 +265,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 	private boolean mSuggestSave = false;
 
 	private Path mViewFile;
+
+	private TracksFigurePanel mTracksFigurePanel;
 
 	//private AxesControlPanel mFormatPane;
 
@@ -617,8 +619,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 		content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "save");
 		content.getActionMap().put("save", new SaveAction());
 
-		mTracksFigure = new TracksFigure(mGenomicModel, 
+		//mTracksFigure = new TracksFigure(mGenomicModel, 
+		//		ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.HG19));
+		
+		mTracksFigure = new TracksFigure();
+		
+		mTracksFigurePanel = new TracksFigurePanel(mTracksFigure,
+				mGenomicModel,
 				ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.HG19));
+		
 
 		mLocationsPanel = new LocationsPanel(this,
 				mGenomeModel,
@@ -770,7 +779,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 		getRibbon().getHomeToolbar().add(new Graph2dStyleRibbonSection(getRibbon(), mPeakStyleModel));
 
 		mFontSection = new FontRibbonSection(this);
-		mFontSection.setup(mTracksFigure.getFont(), Color.BLACK);
+		mFontSection.setup(mTracksFigurePanel.getFont(), Color.BLACK);
 		getRibbon().getToolbar("Layout").add(mFontSection);
 		getRibbon().getToolbar("Layout").add(new LayoutRibbonSection(getRibbon(), mTitlePositionModel));
 		getRibbon().getToolbar("Layout").add(new MarginRibbonSection(getRibbon(), mMarginModel));
@@ -883,8 +892,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
 		//mFormatPane = new AxesControlPanel(this, mCanvas);
 
+		
 		//ZoomCanvas zoomCanvas = new ZoomCanvas(mTracksFigure);
-		mTracksFigure.setZoomModel(mZoomModel);
+		mTracksFigurePanel.setZoomModel(mZoomModel);
 
 		//ContainerCanvas cc = new FrameCanvas(zoomCanvas);
 
@@ -894,7 +904,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
 		//BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-		ModernScrollPane scrollPane = new ModernScrollPane(mTracksFigure);
+		ModernScrollPane scrollPane = new ModernScrollPane(mTracksFigurePanel);
 		scrollPane.setScrollBarLocation(ScrollBarLocation.FLOATING);
 		//scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
 		//ModernPanel panel = new ModernPanel(scrollPane);
@@ -1823,7 +1833,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 	 * @return the canvas
 	 */
 	public ModernPlotCanvas getCanvas() {
-		return mTracksFigure;
+		return mTracksFigurePanel;
 	}
 
 	/* (non-Javadoc)
@@ -1833,7 +1843,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 	public void close() {
 		if (mSuggestSave) {
 			ModernDialogStatus status = ModernMessageDialog.createDialog(this,
-					MessageDialogType.WARNING_OK_CANCEL,
+					MessageDialogType.WARNING_YES_NO,
 					"The current view has not been saved.", 
 					"Would you like to save it?");
 
@@ -1858,14 +1868,14 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 				// If the user chooses not to save, prompt one last time that
 				// the view is unsaved if they exit.
 				
-				status = ModernMessageDialog.createDialog(this, 
-						MessageDialogType.WARNING_OK_CANCEL,
-						"The current view has not been saved.", 
-						"Are you sure you want to exit?");
+				//status = ModernMessageDialog.createDialog(this, 
+				//		MessageDialogType.WARNING_OK_CANCEL,
+				//		"The current view has not been saved.", 
+				//		"Are you sure you want to exit?");
 
-				if (status == ModernDialogStatus.CANCEL) {
-					return;
-				}
+				//if (status == ModernDialogStatus.CANCEL) {
+				//	return;
+				//}
 			}
 		}
 

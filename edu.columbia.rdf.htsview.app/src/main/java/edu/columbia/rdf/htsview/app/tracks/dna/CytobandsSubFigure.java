@@ -58,9 +58,9 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
 		mName = name;
 		mLayer = new CytobandsRegionLayer(cytobands);
 		
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().putZ(mLayer);
 
-		Track.setTitle(name, titlePosition, getCurrentAxes());
+		Track.setTitle(name, titlePosition, currentAxes());
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
 		CytobandsSubFigure canvas = 
 				new CytobandsSubFigure(name, cytobands, titlePosition);
 
-		canvas.getCurrentAxes().setInternalPlotSize(Track.MEDIUM_TRACK_SIZE);
+		canvas.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
 
 		return canvas;
 	}
@@ -114,9 +114,9 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
 		mLayer.setRegion(displayRegion);
 
 		// Update the title to reflect changes
-		getCurrentAxes().getTitle().setText(mName + " - " + displayRegion.getChr().toString());
+		currentAxes().getTitle().setText(mName + " - " + displayRegion.getChr().toString());
 		
 		// set the graph limits
-		getCurrentAxes().getX1Axis().setLimits(1, mSizes.getSize(displayRegion.getChr()));
+		currentAxes().getX1Axis().setLimits(1, mSizes.getSize(displayRegion.getChr()));
 	}
 }

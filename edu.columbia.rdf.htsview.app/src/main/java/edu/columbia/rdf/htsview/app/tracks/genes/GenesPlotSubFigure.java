@@ -77,9 +77,9 @@ public class GenesPlotSubFigure extends FixedSubFigure {
 		
 		mGenesLayer = new GenesPlotLayer(properties);
 
-		getCurrentAxes().putZ(mGenesLayer);
+		currentAxes().putZ(mGenesLayer);
 
-		Track.setTitle(name, titlePosition, getCurrentAxes());
+		Track.setTitle(name, titlePosition, currentAxes());
 	}
 
 	/**

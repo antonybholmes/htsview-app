@@ -114,8 +114,8 @@ public class SegPlotTrack extends GraphPlotTrack {
 		
 		setMargins(getName(), titlePosition, mSubFigure);
 		
-		mSubFigure.getCurrentAxes().getX1Axis().getTitle().setText(null);
-		mSubFigure.getCurrentAxes().getY1Axis().setLimits(0, 1);
+		mSubFigure.currentAxes().getX1Axis().getTitle().setText(null);
+		mSubFigure.currentAxes().getY1Axis().setLimits(0, 1);
 		
 		return mSubFigure;
 	}

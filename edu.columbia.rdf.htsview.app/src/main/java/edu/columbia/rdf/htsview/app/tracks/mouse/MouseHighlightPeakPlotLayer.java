@@ -20,9 +20,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 import org.jebtk.core.ColorUtils;
-import org.jebtk.core.geom.Point2DDouble;
+import org.jebtk.core.geom.DoublePos2D;
 import org.jebtk.core.text.Formatter;
 import org.jebtk.graphplot.figure.Axes;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotSeriesLayer;
 import org.jebtk.graphplot.figure.SubFigure;
@@ -128,7 +129,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 				if (Math.abs(x - p.x) <= SNAP_SIZE) {
 					mPoint = p;
 				
-					fireCanvasRedraw();
+					fireChanged();
 				}
 			}
 		}
@@ -150,18 +151,17 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 	 * @param series the series
 	 */
 	public MouseHighlightPeakPlotLayer(String series) {
-		super("Mouse Highlight Peaks", series);
-		
-		addCanvasMouseListener(new CanvasEvents());
+		super(series);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.PlotSeriesLayer#plotClipped(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes, org.graphplot.figure.Plot, org.abh.common.math.matrix.AnnotationMatrix, org.graphplot.figure.series.XYSeries)
+	 * @see org.graphplot.figure.PlotSeriesLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes, org.graphplot.figure.Plot, org.abh.common.math.matrix.AnnotationMatrix, org.graphplot.figure.series.XYSeries)
 	 */
 	@Override
-	public void plotClipped(Graphics2D g2,
+	public void plotLayer(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure,
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes,
 			Plot plot,
 			AnnotationMatrix m,
@@ -184,15 +184,15 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 			
 			g2.drawLine(0, 
 					mPoint.y, 
-					axes.getInternalPlotSize().getW(), 
+					axes.getInternalSize().getW(), 
 					mPoint.y);
 			
 			g2.drawLine(mPoint.x,
 					0, 
 					mPoint.x, 
-					axes.getInternalPlotSize().getH());
+					axes.getInternalSize().getH());
 			
-			Point2DDouble p = mXy.original(mPoint.x);
+			DoublePos2D p = mXy.original(mPoint.x);
 			
 			if (p != null) {
 				//String s = "(" + p.getX() + "," + p.getY() + ")";
@@ -213,7 +213,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 		
 			mPoint = null;
 		
-			fireCanvasRedraw();
+			fireChanged();
 		}
 	}
 }

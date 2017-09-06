@@ -48,9 +48,9 @@ public class MouseConservationPlotCanvas extends DnaSubFigure {
 			TitleProperties titlePosition) {
 		mLayer = new MouseConservationCanvasLayer(conservationAssembly);
 		
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().putZ(mLayer);
 
-		Track.setTitle(MouseConservationPlotTrack.TITLE, titlePosition, getCurrentAxes());
+		Track.setTitle(MouseConservationPlotTrack.TITLE, titlePosition, currentAxes());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class MouseConservationPlotCanvas extends DnaSubFigure {
 		MouseConservationPlotCanvas canvas = new MouseConservationPlotCanvas(assembly,
 				titlePosition);
 
-		Axes axes = canvas.getCurrentAxes();
+		Axes axes = canvas.currentAxes();
 		
 		// set the graph limits
 		axes.getX1Axis().getTitle().setText(null);
@@ -75,7 +75,7 @@ public class MouseConservationPlotCanvas extends DnaSubFigure {
 		axes.getY1Axis().getTitle().setText(null);
 		axes.getY1Axis().startEndTicksOnly();
 
-		axes.setInternalPlotSize(Track.SMALL_TRACK_SIZE);
+		axes.setInternalSize(Track.SMALL_TRACK_SIZE);
 		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
 
 		

@@ -25,6 +25,7 @@ import org.jebtk.bioinformatics.genomic.RepeatMaskType;
 import org.jebtk.bioinformatics.genomic.SequenceRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 
@@ -53,8 +54,6 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
 	 * @param assembly the assembly
 	 */
 	public DnaRepeatMaskCanvasLayer(String genome, GenomeAssembly assembly) {
-		super(DnaRepeatMaskPlotTrack.TITLE);
-
 		mGenome = genome;
 		mAssembly = assembly;
 	}
@@ -69,12 +68,13 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotClipped(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
+	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plotClipped(Graphics2D g2,
+	public void plotLayer(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure,
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 		
 		// So that we don't attempt to pull a whole chromosome
@@ -83,7 +83,7 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
 		}
 
 		int y = 0;
-		int h = axes.getInternalPlotSize().getH();
+		int h = axes.getInternalSize().getH();
 
 		try {
 			SequenceRegion sequence = mAssembly.getSequence(mGenome, 

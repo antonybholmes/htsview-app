@@ -24,6 +24,7 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 
@@ -60,8 +61,6 @@ public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedL
 	 * @param color the color
 	 */
 	public RegionPlotLayerCanvas(Color color) {
-		super("Regions");
-
 		mColor = color;
 	}
 	
@@ -75,12 +74,13 @@ public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedL
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotClipped(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
+	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plotClipped(Graphics2D g2,
+	public void plotLayer(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure,
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 		
 		if (CollectionUtils.isNullOrEmpty(mRegions)) {
@@ -95,7 +95,7 @@ public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedL
 		//int px1;
 		//int px2;
 		int y1 = 0;
-		int h = axes.getInternalPlotSize().getH();
+		int h = axes.getInternalSize().getH();
 		int w;
 		
 		g2.setColor(mColor);

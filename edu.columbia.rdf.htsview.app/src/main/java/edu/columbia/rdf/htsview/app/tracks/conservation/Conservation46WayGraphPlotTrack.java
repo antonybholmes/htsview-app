@@ -21,7 +21,7 @@ import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -59,16 +59,16 @@ public class Conservation46WayGraphPlotTrack extends ConservationPlotTrack {
 		case RIGHT:
 		case COMPACT_RIGHT:
 			int right = rightTitleWidth(getName());
-			mSubFigure.getCurrentAxes().setMargins(SMALL_MARGIN, 
+			mSubFigure.currentAxes().setMargins(SMALL_MARGIN, 
 					MARGINS.getLeft(), 
 					SMALL_MARGIN, 
 					right);
 			break;
 		default:
-			mSubFigure.getCurrentAxes().setMargins(MARGINS);
+			mSubFigure.currentAxes().setMargins(MARGINS);
 		}
 		
-		Axes2D.disableAllFeatures(mSubFigure.getCurrentAxes());
+		Axes.disableAllFeatures(mSubFigure.currentAxes());
 		
 		return mSubFigure;
 	}

@@ -123,13 +123,13 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
 			window = MainMatCalc.main(mParent.getAppInfo(), new BioModuleLoader()); 
 
-			window.openFile(mFile, true, TextUtils.emptyList(), 0, TextUtils.TAB_DELIMITER, OpenMode.NEW_WINDOW);
+			window.autoOpenFile(mFile, true, TextUtils.emptyList(), 0, TextUtils.TAB_DELIMITER, OpenMode.NEW_WINDOW);
 
 			window.runModule("Line Graph", "--switch-tab");
 
 			Graph2dWindow plotWindow = window.getCurrentPlotWindow();
 
-			Axes axes = plotWindow.getFigure().getCurrentSubFigure().getCurrentAxes();
+			Axes axes = plotWindow.getFigure().currentSubFigure().currentAxes();
 
 			axes.getLegend().setVisible(true);
 			axes.getX1Axis().setLimits(-mPadding, mPadding);

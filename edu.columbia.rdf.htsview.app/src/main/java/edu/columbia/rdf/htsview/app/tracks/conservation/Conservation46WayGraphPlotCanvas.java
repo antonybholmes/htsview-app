@@ -47,11 +47,11 @@ public class Conservation46WayGraphPlotCanvas extends DnaSubFigure {
 			TitleProperties titlePosition) {
 		mLayer = new Conservation46WayGraphCanvasLayer(conservationAssembly);
 		
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().putZ(mLayer);
 
 		Track.setTitle(Conservation46WayGraphPlotTrack.TITLE, 
 				titlePosition, 
-				getCurrentAxes());
+				currentAxes());
 	}
 
 	/**
@@ -71,13 +71,13 @@ public class Conservation46WayGraphPlotCanvas extends DnaSubFigure {
 				new Conservation46WayGraphPlotCanvas(assembly, titlePosition);
 
 		// set the graph limits
-		canvas.getCurrentAxes().getX1Axis().getTitle().setText(null);
-		canvas.getCurrentAxes().getX1Axis().startEndTicksOnly();
+		canvas.currentAxes().getX1Axis().getTitle().setText(null);
+		canvas.currentAxes().getX1Axis().startEndTicksOnly();
 
-		canvas.getCurrentAxes().getY1Axis().getTitle().setText(null);
-		canvas.getCurrentAxes().getY1Axis().startEndTicksOnly();
+		canvas.currentAxes().getY1Axis().getTitle().setText(null);
+		canvas.currentAxes().getY1Axis().startEndTicksOnly();
 
-		canvas.getCurrentAxes().setInternalPlotSize(Track.MEDIUM_TRACK_SIZE);
+		canvas.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
 		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
 
 		

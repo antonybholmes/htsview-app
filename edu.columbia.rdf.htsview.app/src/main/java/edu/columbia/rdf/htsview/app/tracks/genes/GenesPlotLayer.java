@@ -28,6 +28,7 @@ import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.ImageUtils;
@@ -118,8 +119,6 @@ public class GenesPlotLayer extends AxesLayer {
 	 * @param genesProperties the genes properties
 	 */
 	public GenesPlotLayer(GenesProperties genesProperties) {
-		super("Genes");
-
 		mGeneProperties = genesProperties;
 	}
 
@@ -138,21 +137,23 @@ public class GenesPlotLayer extends AxesLayer {
 	 * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plot(Graphics2D g2,
+	public void drawPlot(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure, 
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 		
-		aaPlot(g2, context, figure, axes);
+		aaPlot(g2, context, figure, subFigure, axes);
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.graphplot.figure.AxesLayer#drawPlot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void drawPlot(Graphics2D g2,
+	public void aaPlot(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure, 
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 		
 		if (CollectionUtils.isNullOrEmpty(mGeneCache)) {

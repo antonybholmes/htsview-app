@@ -20,7 +20,7 @@ import java.awt.Component;
 
 import javax.swing.Box;
 
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.modern.collapsepane.ModernCollapsePane;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.tabs.TabsModel;
@@ -53,7 +53,7 @@ public class FormatPanel extends ModernWidget {
 	 * @param genes the genes
 	 */
 	public FormatPanel(ModernWindow parent,
-			Axes2D space,
+			Axes space,
 			GenesProperties genes) {
 		
 		TabsModel groupTabsModel = new TabsModel();

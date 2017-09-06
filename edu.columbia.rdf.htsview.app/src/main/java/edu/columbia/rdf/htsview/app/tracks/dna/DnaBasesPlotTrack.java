@@ -21,7 +21,7 @@ import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -56,7 +56,7 @@ public class DnaBasesPlotTrack extends DnaPlotTrack {
 		
 		setMargins(getName(), titlePosition, mSubFigure);
 		
-		Axes2D.disableAllFeatures(mSubFigure.getCurrentAxes());
+		Axes.disableAllFeatures(mSubFigure.currentAxes());
 
 		return mSubFigure;
 	}
