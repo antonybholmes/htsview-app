@@ -141,10 +141,7 @@ public class CountsModule extends HTSViewModule implements ModernClickListener  
 			return;
 		}
 
-		CountTask task = new CountTask(mWindow,
-				dialog.getPlotName(),
-				sampleTracks, 
-				dialog.getRegions());
+		CountTask task = new CountTask(sampleTracks, dialog.getRegions());
 
 		task.doInBackground();
 	}

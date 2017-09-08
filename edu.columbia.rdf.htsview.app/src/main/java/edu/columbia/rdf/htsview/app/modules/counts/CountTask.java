@@ -22,26 +22,17 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.io.Temp;
-import org.jebtk.core.text.TextUtils;
-import org.jebtk.graphplot.figure.Axes;
-import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.math.matrix.AnnotatableMatrix;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.status.StatusService;
-import org.jebtk.modern.window.ModernRibbonWindow;
-import org.xml.sax.SAXException;
 
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 import edu.columbia.rdf.matcalc.MainMatCalc;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.OpenMode;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
-import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -52,17 +43,11 @@ public class CountTask extends SwingWorker<Void, Void> {
 	/** The m locations. */
 	private List<GenomicRegion> mLocations;
 	
-	/** The m parent. */
-	private ModernRibbonWindow mParent;
-
 	/** The m tracks. */
 	private List<SamplePlotTrack> mTracks;
 	
 	/** The m file. */
 	private Path mFile;
-	
-	/** The m name. */
-	private String mName;
 
 	/**
 	 * Instantiates a new read dist task.
@@ -75,12 +60,8 @@ public class CountTask extends SwingWorker<Void, Void> {
 	 * @param window the window
 	 * @param average the average
 	 */
-	public CountTask(ModernRibbonWindow parent,
-			String name,
-			List<SamplePlotTrack> tracks,
+	public CountTask(List<SamplePlotTrack> tracks,
 			List<GenomicRegion> regions) {
-		mParent = parent;
-		mName = name;
 		mTracks = tracks;
 		mLocations = regions;
 	}
@@ -133,11 +114,11 @@ public class CountTask extends SwingWorker<Void, Void> {
 			matrix.setRowName(i, mLocations.get(i).getLocation());
 		}
 		
-		for (int i = 0; i < mTracks.size(); ++i) {
-			SamplePlotTrack track = mTracks.get(i);
+		for (int i = 0; i < mLocations.size(); ++i) {
+			GenomicRegion r = mLocations.get(i);
 			
-			for (int j = 0; j < mLocations.size(); ++j) {
-				GenomicRegion r = mLocations.get(j);
+			for (int j = 0; j < mTracks.size(); ++j) {
+				SamplePlotTrack track = mTracks.get(j);
 				
 				int counts = getCounts(track, r);
 
