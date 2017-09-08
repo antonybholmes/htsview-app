@@ -44,6 +44,7 @@ import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyWeb;
 import edu.columbia.rdf.htsview.tracks.view.ABIJsonParser;
 import edu.columbia.rdf.htsview.tracks.view.TrackParserService;
 import org.jebtk.core.AppService;
+import org.jebtk.core.PluginService;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.network.UrlBuilder;
@@ -56,6 +57,7 @@ import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.edb.ui.Repository;
 import edu.columbia.rdf.edb.ui.RepositoryService;
 import edu.columbia.rdf.edb.ui.network.ServerException;
+import edu.columbia.rdf.htsview.app.modules.counts.CountsModule;
 import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBAM;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBCT;
@@ -148,6 +150,8 @@ public class MainHtsView {
 		//ReadsSplashScreen window = new ReadsSplashScreen(new ReadsInfo());
 
 		//window.setVisible(true);
+		
+		PluginService.getInstance().addPlugin("htsview", CountsModule.class);
 
 		EDBWLogin login = null;
 

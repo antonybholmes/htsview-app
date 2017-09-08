@@ -58,7 +58,7 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
 		mName = name;
 		mLayer = new CytobandsRegionLayer(cytobands);
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 
 		Track.setTitle(name, titlePosition, currentAxes());
 	}

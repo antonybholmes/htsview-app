@@ -47,7 +47,7 @@ public class Conservation46WayGraphPlotCanvas extends DnaSubFigure {
 			TitleProperties titlePosition) {
 		mLayer = new Conservation46WayGraphCanvasLayer(conservationAssembly);
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 
 		Track.setTitle(Conservation46WayGraphPlotTrack.TITLE, 
 				titlePosition, 

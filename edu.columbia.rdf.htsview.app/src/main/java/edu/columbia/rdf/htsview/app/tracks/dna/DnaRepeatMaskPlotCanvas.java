@@ -47,7 +47,7 @@ public class DnaRepeatMaskPlotCanvas extends DnaSubFigure {
 			TitleProperties titlePosition) {
 		mLayer = new DnaRepeatMaskCanvasLayer(genome, genomeAssembly);
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 
 		Track.setTitle(DnaRepeatMaskPlotTrack.TITLE, titlePosition, currentAxes());
 	}

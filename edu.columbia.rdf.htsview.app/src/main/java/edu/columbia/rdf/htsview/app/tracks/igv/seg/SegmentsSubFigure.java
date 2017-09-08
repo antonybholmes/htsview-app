@@ -70,7 +70,7 @@ public class SegmentsSubFigure extends FixedSubFigure {
 		// set the graph limits
 		currentAxes().getX1Axis().getTitle().setText(null);
 		currentAxes().getY1Axis().setLimits(0, 1);
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 	
 		Track.setTitle(segments.getName(), titlePosition, currentAxes());
 	}

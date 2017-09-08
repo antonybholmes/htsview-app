@@ -46,7 +46,7 @@ public class DnaColorPlotCanvas extends DnaSubFigure {
 			TitleProperties titlePosition) {
 		mLayer = new DnaColorCanvasLayer(genome, genomeAssembly);
 
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 
 		Track.setTitle("DNA", titlePosition, currentAxes());
 	}

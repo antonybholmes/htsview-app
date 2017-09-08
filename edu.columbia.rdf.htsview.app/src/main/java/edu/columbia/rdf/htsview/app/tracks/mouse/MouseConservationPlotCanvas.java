@@ -48,7 +48,7 @@ public class MouseConservationPlotCanvas extends DnaSubFigure {
 			TitleProperties titlePosition) {
 		mLayer = new MouseConservationCanvasLayer(conservationAssembly);
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 
 		Track.setTitle(MouseConservationPlotTrack.TITLE, titlePosition, currentAxes());
 	}

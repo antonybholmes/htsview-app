@@ -25,7 +25,9 @@ import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -48,6 +50,8 @@ import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
 import org.jebtk.bioinformatics.ui.filters.GFFGuiFileFilter;
 import org.jebtk.bioinformatics.ui.filters.SegGuiFileFilter;
+import org.jebtk.core.Plugin;
+import org.jebtk.core.PluginService;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
@@ -102,14 +106,15 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 import org.jebtk.modern.zoom.ModernStatusZoomSlider;
 import org.jebtk.modern.zoom.ZoomModel;
 import org.jebtk.modern.zoom.ZoomRibbonSection;
-import org.rdf.bedgraph.MainBedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
+import edu.columbia.rdf.bedgraph.app.MainBedGraph;
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.edb.ui.network.ServerException;
 import edu.columbia.rdf.htsview.app.Import.EncodeWorker;
+import edu.columbia.rdf.htsview.app.modules.Module;
 import edu.columbia.rdf.htsview.app.modules.dist.ReadDistDialog;
 import edu.columbia.rdf.htsview.app.modules.dist.ReadDistTask;
 import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapDialog;
@@ -268,23 +273,16 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
 	private TracksFigurePanel mTracksFigurePanel;
 
-	//private AxesControlPanel mFormatPane;
+	/**
+	 * The member modules.
+	 */
+	private List<Module> mModules = new ArrayList<Module>();
 
 	/**
-	 * The constant PREVIOUS_XML_VIEW_FILE.
+	 * The member module map.
 	 */
-	//private static final Path PREVIOUS_XML_VIEW_FILE = 
-	//		PathUtils.getPath("previous.readsx");
-
-	/**
-	 * The constant PREVIOUS_JSON_VIEW_FILE.
-	 */
-	//private static final Path PREVIOUS_JSON_VIEW_FILE = 
-	//		PathUtils.getPath("previous.readsj");
-
-	//private static final GenomicRegion DEFAULT_REGION =
-	//		new GenomicRegion(Chromosome.CHR1, 1000000, 1100000);
-
+	private Map<String, Module> mModuleMap = new HashMap<String, Module>();
+	
 	/**
 	 * The class ResolutionEvents.
 	 */
@@ -659,6 +657,13 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
 		createUi();
 
+		try {
+			loadModules();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
+		addModulesUI();
 
 		mGenomeModel.addChangeListener(new GenomeEvents());
 		mGenomicModel.addChangeListener(new GenomicEvents());
@@ -930,6 +935,50 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 		addTracksPane();
 
 		//addLocationsPane();
+	}
+	
+	private void loadModules() throws InstantiationException, IllegalAccessException {
+		Module module;
+
+		for (Plugin plugin : PluginService.getInstance().iterator("htsview")) {
+
+			System.err.println("Loading plugin " + plugin.getName());
+			module = (Module)plugin.getPluginClass().newInstance();
+
+			//System.err.println("Loading module " + module.getName());
+
+			mModules.add(module);
+
+			mModuleMap.put(module.getName(), module);
+		}
+	}
+
+	/**
+	 * Run module.
+	 *
+	 * @param module the module
+	 * @param args the args
+	 * @return true, if successful
+	 */
+	public boolean runModule(String module, String... args) {
+		System.err.println("run module " + module + " " + args);
+
+		if (mModuleMap.containsKey(module)) {
+			mModuleMap.get(module).run(args);
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Allow modules to initialize and customize the UI.
+	 */
+	private void addModulesUI() {
+		for (Module module : mModules) {
+			module.init(this);
+		}
 	}
 
 	/**
@@ -1999,5 +2048,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 		}
 
 		return null;
+	}
+
+	public HTSTracksPanel getTracksPanel() {
+		return mTracksPanel;
 	}
 }

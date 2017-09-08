@@ -18,37 +18,31 @@ package edu.columbia.rdf.htsview.app.modules.dist;
 import java.awt.FontFormatException;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.SwingWorker;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.DefaultTreeMapCreator;
 import org.jebtk.core.io.BufferedTableWriter;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.Temp;
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.modern.status.StatusService;
 import org.jebtk.modern.window.ModernRibbonWindow;
-import edu.columbia.rdf.matcalc.MainMatCalc;
-import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.OpenMode;
-import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
-import org.xml.sax.SAXException;
 
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapIdLocation;
+import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
+import edu.columbia.rdf.matcalc.MainMatCalc;
+import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
+import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -123,7 +117,9 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
 			window = MainMatCalc.main(mParent.getAppInfo(), new BioModuleLoader()); 
 
-			window.autoOpenFile(mFile, true, TextUtils.emptyList(), 0, TextUtils.TAB_DELIMITER, OpenMode.NEW_WINDOW);
+			System.err.println("my tmp file " + mFile.toAbsolutePath());
+			
+			window.openFile(mFile).autoOpen();
 
 			window.runModule("Line Graph", "--switch-tab");
 
@@ -154,10 +150,6 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
@@ -167,8 +159,6 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 		} catch (FontFormatException e) {
 			e.printStackTrace();
 		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		} catch (InvalidFormatException e) {
 			e.printStackTrace();
 		}
 

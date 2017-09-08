@@ -47,7 +47,7 @@ public class DnaBasesPlotCanvas extends DnaSubFigure {
 			TitleProperties titlePosition) {
 		mLayer = new DnaBasesCanvasLayer(genome, genomeAssembly);
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 		
 		Track.setTitle("DNA", titlePosition, currentAxes());
 	}

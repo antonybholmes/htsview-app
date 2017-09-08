@@ -127,9 +127,9 @@
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.rdf</groupId>
-			<artifactId>org.rdf.bedgraph</artifactId>
-			<version>6.0.0</version>
+			<groupId>edu.columbia.rdf</groupId>
+			<artifactId>edu.columbia.rdf.bedgraph.app</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.columbia.rdf.htsview</groupId>
