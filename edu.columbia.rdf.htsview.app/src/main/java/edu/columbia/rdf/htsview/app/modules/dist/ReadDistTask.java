@@ -140,8 +140,6 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 			int i = 0;
 
 			for (Plot plot : axes.getPlots()) {
-				System.err.println("hmm " + i + " " + mTracks.get(i).getName() + " " + mTracks.get(i).getLineColor());
-
 				plot.getCurrentSeries().getStyle().getLineStyle().setColor(mTracks.get(i).getLineColor());
 				plot.getCurrentSeries().getStyle().getFillStyle().setColor(mTracks.get(i).getFillColor());
 				plot.getCurrentSeries().getMarker().setVisible(false);
@@ -307,7 +305,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 	private List<Double> getCounts(SamplePlotTrack track,
 			GenomicRegion ext, 
 			int mWindow) throws IOException {
-		List<Double> counts = track.getAssembly().getNormalizedCounts(track.getSample(),
+		List<Double> counts = track.getAssembly().getRPM(track.getSample(),
 				ext,
 				mWindow);
 

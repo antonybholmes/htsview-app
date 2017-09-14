@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.modules.counts;
 import java.awt.FontFormatException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SwingWorker;
@@ -29,6 +30,7 @@ import org.jebtk.math.matrix.AnnotatableMatrix;
 import org.jebtk.math.matrix.AnnotationMatrix;
 import org.jebtk.modern.status.StatusService;
 
+import edu.columbia.rdf.htsview.ngs.Normalization;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 import edu.columbia.rdf.matcalc.MainMatCalc;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
@@ -42,12 +44,12 @@ public class CountTask extends SwingWorker<Void, Void> {
 
 	/** The m locations. */
 	private List<GenomicRegion> mLocations;
-	
+
 	/** The m tracks. */
 	private List<SamplePlotTrack> mTracks;
-	
-	/** The m file. */
-	private Path mFile;
+
+
+	private NormalizationMethod mNorm = NormalizationMethod.TPM;
 
 	/**
 	 * Instantiates a new read dist task.
@@ -61,9 +63,11 @@ public class CountTask extends SwingWorker<Void, Void> {
 	 * @param average the average
 	 */
 	public CountTask(List<SamplePlotTrack> tracks,
-			List<GenomicRegion> regions) {
+			List<GenomicRegion> regions,
+			NormalizationMethod norm) {
 		mTracks = tracks;
 		mLocations = regions;
+		mNorm = norm;
 	}
 
 	/* (non-Javadoc)
@@ -76,13 +80,14 @@ public class CountTask extends SwingWorker<Void, Void> {
 		MainMatCalcWindow window;
 
 		try {
-			mFile = Temp.generateTempFile("txt");
+			Path countFile = Temp.generateTempFile("txt");
+			Path normFile = Temp.generateTempFile("txt");
 
-			createCountsFile();
+			createCountsFile(countFile, normFile);
 
 			window = MainMatCalc.main(new BioModuleLoader()); 
 
-			window.openFile(mFile).rowAnnotations(1).autoOpen();
+			window.openFile(normFile).rowAnnotations(1).autoOpen();
 		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | FontFormatException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +100,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 	 */
 	@Override
 	public void done() {
-		
+
 	}
 
 	/**
@@ -103,32 +108,88 @@ public class CountTask extends SwingWorker<Void, Void> {
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	private void createCountsFile() throws IOException {
+	private void createCountsFile(Path countsFile, Path normFile) throws IOException {
 		AnnotationMatrix matrix = AnnotatableMatrix.createNumericalMatrix(mLocations.size(), mTracks.size());
-		
+
 		for (int i = 0; i < mTracks.size(); ++i) {
 			matrix.setColumnName(i, mTracks.get(i).getName());
 		}
-		
+
 		for (int i = 0; i < mLocations.size(); ++i) {
 			matrix.setRowName(i, mLocations.get(i).getLocation());
 		}
-		
+
 		for (int i = 0; i < mLocations.size(); ++i) {
 			GenomicRegion r = mLocations.get(i);
-			
+
 			for (int j = 0; j < mTracks.size(); ++j) {
 				SamplePlotTrack track = mTracks.get(j);
-				
+
 				int counts = getCounts(track, r);
 
 				matrix.set(i, j, counts);
 			}
 		}
 
-		System.err.println("Writing to " + mFile);
+		System.err.println("Writing to " + countsFile);
+
+		AnnotationMatrix.writeAnnotationMatrix(matrix, countsFile);
+
+		// Normalize
+
+		AnnotationMatrix normMatrix;
+
+		if (mNorm == NormalizationMethod.NONE) {
+			normMatrix = matrix;
+		} else {
+			// Get the total reads for each sample
+			List<Integer> totalReads = new ArrayList<Integer>(mTracks.size());
+			
+			for (int j = 0; j < mTracks.size(); ++j) {
+				SamplePlotTrack track = mTracks.get(j);
+
+				totalReads.add(track.getAssembly().getMappedReads(track.getSample()));
+			}
+			
+
+			switch (mNorm) {
+			case RPM:
+				normMatrix = Normalization.rpm(matrix, totalReads);
+				break;
+			case TPM:
+				normMatrix = Normalization.tpm(matrix, mLocations);
+				break;
+			case RPKM:
+				normMatrix = Normalization.rpkm(matrix, totalReads, mLocations);
+				break;
+			case MEDIAN_RATIOS:
+				normMatrix = Normalization.medianRatios(matrix);
+				break;
+			default:
+				normMatrix = Normalization.rpm(matrix, totalReads);
+				break;
+			}
+			
+			// Add annotations
+			
+			for (int i = 0; i < mTracks.size(); ++i) {
+				String name = mTracks.get(i).getName();
+				
+				if (mNorm != NormalizationMethod.NONE) {
+					name += " " + mNorm;
+				}
+				
+				normMatrix.setColumnName(i, name);
+			}
+
+			for (int i = 0; i < mLocations.size(); ++i) {
+				normMatrix.setRowName(i, mLocations.get(i).getLocation());
+			}
+		}
 		
-		AnnotationMatrix.writeAnnotationMatrix(matrix, mFile);
+		System.err.println("Writing to " + normFile);
+
+		AnnotationMatrix.writeAnnotationMatrix(normMatrix, normFile);
 	}
 
 

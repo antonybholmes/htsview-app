@@ -18,9 +18,7 @@ package edu.columbia.rdf.htsview.app.modules.counts;
 import java.awt.Dimension;
 import java.nio.file.Path;
 import java.text.ParseException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.Box;
 
@@ -29,23 +27,21 @@ import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.bioinformatics.genomic.Chromosome;
-import org.jebtk.bioinformatics.genomic.Gene;
-import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphTableModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedTableModel;
-import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
+import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dataview.ModernDataModel;
 import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -71,8 +67,6 @@ import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
 import edu.columbia.rdf.htsview.app.modules.heatmap.GenomicRegionsPanel;
-import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapIdLocation;
-import edu.columbia.rdf.htsview.app.modules.heatmap.RegionsPanel;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
 
@@ -100,8 +94,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 	private ModernList<String> mSamplesList = new ModernList<String>();
 	
 	/** The m check plot. */
-	private ModernCheckBox mCheckPlot = 
-			new ModernCheckBox("Create plot", true);
+	private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
 	
 	/** The m regions panel. */
 	private GenomicRegionsPanel mRegionsPanel;
@@ -114,6 +107,8 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
 	/** The Constant LIST_SIZE. */
 	private static final Dimension LIST_SIZE = new Dimension(540, 140);
+	
+	private NormCombo mNormCombo = new NormCombo();
 
 	/**
 	 * Instantiates a new read dist dialog.
@@ -192,7 +187,15 @@ public class CountsDialog extends ModernDialogHelpWindow {
 		box2.add(box3);
 		box.add(box2);
 		
-		box.add(UI.createVGap(10));
+		box.add(UI.createVGap(20));
+		
+		box2 = HBox.create();
+		box2.add(new ModernAutoSizeLabel("Normalization", 100));
+		box2.add(mNormCombo);
+		box.add(box2);
+		
+		box.add(UI.createVGap(20));
+		
 		box.add(mCheckPlot);
 
 		setDialogCardContent(box);
@@ -202,7 +205,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 	 * @see org.abh.common.ui.dialog.ModernDialogTaskWindow#clicked(org.abh.common.ui.event.ModernClickEvent)
 	 */
 	@Override
-	public final void clicked(ModernClickEvent e) {
+	public void clicked(ModernClickEvent e) {
 		if (e.getSource().equals(mOkButton)) {
 			try {
 				if (mRegionsPanel.getRegions().size() > 0) {
@@ -373,5 +376,9 @@ public class CountsDialog extends ModernDialogHelpWindow {
 	 */
 	public String getPlotName() {
 		return mNameField.getText();
+	}
+	
+	public NormalizationMethod getNorm() {
+		return mNormCombo.getNorm();
 	}
 }

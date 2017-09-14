@@ -434,12 +434,12 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 			int mWindow) throws IOException, ParseException {
 		SampleAssembly assembly = sample.getAssembly();
 		
-		List<Double> counts = assembly.getNormalizedCounts(sample.getSample(),
+		List<Double> counts = assembly.getRPM(sample.getSample(),
 				ext,
 				mWindow);
 
 		if (mInput != null) {
-			List<Double> inputCounts = assembly.getNormalizedCounts(mInput,
+			List<Double> inputCounts = assembly.getRPM(mInput,
 					ext,
 					mWindow);
 

@@ -197,8 +197,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 	private ModernHContentPane mContentPane = 
 			new ModernHContentPane();
 
-	//private BedGraphsModel mBedGraphsModel = new BedGraphsModel();
-
 	/**
 	 * The m genomic model.
 	 */
@@ -1483,8 +1481,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 				if (track.getAssembly().getReadLength(track.getSample()) > 0) {
 					l = track.getAssembly().getReadLength(track.getSample());
 				}
-
-				System.err.println(starts);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
