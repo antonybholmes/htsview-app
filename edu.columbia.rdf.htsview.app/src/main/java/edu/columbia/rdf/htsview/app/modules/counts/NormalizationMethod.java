@@ -5,5 +5,5 @@ public enum NormalizationMethod {
 	RPM,
 	TPM,
 	RPKM,
-	MEDIAN_RATIOS
+	MEDIAN_RATIO
 }

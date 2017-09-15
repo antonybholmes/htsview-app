@@ -25,7 +25,7 @@ public class NormCombo extends ModernComboBox {
 		case 3:
 			return NormalizationMethod.TPM;
 		case 4:
-			return NormalizationMethod.MEDIAN_RATIOS;
+			return NormalizationMethod.MEDIAN_RATIO;
 		default:
 			return NormalizationMethod.NONE;
 		}
