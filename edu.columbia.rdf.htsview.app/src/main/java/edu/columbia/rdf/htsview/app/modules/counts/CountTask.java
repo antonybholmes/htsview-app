@@ -28,6 +28,7 @@ import org.jebtk.bioinformatics.genomic.MatrixNormalization;
 import org.jebtk.core.io.Temp;
 import org.jebtk.math.matrix.AnnotatableMatrix;
 import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.status.StatusService;
 
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
@@ -159,7 +160,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 			normMatrix = MatrixNormalization.rpkm(matrix, mLocations);
 			break;
 		case MEDIAN_RATIO:
-			normMatrix = MatrixNormalization.medianRatio(matrix);
+			normMatrix = MatrixOperations.medianRatio(matrix);
 			break;
 		default:
 			// No transformation
