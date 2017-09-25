@@ -103,14 +103,10 @@ public class CountsModule extends HTSViewModule implements ModernClickListener  
 
 	@Override
 	public void clicked(ModernClickEvent e) {
-		try {
-			counts();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		counts();
 	}
 
-	private void counts() throws ParseException {
+	private void counts() {
 		List<SamplePlotTrack> sampleTracks = new ArrayList<SamplePlotTrack>();
 
 		for (Track track : mWindow.getTracksPanel().getSelectedTracks()) {

@@ -75,7 +75,7 @@ import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
  * The Class ReadDistDialog.
  */
 public class CountsDialog extends ModernDialogHelpWindow {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -92,10 +92,10 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
 	/** The m samples list. */
 	private ModernList<String> mSamplesList = new ModernList<String>();
-	
+
 	/** The m check plot. */
 	private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
-	
+
 	/** The m regions panel. */
 	private GenomicRegionsPanel mRegionsPanel;
 
@@ -107,7 +107,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
 	/** The Constant LIST_SIZE. */
 	private static final Dimension LIST_SIZE = new Dimension(540, 140);
-	
+
 	private NormCombo mNormCombo = new NormCombo();
 
 	/**
@@ -144,7 +144,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 		mSamplesButton.addClickListener(this);
 
 		setSize(720, 680);
-		
+
 		UI.centerWindowToScreen(this);
 	}
 
@@ -159,7 +159,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 		box2.add(new ModernAutoSizeLabel("Name", 100));
 		box2.add(new ModernTextBorderPanel(mNameField, ModernWidget.VERY_LARGE_SIZE));
 		box.add(box2);
-		
+
 		midSectionHeader("Samples", box);
 
 		ModernScrollPane scrollPane = new ModernScrollPane(mSamplesList);
@@ -186,16 +186,16 @@ public class CountsDialog extends ModernDialogHelpWindow {
 		box3.add(mGenesButton);
 		box2.add(box3);
 		box.add(box2);
-		
+
 		box.add(UI.createVGap(20));
-		
+
 		box2 = HBox.create();
 		box2.add(new ModernAutoSizeLabel("Normalization", 100));
 		box2.add(mNormCombo);
 		box.add(box2);
-		
+
 		box.add(UI.createVGap(20));
-		
+
 		box.add(mCheckPlot);
 
 		setDialogCardContent(box);
@@ -207,15 +207,11 @@ public class CountsDialog extends ModernDialogHelpWindow {
 	@Override
 	public void clicked(ModernClickEvent e) {
 		if (e.getSource().equals(mOkButton)) {
-			try {
-				if (mRegionsPanel.getRegions().size() > 0) {
-					super.clicked(e);
-				} else {
-					ModernMessageDialog.createWarningDialog(mParent, 
-							"You must enter at least one gene or region to plot.");
-				}
-			} catch (ParseException e1) {
-				e1.printStackTrace();
+			if (mRegionsPanel.getRegions().size() > 0) {
+				super.clicked(e);
+			} else {
+				ModernMessageDialog.createWarningDialog(mParent, 
+						"You must enter at least one gene or region to plot.");
 			}
 		} else if (e.getSource().equals(mFileButton)) {
 			try {
@@ -241,8 +237,8 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
 		loadSamples(dialog.getSelectedSamples());
 	}
-	*/
-	
+	 */
+
 	/**
 	 * Load samples.
 	 *
@@ -259,7 +255,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
 		mSamplesList.setModel(model);
 	}
-	
+
 	/**
 	 * Browse for file.
 	 *
@@ -355,7 +351,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 	 * @return the regions
 	 * @throws ParseException the parse exception
 	 */
-	public List<GenomicRegion> getRegions() throws ParseException {
+	public List<GenomicRegion> getRegions() {
 		return mRegionsPanel.getRegions();
 	}
 
@@ -377,7 +373,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 	public String getPlotName() {
 		return mNameField.getText();
 	}
-	
+
 	public NormalizationMethod getNorm() {
 		return mNormCombo.getNorm();
 	}
