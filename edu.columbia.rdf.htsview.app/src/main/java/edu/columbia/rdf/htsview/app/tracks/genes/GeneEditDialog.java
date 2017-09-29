@@ -130,7 +130,7 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 			break;
 		}
 		
-		setSize(480, 440);
+		setSize(520, 480);
 		
 		UI.centerWindowToScreen(this);
 	}
@@ -204,7 +204,7 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 		content.add(ModernPanel.createVGap());
 		content.add(mCheckCompact);
 
-		setContent(content);
+		setDialogCardContent(content);
 	}
 
 	/* (non-Javadoc)

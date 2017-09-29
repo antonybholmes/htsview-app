@@ -18,7 +18,7 @@ package edu.columbia.rdf.edb.reads.app;
 import java.io.IOException;
 
 import edu.columbia.rdf.htsview.ngs.CountAssembly;
-import edu.columbia.rdf.htsview.ngs.ReadCountsFile16Bit;
+import edu.columbia.rdf.htsview.ngs.ReadCountsFile32Bit;
 import edu.columbia.rdf.htsview.ngs.ReadCountsFileBRT;
 import org.jebtk.core.io.PathUtils;
 import org.junit.Test;
