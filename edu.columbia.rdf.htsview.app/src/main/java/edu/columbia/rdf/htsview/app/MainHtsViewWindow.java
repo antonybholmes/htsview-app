@@ -1825,7 +1825,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 		} else if (BioPathUtils.ext().bedgraph().test(file)) {
 			exportToBedGraph();
 		} else {
-			Image.write(getCanvas(), file);
+			Image.write(mTracksFigure, file);
 		}
 
 		//RecentFilesService.getInstance().add(file);
