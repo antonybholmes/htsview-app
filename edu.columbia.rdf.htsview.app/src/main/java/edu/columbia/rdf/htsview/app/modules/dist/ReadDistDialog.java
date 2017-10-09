@@ -32,22 +32,22 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
-import org.jebtk.core.collections.CollectionUtils;
-import org.jebtk.core.io.FileUtils;
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphTableModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedTableModel;
+import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.io.FileUtils;
+import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
+import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dataview.ModernDataModel;
 import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -76,6 +76,7 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 import edu.columbia.rdf.htsview.app.ResolutionComboBox;
 import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapIdLocation;
 import edu.columbia.rdf.htsview.app.modules.heatmap.RegionsPanel;
+import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
 
 // TODO: Auto-generated Javadoc
@@ -112,12 +113,12 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
 	//		new ModernCheckBox("Use input", ModernWidget.STANDARD_SIZE);
 
 	/** The m check plot. */
-	private ModernCheckBox mCheckPlot = 
-			new ModernCheckBox("Create plot", true);
+	private CheckBox mCheckPlot = 
+			new ModernCheckSwitch("Create plot", true);
 	
 	/** The m check average. */
-	private ModernCheckBox mCheckAverage = 
-			new ModernCheckBox("Average count", true);
+	private CheckBox mCheckAverage = 
+			new ModernCheckSwitch("Average count", true);
 
 	/** The m regions panel. */
 	private RegionsPanel mRegionsPanel;
@@ -213,7 +214,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
 		box2.add(box3);
 		box.add(box2);
 
-		box.add(UI.createVGap(40));
+		box.add(UI.createVGap(20));
 
 		box2 = HBox.create();
 		box2.add(new ModernAutoSizeLabel("Extend"));
@@ -229,7 +230,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
 		
 		box.add(UI.createVGap(10));
 		box.add(mCheckAverage);
-		box.add(UI.createVGap(5));
+		//box.add(UI.createVGap(5));
 		box.add(mCheckPlot);
 
 		setDialogCardContent(box);

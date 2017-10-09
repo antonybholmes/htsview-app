@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.app.modules.dist;
 
-import java.awt.FontFormatException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.SwingWorker;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultTreeMap;
@@ -117,14 +115,12 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
 			window = MainMatCalc.main(mParent.getAppInfo(), new BioModuleLoader()); 
 
-			System.err.println("my tmp file " + mFile.toAbsolutePath());
-			
 			window.openFile(mFile).autoOpen();
 
 			window.runModule("Line Graph", "--switch-tab");
-
+	
 			Graph2dWindow plotWindow = window.getCurrentPlotWindow();
-
+	
 			Axes axes = plotWindow.getFigure().currentSubFigure().currentAxes();
 
 			axes.getLegend().setVisible(true);
@@ -132,8 +128,6 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 			axes.getX1Axis().getTitle().setText("Distance to " + mName);
 			axes.getY1Axis().getTitle().setText("Normalized ChIP-Seq reads");
 			axes.setMargins(100);
-
-			System.err.println("mtracks " + mTracks.size());
 
 			// Update all of the tracks
 
@@ -146,17 +140,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
 				++i;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (FontFormatException e) {
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

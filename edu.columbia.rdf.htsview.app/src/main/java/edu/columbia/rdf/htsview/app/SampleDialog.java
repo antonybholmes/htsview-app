@@ -27,13 +27,12 @@ import org.jebtk.core.settings.SettingsService;
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.panel.ModernContentPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
@@ -59,12 +58,12 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
 	/**
 	 * The m check sample.
 	 */
-	private ModernCheckBox mCheckSample = new ModernCheckBox("Sample", true);
+	private CheckBox mCheckSample = new ModernCheckSwitch("Sample", true);
 
 	/**
 	 * The m check reads.
 	 */
-	private ModernCheckBox mCheckReads = new ModernCheckBox("Reads", true);
+	private CheckBox mCheckReads = new ModernCheckSwitch("Reads");
 
 	/** The m read support. */
 	private boolean mReadSupport;
