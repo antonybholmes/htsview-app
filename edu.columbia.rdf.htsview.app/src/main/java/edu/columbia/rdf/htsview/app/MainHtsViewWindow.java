@@ -65,8 +65,8 @@ import org.jebtk.core.tree.TreeNodeEventListener;
 import org.jebtk.graphplot.Image;
 import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.Graph2dStyleModel;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
@@ -1486,7 +1486,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 			}
 		}
 
-		AnnotationMatrix m = AnnotatableMatrix.createAnnotatableMatrix(starts.size(), 3);
+		DataFrame m = DataFrame.createDataFrame(starts.size(), 3);
 
 		m.setName("Reads");
 		m.setColumnNames("chr", "start", "end");

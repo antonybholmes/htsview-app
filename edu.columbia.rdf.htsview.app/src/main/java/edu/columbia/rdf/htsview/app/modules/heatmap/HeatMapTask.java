@@ -44,8 +44,8 @@ import org.jebtk.core.io.Temp;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.graphplot.AspectRatio;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 import org.jebtk.modern.window.ModernRibbonWindow;
 import edu.columbia.rdf.matcalc.MainMatCalc;
@@ -62,7 +62,7 @@ import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
 public class HeatMapTask extends SwingWorker<Void, Void> {
 
 	/** The m matrices. */
-	private List<AnnotationMatrix> mMatrices;
+	private List<DataFrame> mMatrices;
 	
 	/** The m regions. */
 	private List<HeatMapIdLocation> mRegions;
@@ -168,17 +168,17 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 	 * @return the list
 	 * @throws Exception the exception
 	 */
-	private List<AnnotationMatrix> createHeatMapMatrices() throws Exception {
+	private List<DataFrame> createHeatMapMatrices() throws Exception {
 		//int window = 100;
 		int bins = 2 * (mPadding / mWindow) + 1;
 
-		List<AnnotationMatrix> ret = new ArrayList<AnnotationMatrix>();
+		List<DataFrame> ret = new ArrayList<DataFrame>();
 
 		for (SamplePlotTrack track : mSamples) {
 			Sample sample = track.getSample();
 			
-			AnnotationMatrix m = 
-					AnnotatableMatrix.createNumericalMatrix(mRegions.size(), bins);
+			DataFrame m = 
+					DataFrame.createNumericalMatrix(mRegions.size(), bins);
 			
 			m.setName(sample.getName());
 			
@@ -223,7 +223,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws ParseException the parse exception
 	 */
-	private void sortNone(SamplePlotTrack sample, int bins, AnnotationMatrix m) throws IOException, ParseException {	
+	private void sortNone(SamplePlotTrack sample, int bins, DataFrame m) throws IOException, ParseException {	
 		//for (HeatMapIdLocation region : mRegions) {
 		for (int i = 0; i < mRegions.size(); ++i) {
 			HeatMapIdLocation region = mRegions.get(i);
@@ -265,7 +265,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws ParseException the parse exception
 	 */
-	private void sortTssDist(SamplePlotTrack sample, int bins, AnnotationMatrix m) throws IOException, ParseException {	
+	private void sortTssDist(SamplePlotTrack sample, int bins, DataFrame m) throws IOException, ParseException {	
 		Map<Integer, Set<String>> tssMap =
 				new TreeMap<Integer, Set<String>>();
 
@@ -342,7 +342,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 	 */
 	private void sortIntensity(SamplePlotTrack sample, 
 			int bins, 
-			AnnotationMatrix m) throws IOException, ParseException {	
+			DataFrame m) throws IOException, ParseException {	
 		Map<Double, Set<GenomicRegion>> tssMap =
 				DefaultTreeMap.create(new TreeSetCreator<GenomicRegion>()); //new TreeMap<Double, Set<GenomicRegion>>();
 

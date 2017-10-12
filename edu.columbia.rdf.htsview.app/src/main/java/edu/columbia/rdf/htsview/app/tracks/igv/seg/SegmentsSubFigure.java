@@ -192,7 +192,7 @@ public class SegmentsSubFigure extends FixedSubFigure {
 				displayRegion.getEnd());
 		
 		if (regions != null) {
-			AnnotationMatrix m = new AnnotatableMatrix(regions.size(), 2);
+			DataFrame m = new AnnotatableMatrix(regions.size(), 2);
 			
 			m.setColumnNames("start", "end");
 			

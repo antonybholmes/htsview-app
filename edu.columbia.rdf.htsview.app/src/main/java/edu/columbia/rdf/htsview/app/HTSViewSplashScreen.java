@@ -20,7 +20,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernTaskSplashScreen2;
 import org.xml.sax.SAXException;
 
@@ -44,7 +44,7 @@ public class HTSViewSplashScreen extends ModernTaskSplashScreen2 {
 	 * @param module the module
 	 * @param args the args
 	 */
-	public HTSViewSplashScreen(AnnotationMatrix m, 
+	public HTSViewSplashScreen(DataFrame m, 
 			String module, 
 			String... args) {
 		super(new HTSViewInfo());

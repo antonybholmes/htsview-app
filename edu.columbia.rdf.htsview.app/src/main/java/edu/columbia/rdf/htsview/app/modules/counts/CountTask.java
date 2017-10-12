@@ -26,8 +26,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.MatrixNormalization;
 import org.jebtk.core.io.Temp;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.status.StatusService;
 
@@ -81,7 +81,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 			Path countFile = Temp.generateTempFile("txt");
 			//Path normFile = Temp.generateTempFile("txt");
 
-			AnnotationMatrix normMatrix = createCountsFile(countFile);
+			DataFrame normMatrix = createCountsFile(countFile);
 
 			window = MainMatCalc.main(new BioModuleLoader()); 
 
@@ -107,8 +107,8 @@ public class CountTask extends SwingWorker<Void, Void> {
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	private AnnotationMatrix createCountsFile(Path countsFile) throws IOException {
-		AnnotationMatrix matrix = AnnotatableMatrix.createNumericalMatrix(mLocations.size(), mTracks.size());
+	private DataFrame createCountsFile(Path countsFile) throws IOException {
+		DataFrame matrix = DataFrame.createNumericalMatrix(mLocations.size(), mTracks.size());
 
 		for (int i = 0; i < mTracks.size(); ++i) {
 			matrix.setColumnName(i, mTracks.get(i).getName());
@@ -131,7 +131,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 		}
 
 		//System.err.println("Writing to " + countsFile);
-		//AnnotationMatrix.writeAnnotationMatrix(matrix, countsFile);
+		//DataFrame.writeDataFrame(matrix, countsFile);
 
 		
 
@@ -146,7 +146,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 
 		matrix.setName("Counts");
 
-		AnnotationMatrix normMatrix;
+		DataFrame normMatrix;
 
 		// Normalize
 		switch (mNorm) {
@@ -188,7 +188,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 
 		//System.err.println("Writing to " + normFile);
 
-		//AnnotationMatrix.writeAnnotationMatrix(normMatrix, normFile);
+		//DataFrame.writeDataFrame(normMatrix, normFile);
 
 		return normMatrix;
 	}

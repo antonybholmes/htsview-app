@@ -29,7 +29,7 @@ import org.jebtk.graphplot.figure.PlotSeriesLayer;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.UniqueXY;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.ModernCanvasMouseListener;
@@ -140,7 +140,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 	private UniqueXY mXy;
 	
 	/** The m M. */
-	private AnnotationMatrix mM;
+	private DataFrame mM;
 	
 	/** The m point. */
 	private Point mPoint = null;
@@ -155,7 +155,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.PlotSeriesLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes, org.graphplot.figure.Plot, org.abh.common.math.matrix.AnnotationMatrix, org.graphplot.figure.series.XYSeries)
+	 * @see org.graphplot.figure.PlotSeriesLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes, org.graphplot.figure.Plot, org.abh.common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeries)
 	 */
 	@Override
 	public void plotLayer(Graphics2D g2,
@@ -164,7 +164,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 			SubFigure subFigure, 
 			Axes axes,
 			Plot plot,
-			AnnotationMatrix m,
+			DataFrame m,
 			XYSeries series) {
 		if (context == DrawingContext.PRINT) {
 			return;
