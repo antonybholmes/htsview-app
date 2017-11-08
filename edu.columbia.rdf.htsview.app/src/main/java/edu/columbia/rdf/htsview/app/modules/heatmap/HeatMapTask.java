@@ -250,8 +250,12 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 			m.setRowAnnotation("Location", i, region.getRegion().toString());
 			
 			for (int j = 0; j < counts.size(); ++j) {
-				System.err.println("heat " + i + " " + j + " " + counts.get(j) + " " + region.getRegion().toString());
+				//System.err.println("heat " + i + " " + j + " " + counts.get(j) + " " + region.getRegion().toString());
 				m.set(i, j, counts.get(j));
+			}
+			
+			if (i % 1000 == 0) {
+				System.err.println("Processed "  + i + " locations...");
 			}
 		}
 	}
@@ -370,7 +374,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 					mPadding, 
 					mPadding);
 
-			System.err.println("closest " + r.toString());
+			//System.err.println("closest " + r.toString());
 
 			// Find closest tss to peak and center on that
 			//GenomicRegion ext = GenomicRegion.extend(Gene.tssRegion(closestGenes.get(0)), 
@@ -408,8 +412,6 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 				m.setRowAnnotation("Location", i, ext.getLocation());
 
 				for (int j = 0; j < counts.size(); ++j) {
-					System.err.println("intensity " + i + " " + j + " " + counts.get(j) + " " + region.toString());
-					
 					m.set(i, j, counts.get(j));
 				}
 

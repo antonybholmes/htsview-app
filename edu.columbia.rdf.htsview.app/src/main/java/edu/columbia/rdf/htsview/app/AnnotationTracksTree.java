@@ -21,12 +21,6 @@ import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.AnnotationBedPlotTrack;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
-import edu.columbia.rdf.htsview.tracks.measurement.RangePlotTrack;
-import edu.columbia.rdf.htsview.tracks.measurement.RulerPlotTrack;
-import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
 import org.jebtk.core.Resources;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.tree.TreeNode;
@@ -40,8 +34,15 @@ import edu.columbia.rdf.htsview.app.tracks.dna.CytobandsPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaBasesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaColorPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaRepeatMaskPlotTrack;
+import edu.columbia.rdf.htsview.app.tracks.genes.GencodeGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.genes.RefSeqGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.mouse.MouseConservationPlotTrack;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.AnnotationBedPlotTrack;
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
+import edu.columbia.rdf.htsview.tracks.measurement.RangePlotTrack;
+import edu.columbia.rdf.htsview.tracks.measurement.RulerPlotTrack;
+import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -77,6 +78,10 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 		//genesNode.addChild(node);
 
 		track = new RefSeqGenesPlotTrack();
+		node = new TreeNode<Track>(track.getName(), track);
+		genesNode.addChild(node);
+		
+		track = new GencodeGenesPlotTrack();
 		node = new TreeNode<Track>(track.getName(), track);
 		genesNode.addChild(node);
 		

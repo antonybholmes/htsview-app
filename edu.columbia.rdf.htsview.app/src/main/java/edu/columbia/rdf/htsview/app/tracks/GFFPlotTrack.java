@@ -55,7 +55,7 @@ public class GFFPlotTrack extends GenesPlotTrack {
 			TitleProperties titlePosition) throws IOException {
 		
 		if (GenesService.getInstance().getGenes(genome, mGenesId) == null) {
-			GenesService.getInstance().put(genome, mGenesId, Genes.fromGFF3(mFile));
+			GenesService.getInstance().put(genome, mGenesId, Genes.gff3Parser().parse(mFile));
 		}
 
 		return super.createGraph(genome, titlePosition);

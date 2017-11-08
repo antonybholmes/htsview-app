@@ -26,6 +26,7 @@ import javax.swing.SwingWorker;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.DefaultTreeMapCreator;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.io.BufferedTableWriter;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.Temp;
@@ -185,10 +186,10 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 		// There are always an odd number of bins centered about zero
 		int bins = 2 * (mPadding / mWindow) + 1;
 
-		Map<Sample, Map<Integer, Double>> mBinCountMap = 
+		Map<Sample, IterMap<Integer, Double>> mBinCountMap = 
 				DefaultTreeMap.create(new DefaultTreeMapCreator<Integer, Double>(0.0)); //new TreeMap<Sample, Map<Integer, Double>>();
 
-		int c = 1;
+		//int c = 1;
 
 		List<Sample> samples = new ArrayList<Sample>(mTracks.size());
 

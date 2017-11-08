@@ -146,6 +146,10 @@ public class GenesPlotSubFigure extends FixedSubFigure {
 				if (!g.getRefSeq().equals(TextUtils.NA)) {
 					id += " (" + g.getRefSeq() + ")";
 				}
+				
+				if (!g.getTranscriptId().equals(TextUtils.NA)) {
+					id += " (" + g.getTranscriptId() + ")";
+				}
 
 				geneMap.get(id).add(g);
 			}

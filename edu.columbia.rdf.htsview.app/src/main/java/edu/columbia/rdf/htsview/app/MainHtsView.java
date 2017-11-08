@@ -32,6 +32,7 @@ import org.jebtk.bioinformatics.conservation.ConservationAssemblyWeb;
 import org.jebtk.bioinformatics.dna.GenomeAssemblyWeb;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
 import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
+import org.jebtk.bioinformatics.genomic.GeneType;
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
@@ -226,9 +227,26 @@ public class MainHtsView {
 				String name = PathUtils.namePrefix(file, "_");
 				
 				if (PathUtils.getName(file).contains("gff3")) {
-					GenesService.getInstance().put(g, name, Genes.fromGFF3(file));
+					GenesService.getInstance().put(g, 
+							name, 
+							Genes.gff3Parser()
+							.setKeepExons(true)
+							.setLevels(GeneType.GENE, GeneType.TRANSCRIPT)
+							.parse(file));
+				} else if (PathUtils.getName(file).contains("gtf")) {
+					GenesService.getInstance().put(g, 
+							name, 
+							Genes.gff3Parser()
+							.setKeepExons(true)
+							.setLevels(GeneType.TRANSCRIPT)
+							.parse(file));
 				} else if (PathUtils.getName(file).contains("gtb")) {
-					GenesService.getInstance().put(g, name, Genes.parseGeneTable(file));
+					GenesService.getInstance().put(g, 
+							name, 
+							Genes.gtbParser()
+							.setKeepExons(true)
+							.setLevels(GeneType.TRANSCRIPT)
+							.parse(file));
 				} else {
 					// Do nothing
 				}

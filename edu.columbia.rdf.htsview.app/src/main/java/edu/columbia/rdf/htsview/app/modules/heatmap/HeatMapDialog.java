@@ -34,27 +34,26 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.chipseq.ChipSeqSamplesDialog;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
-import org.jebtk.core.collections.CollectionUtils;
-import org.jebtk.core.io.FileUtils;
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphTableModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedTableModel;
+import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.io.FileUtils;
+import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
+import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.button.ModernRadioButton;
 import org.jebtk.modern.dataview.ModernDataModel;
-import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -78,6 +77,8 @@ import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.edb.Sample;
+import edu.columbia.rdf.htsview.chipseq.ChipSeqSamplesDialog;
+import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
 
 // TODO: Auto-generated Javadoc
@@ -124,8 +125,8 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 			new ModernCheckBox("Subtract Input", 120);
 
 	/** The m check plot. */
-	private ModernCheckBox mCheckPlot = 
-			new ModernCheckBox("Create plot", true);
+	private CheckBox mCheckPlot = 
+			new ModernCheckSwitch("Create plot", true);
 
 	/** The m check sort none. */
 	private ModernRadioButton mCheckSortNone = 
@@ -192,7 +193,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 		mSampleButton.addClickListener(this);
 		mInputButton.addClickListener(this);
 
-		setSize(720, 660);
+		setSize(720, 680);
 
 		UI.centerWindowToScreen(this);
 	}
@@ -379,8 +380,10 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 	private void loadTss() {
 		Set<String> genes = new HashSet<String>();
 
-		for (String refseq : GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").getRefSeqIds()) {
-			Gene gene = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").lookupByRefSeq(refseq);
+		String genome = mGenomeModel.get();
+		
+		for (String refseq : GenesService.getInstance().getGenes(genome, "refseq").getRefSeqIds()) {
+			Gene gene = GenesService.getInstance().getGenes(genome, "refseq").lookupByRefSeq(refseq);
 
 			//GenomicRegion tss = Gene.tssRegion(gene);
 

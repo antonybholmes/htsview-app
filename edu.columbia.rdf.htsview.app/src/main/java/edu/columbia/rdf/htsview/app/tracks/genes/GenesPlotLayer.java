@@ -21,7 +21,6 @@ import java.awt.geom.GeneralPath;
 import java.util.Map;
 import java.util.Set;
 
-import org.jebtk.bioinformatics.genomic.Exon;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
@@ -208,7 +207,7 @@ public class GenesPlotLayer extends AxesLayer {
 			}
 
 			// Set the strand to be that of the first gene we encounter
-			strand = mGeneCache.get(symbol).iterator().next().getStrand();
+			strand = mGeneCache.get(symbol).iterator().next().getRegion().getStrand();
 
 			//
 			// The line
@@ -218,8 +217,10 @@ public class GenesPlotLayer extends AxesLayer {
 			int lx2 = Integer.MIN_VALUE;
 
 			for (Gene g : mGeneCache.get(symbol)) {
-				lx1 = Math.min(lx1, g.getStart());
-				lx2 = Math.max(lx2, g.getEnd());
+				GenomicRegion region = g.getRegion();
+				
+				lx1 = Math.min(lx1, region.getStart());
+				lx2 = Math.max(lx2, region.getEnd());
 			}
 
 			lx1 = axes.toPlotX1(lx1);
@@ -245,7 +246,7 @@ public class GenesPlotLayer extends AxesLayer {
 				// Draw the utr
 				//
 
-				for (Exon exon : g) {
+				for (GenomicRegion exon : g) {
 					x1 = axes.toPlotX1(exon.getStart());
 					x2 = axes.toPlotX1(exon.getEnd());
 
@@ -255,10 +256,10 @@ public class GenesPlotLayer extends AxesLayer {
 					if (x1 < minX || x2 > maxX) {
 						continue;
 					}
-
-					if (!exon.getType().contains("utr")) {
-						continue;
-					}
+					
+					//if (!exon.getType().contains("utr")) {
+					//	continue;
+					//}
 
 					// Draw the UTR regions with a narrow band, as with the
 					// UCSC
@@ -275,7 +276,7 @@ public class GenesPlotLayer extends AxesLayer {
 				// Draw the exons last so they overwrite the UTR.
 				//
 
-				for (Exon exon : g) {
+				for (GenomicRegion exon : g) {
 
 					x1 = axes.toPlotX1(exon.getStart());
 					x2 = axes.toPlotX1(exon.getEnd());
@@ -287,9 +288,9 @@ public class GenesPlotLayer extends AxesLayer {
 						continue;
 					}
 
-					if (!exon.getType().equals("exon")) {
-						continue;
-					}
+					//if (!exon.getType().equals("exon")) {
+					//	continue;
+					//}
 
 					y1 = y - HALF_BAR_HEIGHT;
 

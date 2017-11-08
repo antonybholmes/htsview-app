@@ -76,7 +76,7 @@ public class Segments implements Iterable<Segment> {
 			mSearch = new FixedGapSearch<Segment>();
 
 			for (Segment s : mSegments) {
-				mSearch.addFeature(s, s);
+				mSearch.add(s, s);
 			}
 
 			mUpdated = false;

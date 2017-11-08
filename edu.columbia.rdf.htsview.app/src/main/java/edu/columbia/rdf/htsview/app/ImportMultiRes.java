@@ -32,6 +32,7 @@ import javax.swing.SwingWorker;
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.collections.TreeMapCreator;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
@@ -512,7 +513,7 @@ public class ImportMultiRes {
 			List<Integer> starts) throws IOException {
 		int blockCount = 0;
 
-		Map<Integer, Map<Integer, Block>> blockMap = 
+		Map<Integer, IterMap<Integer, Block>> blockMap = 
 				DefaultTreeMap.create(new TreeMapCreator<Integer, Block>());
 
 		for (int i = 0; i < starts.size(); ++i) {
