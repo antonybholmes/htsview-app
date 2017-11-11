@@ -37,13 +37,7 @@ import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
-import edu.columbia.rdf.htsview.chipseq.ChipSeqRepositoryCache;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderABI;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderBedGraph;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
-import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyWeb;
-import edu.columbia.rdf.htsview.tracks.view.ABIJsonParser;
-import edu.columbia.rdf.htsview.tracks.view.TrackParserService;
+import org.jebtk.bioinformatics.genomic.LazyGenes;
 import org.jebtk.core.AppService;
 import org.jebtk.core.PluginService;
 import org.jebtk.core.io.FileUtils;
@@ -79,6 +73,13 @@ import edu.columbia.rdf.htsview.app.tracks.view.ReadsJsonParser;
 import edu.columbia.rdf.htsview.app.tracks.view.SampleFSJsonParser;
 import edu.columbia.rdf.htsview.app.tracks.view.SampleJsonParser;
 import edu.columbia.rdf.htsview.app.tracks.view.SegJsonParser;
+import edu.columbia.rdf.htsview.chipseq.ChipSeqRepositoryCache;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderABI;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderBedGraph;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
+import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyWeb;
+import edu.columbia.rdf.htsview.tracks.view.ABIJsonParser;
+import edu.columbia.rdf.htsview.tracks.view.TrackParserService;
 
 
 // TODO: Auto-generated Javadoc
@@ -103,7 +104,7 @@ public class MainHtsView {
 	 */
 	public static final void main(String[] args) throws FontFormatException, IOException, SAXException, ParserConfigurationException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, ServerException, ParseException {
 		AppService.getInstance().setAppInfo("htsview");
-		
+
 		ThemeService.getInstance().setTheme(); //ColorTheme.GREEN);
 
 		/*
@@ -151,7 +152,7 @@ public class MainHtsView {
 		//ReadsSplashScreen window = new ReadsSplashScreen(new ReadsInfo());
 
 		//window.setVisible(true);
-		
+
 		PluginService.getInstance().addPlugin("htsview", CountsModule.class);
 
 		EDBWLogin login = null;
@@ -164,10 +165,10 @@ public class MainHtsView {
 						SettingsService.getInstance().getAsString("edb.modules.edbw.key"),
 						SettingsService.getInstance().getAsInt("edb.modules.edbw.topt.epoch"),
 						SettingsService.getInstance().getAsInt("edb.modules.edbw.topt.step-size"));
-				*/
-				
+				 */
+
 				login = EDBWLogin.loadFromSettings();
-				
+
 				HTSViewLoginDialog window = new HTSViewLoginDialog(login);
 
 				window.setVisible(true);
@@ -209,51 +210,60 @@ public class MainHtsView {
 			String genome, 
 			Collection<Sample> samples) throws ServerException, IOException, ClassNotFoundException, SAXException, ParserConfigurationException {
 		//Map<String, Genes> geneMap = new HashMap<String, Genes>();
-		
+
 		List<Path> dirs = FileUtils.lsdir(PathUtils.getPath("res", "genomes"));
-		
+
 		for (Path dir : dirs) {
 			String g = PathUtils.namePrefix(dir);
+
+			String namePrefix = "_" + g;
 			
 			CytobandsService.getInstance().load(g,
 					FileUtils.newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
-			
+
 			ChromosomeSizesService.getInstance().load(g,
 					FileUtils.newBufferedReader(dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
-			
+
 			List<Path> files = FileUtils.ls(dir.resolve("genes"));
-			
+
 			for (Path file : files) {
-				String name = PathUtils.namePrefix(file, "_");
-				
-				if (PathUtils.getName(file).contains("gff3")) {
+				String filename = PathUtils.getName(file);
+
+				String db = PathUtils.namePrefix(file, namePrefix);
+
+				if (filename.contains("gff3")) {
 					GenesService.getInstance().put(g, 
-							name, 
-							Genes.gff3Parser()
-							.setKeepExons(true)
-							.setLevels(GeneType.GENE, GeneType.TRANSCRIPT)
-							.parse(file));
-				} else if (PathUtils.getName(file).contains("gtf")) {
+							db, 
+							new LazyGenes(file, Genes.gff3Parser()
+									.setKeepExons(true)
+									.setLevels(GeneType.GENE, 
+											GeneType.TRANSCRIPT)));
+				} else if (filename.contains("gtf")) {
 					GenesService.getInstance().put(g, 
-							name, 
-							Genes.gff3Parser()
-							.setKeepExons(true)
-							.setLevels(GeneType.TRANSCRIPT)
-							.parse(file));
-				} else if (PathUtils.getName(file).contains("gtb")) {
+							db, 
+							new LazyGenes(file, Genes.gff3Parser()
+									.setKeepExons(true)
+									.setLevels(GeneType.TRANSCRIPT)));
+				} else if (filename.contains("gtb2")) {
 					GenesService.getInstance().put(g, 
-							name, 
-							Genes.gtbParser()
-							.setKeepExons(true)
-							.setLevels(GeneType.TRANSCRIPT)
-							.parse(file));
+							db, 
+							new LazyGenes(file, 
+									Genes.gtb2Parser()
+									.setKeepExons(true)
+									.setLevels(GeneType.TRANSCRIPT)));
+				} else if (filename.contains("gtb")) {
+					GenesService.getInstance().put(g, 
+							db, 
+							new LazyGenes(file, Genes.gtbParser()
+									.setKeepExons(true)
+									.setLevels(GeneType.TRANSCRIPT)));
 				} else {
 					// Do nothing
 				}
 			}
-			
+
 		}
-		
+
 		/*
 		Path path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.hg19.refseq.genes.gff");
 		geneMap.put(GenomeAssembly.HG19, 
@@ -278,8 +288,8 @@ public class MainHtsView {
 		path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.mm10.chr-sizes");
 		ChromosomeSizesService.getInstance().load(GenomeAssembly.MM10, 
 				Resources.getGzipReader(path));
-		*/
-		
+		 */
+
 		GenomeAssembly genomeAssembly = 
 				new GenomeAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
 
@@ -288,7 +298,7 @@ public class MainHtsView {
 
 		ConservationAssembly mouseConservationAssembly = 
 				new ConservationAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.mouse.conservation.remote-url")));
-		
+
 		if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
 			ChipSeqRepositoryCache session = new ChipSeqRepositoryCache(login);
 
@@ -299,7 +309,7 @@ public class MainHtsView {
 			UrlBuilder url = SettingsService.getInstance()
 					.getSetting("edb.reads.chip-seq.remote-url")
 					.getAsUrlBuilder();
-			
+
 			WebAssemblyService.getInstance().setSampleAssembly(new SampleAssemblyWeb(login, url));
 			WebAssemblyService.getInstance().setPeakAssembly(new PeakAssemblyWeb(login));
 		}
@@ -320,7 +330,7 @@ public class MainHtsView {
 		TrackParserService.getInstance().register(new AnnotationJsonParser());
 		TrackParserService.getInstance().register(new SegJsonParser());
 		TrackParserService.getInstance().register(new ABIJsonParser());
-		
+
 		SampleLoaderService.getInstance().register(new SampleLoaderBCT());
 		SampleLoaderService.getInstance().register(new SampleLoaderBAM());
 		SampleLoaderService.getInstance().register(new SampleLoaderBRT2());
@@ -331,7 +341,7 @@ public class MainHtsView {
 		SampleLoaderService.getInstance().register(new SampleLoaderGFF());
 		SampleLoaderService.getInstance().register(new SampleLoaderSeg());
 		SampleLoaderService.getInstance().register(new SampleLoaderABI());
-		
+
 		MainHtsViewWindow window = new MainHtsViewWindow(genome,
 				tree,
 				samples);

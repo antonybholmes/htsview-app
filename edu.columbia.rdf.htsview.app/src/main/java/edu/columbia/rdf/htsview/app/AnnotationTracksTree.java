@@ -35,6 +35,7 @@ import edu.columbia.rdf.htsview.app.tracks.dna.DnaBasesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaColorPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaRepeatMaskPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.genes.GencodeGenesPlotTrack;
+import edu.columbia.rdf.htsview.app.tracks.genes.GencodePolyAPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.genes.RefSeqGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.mouse.MouseConservationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
@@ -82,6 +83,10 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 		genesNode.addChild(node);
 		
 		track = new GencodeGenesPlotTrack();
+		node = new TreeNode<Track>(track.getName(), track);
+		genesNode.addChild(node);
+		
+		track = new GencodePolyAPlotTrack();
 		node = new TreeNode<Track>(track.getName(), track);
 		genesNode.addChild(node);
 		
