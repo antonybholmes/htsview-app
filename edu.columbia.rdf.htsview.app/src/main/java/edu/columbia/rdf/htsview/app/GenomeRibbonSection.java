@@ -86,14 +86,8 @@ public class GenomeRibbonSection extends RibbonSection implements ModernClickLis
 		ModernPopupMenu popup = new ModernPopupMenu();
 		
 		for (String genome : CollectionUtils.sort(GenesService.getInstance().getGenomes())) {
-			//RibbonLargeRadioButton button = new RibbonLargeRadioButton(genome);
-			//button.setSelected(genome.equals(model.get()));
-			//button.addClickListener(this);
-			//group.add(button);
-			//add(button);
-			
 			popup.addMenuItem(new ModernTwoLineMenuItem(genome, 
-					"Load " + genome + " data.", 
+					"Switch to the " + genome + " genome.", 
 					ICON));
 		}
 		

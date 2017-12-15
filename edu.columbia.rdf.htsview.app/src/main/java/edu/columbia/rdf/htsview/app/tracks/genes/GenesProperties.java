@@ -74,7 +74,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
 		mVariantGene.addChangeListener(this);
 		mOtherGene.addChangeListener(this);
 		mUTR.addChangeListener(this);
-		
+
 		mUTR.setFillColor(Color.WHITE);
 		mUTR.getLineStyle().setColor(Color.BLACK);
 		
@@ -230,5 +230,11 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
 	 */
 	public Color getArrowColor() {
 		return mArrowColor;
+	}
+
+	public void setArrowColor(Color color) {
+		mArrowColor = color;
+		
+		fireChanged();
 	}
 }

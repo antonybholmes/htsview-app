@@ -19,9 +19,10 @@ import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.graphplot.figure.Axes;
+
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import org.jebtk.graphplot.figure.Axes;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,6 +31,10 @@ import org.jebtk.graphplot.figure.Axes;
 public class DnaBasesPlotTrack extends DnaPlotTrack {
 
 
+	private static final long serialVersionUID = 1L;
+	
+	private boolean mColorMode = true;
+
 	/**
 	 * Instantiates a new dna bases plot track.
 	 *
@@ -37,6 +42,14 @@ public class DnaBasesPlotTrack extends DnaPlotTrack {
 	 */
 	public DnaBasesPlotTrack(GenomeAssembly genomeAssembly) {
 		super("DNA Bases", genomeAssembly);
+	}
+	
+	public void setColorMode(boolean colorMode) {
+		mColorMode = colorMode;
+	}
+	
+	public boolean getColorMode() {
+		return mColorMode;
 	}
 
 	/* (non-Javadoc)
@@ -50,9 +63,10 @@ public class DnaBasesPlotTrack extends DnaPlotTrack {
 		// Display some genes
 		//
 		
-		mSubFigure = DnaBasesPlotCanvas.create(genome,
+		mSubFigure = DnaBasesPlotSubFigure.create(genome,
 				mGenomeAssembly,
-				titlePosition);
+				titlePosition,
+				mColorMode);
 		
 		setMargins(getName(), titlePosition, mSubFigure);
 		

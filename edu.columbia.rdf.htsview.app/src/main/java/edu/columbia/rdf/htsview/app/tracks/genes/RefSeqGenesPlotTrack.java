@@ -23,6 +23,8 @@ import java.io.IOException;
  */
 public class RefSeqGenesPlotTrack extends GenesPlotTrack {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Instantiates a new ref seq genes plot track.
 	 *

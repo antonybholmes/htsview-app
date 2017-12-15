@@ -26,7 +26,7 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
@@ -327,7 +327,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 			} else if (model.getValueAsString(i, 0).startsWith("chr")) {
 				// three column format
 
-				region = new GenomicRegion(Chromosome.parse(model.getValueAsString(i, 0)),
+				region = new GenomicRegion(ChromosomeService.getInstance().guess(file, model.getValueAsString(i, 0)),
 						model.getValueAsInt(i, 1),
 						model.getValueAsInt(i, 2));
 

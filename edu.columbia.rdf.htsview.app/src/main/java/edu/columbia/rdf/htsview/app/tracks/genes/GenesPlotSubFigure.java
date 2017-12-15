@@ -16,20 +16,21 @@
 package edu.columbia.rdf.htsview.app.tracks.genes;
 
 import java.awt.Color;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
-import edu.columbia.rdf.htsview.tracks.TitleProperties;
-import edu.columbia.rdf.htsview.tracks.Track;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.PlotStyle;
+
+import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
+import edu.columbia.rdf.htsview.tracks.Track;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -121,7 +122,7 @@ public class GenesPlotSubFigure extends FixedSubFigure {
 			Color lineColor,
 			Color fillColor,
 			PlotStyle style) {
-		List<Gene> genes = GenesService.getInstance()
+		Collection<Gene> genes = GenesService.getInstance()
 				.getGenes(mGenome, mGenesId)
 				.findGenes(displayRegion);
 

@@ -2049,4 +2049,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 	public HTSTracksPanel getTracksPanel() {
 		return mTracksPanel;
 	}
+
+	public GenomicRegionModel getGenomicModel() {
+		return mGenomicModel;
+	}
 }

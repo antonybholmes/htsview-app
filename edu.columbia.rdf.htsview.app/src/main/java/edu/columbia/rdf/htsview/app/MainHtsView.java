@@ -30,8 +30,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.conservation.ConservationAssemblyWeb;
 import org.jebtk.bioinformatics.dna.GenomeAssemblyWeb;
+import org.jebtk.bioinformatics.dna.GenomeAssemblyZip;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
 import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
+import org.jebtk.bioinformatics.genomic.Dna;
+import org.jebtk.bioinformatics.genomic.GTBZGenes;
+import org.jebtk.bioinformatics.genomic.GTBZParser;
 import org.jebtk.bioinformatics.genomic.GeneType;
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
@@ -53,6 +57,7 @@ import edu.columbia.rdf.edb.ui.Repository;
 import edu.columbia.rdf.edb.ui.RepositoryService;
 import edu.columbia.rdf.edb.ui.network.ServerException;
 import edu.columbia.rdf.htsview.app.modules.counts.CountsModule;
+import edu.columbia.rdf.htsview.app.modules.dna.DnaModule;
 import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBAM;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBCT;
@@ -154,6 +159,7 @@ public class MainHtsView {
 		//window.setVisible(true);
 
 		PluginService.getInstance().addPlugin("htsview", CountsModule.class);
+		PluginService.getInstance().addPlugin("htsview", DnaModule.class);
 
 		EDBWLogin login = null;
 
@@ -217,7 +223,7 @@ public class MainHtsView {
 			String g = PathUtils.namePrefix(dir);
 
 			String namePrefix = "_" + g;
-			
+
 			CytobandsService.getInstance().load(g,
 					FileUtils.newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
 
@@ -242,6 +248,13 @@ public class MainHtsView {
 					GenesService.getInstance().put(g, 
 							db, 
 							new LazyGenes(file, Genes.gff3Parser()
+									.setKeepExons(true)
+									.setLevels(GeneType.TRANSCRIPT)));
+				} else if (filename.contains("gtbz")) {
+					GenesService.getInstance().put(g, 
+							db, 
+							new GTBZGenes(file, 
+									new GTBZParser()
 									.setKeepExons(true)
 									.setLevels(GeneType.TRANSCRIPT)));
 				} else if (filename.contains("gtb2")) {
@@ -314,7 +327,18 @@ public class MainHtsView {
 			WebAssemblyService.getInstance().setPeakAssembly(new PeakAssemblyWeb(login));
 		}
 
-		AnnotationTracksTree tree = new AnnotationTracksTree(genomeAssembly,
+		GenomeAssembly dnaAssembly;
+
+		if (SettingsService.getInstance().getAsBool("htsview.dna.web-mode")) {
+			dnaAssembly = 
+					new GenomeAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
+		} else {
+			dnaAssembly = new GenomeAssemblyZip(Dna.RES_DIR);
+		}
+
+
+
+		AnnotationTracksTree tree = new AnnotationTracksTree(dnaAssembly,
 				conservationAssembly,
 				mouseConservationAssembly);
 

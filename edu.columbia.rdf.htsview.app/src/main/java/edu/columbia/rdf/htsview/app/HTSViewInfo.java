@@ -28,12 +28,15 @@ import edu.columbia.rdf.htsview.app.icons.HTSViewIcon;
  */
 public class HTSViewInfo extends GuiAppInfo {
 
+	//public static final Path RES_DIR = PathUtils.getPath("res/modules/dna");
+	
+	
 	/**
 	 * Instantiates a new reads info.
 	 */
 	public HTSViewInfo() {
 		super("HTS View",
-				new AppVersion(4),
+				new AppVersion(6),
 				"Copyright (C) 2014-${year} Antony Holmes",
 				UIService.getInstance().loadIcon(HTSViewIcon.class, 32),
 				UIService.getInstance().loadIcon(HTSViewIcon.class, 128),

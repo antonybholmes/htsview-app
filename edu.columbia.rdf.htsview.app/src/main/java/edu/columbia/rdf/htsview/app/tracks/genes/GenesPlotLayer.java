@@ -18,13 +18,13 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
-import java.util.Map;
 import java.util.Set;
 
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesLayer;
 import org.jebtk.graphplot.figure.Figure;
@@ -76,7 +76,7 @@ public class GenesPlotLayer extends AxesLayer {
 	private GenesProperties mGeneProperties;
 
 	/** The m gene cache. */
-	private Map<String, Set<Gene>> mGeneCache;
+	private IterMap<String, Set<Gene>> mGeneCache;
 
 	/** The Constant FORWARD_TSS_ARROW. */
 	private static final GeneralPath FORWARD_TSS_ARROW = new GeneralPath();
@@ -127,7 +127,7 @@ public class GenesPlotLayer extends AxesLayer {
 	 * @param genes the genes
 	 * @param displayRegion the display region
 	 */
-	public void update(Map<String, Set<Gene>> genes, 
+	public void update(IterMap<String, Set<Gene>> genes, 
 			GenomicRegion displayRegion) {
 		mGeneCache = genes;
 	}
@@ -184,7 +184,7 @@ public class GenesPlotLayer extends AxesLayer {
 
 		g2.setStroke(mGeneProperties.getStyle().getStroke());
 
-		for (String symbol : mGeneCache.keySet()) {
+		for (String symbol : mGeneCache) {
 			if (c == maxGenes) {
 				break;
 			}
@@ -207,7 +207,7 @@ public class GenesPlotLayer extends AxesLayer {
 			}
 
 			// Set the strand to be that of the first gene we encounter
-			strand = mGeneCache.get(symbol).iterator().next().getRegion().getStrand();
+			strand = mGeneCache.get(symbol).iterator().next().getStrand();
 
 			//
 			// The line
@@ -217,10 +217,8 @@ public class GenesPlotLayer extends AxesLayer {
 			int lx2 = Integer.MIN_VALUE;
 
 			for (Gene g : mGeneCache.get(symbol)) {
-				GenomicRegion region = g.getRegion();
-				
-				lx1 = Math.min(lx1, region.getStart());
-				lx2 = Math.max(lx2, region.getEnd());
+				lx1 = Math.min(lx1, g.mStart);
+				lx2 = Math.max(lx2, g.mEnd);
 			}
 
 			lx1 = axes.toPlotX1(lx1);
@@ -246,9 +244,35 @@ public class GenesPlotLayer extends AxesLayer {
 				// Draw the utr
 				//
 
-				for (GenomicRegion exon : g) {
-					x1 = axes.toPlotX1(exon.getStart());
-					x2 = axes.toPlotX1(exon.getEnd());
+				for (Gene exon : g.get5pUtrs()) {
+					x1 = axes.toPlotX1(exon.mStart);
+					x2 = axes.toPlotX1(exon.mEnd);
+
+					// If exons are outside the view window, simply don't draw
+					// them rather than using the min/max x. This stops the
+					// exons bunching up at the end of the gene as we scroll
+					if (x1 < minX || x2 > maxX) {
+						continue;
+					}
+					
+					//if (!exon.getType().contains("utr")) {
+					//	continue;
+					//}
+
+					// Draw the UTR regions with a narrow band, as with the
+					// UCSC
+					y1 = y - QUARTER_BAR_HEIGHT;
+
+					g2.setColor(mGeneProperties.getUTR().getFillStyle().getColor());
+					g2.fillRect(x1, y1, x2 - x1, HALF_BAR_HEIGHT);
+
+					g2.setColor(mGeneProperties.getUTR().getLineStyle().getColor());
+					g2.drawRect(x1, y1, x2 - x1, HALF_BAR_HEIGHT);
+				}
+				
+				for (Gene exon : g.get3pUtrs()) {
+					x1 = axes.toPlotX1(exon.mStart);
+					x2 = axes.toPlotX1(exon.mEnd);
 
 					// If exons are outside the view window, simply don't draw
 					// them rather than using the min/max x. This stops the
@@ -276,10 +300,11 @@ public class GenesPlotLayer extends AxesLayer {
 				// Draw the exons last so they overwrite the UTR.
 				//
 
-				for (GenomicRegion exon : g) {
-
-					x1 = axes.toPlotX1(exon.getStart());
-					x2 = axes.toPlotX1(exon.getEnd());
+				ExonProperties p = mGeneProperties.getVariantGene().getExons();
+				
+				for (Gene exon : g.getExons()) {
+					x1 = axes.toPlotX1(exon.mStart);
+					x2 = axes.toPlotX1(exon.mEnd);
 
 					// If exons are outside the view window, simply don't draw
 					// them rather than using the min/max x. This stops the
@@ -297,9 +322,11 @@ public class GenesPlotLayer extends AxesLayer {
 					//g2.setColor(isMainVariant ? mGeneProperties.getVariantGene().getLineStyle().getColor() : 
 					//	mGeneProperties.getOtherGene().getLineStyle().getColor());
 
-					g2.setColor(mGeneProperties.getVariantGene().getLineStyle().getColor());
-
+					g2.setColor(p.getLineStyle().getColor());
 					g2.fillRect(x1, y1, x2 - x1, BAR_HEIGHT);
+					
+					//g2.setColor(p.getLineStyle().getColor());
+					//g2.drawRect(x1, y1, x2 - x1, BAR_HEIGHT);
 
 					if (mGeneProperties.getShowExonArrows()) {
 						if (Strand.isSense(strand)) {

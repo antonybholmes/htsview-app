@@ -26,11 +26,15 @@ import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
  */
 public abstract class DnaPlotTrack extends AnnotationPlotTrack {
 
+	private static final long serialVersionUID = 1L;
+
 	/** The m genome assembly. */
 	protected GenomeAssembly mGenomeAssembly;
 	
 	/** The Constant MAX_DISPLAY_BASES. */
-	public static final int MAX_DISPLAY_BASES = 100000;
+	public static final int MAX_DISPLAY_BASES = 100;
+	
+	public static final int MAX_DISPLAY_COLOR_BASES = 1000;
 
 
 	/**

@@ -90,7 +90,9 @@ public class DnaColorCanvasLayer extends AxesClippedLayer {
 		int x1;
 		int y = 0;
 		int h = axes.getInternalSize().getH();
-
+		int bw = g2.getFontMetrics().stringWidth("G");
+		int hbw = bw / 2;
+		
 		try {
 			SequenceRegion sequence =
 					mAssembly.getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
@@ -124,6 +126,7 @@ public class DnaColorCanvasLayer extends AxesClippedLayer {
 					break;
 				default:
 					g2.setColor(Dna.BASE_N_COLOR);
+					break;
 				}
 				
 				x1 = axes.toPlotX1(start);

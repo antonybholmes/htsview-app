@@ -25,17 +25,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package edu.columbia.rdf.htsview.app.modules.counts;
-
-import java.util.ArrayList;
-import java.util.List;
+package edu.columbia.rdf.htsview.app.modules.dna;
 
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
-import org.jebtk.modern.dialog.ModernDialogStatus;
-import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
+import org.jebtk.modern.graphics.icons.RunVectorIcon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import org.slf4j.Logger;
@@ -43,8 +39,6 @@ import org.slf4j.LoggerFactory;
 
 import edu.columbia.rdf.htsview.app.MainHtsViewWindow;
 import edu.columbia.rdf.htsview.app.modules.HTSViewModule;
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
 
 /**
@@ -55,16 +49,15 @@ import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
  * @author Antony Holmes Holmes
  *
  */
-public class CountsModule extends HTSViewModule implements ModernClickListener  {	
+public class DnaModule extends HTSViewModule implements ModernClickListener  {	
 	private static final Logger LOG = 
-			LoggerFactory.getLogger(CountsModule.class);
+			LoggerFactory.getLogger(DnaModule.class);
 
 	/**
 	 * The member convert button.
 	 */
-	private ModernButton mCountsButton = new RibbonLargeButton("Counts", 
-			UIService.getInstance().loadIcon("read_dist", 32),
-			UIService.getInstance().loadIcon("read_dist", 24));
+	private ModernButton mDnaButton = new RibbonLargeButton("DNA", 
+			UIService.getInstance().loadIcon("dna", 24));
 
 	/**
 	 * The member window.
@@ -78,7 +71,7 @@ public class CountsModule extends HTSViewModule implements ModernClickListener  
 	 */
 	@Override
 	public String getName() {
-		return "Counts";
+		return "DNA";
 	}
 
 	/* (non-Javadoc)
@@ -89,55 +82,25 @@ public class CountsModule extends HTSViewModule implements ModernClickListener  
 		mWindow = window;
 
 		// home
-		mCountsButton.setToolTip(new ModernToolTip("Fill Gaps", 
-				"Fill gaps using reference."), 
+		mDnaButton.setToolTip(new ModernToolTip("DNA", 
+				"Get DNA sequence for region."), 
 				mWindow.getRibbon().getToolTipModel());
-		mCountsButton.setClickMessage("Fill Gaps");
-		mWindow.getRibbon().getToolbar("Tools").getSection("Fill Gaps").add(mCountsButton);
+		mDnaButton.setClickMessage("DNA");
+		mWindow.getRibbon().getToolbar("Tools").getSection("DNA").add(mDnaButton);
 
-		mCountsButton.addClickListener(this);
+		mDnaButton.addClickListener(this);
 	}
 
 	@Override
 	public void clicked(ModernClickEvent e) {
-		counts();
+		dna();
 	}
 
-	private void counts() {
-		List<SamplePlotTrack> sampleTracks = new ArrayList<SamplePlotTrack>();
-
-		for (Track track : mWindow.getTracksPanel().getSelectedTracks()) {
-			if (track instanceof SamplePlotTrack) {
-				sampleTracks.add((SamplePlotTrack)track);
-			}
-		}
-
-		if (sampleTracks.size() == 0) {
-			ModernMessageDialog.createWarningDialog(mWindow, 
-					"You must select a sample.");
-			return;
-		}
-
-		CountsDialog dialog = new CountsDialog(mWindow, sampleTracks);
-
-		dialog.setVisible(true);
-
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-
-		ModernDialogStatus status = ModernMessageDialog
-				.createOkCancelInfoDialog(mWindow, 
-				"Generating distribution plots can take several minutes.");
-
-		if (status == ModernDialogStatus.CANCEL) {
-			return;
-		}
-
-		CountTask task = new CountTask(sampleTracks, 
-				dialog.getRegions(),
-				dialog.getNorm());
+	private void dna() {
+		DnaTask task = new DnaTask(mWindow, 
+				mWindow.getGenomicModel());
 
 		task.doInBackground();
+		task.done();
 	}
 }

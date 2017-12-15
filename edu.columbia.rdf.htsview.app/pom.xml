@@ -136,5 +136,15 @@
 			<artifactId>edu.columbia.rdf.htsview</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>edu.columbia.rdf.matcalc</groupId>
+			<artifactId>edu.columbia.rdf.matcalc.toolbox.dna.app</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.columbia.rdf.matcalc</groupId>
+			<artifactId>edu.columbia.rdf.matcalc.toolbox.motifs.app</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 </project>

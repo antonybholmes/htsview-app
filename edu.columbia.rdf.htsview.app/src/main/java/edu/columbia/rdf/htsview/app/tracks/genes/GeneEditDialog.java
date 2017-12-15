@@ -55,6 +55,8 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 	
 	/** The m UTR color button. */
 	private ColorSwatchButton mUTRColorButton;
+	
+	private ColorSwatchButton mExonColorButton;
 
 	/** The m name field. */
 	private ModernTextField mNameField = 
@@ -86,6 +88,8 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 	/** The m check compact. */
 	private ModernRadioButton mCheckCompact =
 			new ModernRadioButton("Compact");
+
+	private ColorSwatchButton mArrowColorButton;
 
 	/**
 	 * Instantiates a new gene edit dialog.
@@ -160,48 +164,58 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 
 		matrixPanel.add(new ModernAutoSizeLabel("Name"));
 		matrixPanel.add(new ModernTextBorderPanel(mNameField));
-		matrixPanel.add(new ModernAutoSizeLabel("Main Color"));
+		matrixPanel.add(new ModernAutoSizeLabel("Gene Color"));
 		
 		Box box = HBox.create();
 		box.add(mColorButton);
 		
 		matrixPanel.add(box);
 		
-		matrixPanel.add(new ModernAutoSizeLabel("Other Color"));
 		
-		box = HBox.create();
-		
+		//matrixPanel.add(new ModernAutoSizeLabel("Other Color"));
+		//box = HBox.create();
 		mOtherColorButton = new ColorSwatchButton(mParent, 
 				mTrack.getOtherColor());
+		//box.add(mOtherColorButton);
+		//matrixPanel.add(box);
 		
-		box.add(mOtherColorButton);
 		
+		matrixPanel.add(new ModernAutoSizeLabel("Exon Color"));
+		box = HBox.create();
+		mExonColorButton = new ColorSwatchButton(mParent, 
+				mTrack.getExonFillColor());
+		box.add(mExonColorButton);
 		matrixPanel.add(box);
 		
-		matrixPanel.add(new ModernAutoSizeLabel("UTR Color"));
+		//matrixPanel.add(new ModernAutoSizeLabel("UTR Color"));
 		
-		box = HBox.create();
+		//box = HBox.create();
 		
 		mUTRColorButton = new ColorSwatchButton(mParent, 
 				mTrack.getUTRFillColor());
 		
-		box.add(mUTRColorButton);
-		
+		matrixPanel.add(new ModernAutoSizeLabel("Arrow Color"));
+		box = HBox.create();
+		mArrowColorButton = new ColorSwatchButton(mParent, 
+				mTrack.getArrowColor());
+		box.add(mArrowColorButton);
 		matrixPanel.add(box);
 		
+		//box.add(mUTRColorButton);
+		
+		//matrixPanel.add(box);
+		
 		content.add(matrixPanel);
-		content.add(ModernPanel.createVGap());
+		//content.add(ModernPanel.createVGap());
 		
 		content.add(mCheckDrawArrows);
 		content.add(ModernPanel.createVGap());
 		content.add(mCheckDrawTssArrows);
 		content.add(ModernPanel.createVGap());
 		content.add(mCheckDrawExonArrows);
-		content.add(UI.createVGap(10));
+		content.add(UI.createVGap(20));
 		content.add(mCheckFull);
-		content.add(ModernPanel.createVGap());
 		content.add(mCheckDense);
-		content.add(ModernPanel.createVGap());
 		content.add(mCheckCompact);
 
 		setDialogCardContent(content);
@@ -281,5 +295,13 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 		} else {
 			return GenesView.FULL;
 		}
+	}
+
+	public Color getExonColor() {
+		return mExonColorButton.getSelectedColor();
+	}
+	
+	public Color getArrowColor() {
+		return mArrowColorButton.getSelectedColor();
 	}
 }

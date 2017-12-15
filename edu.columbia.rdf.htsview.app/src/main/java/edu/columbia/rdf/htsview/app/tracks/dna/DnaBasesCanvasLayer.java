@@ -16,9 +16,11 @@
 package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Dna;
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.RepeatMaskType;
@@ -27,6 +29,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
+import org.jebtk.modern.font.FontService;
 import org.jebtk.modern.graphics.DrawingContext;
 
 // TODO: Auto-generated Javadoc
@@ -37,6 +40,11 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+
+
+	private static final Font DNA_FONT = 
+			FontService.getInstance().loadFont("Courier New", 16);
 
 
 	
@@ -51,16 +59,24 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
 	/** The m genome. */
 	private String mGenome;
 
+
+
+	private boolean mColorMode = false;
+
 	/**
 	 * Instantiates a new dna bases canvas layer.
 	 *
 	 * @param genome the genome
 	 * @param assembly the assembly
 	 */
-	public DnaBasesCanvasLayer(String genome, GenomeAssembly assembly) {
+	public DnaBasesCanvasLayer(String genome, 
+			GenomeAssembly assembly,
+			boolean colorMode) {
 		mGenome = genome;
 		mAssembly = assembly;
+		mColorMode = colorMode;
 	}
+	
 	
 	/**
 	 * Update.
@@ -82,15 +98,28 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
 			Axes axes) {
 		
 		// So that we don't attempt to pull a whole chromosome
-		if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
-			return;
+		if (mDisplayRegion.getLength() <= DnaPlotTrack.MAX_DISPLAY_BASES) {
+			plotBases(g2, context, figure, subFigure, axes);
+		} else {
+			plotColors(g2, context, figure, subFigure, axes);
 		}
-
+	}
+	
+	private void plotBases(Graphics2D g2,
+			DrawingContext context,
+			Figure figure, 
+			SubFigure subFigure, 
+			Axes axes) {
+		
+		g2.setFont(DNA_FONT);
 
 		int y = g2.getFontMetrics().getAscent() + 
 				g2.getFontMetrics().getDescent();
 	
 		g2.setColor(Color.BLACK);
+		
+		int bw = g2.getFontMetrics().stringWidth("G");
+		int hbw = bw / 2;
 		
 		try {
 			SequenceRegion sequence =
@@ -99,16 +128,106 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
 			int start = mDisplayRegion.getStart();
 	
 			int x1 = axes.toPlotX1(mDisplayRegion.getStart());
-			int w;
+			//int w;
 			
 			for (char c : sequence.getSequence().toArray())	{
+				
+				if (mColorMode) {
+					switch (c) {
+					case 'a':
+						//fullHeight = false;
+					case 'A':
+						g2.setColor(Dna.BASE_A_COLOR);
+						break;
+					case 'c':
+						//fullHeight = false;
+					case 'C':
+						g2.setColor(Dna.BASE_C_COLOR);
+						break;
+					case 'g':
+						//fullHeight = false;
+					case 'G':
+						g2.setColor(Dna.BASE_G_COLOR);
+						break;
+					case 't':
+						//fullHeight = false;
+					case 'T':
+						g2.setColor(Dna.BASE_T_COLOR);
+						break;
+					default:
+						g2.setColor(Dna.BASE_N_COLOR);
+					}
+				}
+				
 				String s = Character.toString(c);
 				
-				x1 = axes.toPlotX1(start);
-				w = axes.toPlotX1(start + 1) - x1;
-				x1 += (w - g2.getFontMetrics().stringWidth(s)) / 2;
+				x1 = axes.toPlotX1(start) - hbw; //(axes.toPlotX1(start) + axes.toPlotX1(start + 1)) / 2 - hbw;
+				//w = axes.toPlotX1(start + 1) - x1;
+				//x1 += (w - bw) / 2;
 				
 				g2.drawString(s, x1, y);
+				
+				++start;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void plotColors(Graphics2D g2,
+			DrawingContext context,
+			Figure figure, 
+			SubFigure subFigure, 
+			Axes axes) {
+		
+		if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_COLOR_BASES) {
+			return;
+		}
+		
+		int x1;
+		int y = 0;
+		int h = axes.getInternalSize().getH();
+
+		try {
+			SequenceRegion sequence =
+					mAssembly.getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
+
+			int start = mDisplayRegion.getStart();
+			int w;
+			
+			//System.err.println(w + " " + space.getLayoutProperties().getPlotSize().getW() + " " + mDisplayRegion.getLength());
+			
+			for (char c : sequence.getSequence().toArray())	{
+				switch (c) {
+				case 'a':
+					//fullHeight = false;
+				case 'A':
+					g2.setColor(Dna.BASE_A_COLOR);
+					break;
+				case 'c':
+					//fullHeight = false;
+				case 'C':
+					g2.setColor(Dna.BASE_C_COLOR);
+					break;
+				case 'g':
+					//fullHeight = false;
+				case 'G':
+					g2.setColor(Dna.BASE_G_COLOR);
+					break;
+				case 't':
+					//fullHeight = false;
+				case 'T':
+					g2.setColor(Dna.BASE_T_COLOR);
+					break;
+				default:
+					g2.setColor(Dna.BASE_N_COLOR);
+					break;
+				}
+				
+				x1 = axes.toPlotX1(start);
+				w = Math.max(1, axes.toPlotX1(start + 1) - x1);
+				
+				g2.fillRect(x1, y, w, h);
 				
 				++start;
 			}

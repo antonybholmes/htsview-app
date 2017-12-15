@@ -31,6 +31,7 @@ import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -383,7 +384,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 		String genome = mGenomeModel.get();
 		
 		for (String refseq : GenesService.getInstance().getGenes(genome, "refseq").getRefSeqIds()) {
-			Gene gene = GenesService.getInstance().getGenes(genome, "refseq").lookupByRefSeq(refseq);
+			Gene gene = GenesService.getInstance().getGenes(genome, "refseq").getGene(refseq);
 
 			//GenomicRegion tss = Gene.tssRegion(gene);
 
@@ -464,7 +465,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 			} else if (model.getValueAsString(i, 0).startsWith("chr")) {
 				// three column format
 
-				region = new GenomicRegion(Chromosome.parse(model.getValueAsString(i, 0)),
+				region = new GenomicRegion(ChromosomeService.getInstance().guess(file, model.getValueAsString(i, 0)),
 						Integer.parseInt(model.getValueAsString(i, 1)),
 						Integer.parseInt(model.getValueAsString(i, 2)));
 

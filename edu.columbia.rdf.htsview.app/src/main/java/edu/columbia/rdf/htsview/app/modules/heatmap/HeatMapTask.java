@@ -33,27 +33,26 @@ import javax.swing.SwingWorker;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.SampleAssembly;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
+import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.Properties;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.Temp;
-import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.graphplot.AspectRatio;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 import org.jebtk.modern.window.ModernRibbonWindow;
-import edu.columbia.rdf.matcalc.MainMatCalc;
-import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 
 import edu.columbia.rdf.edb.Sample;
+import edu.columbia.rdf.htsview.tracks.SampleAssembly;
+import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
+import edu.columbia.rdf.matcalc.MainMatCalc;
+import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
+import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -282,12 +281,12 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 				continue;
 			}
 
-			List<Gene> closestGenes = 
+			Iterable<Gene> closestGenes = 
 					GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").findClosestGenesByTss(region.getRegion());
 
 			//System.err.println("sym " + closestGenes.get(0).getSymbol());
 
-			int tssDistance = Gene.tssDist5p(closestGenes.get(0), region.getRegion()); //GenomicRegion.midDist(region.getRegion(), Gene.tssRegion(closestGenes.get(0)));
+			int tssDistance = Gene.tssDist5p(closestGenes.iterator().next(), region.getRegion()); //GenomicRegion.midDist(region.getRegion(), Gene.tssRegion(closestGenes.get(0)));
 
 			//System.err.println("tss " + tssDistance + " " + closestGenes.get(0).getLocation() + " " + region.getRegion());
 
@@ -309,7 +308,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 		
 		for (int tssDist : tssMap.keySet()) {
 			for (String refseq : tssMap.get(tssDist)) {
-				Gene gene = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").lookupByRefSeq(refseq);
+				Gene gene = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").getGene(refseq);
 
 				GenomicRegion tssRegion = Gene.tssRegion(gene);
 

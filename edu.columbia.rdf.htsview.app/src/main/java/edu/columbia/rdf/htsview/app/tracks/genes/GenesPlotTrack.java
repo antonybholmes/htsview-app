@@ -42,6 +42,8 @@ import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
  */
 public abstract class GenesPlotTrack extends AnnotationPlotTrack {
 
+	private static final long serialVersionUID = 1L;
+
 	/** The m genes properties. */
 	protected GenesProperties mGenesProperties = new GenesProperties();
 	
@@ -77,9 +79,9 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
 	@Override
 	public void setFillColor(Color color) {
 		mGenesProperties.getVariantGene().getLineStyle().setColor(color);
-		mGenesProperties.getVariantGene().getExons().getLineStyle().setColor(color);
-		mGenesProperties.getVariantGene().getExons().setFillColor(color);
-		mGenesProperties.getVariantGene().getFont().setColor(color);
+		//mGenesProperties.getVariantGene().getExons().getLineStyle().setColor(color);
+		//mGenesProperties.getVariantGene().getExons().setFillColor(color);
+		//mGenesProperties.getVariantGene().getFont().setColor(color);
 	}
 	
 	/**
@@ -89,9 +91,9 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
 	 */
 	public void setOtherColor(Color color) {
 		mGenesProperties.getOtherGene().getLineStyle().setColor(color);
-		mGenesProperties.getOtherGene().getExons().getLineStyle().setColor(color);
-		mGenesProperties.getOtherGene().getExons().setFillColor(color);
-		mGenesProperties.getOtherGene().getFont().setColor(color);
+		//mGenesProperties.getOtherGene().getExons().getLineStyle().setColor(color);
+		//mGenesProperties.getOtherGene().getExons().setFillColor(color);
+		//mGenesProperties.getOtherGene().getFont().setColor(color);
 	}
 	
 	/**
@@ -119,6 +121,34 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
 	 */
 	public void setUTRFillColor(Color color) {
 		mGenesProperties.getUTR().getFillStyle().setColor(color);
+	}
+	
+	public Color getExonFillColor() {
+		return mGenesProperties.getVariantGene().getExons().getLineStyle().getColor();
+	}
+	
+	/**
+	 * Sets the UTR fill color.
+	 *
+	 * @param color the new UTR fill color
+	 */
+	public void setArrowColor(Color color) {
+		mGenesProperties.setArrowColor(color);
+		//mGenesProperties.getVariantGene().getExons().getFillStyle().setColor(color);
+	}
+	
+	public Color getArrowColor() {
+		return mGenesProperties.getArrowColor();
+	}
+	
+	/**
+	 * Sets the UTR fill color.
+	 *
+	 * @param color the new UTR fill color
+	 */
+	public void setExonFillColor(Color color) {
+		mGenesProperties.getVariantGene().getExons().getLineStyle().setColor(color);
+		//mGenesProperties.getVariantGene().getExons().getFillStyle().setColor(color);
 	}
 	
 	/**
@@ -258,7 +288,8 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
 		setFillColor(dialog.getColor());
 		setOtherColor(dialog.getOtherColor());
 		setUTRFillColor(dialog.getUTRColor());
-		
+		setExonFillColor(dialog.getExonColor());
+		setArrowColor(dialog.getArrowColor());
 		setShowTssArrows(dialog.getDrawTssArrows());
 		setShowExonArrows(dialog.getDrawExonArrows());
 		setShowArrows(dialog.getDrawArrows());

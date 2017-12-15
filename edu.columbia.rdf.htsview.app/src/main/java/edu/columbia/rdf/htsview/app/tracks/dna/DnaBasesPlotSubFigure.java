@@ -27,7 +27,7 @@ import org.jebtk.graphplot.figure.PlotStyle;
 /**
  * The Class DnaBasesPlotCanvas.
  */
-public class DnaBasesPlotCanvas extends DnaSubFigure {
+public class DnaBasesPlotSubFigure extends DnaSubFigure {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -42,10 +42,11 @@ public class DnaBasesPlotCanvas extends DnaSubFigure {
 	 * @param genomeAssembly the genome assembly
 	 * @param titlePosition the title position
 	 */
-	public DnaBasesPlotCanvas(String genome,
+	public DnaBasesPlotSubFigure(String genome,
 			GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition) {
-		mLayer = new DnaBasesCanvasLayer(genome, genomeAssembly);
+			TitleProperties titlePosition,
+			boolean colorMode) {
+		mLayer = new DnaBasesCanvasLayer(genome, genomeAssembly, colorMode);
 		
 		currentAxes().addChild(mLayer);
 		
@@ -60,13 +61,15 @@ public class DnaBasesPlotCanvas extends DnaSubFigure {
 	 * @param titlePosition the title position
 	 * @return the dna bases plot canvas
 	 */
-	public static DnaBasesPlotCanvas create(String genome,
+	public static DnaBasesPlotSubFigure create(String genome,
 			GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition) {
+			TitleProperties titlePosition,
+			boolean colorMode) {
 
-		DnaBasesPlotCanvas canvas = new DnaBasesPlotCanvas(genome,
+		DnaBasesPlotSubFigure canvas = new DnaBasesPlotSubFigure(genome,
 				genomeAssembly,
-				titlePosition);
+				titlePosition,
+				colorMode);
 
 		// set the graph limits
 		canvas.currentAxes().getX1Axis().getTitle().setText(null);

@@ -25,8 +25,9 @@ import java.util.List;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
-import org.jebtk.bioinformatics.genomic.Chromosome.Human;
+import org.jebtk.bioinformatics.genomic.Human;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
@@ -274,7 +275,7 @@ public class Import {
 			while ((line = reader.readLine()) != null) {
 				tokens = TextUtils.tabSplit(line);
 
-				Chromosome c = Chromosome.parse(tokens.get(2));
+				Chromosome c = ChromosomeService.getInstance().guess(samFile, tokens.get(2));
 
 				if (c == null || (currentChr != null && !c.equals(currentChr))) {
 					break;

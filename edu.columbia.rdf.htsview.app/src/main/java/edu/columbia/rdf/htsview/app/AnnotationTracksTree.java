@@ -27,7 +27,6 @@ import org.jebtk.core.tree.TreeNode;
 import org.jebtk.core.tree.TreeRootNode;
 import org.jebtk.modern.tree.ModernTree;
 
-import edu.columbia.rdf.htsview.app.tracks.VegaGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.conservation.Conservation46WayGraphPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.conservation.Conservation46WayPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.CytobandsPlotTrack;
@@ -35,7 +34,6 @@ import edu.columbia.rdf.htsview.app.tracks.dna.DnaBasesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaColorPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaRepeatMaskPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.genes.GencodeGenesPlotTrack;
-import edu.columbia.rdf.htsview.app.tracks.genes.GencodePolyAPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.genes.RefSeqGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.mouse.MouseConservationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
@@ -62,7 +60,7 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 	 * @param mouseConservationAssembly the mouse conservation assembly
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public AnnotationTracksTree(GenomeAssembly genomeAssembly,
+	public AnnotationTracksTree(GenomeAssembly dnaAssembly,
 			ConservationAssembly conservationAssembly,
 			ConservationAssembly mouseConservationAssembly) throws IOException {
 		Track track;
@@ -70,7 +68,7 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 
 		TreeRootNode<Track> root = new TreeRootNode<Track>();
 
-		TreeNode<Track> humanNode = new TreeNode<Track>("Genomic");
+		TreeNode<Track> genomicNode = new TreeNode<Track>("Genomic");
 
 		TreeNode<Track> genesNode = new TreeNode<Track>("Gene Annotation");
 
@@ -86,35 +84,35 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 		node = new TreeNode<Track>(track.getName(), track);
 		genesNode.addChild(node);
 		
-		track = new GencodePolyAPlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		genesNode.addChild(node);
+		//track = new GencodePolyAPlotTrack();
+		//node = new TreeNode<Track>(track.getName(), track);
+		//genesNode.addChild(node);
 		
 		//track = new UcscGenesPlotTrack();
 		//node = new TreeNode<Track>(track.getName(), track);
 		//genesNode.addChild(node);
 
-		track = new VegaGenesPlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		genesNode.addChild(node);
+		//track = new VegaGenesPlotTrack();
+		//node = new TreeNode<Track>(track.getName(), track);
+		//genesNode.addChild(node);
 
-		humanNode.addChild(genesNode);
+		genomicNode.addChild(genesNode);
 
 		TreeNode<Track> dnaNode = new TreeNode<Track>("DNA Annotation");
 
-		track = new DnaBasesPlotTrack(genomeAssembly);
+		track = new DnaBasesPlotTrack(dnaAssembly);
 		node = new TreeNode<Track>(track.getName(), track);
 		dnaNode.addChild(node);
 
-		track = new DnaColorPlotTrack(genomeAssembly);
+		track = new DnaColorPlotTrack(dnaAssembly);
 		node = new TreeNode<Track>(track.getName(), track);
 		dnaNode.addChild(node);
 
-		track = new DnaRepeatMaskPlotTrack(genomeAssembly);
+		track = new DnaRepeatMaskPlotTrack(dnaAssembly);
 		node = new TreeNode<Track>(track.getName(), track);
 		dnaNode.addChild(node);
 
-		humanNode.addChild(dnaNode);
+		genomicNode.addChild(dnaNode);
 
 		TreeNode<Track> conservationNode = new TreeNode<Track>("Conservation");
 
@@ -130,40 +128,35 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 		node = new TreeNode<Track>(track.getName(), track);
 		conservationNode.addChild(node);
 
-		humanNode.addChild(conservationNode);
+		genomicNode.addChild(conservationNode);
 		
-		
-		
-		
-		
-
-		TreeNode<Track> otherNode = new TreeNode<Track>("Other");
+		TreeNode<Track> chrNode = new TreeNode<Track>("Chromosome");
 		
 		track = new CytobandsPlotTrack();
 		node = new TreeNode<Track>(track.getName(), track);
-		otherNode.addChild(node);
+		chrNode.addChild(node);
+		genomicNode.addChild(chrNode);
+		
+		TreeNode<Track> microarrayNode = new TreeNode<Track>("Microarray");
+
+		track = new BedPlotTrack(PathUtils.getPath("res/tracks/HG-U133_Plus_2.probes.hg19.bed.gz"), 
+				TrackDisplayMode.FULL);
+		node = new TreeNode<Track>(track.getName(), track);
+		microarrayNode.addChild(node);
+		
+		genomicNode.addChild(microarrayNode);
+		
+		/*
+		TreeNode<Track> otherNode = new TreeNode<Track>("Other");
 		
 		track = new AnnotationBedPlotTrack(Bed.parseTracks("DDS_IgLocusMap", 
 				Resources.getResGzipReader("res/tracks/DDS_IgLocusMap.bed.gz")).get(0));
 		node = new TreeNode<Track>(track.getName(), track);
 		otherNode.addChild(node);
+		genomicNode.addChild(otherNode);
+		*/
 		
-		humanNode.addChild(otherNode);
-		
-		root.addChild(humanNode);
-		
-		
-		humanNode = new TreeNode<Track>("Human");
-		
-		TreeNode<Track> microarrayNode = new TreeNode<Track>("Microarray");
-
-		track = new BedPlotTrack(PathUtils.getPath("res/tracks/HG-U133_Plus_2.probes.hg19.bed.gz"), TrackDisplayMode.FULL);
-		node = new TreeNode<Track>(track.getName(), track);
-		microarrayNode.addChild(node);
-		
-		humanNode.addChild(microarrayNode);
-		
-		root.addChild(humanNode);
+		root.addChild(genomicNode);
 		
 		//
 		// Mouse
