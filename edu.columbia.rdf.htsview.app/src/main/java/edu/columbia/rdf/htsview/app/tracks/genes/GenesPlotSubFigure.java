@@ -17,13 +17,13 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
 
 import java.awt.Color;
 import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
 
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultTreeMap;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.PlotStyle;
@@ -126,7 +126,7 @@ public class GenesPlotSubFigure extends FixedSubFigure {
 				.getGenes(mGenome, mGenesId)
 				.findGenes(displayRegion);
 
-		Map<String, Set<Gene>> geneMap =
+		IterMap<String, Set<Gene>> geneMap =
 				DefaultTreeMap.create(new TreeSetCreator<Gene>());
 
 		GenesView view = mProperties.getView();
@@ -154,6 +154,8 @@ public class GenesPlotSubFigure extends FixedSubFigure {
 
 				geneMap.get(id).add(g);
 			}
+			
+			break;
 		}
 
 		// Include extra space to allow the title to be draw in the margin,
