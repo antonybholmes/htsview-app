@@ -9,9 +9,9 @@ res/
 /recent.files.json
 /user.settings.json
 /.settings/
+/.classpath
 /previous.readsj
 /dependency-reduced-pom.xml
 /doc/
-/out.log
-/out.log.*
+/*log*
 /user.setj
