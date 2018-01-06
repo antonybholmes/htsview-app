@@ -26,55 +26,57 @@ import org.jebtk.modern.ribbon.Ribbon;
 
 // TODO: Auto-generated Javadoc
 /**
- * Functions the same as {@code GenomicRegionRibbonSection}, but 
- * restricts users to entering coordinates with a minimum size.
+ * Functions the same as {@code GenomicRegionRibbonSection}, but restricts users
+ * to entering coordinates with a minimum size.
  * 
  * @author Antony Holmes Holmes
  *
  */
 public class HTSGenomicRibbonSection extends GenomicRegionRibbonSection {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Minimum width of a region.
-	 */
-	private static final int MIN_BASES = 100;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new HTS genomic ribbon section.
-	 *
-	 * @param ribbon the ribbon
-	 * @param model the model
-	 * @param genomeModel the genome model
-	 */
-	public HTSGenomicRibbonSection(Ribbon ribbon, 
-			GenomicRegionModel model, 
-			GenomeModel genomeModel) {
-		super(ribbon, model, genomeModel);
-	}
+  /**
+   * Minimum width of a region.
+   */
+  private static final int MIN_BASES = 100;
 
-	/* (non-Javadoc)
-	 * @see org.jebtk.bioinformatics.ui.GenomicRegionRibbonSection#parse()
-	 */
-	@Override
-	protected GenomicRegion parse() throws ParseException {
-		GenomicRegion region = super.parse();
-		
-		if (region != null) {
-			// Restrict users so they can't look at a region smaller than
-			// MIN_SIZE
-			
-			if (region.getEnd() - region.getStart() < MIN_BASES) {
-				int size = ChromosomeSizesService.getInstance().getSizes(mGenomeModel.get()).getSize(region.getChr());
+  /**
+   * Instantiates a new HTS genomic ribbon section.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param model
+   *          the model
+   * @param genomeModel
+   *          the genome model
+   */
+  public HTSGenomicRibbonSection(Ribbon ribbon, GenomicRegionModel model, GenomeModel genomeModel) {
+    super(ribbon, model, genomeModel);
+  }
 
-				region = GenomicRegion.create(region.getChr(), 
-						region.getStart(), 
-						Math.min(region.getStart() + MIN_BASES, size));
-			}
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.jebtk.bioinformatics.ui.GenomicRegionRibbonSection#parse()
+   */
+  @Override
+  protected GenomicRegion parse() throws ParseException {
+    GenomicRegion region = super.parse();
 
-		return region;
-	}
+    if (region != null) {
+      // Restrict users so they can't look at a region smaller than
+      // MIN_SIZE
+
+      if (region.getEnd() - region.getStart() < MIN_BASES) {
+        int size = ChromosomeSizesService.getInstance().getSizes(mGenomeModel.get()).getSize(region.getChr());
+
+        region = GenomicRegion.create(region.getChr(), region.getStart(),
+            Math.min(region.getStart() + MIN_BASES, size));
+      }
+    }
+
+    return region;
+  }
 }

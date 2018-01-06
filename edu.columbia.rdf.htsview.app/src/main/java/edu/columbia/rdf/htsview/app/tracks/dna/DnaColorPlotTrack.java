@@ -29,63 +29,64 @@ import org.jebtk.graphplot.figure.Axes;
  */
 public class DnaColorPlotTrack extends DnaPlotTrack {
 
-	/** The m sub figure. */
-	private DnaColorPlotCanvas mSubFigure;
+  /** The m sub figure. */
+  private DnaColorPlotCanvas mSubFigure;
 
-	/**
-	 * Instantiates a new dna color plot track.
-	 *
-	 * @param genomeAssembly the genome assembly
-	 */
-	public DnaColorPlotTrack(GenomeAssembly genomeAssembly) {
-		super("DNA Color", genomeAssembly);
-	}
+  /**
+   * Instantiates a new dna color plot track.
+   *
+   * @param genomeAssembly
+   *          the genome assembly
+   */
+  public DnaColorPlotTrack(GenomeAssembly genomeAssembly) {
+    super("DNA Color", genomeAssembly);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) throws IOException {
-		
-		//
-		// Display some genes
-		//
-		
-		mSubFigure = DnaColorPlotCanvas.create(genome,
-				mGenomeAssembly,
-				titlePosition);
-		
-		switch(titlePosition.getPosition()) {
-		case RIGHT:
-		case COMPACT_RIGHT:
-			setSmallMargins(getName(), mSubFigure);
-			break;
-		default:
-			setStandardMargins(getName(), mSubFigure);
-			break;
-		}
-		
-		Axes.disableAllFeatures(mSubFigure.currentAxes());
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
 
-		return mSubFigure;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, int, int, int)
-	 */
-	@Override
-	public TrackSubFigure updateGraph(GenomicRegion displayRegion, 
-			int resolution,
-			int width,
-			int height,
-			int margin) throws IOException {
-		
-		//mPlot.setForwardCanvasEventsEnabled(false);
-		mSubFigure.update(displayRegion, resolution, width, height, margin);
-		//mPlot.setForwardCanvasEventsEnabled(true);
-		
-		
-		return mSubFigure;
-	}
+    //
+    // Display some genes
+    //
+
+    mSubFigure = DnaColorPlotCanvas.create(genome, mGenomeAssembly, titlePosition);
+
+    switch (titlePosition.getPosition()) {
+    case RIGHT:
+    case COMPACT_RIGHT:
+      setSmallMargins(getName(), mSubFigure);
+      break;
+    default:
+      setStandardMargins(getName(), mSubFigure);
+      break;
+    }
+
+    Axes.disableAllFeatures(mSubFigure.currentAxes());
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
+      throws IOException {
+
+    // mPlot.setForwardCanvasEventsEnabled(false);
+    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    // mPlot.setForwardCanvasEventsEnabled(true);
+
+    return mSubFigure;
+  }
 }

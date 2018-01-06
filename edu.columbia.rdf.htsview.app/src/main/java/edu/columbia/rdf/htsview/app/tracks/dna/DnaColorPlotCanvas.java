@@ -28,74 +28,72 @@ import org.jebtk.graphplot.figure.PlotStyle;
  * The Class DnaColorPlotCanvas.
  */
 public class DnaColorPlotCanvas extends DnaSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m layer. */
-	private DnaColorCanvasLayer mLayer;
 
-	/**
-	 * Instantiates a new dna color plot canvas.
-	 *
-	 * @param genome the genome
-	 * @param genomeAssembly the genome assembly
-	 * @param titlePosition the title position
-	 */
-	public DnaColorPlotCanvas(String genome, GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition) {
-		mLayer = new DnaColorCanvasLayer(genome, genomeAssembly);
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-		currentAxes().addChild(mLayer);
+  /** The m layer. */
+  private DnaColorCanvasLayer mLayer;
 
-		Track.setTitle("DNA", titlePosition, currentAxes());
-	}
+  /**
+   * Instantiates a new dna color plot canvas.
+   *
+   * @param genome
+   *          the genome
+   * @param genomeAssembly
+   *          the genome assembly
+   * @param titlePosition
+   *          the title position
+   */
+  public DnaColorPlotCanvas(String genome, GenomeAssembly genomeAssembly, TitleProperties titlePosition) {
+    mLayer = new DnaColorCanvasLayer(genome, genomeAssembly);
 
-	/**
-	 * Creates the.
-	 *
-	 * @param genome the genome
-	 * @param genomeAssembly the genome assembly
-	 * @param titlePosition the title position
-	 * @return the dna color plot canvas
-	 */
-	public static DnaColorPlotCanvas create(String genome,
-			GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition) {
+    currentAxes().addChild(mLayer);
 
-		DnaColorPlotCanvas canvas = new DnaColorPlotCanvas(genome, 
-				genomeAssembly,
-				titlePosition);
+    Track.setTitle("DNA", titlePosition, currentAxes());
+  }
 
-		// set the graph limits
-		canvas.currentAxes().getX1Axis().getTitle().setText(null);
-		canvas.currentAxes().getX1Axis().startEndTicksOnly();
+  /**
+   * Creates the.
+   *
+   * @param genome
+   *          the genome
+   * @param genomeAssembly
+   *          the genome assembly
+   * @param titlePosition
+   *          the title position
+   * @return the dna color plot canvas
+   */
+  public static DnaColorPlotCanvas create(String genome, GenomeAssembly genomeAssembly, TitleProperties titlePosition) {
 
-		canvas.currentAxes().getY1Axis().getTitle().setText(null);
-		canvas.currentAxes().getY1Axis().startEndTicksOnly();
+    DnaColorPlotCanvas canvas = new DnaColorPlotCanvas(genome, genomeAssembly, titlePosition);
 
-		canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
-		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+    // set the graph limits
+    canvas.currentAxes().getX1Axis().getTitle().setText(null);
+    canvas.currentAxes().getX1Axis().startEndTicksOnly();
 
+    canvas.currentAxes().getY1Axis().getTitle().setText(null);
+    canvas.currentAxes().getY1Axis().startEndTicksOnly();
 
-		return canvas;
-	}
+    canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
+    // canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
 
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
-		
-		mLayer.update(displayRegion);
-	}
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.
+   * GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color,
+   * org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.update(displayRegion);
+  }
 }

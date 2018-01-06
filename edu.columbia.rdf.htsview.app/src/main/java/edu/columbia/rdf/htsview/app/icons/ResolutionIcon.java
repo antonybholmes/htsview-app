@@ -26,39 +26,43 @@ import org.jebtk.modern.widget.ModernWidget;
  * The Class ResolutionIcon.
  */
 public class ResolutionIcon extends ModernVectorIcon {
-	
-	/** The m name. */
-	private String mName;
 
-	/**
-	 * Instantiates a new resolution icon.
-	 *
-	 * @param name the name
-	 */
-	public ResolutionIcon(String name) {
-		mName = name;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.graphics.icons.ModernIcon#drawIcon(java.awt.Graphics2D, int, int, int, int)
-	 */
-	@Override
-	public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
-		g2.setColor(Color.WHITE);
-		g2.fillRect(x, y, w, h);
-		
-		g2.setColor(ModernWidget.LINE_COLOR);
-		g2.drawRect(x, y, w - 1, h - 1);
-		
-		g2.setFont(ModernWidget.FONT);
-		
-		x = x + (w - g2.getFontMetrics().stringWidth(mName)) / 2;
-		y = y + (h + g2.getFontMetrics().getAscent() - g2.getFontMetrics().getDescent()) / 2;
-		
+  /** The m name. */
+  private String mName;
 
-		g2.setColor(Color.BLACK);
-		
-		g2.drawString(mName, x, y);
-	}
+  /**
+   * Instantiates a new resolution icon.
+   *
+   * @param name
+   *          the name
+   */
+  public ResolutionIcon(String name) {
+    mName = name;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.graphics.icons.ModernIcon#drawIcon(java.awt.Graphics2D,
+   * int, int, int, int)
+   */
+  @Override
+  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+    g2.setColor(Color.WHITE);
+    g2.fillRect(x, y, w, h);
+
+    g2.setColor(ModernWidget.LINE_COLOR);
+    g2.drawRect(x, y, w - 1, h - 1);
+
+    g2.setFont(ModernWidget.FONT);
+
+    x = x + (w - g2.getFontMetrics().stringWidth(mName)) / 2;
+    y = y + (h + g2.getFontMetrics().getAscent() - g2.getFontMetrics().getDescent()) / 2;
+
+    g2.setColor(Color.BLACK);
+
+    g2.drawString(mName, x, y);
+  }
 
 }

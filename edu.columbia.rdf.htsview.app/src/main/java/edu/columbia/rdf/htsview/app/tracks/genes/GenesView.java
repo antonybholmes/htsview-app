@@ -20,35 +20,36 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
  * The Enum GenesView.
  */
 public enum GenesView {
-	
-	/** The full. */
-	FULL,
-	
-	/** The dense. */
-	DENSE,
-	
-	/** The compact. */
-	COMPACT;
-	
-	/**
-	 * Parses the.
-	 *
-	 * @param v the v
-	 * @return the genes view
-	 */
-	public static GenesView parse(String v) {
-		if (v == null) {
-			return FULL;
-		}
-		
-		String vl = v.toLowerCase();
-		
-		if (vl.equals("dense")) {
-			return DENSE;
-		} else if (vl.equals("compact")) {
-			return COMPACT;
-		} else {
-			return FULL;
-		}
-	}
+
+  /** The full. */
+  FULL,
+
+  /** The dense. */
+  DENSE,
+
+  /** The compact. */
+  COMPACT;
+
+  /**
+   * Parses the.
+   *
+   * @param v
+   *          the v
+   * @return the genes view
+   */
+  public static GenesView parse(String v) {
+    if (v == null) {
+      return FULL;
+    }
+
+    String vl = v.toLowerCase();
+
+    if (vl.equals("dense")) {
+      return DENSE;
+    } else if (vl.equals("compact")) {
+      return COMPACT;
+    } else {
+      return FULL;
+    }
+  }
 }

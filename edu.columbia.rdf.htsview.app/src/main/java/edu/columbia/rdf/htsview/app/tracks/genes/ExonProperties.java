@@ -27,16 +27,16 @@ import org.jebtk.graphplot.figure.properties.LineFillProperties;
  *
  */
 public class ExonProperties extends LineFillProperties {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new exon properties.
-	 */
-	public ExonProperties() {
-		setFillColor(Color.BLACK);
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new exon properties.
+   */
+  public ExonProperties() {
+    setFillColor(Color.BLACK);
+  }
 }

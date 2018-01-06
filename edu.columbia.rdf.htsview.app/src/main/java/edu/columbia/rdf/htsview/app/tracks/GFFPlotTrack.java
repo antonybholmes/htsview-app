@@ -31,33 +31,37 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GenesPlotTrack;
  * The Class GFFPlotTrack.
  */
 public class GFFPlotTrack extends GenesPlotTrack {
-	
-	/** The m file. */
-	private Path mFile;
 
-	/**
-	 * Instantiates a new GFF plot track.
-	 *
-	 * @param file the file
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public GFFPlotTrack(Path file) throws IOException {
-		super(PathUtils.getName(file), PathUtils.getName(file));
-		
-		mFile = file;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.genes.GenesPlotTrack#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) throws IOException {
-		
-		if (GenesService.getInstance().getGenes(genome, mGenesId) == null) {
-			GenesService.getInstance().put(genome, mGenesId, Genes.gff3Parser().parse(mFile));
-		}
+  /** The m file. */
+  private Path mFile;
 
-		return super.createGraph(genome, titlePosition);
-	}
+  /**
+   * Instantiates a new GFF plot track.
+   *
+   * @param file
+   *          the file
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public GFFPlotTrack(Path file) throws IOException {
+    super(PathUtils.getName(file), PathUtils.getName(file));
+
+    mFile = file;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.htsview.tracks.genes.GenesPlotTrack#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+
+    if (GenesService.getInstance().getGenes(genome, mGenesId) == null) {
+      GenesService.getInstance().put(genome, mGenesId, Genes.gff3Parser().parse(mFile));
+    }
+
+    return super.createGraph(genome, titlePosition);
+  }
 }

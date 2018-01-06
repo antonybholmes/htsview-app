@@ -30,62 +30,62 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class DnaBasesPlotTrack extends DnaPlotTrack {
 
+  private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
-	
-	private boolean mColorMode = true;
+  private boolean mColorMode = true;
 
-	/**
-	 * Instantiates a new dna bases plot track.
-	 *
-	 * @param genomeAssembly the genome assembly
-	 */
-	public DnaBasesPlotTrack(GenomeAssembly genomeAssembly) {
-		super("DNA Bases", genomeAssembly);
-	}
-	
-	public void setColorMode(boolean colorMode) {
-		mColorMode = colorMode;
-	}
-	
-	public boolean getColorMode() {
-		return mColorMode;
-	}
+  /**
+   * Instantiates a new dna bases plot track.
+   *
+   * @param genomeAssembly
+   *          the genome assembly
+   */
+  public DnaBasesPlotTrack(GenomeAssembly genomeAssembly) {
+    super("DNA Bases", genomeAssembly);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) throws IOException {
-		
-		//
-		// Display some genes
-		//
-		
-		mSubFigure = DnaBasesPlotSubFigure.create(genome,
-				mGenomeAssembly,
-				titlePosition,
-				mColorMode);
-		
-		setMargins(getName(), titlePosition, mSubFigure);
-		
-		Axes.disableAllFeatures(mSubFigure.currentAxes());
+  public void setColorMode(boolean colorMode) {
+    mColorMode = colorMode;
+  }
 
-		return mSubFigure;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, int, int, int)
-	 */
-	@Override
-	public TrackSubFigure updateGraph(GenomicRegion displayRegion, 
-			int resolution,
-			int width,
-			int height,
-			int margin) throws IOException {
-		mSubFigure.update(displayRegion, resolution, width, height, margin);
-		
-		return mSubFigure;
-	}
+  public boolean getColorMode() {
+    return mColorMode;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+
+    //
+    // Display some genes
+    //
+
+    mSubFigure = DnaBasesPlotSubFigure.create(genome, mGenomeAssembly, titlePosition, mColorMode);
+
+    setMargins(getName(), titlePosition, mSubFigure);
+
+    Axes.disableAllFeatures(mSubFigure.currentAxes());
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
+      throws IOException {
+    mSubFigure.update(displayRegion, resolution, width, height, margin);
+
+    return mSubFigure;
+  }
 }

@@ -24,27 +24,25 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GenesPlotTrack;
  * The Class VegaGenesPlotTrack.
  */
 public class VegaGenesPlotTrack extends GenesPlotTrack {
-	
-	/**
-	 * Instantiates a new vega genes plot track.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public VegaGenesPlotTrack() throws IOException {
-		super("Vega genes", "vega");
-	}
 
-	/*
-	@Override
-	public TrackSubFigure getGraph(String genome, 
-			TitleProperties titlePosition) throws IOException {
-		
-		if (mGenes == null) {
-			mGenes = new Genes(Resources.getResGzipReader("res/rdf_ucsc_vega_genes_hg19.txt.gz"));
-		}
-		
-		return super.getGraph(genome, titlePosition);
-	}
-	*/
-	
+  /**
+   * Instantiates a new vega genes plot track.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public VegaGenesPlotTrack() throws IOException {
+    super("Vega genes", "vega");
+  }
+
+  /*
+   * @Override public TrackSubFigure getGraph(String genome, TitleProperties
+   * titlePosition) throws IOException {
+   * 
+   * if (mGenes == null) { mGenes = new
+   * Genes(Resources.getResGzipReader("res/rdf_ucsc_vega_genes_hg19.txt.gz")); }
+   * 
+   * return super.getGraph(genome, titlePosition); }
+   */
+
 }

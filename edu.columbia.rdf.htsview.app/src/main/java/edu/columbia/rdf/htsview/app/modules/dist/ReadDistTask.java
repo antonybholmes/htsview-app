@@ -49,263 +49,251 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
  */
 public class ReadDistTask extends SwingWorker<Void, Void> {
 
-	/** The m locations. */
-	private List<HeatMapIdLocation> mLocations;
-	
-	/** The m padding. */
-	private int mPadding;
-	
-	/** The m window. */
-	private int mWindow;
-	
-	/** The m parent. */
-	private ModernRibbonWindow mParent;
+  /** The m locations. */
+  private List<HeatMapIdLocation> mLocations;
 
-	/** The m tracks. */
-	private List<SamplePlotTrack> mTracks;
-	
-	/** The m file. */
-	private Path mFile;
-	
-	/** The m name. */
-	private String mName;
-	
-	/** The m average. */
-	private boolean mAverage;
+  /** The m padding. */
+  private int mPadding;
 
-	/**
-	 * Instantiates a new read dist task.
-	 *
-	 * @param parent the parent
-	 * @param name the name
-	 * @param tracks the tracks
-	 * @param regions the regions
-	 * @param padding the padding
-	 * @param window the window
-	 * @param average the average
-	 */
-	public ReadDistTask(ModernRibbonWindow parent,
-			String name,
-			List<SamplePlotTrack> tracks,
-			List<HeatMapIdLocation> regions, 
-			int padding,
-			int window,
-			boolean average) {
-		mParent = parent;
-		mName = name;
-		mTracks = tracks;
-		mLocations = regions;
-		mPadding = padding;
-		mWindow = window;
-		mAverage = average;
-	}
+  /** The m window. */
+  private int mWindow;
 
-	/* (non-Javadoc)
-	 * @see javax.swing.SwingWorker#doInBackground()
-	 */
-	@Override
-	public Void doInBackground() {
-		StatusService.getInstance().setStatus("Compiling peaks...");
+  /** The m parent. */
+  private ModernRibbonWindow mParent;
 
-		MainMatCalcWindow window;
+  /** The m tracks. */
+  private List<SamplePlotTrack> mTracks;
 
-		try {
-			mFile = Temp.generateTempFile("txt");
+  /** The m file. */
+  private Path mFile;
 
-			createCountsFile();
+  /** The m name. */
+  private String mName;
 
-			window = MainMatCalc.main(mParent.getAppInfo(), new BioModuleLoader()); 
+  /** The m average. */
+  private boolean mAverage;
 
-			window.openFile(mFile).autoOpen();
+  /**
+   * Instantiates a new read dist task.
+   *
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param tracks
+   *          the tracks
+   * @param regions
+   *          the regions
+   * @param padding
+   *          the padding
+   * @param window
+   *          the window
+   * @param average
+   *          the average
+   */
+  public ReadDistTask(ModernRibbonWindow parent, String name, List<SamplePlotTrack> tracks,
+      List<HeatMapIdLocation> regions, int padding, int window, boolean average) {
+    mParent = parent;
+    mName = name;
+    mTracks = tracks;
+    mLocations = regions;
+    mPadding = padding;
+    mWindow = window;
+    mAverage = average;
+  }
 
-			window.runModule("Line Graph", "--switch-tab");
-	
-			Graph2dWindow plotWindow = window.getCurrentPlotWindow();
-	
-			Axes axes = plotWindow.getFigure().currentSubFigure().currentAxes();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.SwingWorker#doInBackground()
+   */
+  @Override
+  public Void doInBackground() {
+    StatusService.getInstance().setStatus("Compiling peaks...");
 
-			axes.getLegend().setVisible(true);
-			axes.getX1Axis().setLimits(-mPadding, mPadding);
-			axes.getX1Axis().getTitle().setText("Distance to " + mName);
-			axes.getY1Axis().getTitle().setText("Normalized ChIP-Seq reads");
-			axes.setMargins(100);
+    MainMatCalcWindow window;
 
-			// Update all of the tracks
+    try {
+      mFile = Temp.generateTempFile("txt");
 
-			int i = 0;
+      createCountsFile();
 
-			for (Plot plot : axes.getPlots()) {
-				plot.getCurrentSeries().getStyle().getLineStyle().setColor(mTracks.get(i).getLineColor());
-				plot.getCurrentSeries().getStyle().getFillStyle().setColor(mTracks.get(i).getFillColor());
-				plot.getCurrentSeries().getMarker().setVisible(false);
+      window = MainMatCalc.main(mParent.getAppInfo(), new BioModuleLoader());
 
-				++i;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+      window.openFile(mFile).autoOpen();
 
-		return null;
-	}
+      window.runModule("Line Graph", "--switch-tab");
 
-	/* (non-Javadoc)
-	 * @see javax.swing.SwingWorker#done()
-	 */
-	@Override
-	public void done() {
-		StatusService.getInstance().setReady();
+      Graph2dWindow plotWindow = window.getCurrentPlotWindow();
 
-		/*
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					MainMatCalcWindow window = MainBioMatCalc.main(mFile, true, 0);
+      Axes axes = plotWindow.getFigure().currentSubFigure().currentAxes();
 
-					window.runModule("Line Graph", 
-							"--switch-tab",
-							"--plot",
-							"--x-axis-name=Sample");
+      axes.getLegend().setVisible(true);
+      axes.getX1Axis().setLimits(-mPadding, mPadding);
+      axes.getX1Axis().getTitle().setText("Distance to " + mName);
+      axes.getY1Axis().getTitle().setText("Normalized ChIP-Seq reads");
+      axes.setMargins(100);
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		 */
-	}
+      // Update all of the tracks
 
-	/**
-	 * Creates the counts file.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void createCountsFile() throws IOException {
+      int i = 0;
 
+      for (Plot plot : axes.getPlots()) {
+        plot.getCurrentSeries().getStyle().getLineStyle().setColor(mTracks.get(i).getLineColor());
+        plot.getCurrentSeries().getStyle().getFillStyle().setColor(mTracks.get(i).getFillColor());
+        plot.getCurrentSeries().getMarker().setVisible(false);
 
-		// There are always an odd number of bins centered about zero
-		int bins = 2 * (mPadding / mWindow) + 1;
+        ++i;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-		Map<Sample, IterMap<Integer, Double>> mBinCountMap = 
-				DefaultTreeMap.create(new DefaultTreeMapCreator<Integer, Double>(0.0)); //new TreeMap<Sample, Map<Integer, Double>>();
+    return null;
+  }
 
-		//int c = 1;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.SwingWorker#done()
+   */
+  @Override
+  public void done() {
+    StatusService.getInstance().setReady();
 
-		List<Sample> samples = new ArrayList<Sample>(mTracks.size());
+    /*
+     * SwingUtilities.invokeLater(new Runnable() {
+     * 
+     * @Override public void run() { try { MainMatCalcWindow window =
+     * MainBioMatCalc.main(mFile, true, 0);
+     * 
+     * window.runModule("Line Graph", "--switch-tab", "--plot",
+     * "--x-axis-name=Sample");
+     * 
+     * } catch (Exception e) { e.printStackTrace(); } } });
+     */
+  }
 
-		for (SamplePlotTrack track : mTracks) {
-			Sample sample = track.getSample();
+  /**
+   * Creates the counts file.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void createCountsFile() throws IOException {
 
-			samples.add(sample);
+    // There are always an odd number of bins centered about zero
+    int bins = 2 * (mPadding / mWindow) + 1;
 
-			for (HeatMapIdLocation location : mLocations) {
-				if (location.getRegion() == null) {
-					continue;
-				}
+    Map<Sample, IterMap<Integer, Double>> mBinCountMap = DefaultTreeMap
+        .create(new DefaultTreeMapCreator<Integer, Double>(0.0)); // new TreeMap<Sample, Map<Integer, Double>>();
 
-				// Extend around a point since we are binning around TSS or
-				// genomic points. Either the point will be a TSS in which case
-				// the mid region will be the same as the TSS since it is a
-				// single location, or else use the mid point of the region
-				// since we must have uniform binning around each location
-				GenomicRegion ext = GenomicRegion.extend(GenomicRegion.midRegion(location.getRegion()),
-						mPadding, 
-						mPadding);
+    // int c = 1;
 
-				// +- 2kb
+    List<Sample> samples = new ArrayList<Sample>(mTracks.size());
 
-				List<Double> counts = getCounts(track, ext, mWindow);
+    for (SamplePlotTrack track : mTracks) {
+      Sample sample = track.getSample();
 
+      samples.add(sample);
 
-				for (int i = 0; i < bins; ++i) {
-					mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) + counts.get(i));
-				}
-			}
-		}
+      for (HeatMapIdLocation location : mLocations) {
+        if (location.getRegion() == null) {
+          continue;
+        }
 
-		if (mAverage) {
-			System.err.println("Averaging " + mFile);
+        // Extend around a point since we are binning around TSS or
+        // genomic points. Either the point will be a TSS in which case
+        // the mid region will be the same as the TSS since it is a
+        // single location, or else use the mid point of the region
+        // since we must have uniform binning around each location
+        GenomicRegion ext = GenomicRegion.extend(GenomicRegion.midRegion(location.getRegion()), mPadding, mPadding);
 
-			for (SamplePlotTrack track : mTracks) {
-				Sample sample = track.getSample();
+        // +- 2kb
 
-				for (int i : mBinCountMap.get(sample).keySet()) {
-					mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) / mLocations.size());
-				}
-			}
-		}
+        List<Double> counts = getCounts(track, ext, mWindow);
 
+        for (int i = 0; i < bins; ++i) {
+          mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) + counts.get(i));
+        }
+      }
+    }
 
-		// This is file of all the counts
+    if (mAverage) {
+      System.err.println("Averaging " + mFile);
 
-		System.err.println("Writing to " + mFile);
+      for (SamplePlotTrack track : mTracks) {
+        Sample sample = track.getSample();
 
-		BufferedTableWriter writer = FileUtils.newBufferedTableWriter(mFile);
+        for (int i : mBinCountMap.get(sample).keySet()) {
+          mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) / mLocations.size());
+        }
+      }
+    }
 
+    // This is file of all the counts
 
+    System.err.println("Writing to " + mFile);
 
-		try {
-			for (int i = 0; i < mTracks.size(); ++i) {
-				writer.write(mTracks.get(i).getName() + " x");
-				writer.sep();
-				writer.write(mTracks.get(i).getName() + " y");
+    BufferedTableWriter writer = FileUtils.newBufferedTableWriter(mFile);
 
-				if (i < mTracks.size() - 1) {
-					writer.sep();
-				}
-			}
+    try {
+      for (int i = 0; i < mTracks.size(); ++i) {
+        writer.write(mTracks.get(i).getName() + " x");
+        writer.sep();
+        writer.write(mTracks.get(i).getName() + " y");
 
-			writer.newLine();
+        if (i < mTracks.size() - 1) {
+          writer.sep();
+        }
+      }
 
-			for (int i = 0; i < bins; ++i) {
-				String bin = Integer.toString((i - bins / 2) * mWindow);
+      writer.newLine();
 
-				for (int j = 0; j < mTracks.size(); ++j) {
-					writer.write(bin);
-					writer.sep();
-					writer.write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
+      for (int i = 0; i < bins; ++i) {
+        String bin = Integer.toString((i - bins / 2) * mWindow);
 
-					if (j < mTracks.size() - 1) {
-						writer.sep();
-					}
-				}
+        for (int j = 0; j < mTracks.size(); ++j) {
+          writer.write(bin);
+          writer.sep();
+          writer.write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
 
-				writer.newLine();
-			}
-		} finally {
-			writer.close();
-		}
-	}
+          if (j < mTracks.size() - 1) {
+            writer.sep();
+          }
+        }
 
+        writer.newLine();
+      }
+    } finally {
+      writer.close();
+    }
+  }
 
-	/**
-	 * Get the counts and subtract the input if necessary.
-	 *
-	 * @param track the track
-	 * @param ext the ext
-	 * @param mWindow the m window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private List<Double> getCounts(SamplePlotTrack track,
-			GenomicRegion ext, 
-			int mWindow) throws IOException {
-		List<Double> counts = track.getAssembly().getRPM(track.getSample(),
-				ext,
-				mWindow);
+  /**
+   * Get the counts and subtract the input if necessary.
+   *
+   * @param track
+   *          the track
+   * @param ext
+   *          the ext
+   * @param mWindow
+   *          the m window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private List<Double> getCounts(SamplePlotTrack track, GenomicRegion ext, int mWindow) throws IOException {
+    List<Double> counts = track.getAssembly().getRPM(track.getSample(), ext, mWindow);
 
-		/*
-		if (mInput != null) {
-			List<Double> inputCounts = mAssembly.getNormalizedCounts(mInput,
-					ext,
-					mWindow);
+    /*
+     * if (mInput != null) { List<Double> inputCounts =
+     * mAssembly.getNormalizedCounts(mInput, ext, mWindow);
+     * 
+     * for (int i = 0; i < counts.size(); ++i) { counts.set(i, Math.max(0,
+     * counts.get(i) - inputCounts.get(i))); } }
+     */
 
-			for (int i = 0; i < counts.size(); ++i) {
-				counts.set(i, Math.max(0, counts.get(i) - inputCounts.get(i)));
-			}
-		}
-		 */
-
-		return counts;
-	}
+    return counts;
+  }
 }

@@ -25,44 +25,46 @@ import edu.columbia.rdf.edb.EDBWLogin;
 import edu.columbia.rdf.edb.ui.LoginDialog;
 import edu.columbia.rdf.edb.ui.network.ServerException;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class LoginDialog.
  */
 public class HTSViewLoginDialog extends LoginDialog {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new login dialog.
-	 *
-	 * @param login the login
-	 */
-	public HTSViewLoginDialog(EDBWLogin login) {
-		super(new HTSViewInfo(), login);
-	}
+  /**
+   * Instantiates a new login dialog.
+   *
+   * @param login
+   *          the login
+   */
+  public HTSViewLoginDialog(EDBWLogin login) {
+    super(new HTSViewInfo(), login);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.edb.ui.LoginDialog#success()
-	 */
-	@Override
-	protected void success() {
-		try {
-			MainHtsView.main(mLogin);
-		} catch (ServerException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (SAXException e1) {
-			e1.printStackTrace();
-		} catch (ParserConfigurationException e1) {
-			e1.printStackTrace();
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.edb.ui.LoginDialog#success()
+   */
+  @Override
+  protected void success() {
+    try {
+      MainHtsView.main(mLogin);
+    } catch (ServerException e1) {
+      e1.printStackTrace();
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    } catch (ClassNotFoundException e1) {
+      e1.printStackTrace();
+    } catch (SAXException e1) {
+      e1.printStackTrace();
+    } catch (ParserConfigurationException e1) {
+      e1.printStackTrace();
+    }
+  }
 }

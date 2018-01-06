@@ -30,51 +30,54 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The Class MouseConservationPlotTrack.
  */
 public class MouseConservationPlotTrack extends ConservationPlotTrack {
-	
-	/** The title. */
-	public static String TITLE = "Mouse Conservation";
 
-	/**
-	 * Instantiates a new mouse conservation plot track.
-	 *
-	 * @param conservationAssembly the conservation assembly
-	 */
-	public MouseConservationPlotTrack(ConservationAssembly conservationAssembly) {
-		super(TITLE, conservationAssembly);
-	}
+  /** The title. */
+  public static String TITLE = "Mouse Conservation";
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) throws IOException {
-		
-		//
-		// Display some genes
-		//
-		
-		mSubFigure = MouseConservationPlotCanvas.create(mConservationAssembly,
-				titlePosition);
-			
-		setMargins(getName(), titlePosition, mSubFigure);
-		
-		return mSubFigure;
-	}
+  /**
+   * Instantiates a new mouse conservation plot track.
+   *
+   * @param conservationAssembly
+   *          the conservation assembly
+   */
+  public MouseConservationPlotTrack(ConservationAssembly conservationAssembly) {
+    super(TITLE, conservationAssembly);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, int, int, int)
-	 */
-	@Override
-	public TrackSubFigure updateGraph(GenomicRegion displayRegion, 
-			int resolution,
-			int width,
-			int height,
-			int margin) throws IOException {
-		//mSubFigure.setForwardCanvasEventsEnabled(false);
-		mSubFigure.update(displayRegion, resolution, width, height, margin);
-		//mSubFigure.setForwardCanvasEventsEnabled(true);
-		
-		return mSubFigure;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+
+    //
+    // Display some genes
+    //
+
+    mSubFigure = MouseConservationPlotCanvas.create(mConservationAssembly, titlePosition);
+
+    setMargins(getName(), titlePosition, mSubFigure);
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
+      throws IOException {
+    // mSubFigure.setForwardCanvasEventsEnabled(false);
+    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    // mSubFigure.setForwardCanvasEventsEnabled(true);
+
+    return mSubFigure;
+  }
 }

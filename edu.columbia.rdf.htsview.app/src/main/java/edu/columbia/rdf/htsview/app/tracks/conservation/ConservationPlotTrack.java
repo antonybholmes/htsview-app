@@ -26,31 +26,33 @@ import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
  */
 public abstract class ConservationPlotTrack extends AnnotationPlotTrack {
 
-	/** The m conservation assembly. */
-	protected ConservationAssembly mConservationAssembly;
-	
-	/** The Constant MAX_DISPLAY_BASES. */
-	protected static final int MAX_DISPLAY_BASES = 100000;
+  /** The m conservation assembly. */
+  protected ConservationAssembly mConservationAssembly;
 
+  /** The Constant MAX_DISPLAY_BASES. */
+  protected static final int MAX_DISPLAY_BASES = 100000;
 
-	/**
-	 * Instantiates a new conservation plot track.
-	 *
-	 * @param name the name
-	 * @param conservationAssembly the conservation assembly
-	 */
-	public ConservationPlotTrack(String name, 
-			ConservationAssembly conservationAssembly) {
-		super(name);
-		
-		mConservationAssembly = conservationAssembly;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
-	 */
-	@Override
-	public Color getFillColor() {
-		return Color.BLACK;
-	}
+  /**
+   * Instantiates a new conservation plot track.
+   *
+   * @param name
+   *          the name
+   * @param conservationAssembly
+   *          the conservation assembly
+   */
+  public ConservationPlotTrack(String name, ConservationAssembly conservationAssembly) {
+    super(name);
+
+    mConservationAssembly = conservationAssembly;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
+   */
+  @Override
+  public Color getFillColor() {
+    return Color.BLACK;
+  }
 }

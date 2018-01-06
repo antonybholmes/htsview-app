@@ -28,51 +28,52 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
  */
 public class ResolutionRibbonButton extends RibbonLargeDropDownButton {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/*
-	private class ClickEvents implements ModernClickListener {
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		
+  /*
+   * private class ClickEvents implements ModernClickListener {
+   * 
+   * 
+   * 
+   * @Override public void clicked(ModernClickEvent e) { mText1 = e.getMessage();
+   * 
+   * repaint(); }
+   * 
+   * }
+   */
 
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mText1 = e.getMessage();
+  /**
+   * Instantiates a new resolution ribbon button.
+   */
+  public ResolutionRibbonButton() {
+    super(TextUtils.EMPTY_STRING, new ResolutionMenu());
 
-			repaint();
-		}
-		
-	}
-	*/
-	
-	/**
-	 * Instantiates a new resolution ribbon button.
-	 */
-	public ResolutionRibbonButton() {
-		super(TextUtils.EMPTY_STRING, new ResolutionMenu());
-		
-		//addClickListener(new ClickEvents());
-		
-		UI.setSize(this, Ribbon.TEXT_BUTTON_SIZE);
-	}
+    // addClickListener(new ClickEvents());
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.ribbon2.RibbonLargeDropDownMenuButton2#drawForegroundAA(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawForegroundAAText(Graphics2D g2) {
-		int iconX = PADDING;
-		int iconY = getTextYPosCenter(g2, getHeight());
-		
-		g2.setColor(TEXT_COLOR);
-		g2.drawString(mText1, iconX, iconY);
-		
-		iconX = mRect.getW() - 16 - PADDING;
-		iconY = (mRect.getH() - 16) / 2;
-		
-		TRIANGLE_ICON.drawIcon(g2, iconX, iconY, 16);
-	}
+    UI.setSize(this, Ribbon.TEXT_BUTTON_SIZE);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.ribbon2.RibbonLargeDropDownMenuButton2#drawForegroundAA(
+   * java.awt.Graphics2D)
+   */
+  @Override
+  public void drawForegroundAAText(Graphics2D g2) {
+    int iconX = PADDING;
+    int iconY = getTextYPosCenter(g2, getHeight());
+
+    g2.setColor(TEXT_COLOR);
+    g2.drawString(mText1, iconX, iconY);
+
+    iconX = mRect.getW() - 16 - PADDING;
+    iconY = (mRect.getH() - 16) / 2;
+
+    TRIANGLE_ICON.drawIcon(g2, iconX, iconY, 16);
+  }
 }

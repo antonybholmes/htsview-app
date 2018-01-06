@@ -31,92 +31,83 @@ import org.jebtk.graphplot.figure.PlotStyle;
  * The Class CytobandsSubFigure.
  */
 public class CytobandsSubFigure extends MeasurementSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m sizes. */
-	private static ChromosomeSizes mSizes;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m layer. */
-	private CytobandsRegionLayer mLayer = null;
+  /** The m sizes. */
+  private static ChromosomeSizes mSizes;
 
+  /** The m layer. */
+  private CytobandsRegionLayer mLayer = null;
 
-	/** The m name. */
-	private String mName;
-	
-	/**
-	 * Instantiates a new cytobands sub figure.
-	 *
-	 * @param name the name
-	 * @param cytobands the cytobands
-	 * @param titlePosition the title position
-	 */
-	public CytobandsSubFigure(String name,
-			Cytobands cytobands, 
-			TitleProperties titlePosition) {
-		mName = name;
-		mLayer = new CytobandsRegionLayer(cytobands);
-		
-		currentAxes().addChild(mLayer);
+  /** The m name. */
+  private String mName;
 
-		Track.setTitle(name, titlePosition, currentAxes());
-	}
+  /**
+   * Instantiates a new cytobands sub figure.
+   *
+   * @param name
+   *          the name
+   * @param cytobands
+   *          the cytobands
+   * @param titlePosition
+   *          the title position
+   */
+  public CytobandsSubFigure(String name, Cytobands cytobands, TitleProperties titlePosition) {
+    mName = name;
+    mLayer = new CytobandsRegionLayer(cytobands);
 
-	/**
-	 * Creates the.
-	 *
-	 * @param name the name
-	 * @param sizes the sizes
-	 * @param cytobands the cytobands
-	 * @param titlePosition the title position
-	 * @return the cytobands sub figure
-	 */
-	public static CytobandsSubFigure create(String name,
-			ChromosomeSizes sizes,
-			Cytobands cytobands, 
-			TitleProperties titlePosition) {
+    currentAxes().addChild(mLayer);
 
-		mSizes = sizes;
+    Track.setTitle(name, titlePosition, currentAxes());
+  }
 
-		CytobandsSubFigure canvas = 
-				new CytobandsSubFigure(name, cytobands, titlePosition);
+  /**
+   * Creates the.
+   *
+   * @param name
+   *          the name
+   * @param sizes
+   *          the sizes
+   * @param cytobands
+   *          the cytobands
+   * @param titlePosition
+   *          the title position
+   * @return the cytobands sub figure
+   */
+  public static CytobandsSubFigure create(String name, ChromosomeSizes sizes, Cytobands cytobands,
+      TitleProperties titlePosition) {
 
-		canvas.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
+    mSizes = sizes;
 
-		return canvas;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		
-		super.update(displayRegion, 
-				resolution, 
-				yMax, 
-				width, 
-				height, 
-				margin, 
-				lineColor, 
-				fillColor, 
-				style);
-		
-		mLayer.setRegion(displayRegion);
+    CytobandsSubFigure canvas = new CytobandsSubFigure(name, cytobands, titlePosition);
 
-		// Update the title to reflect changes
-		currentAxes().getTitle().setText(mName + " - " + displayRegion.getChr().toString());
-		
-		// set the graph limits
-		currentAxes().getX1Axis().setLimits(1, mSizes.getSize(displayRegion.getChr()));
-	}
+    canvas.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
+
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.
+   * jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.setRegion(displayRegion);
+
+    // Update the title to reflect changes
+    currentAxes().getTitle().setText(mName + " - " + displayRegion.getChr().toString());
+
+    // set the graph limits
+    currentAxes().getX1Axis().setLimits(1, mSizes.getSize(displayRegion.getChr()));
+  }
 }

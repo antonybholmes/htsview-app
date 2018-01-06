@@ -41,62 +41,68 @@ import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
  */
 public class BedGraphJsonParser extends TrackJsonParser {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.window.ModernWindow, java.lang.String, int, org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public boolean parse(ModernWindow window,
-			final String name,
-			int id,
-			ModernTree<Track> annotationTree,
-			final Json trackJson,
-			TreeNode<Track> rootNode) throws IOException {
-		Color color = null;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
+   * window.ModernWindow, java.lang.String, int,
+   * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
+      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+    Color color = null;
 
-		if (trackJson.containsKey("color")) {
-			color = trackJson.getAsColor("color");
-		} else {
-			color = Color.LIGHT_GRAY;
-		}
+    if (trackJson.containsKey("color")) {
+      color = trackJson.getAsColor("color");
+    } else {
+      color = Color.LIGHT_GRAY;
+    }
 
-		Path file = getFile(trackJson);
+    Path file = getFile(trackJson);
 
-		boolean validTrack = false;
-		
-		if (FileUtils.exists(file)) {
-			try {
-				List<UCSCTrack> bedGraphs = BedGraph.parse(file);
+    boolean validTrack = false;
 
-				for (UCSCTrack bedGraph : CollectionUtils.reverse(bedGraphs)) {
-					bedGraph.setColor(color);
+    if (FileUtils.exists(file)) {
+      try {
+        List<UCSCTrack> bedGraphs = BedGraph.parse(file);
 
-					TrackTreeNode child = new TrackTreeNode(new BedGraphPlotTrack(bedGraph, file));
+        for (UCSCTrack bedGraph : CollectionUtils.reverse(bedGraphs)) {
+          bedGraph.setColor(color);
 
-					rootNode.addChild(child);
-				}
+          TrackTreeNode child = new TrackTreeNode(new BedGraphPlotTrack(bedGraph, file));
 
-				validTrack = true;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return validTrack;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "BedGraph";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
-	 */
-	@Override
-	public String getType() {
-		return "bedgraph";
-	}
+          rootNode.addChild(child);
+        }
+
+        validTrack = true;
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    return validTrack;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "BedGraph";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
+   */
+  @Override
+  public String getType() {
+    return "bedgraph";
+  }
 }

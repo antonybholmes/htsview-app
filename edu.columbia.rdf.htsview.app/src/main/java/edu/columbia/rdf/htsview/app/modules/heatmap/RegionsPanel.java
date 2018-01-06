@@ -28,88 +28,85 @@ import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernTextArea;
 import org.jebtk.modern.widget.ModernWidget;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class RegionsPanel.
  */
 public class RegionsPanel extends ModernWidget {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m genes field. */
-	private ModernTextArea mGenesField =
-			new ModernClipboardTextArea();
 
-	/** The m genome model. */
-	private GenomeModel mGenomeModel;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new regions panel.
-	 *
-	 * @param genomeModel the genome model
-	 */
-	public RegionsPanel(GenomeModel genomeModel) {
-		mGenomeModel = genomeModel;
-	
-		//super(BoxLayout.PAGE_AXIS);
+  /** The m genes field. */
+  private ModernTextArea mGenesField = new ModernClipboardTextArea();
 
-		///Box box = Box.createVerticalBox();
-		//box.setAlignmentY(TOP_ALIGNMENT);
-		
-		//box.add(new ModernDialogHeadingLabel("Gene Symbols"));
-		//box.add(ModernTheme.createVerticalGap());
-		
-		//add(new ModernLabel("Plot locations"), BorderLayout.PAGE_START);
+  /** The m genome model. */
+  private GenomeModel mGenomeModel;
 
-		
-		
-		ModernScrollPane scrollPane = new ModernScrollPane(mGenesField);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-		//Ui.setSize(scrollPane, new Dimension(150, 400));
-		//box.add(new ModernDialogContentPanel(scrollPane));
-		//box.setMinimumSize(new Dimension(150, 0));
-	
-		setBody(new ModernLineBorderPanel(scrollPane));
-	}
-	
-	/**
-	 * Gets the regions.
-	 *
-	 * @return the regions
-	 * @throws ParseException the parse exception
-	 */
-	public List<HeatMapIdLocation> getRegions() throws ParseException {
-		List<String> lines = 
-				TextUtils.fastSplit(mGenesField.getText().trim(), TextUtils.NEW_LINE_DELIMITER);
-		
-		List<HeatMapIdLocation> ret = 
-				new ArrayList<HeatMapIdLocation>();
-		
-		for (String line : lines) {
-			//line = line.replaceAll(TextUtils.COMMA_DELIMITER, TextUtils.EMPTY_STRING);
-			
-			if (line.length() > 0) {
-				for (String id : TextUtils.scSplit(line)) {
-					HeatMapIdLocation loc = HeatMapIdLocation.parse(id, mGenomeModel);
-					
-					if (loc != null) {
-						ret.add(loc);
-					}
-				}
-			}
-		}
-		
-		return ret;
-	}
+  /**
+   * Instantiates a new regions panel.
+   *
+   * @param genomeModel
+   *          the genome model
+   */
+  public RegionsPanel(GenomeModel genomeModel) {
+    mGenomeModel = genomeModel;
 
-	/**
-	 * Sets the text.
-	 *
-	 * @param text the new text
-	 */
-	public void setText(String text) {
-		mGenesField.setText(text);
-	}
+    // super(BoxLayout.PAGE_AXIS);
+
+    /// Box box = Box.createVerticalBox();
+    // box.setAlignmentY(TOP_ALIGNMENT);
+
+    // box.add(new ModernDialogHeadingLabel("Gene Symbols"));
+    // box.add(ModernTheme.createVerticalGap());
+
+    // add(new ModernLabel("Plot locations"), BorderLayout.PAGE_START);
+
+    ModernScrollPane scrollPane = new ModernScrollPane(mGenesField);
+    scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
+    // Ui.setSize(scrollPane, new Dimension(150, 400));
+    // box.add(new ModernDialogContentPanel(scrollPane));
+    // box.setMinimumSize(new Dimension(150, 0));
+
+    setBody(new ModernLineBorderPanel(scrollPane));
+  }
+
+  /**
+   * Gets the regions.
+   *
+   * @return the regions
+   * @throws ParseException
+   *           the parse exception
+   */
+  public List<HeatMapIdLocation> getRegions() throws ParseException {
+    List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(), TextUtils.NEW_LINE_DELIMITER);
+
+    List<HeatMapIdLocation> ret = new ArrayList<HeatMapIdLocation>();
+
+    for (String line : lines) {
+      // line = line.replaceAll(TextUtils.COMMA_DELIMITER, TextUtils.EMPTY_STRING);
+
+      if (line.length() > 0) {
+        for (String id : TextUtils.scSplit(line)) {
+          HeatMapIdLocation loc = HeatMapIdLocation.parse(id, mGenomeModel);
+
+          if (loc != null) {
+            ret.add(loc);
+          }
+        }
+      }
+    }
+
+    return ret;
+  }
+
+  /**
+   * Sets the text.
+   *
+   * @param text
+   *          the new text
+   */
+  public void setText(String text) {
+    mGenesField.setText(text);
+  }
 }

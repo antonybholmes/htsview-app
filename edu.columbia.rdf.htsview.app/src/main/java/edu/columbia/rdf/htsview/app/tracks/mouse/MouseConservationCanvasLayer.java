@@ -24,16 +24,17 @@ import edu.columbia.rdf.htsview.app.tracks.conservation.ConservationCanvasLayer;
  * The Class MouseConservationCanvasLayer.
  */
 public class MouseConservationCanvasLayer extends ConservationCanvasLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new mouse conservation canvas layer.
-	 *
-	 * @param assembly the assembly
-	 */
-	public MouseConservationCanvasLayer(ConservationAssembly assembly) {
-		super(MouseConservationPlotTrack.TITLE, assembly, 1);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new mouse conservation canvas layer.
+   *
+   * @param assembly
+   *          the assembly
+   */
+  public MouseConservationCanvasLayer(ConservationAssembly assembly) {
+    super(MouseConservationPlotTrack.TITLE, assembly, 1);
+  }
 }

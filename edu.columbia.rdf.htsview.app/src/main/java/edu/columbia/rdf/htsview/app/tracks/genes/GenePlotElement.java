@@ -29,104 +29,110 @@ import edu.columbia.rdf.matcalc.figure.ColoredPlotControl;
  * The Class GenePlotElement.
  */
 public class GenePlotElement extends Box {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m genes. */
-	private GeneProperties mGenes;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m line color. */
-	private ColoredPlotControl mLineColor;
+  /** The m genes. */
+  private GeneProperties mGenes;
 
-	/** The m exon fill color. */
-	private ColoredPlotControl mExonFillColor;
+  /** The m line color. */
+  private ColoredPlotControl mLineColor;
 
-	/** The m exon line color. */
-	private ColoredPlotControl mExonLineColor;
-	
-	/**
-	 * The Class LineEvents.
-	 */
-	private class LineEvents implements ModernClickListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mGenes.getLineStyle().setColor(mLineColor.getSelectedColor());
-		}
-	}
-	
-	/**
-	 * The Class ExonFillEvents.
-	 */
-	private class ExonFillEvents implements ModernClickListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mGenes.getExons().setFillColor(mExonFillColor.getSelectedColor());
-		}
-	}
-	
-	/**
-	 * The Class ExonLineEvents.
-	 */
-	private class ExonLineEvents implements ModernClickListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mGenes.getExons().getLineStyle().setColor(mExonLineColor.getSelectedColor());
-		}
-	}
-	
-	/**
-	 * Instantiates a new gene plot element.
-	 *
-	 * @param parent the parent
-	 * @param genes the genes
-	 */
-	public GenePlotElement(ModernWindow parent,
-			GeneProperties genes) {
-		super(BoxLayout.PAGE_AXIS);
-		
-		mGenes = genes;
-		
-		mLineColor = new ColoredPlotControl(parent, 
-				"Line", 
-				genes.getLineStyle().getColor());
-		
-		add(mLineColor);
-		
-		add(ModernPanel.createVGap());
-		
-		mExonLineColor = new ColoredPlotControl(parent, 
-				"Exon Outline", 
-				genes.getExons().getLineStyle().getColor());
-		
-		add(mExonLineColor);
-		
-		add(ModernPanel.createVGap());
-		
-		mExonFillColor = new ColoredPlotControl(parent, 
-				"Exon Fill", 
-				genes.getExons().getFillStyle().getColor());
-		
-		add(mExonFillColor);
-		
-		add(ModernPanel.createVGap());
-		
-		mLineColor.addClickListener(new LineEvents());
-		mExonLineColor.addClickListener(new ExonLineEvents());
-		mExonFillColor.addClickListener(new ExonFillEvents());
-	}
+  /** The m exon fill color. */
+  private ColoredPlotControl mExonFillColor;
 
-	
+  /** The m exon line color. */
+  private ColoredPlotControl mExonLineColor;
+
+  /**
+   * The Class LineEvents.
+   */
+  private class LineEvents implements ModernClickListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+     * ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      mGenes.getLineStyle().setColor(mLineColor.getSelectedColor());
+    }
+  }
+
+  /**
+   * The Class ExonFillEvents.
+   */
+  private class ExonFillEvents implements ModernClickListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+     * ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      mGenes.getExons().setFillColor(mExonFillColor.getSelectedColor());
+    }
+  }
+
+  /**
+   * The Class ExonLineEvents.
+   */
+  private class ExonLineEvents implements ModernClickListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+     * ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      mGenes.getExons().getLineStyle().setColor(mExonLineColor.getSelectedColor());
+    }
+  }
+
+  /**
+   * Instantiates a new gene plot element.
+   *
+   * @param parent
+   *          the parent
+   * @param genes
+   *          the genes
+   */
+  public GenePlotElement(ModernWindow parent, GeneProperties genes) {
+    super(BoxLayout.PAGE_AXIS);
+
+    mGenes = genes;
+
+    mLineColor = new ColoredPlotControl(parent, "Line", genes.getLineStyle().getColor());
+
+    add(mLineColor);
+
+    add(ModernPanel.createVGap());
+
+    mExonLineColor = new ColoredPlotControl(parent, "Exon Outline", genes.getExons().getLineStyle().getColor());
+
+    add(mExonLineColor);
+
+    add(ModernPanel.createVGap());
+
+    mExonFillColor = new ColoredPlotControl(parent, "Exon Fill", genes.getExons().getFillStyle().getColor());
+
+    add(mExonFillColor);
+
+    add(ModernPanel.createVGap());
+
+    mLineColor.addClickListener(new LineEvents());
+    mExonLineColor.addClickListener(new ExonLineEvents());
+    mExonFillColor.addClickListener(new ExonFillEvents());
+  }
+
 }

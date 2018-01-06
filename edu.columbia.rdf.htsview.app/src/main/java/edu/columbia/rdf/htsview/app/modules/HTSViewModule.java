@@ -25,23 +25,26 @@ import edu.columbia.rdf.htsview.app.HTSViewInfo;
  */
 public abstract class HTSViewModule extends Module {
 
-	/** The Constant DEFAULT_INFO. */
-	private static final GuiAppInfo DEFAULT_INFO = 
-			new HTSViewInfo();
+  /** The Constant DEFAULT_INFO. */
+  private static final GuiAppInfo DEFAULT_INFO = new HTSViewInfo();
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#getModuleInfo()
-	 */
-	@Override
-	public GuiAppInfo getModuleInfo() {
-		return DEFAULT_INFO;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#run(java.lang.String[])
-	 */
-	@Override
-	public void run(String... args) {
-		// Do nothing
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#getModuleInfo()
+   */
+  @Override
+  public GuiAppInfo getModuleInfo() {
+    return DEFAULT_INFO;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#run(java.lang.String[])
+   */
+  @Override
+  public void run(String... args) {
+    // Do nothing
+  }
 }

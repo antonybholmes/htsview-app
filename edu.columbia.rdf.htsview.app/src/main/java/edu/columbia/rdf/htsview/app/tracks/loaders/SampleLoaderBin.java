@@ -39,129 +39,125 @@ import edu.columbia.rdf.htsview.app.SampleDialog;
  */
 public abstract class SampleLoaderBin extends SampleLoaderFS {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#open(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track open(ModernWindow parent,
-			Path metaFile,
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(metaFile)) {
-			return null;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#open(org.abh.common.ui.
+   * window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track open(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(metaFile)) {
+      return null;
+    }
 
-		Json json = JsonParser.json(metaFile);
+    Json json = JsonParser.json(metaFile);
 
-		Sample sample = SampleTracks.getSampleFromTrack(json);
+    Sample sample = SampleTracks.getSampleFromTrack(json);
 
-		SampleDialog dialog = new SampleDialog(parent, sample, true, null);
+    SampleDialog dialog = new SampleDialog(parent, sample, true, null);
 
-		dialog.setVisible(true);
+    dialog.setVisible(true);
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return null;
-		}
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return null;
+    }
 
-		Track ret = null;
+    Track ret = null;
 
-		if (dialog.getShowSample()) {
-			ret = openSample(parent,
-					sample,
-					metaFile,
-					json,
-					root);
-		}
+    if (dialog.getShowSample()) {
+      ret = openSample(parent, sample, metaFile, json, root);
+    }
 
-		if (dialog.getShowReads()) {
-			openReads(parent,
-					sample,
-					metaFile,
-					json,
-					root);
-		}
+    if (dialog.getShowReads()) {
+      openReads(parent, sample, metaFile, json, root);
+    }
 
-		return ret;
-	}
+    return ret;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openSample(ModernWindow parent,
-			Path metaFile,
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(metaFile)) {
-			return null;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * common.ui.window.ModernWindow, java.nio.file.Path,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openSample(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(metaFile)) {
+      return null;
+    }
 
-		Json json = JsonParser.json(metaFile);
+    Json json = JsonParser.json(metaFile);
 
-		Sample sample = SampleTracks.getSampleFromTrack(json);
+    Sample sample = SampleTracks.getSampleFromTrack(json);
 
-		return openSample(parent,
-				sample,
-				metaFile,
-				json,
-				root);
-	}
+    return openSample(parent, sample, metaFile, json, root);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openReads(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openReads(ModernWindow parent,
-			Path metaFile,
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(metaFile)) {
-			return null;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openReads(org.abh.common
+   * .ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openReads(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(metaFile)) {
+      return null;
+    }
 
-		Json json = JsonParser.json(metaFile);
+    Json json = JsonParser.json(metaFile);
 
-		Sample sample = SampleTracks.getSampleFromTrack(json);
+    Sample sample = SampleTracks.getSampleFromTrack(json);
 
-		return openReads(parent,
-				sample,
-				metaFile,
-				json,
-				root);
-	}
+    return openReads(parent, sample, metaFile, json, root);
+  }
 
-	/**
-	 * Open sample.
-	 *
-	 * @param parent the parent
-	 * @param sample the sample
-	 * @param metaFile the meta file
-	 * @param json the json
-	 * @param root the root
-	 * @return the track
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public Track openSample(ModernWindow parent,
-			Sample sample,
-			Path metaFile,
-			Json json,
-			TreeNode<Track> root) throws IOException {
-		return null;
-	}
+  /**
+   * Open sample.
+   *
+   * @param parent
+   *          the parent
+   * @param sample
+   *          the sample
+   * @param metaFile
+   *          the meta file
+   * @param json
+   *          the json
+   * @param root
+   *          the root
+   * @return the track
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public Track openSample(ModernWindow parent, Sample sample, Path metaFile, Json json, TreeNode<Track> root)
+      throws IOException {
+    return null;
+  }
 
-	/**
-	 * Open reads.
-	 *
-	 * @param parent the parent
-	 * @param sample the sample
-	 * @param metaFile the meta file
-	 * @param json the json
-	 * @param root the root
-	 * @return the track
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public Track openReads(ModernWindow parent,
-			Sample sample,
-			Path metaFile,
-			Json json,
-			TreeNode<Track> root) throws IOException {
-		return null;
-	}
+  /**
+   * Open reads.
+   *
+   * @param parent
+   *          the parent
+   * @param sample
+   *          the sample
+   * @param metaFile
+   *          the meta file
+   * @param json
+   *          the json
+   * @param root
+   *          the root
+   * @return the track
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public Track openReads(ModernWindow parent, Sample sample, Path metaFile, Json json, TreeNode<Track> root)
+      throws IOException {
+    return null;
+  }
 }

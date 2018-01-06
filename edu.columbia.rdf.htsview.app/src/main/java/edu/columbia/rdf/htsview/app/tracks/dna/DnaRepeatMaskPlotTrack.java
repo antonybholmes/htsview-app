@@ -28,65 +28,66 @@ import org.jebtk.graphplot.figure.Axes;
  * The Class DnaRepeatMaskPlotTrack.
  */
 public class DnaRepeatMaskPlotTrack extends DnaPlotTrack {
-	
-	/** The title. */
-	public static String TITLE = "DNA Repeat Mask";
-	
-	/**
-	 * Instantiates a new dna repeat mask plot track.
-	 *
-	 * @param genomeAssembly the genome assembly
-	 */
-	public DnaRepeatMaskPlotTrack(GenomeAssembly genomeAssembly) {
-		super(TITLE, genomeAssembly);
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) throws IOException {
-		
-		//
-		// Display some genes
-		//
-		
-		mSubFigure = DnaRepeatMaskPlotCanvas.create(genome,
-				mGenomeAssembly,
-				titlePosition);
-		
-			
-		switch(titlePosition.getPosition()) {
-		case RIGHT:
-		case COMPACT_RIGHT:	
-			int right = rightTitleWidth(getName());
-			mSubFigure.currentAxes().setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, right);
-			break;
-		default:
-			mSubFigure.currentAxes().setMargins(MARGINS);
-		}
-		
-		Axes.disableAllFeatures(mSubFigure.currentAxes());
-		
-		return mSubFigure;
-	}
+  /** The title. */
+  public static String TITLE = "DNA Repeat Mask";
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, int, int, int)
-	 */
-	@Override
-	public TrackSubFigure updateGraph(GenomicRegion displayRegion, 
-			int resolution,
-			int width,
-			int height,
-			int margin) throws IOException {
-		
-		//mSubFigure.setForwardCanvasEventsEnabled(false);
-		mSubFigure.update(displayRegion, resolution, width, height, margin);
-		//mSubFigure.setForwardCanvasEventsEnabled(true);
-		
-		return mSubFigure;
-	}
-	
+  /**
+   * Instantiates a new dna repeat mask plot track.
+   *
+   * @param genomeAssembly
+   *          the genome assembly
+   */
+  public DnaRepeatMaskPlotTrack(GenomeAssembly genomeAssembly) {
+    super(TITLE, genomeAssembly);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+
+    //
+    // Display some genes
+    //
+
+    mSubFigure = DnaRepeatMaskPlotCanvas.create(genome, mGenomeAssembly, titlePosition);
+
+    switch (titlePosition.getPosition()) {
+    case RIGHT:
+    case COMPACT_RIGHT:
+      int right = rightTitleWidth(getName());
+      mSubFigure.currentAxes().setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, right);
+      break;
+    default:
+      mSubFigure.currentAxes().setMargins(MARGINS);
+    }
+
+    Axes.disableAllFeatures(mSubFigure.currentAxes());
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
+      throws IOException {
+
+    // mSubFigure.setForwardCanvasEventsEnabled(false);
+    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    // mSubFigure.setForwardCanvasEventsEnabled(true);
+
+    return mSubFigure;
+  }
+
 }

@@ -38,55 +38,61 @@ import org.jebtk.modern.window.ModernWindow;
  */
 public class BedJsonParser extends TrackJsonParser {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.window.ModernWindow, java.lang.String, int, org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public boolean parse(ModernWindow window,
-			final String name,
-			int id,
-			ModernTree<Track> annotationTree,
-			final Json trackJson,
-			TreeNode<Track> rootNode) throws IOException {
-		Color color = null;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
+   * window.ModernWindow, java.lang.String, int,
+   * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
+      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+    Color color = null;
 
-		if (trackJson.containsKey("color")) {
-			color = trackJson.getAsColor("color");
-		} else {
-			color = Color.LIGHT_GRAY;
-		}
+    if (trackJson.containsKey("color")) {
+      color = trackJson.getAsColor("color");
+    } else {
+      color = Color.LIGHT_GRAY;
+    }
 
-		Path file = getFile(trackJson);
+    Path file = getFile(trackJson);
 
-		if (FileUtils.exists(file)) {
-			List<UCSCTrack> beds = Bed.parseTracks(file);
+    if (FileUtils.exists(file)) {
+      List<UCSCTrack> beds = Bed.parseTracks(file);
 
-			for (UCSCTrack bed : beds) {
-				bed.setName(name);
-				bed.setColor(color);
+      for (UCSCTrack bed : beds) {
+        bed.setName(name);
+        bed.setColor(color);
 
-				TrackTreeNode child = new TrackTreeNode(new BedPlotTrack(bed, file));
+        TrackTreeNode child = new TrackTreeNode(new BedPlotTrack(bed, file));
 
-				rootNode.addChild(child);
-			}
-		}
+        rootNode.addChild(child);
+      }
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Bed";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Bed";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
-	 */
-	@Override
-	public String getType() {
-		return "bed";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
+   */
+  @Override
+  public String getType() {
+    return "bed";
+  }
 }

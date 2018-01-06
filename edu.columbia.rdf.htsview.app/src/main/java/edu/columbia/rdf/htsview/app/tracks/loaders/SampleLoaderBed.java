@@ -33,37 +33,43 @@ import org.jebtk.modern.window.ModernWindow;
  */
 public class SampleLoaderBed extends SampleLoaderFS {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openSample(ModernWindow parent,
-			Path file, 
-			TreeNode<Track> root) throws IOException {
-		List<UCSCTrack> beds = Bed.parseTracks(file);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * common.ui.window.ModernWindow, java.nio.file.Path,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+    List<UCSCTrack> beds = Bed.parseTracks(file);
 
-		Track ret = null;
-		
-		for (UCSCTrack bed : beds) {
-			ret = load(new BedPlotTrack(bed, file), root);
-		}
-		
-		return ret;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "BED";
-	}
+    Track ret = null;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
-	 */
-	@Override
-	public String getExt() {
-		return "bed";
-	}
+    for (UCSCTrack bed : beds) {
+      ret = load(new BedPlotTrack(bed, file), root);
+    }
+
+    return ret;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "BED";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
+   */
+  @Override
+  public String getExt() {
+    return "bed";
+  }
 }

@@ -25,27 +25,28 @@ import org.jebtk.graphplot.figure.PlotStyle;
  */
 public class ReadsStyleModel extends Graph2dStyleModel {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new reads style model.
-	 */
-	public ReadsStyleModel() {
-		set(PlotStyle.parse(SettingsService.getInstance().getAsString("edb.reads.peak-style")));
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.model.ItemModel#set(java.lang.Object)
-	 */
-	@Override
-	public void set(PlotStyle peakStyle) {
-		super.set(peakStyle);
-		
-		// Store the setting
-		SettingsService.getInstance().update("edb.reads.peak-style", 
-				peakStyle.toString().toLowerCase());
-	}
+  /**
+   * Instantiates a new reads style model.
+   */
+  public ReadsStyleModel() {
+    set(PlotStyle.parse(SettingsService.getInstance().getAsString("edb.reads.peak-style")));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.model.ItemModel#set(java.lang.Object)
+   */
+  @Override
+  public void set(PlotStyle peakStyle) {
+    super.set(peakStyle);
+
+    // Store the setting
+    SettingsService.getInstance().update("edb.reads.peak-style", peakStyle.toString().toLowerCase());
+  }
 }

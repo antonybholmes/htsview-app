@@ -28,78 +28,74 @@ import org.jebtk.graphplot.figure.PlotStyle;
  * The Class DnaBasesPlotCanvas.
  */
 public class DnaBasesPlotSubFigure extends DnaSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m layer. */
-	private DnaBasesCanvasLayer mLayer;
-	
-	/**
-	 * Instantiates a new dna bases plot canvas.
-	 *
-	 * @param genome the genome
-	 * @param genomeAssembly the genome assembly
-	 * @param titlePosition the title position
-	 */
-	public DnaBasesPlotSubFigure(String genome,
-			GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition,
-			boolean colorMode) {
-		mLayer = new DnaBasesCanvasLayer(genome, genomeAssembly, colorMode);
-		
-		currentAxes().addChild(mLayer);
-		
-		Track.setTitle("DNA", titlePosition, currentAxes());
-	}
 
-	/**
-	 * Creates the.
-	 *
-	 * @param genome the genome
-	 * @param genomeAssembly the genome assembly
-	 * @param titlePosition the title position
-	 * @return the dna bases plot canvas
-	 */
-	public static DnaBasesPlotSubFigure create(String genome,
-			GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition,
-			boolean colorMode) {
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-		DnaBasesPlotSubFigure canvas = new DnaBasesPlotSubFigure(genome,
-				genomeAssembly,
-				titlePosition,
-				colorMode);
+  /** The m layer. */
+  private DnaBasesCanvasLayer mLayer;
 
-		// set the graph limits
-		canvas.currentAxes().getX1Axis().getTitle().setText(null);
-		canvas.currentAxes().getX1Axis().startEndTicksOnly();
+  /**
+   * Instantiates a new dna bases plot canvas.
+   *
+   * @param genome
+   *          the genome
+   * @param genomeAssembly
+   *          the genome assembly
+   * @param titlePosition
+   *          the title position
+   */
+  public DnaBasesPlotSubFigure(String genome, GenomeAssembly genomeAssembly, TitleProperties titlePosition,
+      boolean colorMode) {
+    mLayer = new DnaBasesCanvasLayer(genome, genomeAssembly, colorMode);
 
-		canvas.currentAxes().getY1Axis().getTitle().setText(null);
-		canvas.currentAxes().getY1Axis().startEndTicksOnly();
+    currentAxes().addChild(mLayer);
 
-		canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
-		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+    Track.setTitle("DNA", titlePosition, currentAxes());
+  }
 
-		
-		return canvas;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
-		
-		mLayer.update(displayRegion);
-	}
+  /**
+   * Creates the.
+   *
+   * @param genome
+   *          the genome
+   * @param genomeAssembly
+   *          the genome assembly
+   * @param titlePosition
+   *          the title position
+   * @return the dna bases plot canvas
+   */
+  public static DnaBasesPlotSubFigure create(String genome, GenomeAssembly genomeAssembly,
+      TitleProperties titlePosition, boolean colorMode) {
+
+    DnaBasesPlotSubFigure canvas = new DnaBasesPlotSubFigure(genome, genomeAssembly, titlePosition, colorMode);
+
+    // set the graph limits
+    canvas.currentAxes().getX1Axis().getTitle().setText(null);
+    canvas.currentAxes().getX1Axis().startEndTicksOnly();
+
+    canvas.currentAxes().getY1Axis().getTitle().setText(null);
+    canvas.currentAxes().getY1Axis().startEndTicksOnly();
+
+    canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
+    // canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.
+   * GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color,
+   * org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.update(displayRegion);
+  }
 }

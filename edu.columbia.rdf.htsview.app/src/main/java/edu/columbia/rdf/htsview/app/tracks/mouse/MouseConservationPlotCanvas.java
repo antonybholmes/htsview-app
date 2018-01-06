@@ -31,72 +31,70 @@ import edu.columbia.rdf.htsview.app.tracks.dna.DnaSubFigure;
  * The Class MouseConservationPlotCanvas.
  */
 public class MouseConservationPlotCanvas extends DnaSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m layer. */
-	private MouseConservationCanvasLayer mLayer;
-	
-	/**
-	 * Instantiates a new mouse conservation plot canvas.
-	 *
-	 * @param conservationAssembly the conservation assembly
-	 * @param titlePosition the title position
-	 */
-	public MouseConservationPlotCanvas(ConservationAssembly conservationAssembly,
-			TitleProperties titlePosition) {
-		mLayer = new MouseConservationCanvasLayer(conservationAssembly);
-		
-		currentAxes().addChild(mLayer);
 
-		Track.setTitle(MouseConservationPlotTrack.TITLE, titlePosition, currentAxes());
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates the.
-	 *
-	 * @param assembly the assembly
-	 * @param titlePosition the title position
-	 * @return the mouse conservation plot canvas
-	 */
-	public static MouseConservationPlotCanvas create(ConservationAssembly assembly,
-			TitleProperties titlePosition) {
+  /** The m layer. */
+  private MouseConservationCanvasLayer mLayer;
 
-		MouseConservationPlotCanvas canvas = new MouseConservationPlotCanvas(assembly,
-				titlePosition);
+  /**
+   * Instantiates a new mouse conservation plot canvas.
+   *
+   * @param conservationAssembly
+   *          the conservation assembly
+   * @param titlePosition
+   *          the title position
+   */
+  public MouseConservationPlotCanvas(ConservationAssembly conservationAssembly, TitleProperties titlePosition) {
+    mLayer = new MouseConservationCanvasLayer(conservationAssembly);
 
-		Axes axes = canvas.currentAxes();
-		
-		// set the graph limits
-		axes.getX1Axis().getTitle().setText(null);
-		axes.getX1Axis().startEndTicksOnly();
+    currentAxes().addChild(mLayer);
 
-		axes.getY1Axis().getTitle().setText(null);
-		axes.getY1Axis().startEndTicksOnly();
+    Track.setTitle(MouseConservationPlotTrack.TITLE, titlePosition, currentAxes());
+  }
 
-		axes.setInternalSize(Track.SMALL_TRACK_SIZE);
-		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+  /**
+   * Creates the.
+   *
+   * @param assembly
+   *          the assembly
+   * @param titlePosition
+   *          the title position
+   * @return the mouse conservation plot canvas
+   */
+  public static MouseConservationPlotCanvas create(ConservationAssembly assembly, TitleProperties titlePosition) {
 
-		
-		return canvas;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
-		
-		mLayer.update(displayRegion);
-	}
+    MouseConservationPlotCanvas canvas = new MouseConservationPlotCanvas(assembly, titlePosition);
+
+    Axes axes = canvas.currentAxes();
+
+    // set the graph limits
+    axes.getX1Axis().getTitle().setText(null);
+    axes.getX1Axis().startEndTicksOnly();
+
+    axes.getY1Axis().getTitle().setText(null);
+    axes.getY1Axis().startEndTicksOnly();
+
+    axes.setInternalSize(Track.SMALL_TRACK_SIZE);
+    // canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.
+   * GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color,
+   * org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.update(displayRegion);
+  }
 }

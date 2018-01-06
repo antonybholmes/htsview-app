@@ -22,13 +22,14 @@ import java.io.IOException;
  * The Class GencodeGenesPlotTrack.
  */
 public class GencodePolyAPlotTrack extends GenesPlotTrack {
-	
-	/**
-	 * Instantiates a new gencode genes plot track.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public GencodePolyAPlotTrack() throws IOException {
-		super("GENCODE polyA", "gencode_polya");
-	}
+
+  /**
+   * Instantiates a new gencode genes plot track.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public GencodePolyAPlotTrack() throws IOException {
+    super("GENCODE polyA", "gencode_polya");
+  }
 }

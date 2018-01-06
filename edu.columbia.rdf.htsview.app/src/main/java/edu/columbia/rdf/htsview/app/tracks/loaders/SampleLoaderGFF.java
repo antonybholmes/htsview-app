@@ -32,33 +32,39 @@ import edu.columbia.rdf.htsview.app.tracks.GFFPlotTrack;
  */
 public class SampleLoaderGFF extends SampleLoaderFS {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openSample(ModernWindow parent,
-			Path file,
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(file)) {
-			return null;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * common.ui.window.ModernWindow, java.nio.file.Path,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(file)) {
+      return null;
+    }
 
-		return load(new GFFPlotTrack(file), root);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "GFF";
-	}
+    return load(new GFFPlotTrack(file), root);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
-	 */
-	@Override
-	public String getExt() {
-		return "gff";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "GFF";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
+   */
+  @Override
+  public String getExt() {
+    return "gff";
+  }
 }

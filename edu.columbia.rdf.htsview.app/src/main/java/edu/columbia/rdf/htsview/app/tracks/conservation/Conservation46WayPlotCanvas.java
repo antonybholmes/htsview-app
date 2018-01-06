@@ -30,70 +30,68 @@ import edu.columbia.rdf.htsview.app.tracks.dna.DnaSubFigure;
  * The Class Conservation46WayPlotCanvas.
  */
 public class Conservation46WayPlotCanvas extends DnaSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m layer. */
-	private Conservation46WayCanvasLayer mLayer;
-	
-	/**
-	 * Instantiates a new conservation 46 way plot canvas.
-	 *
-	 * @param conservationAssembly the conservation assembly
-	 * @param titlePosition the title position
-	 */
-	public Conservation46WayPlotCanvas(ConservationAssembly conservationAssembly,
-			TitleProperties titlePosition) {
-		mLayer = new Conservation46WayCanvasLayer(conservationAssembly);
-		
-		currentAxes().addChild(mLayer);
 
-		Track.setTitle(Conservation46WayPlotTrack.TITLE, titlePosition, currentAxes());
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates the.
-	 *
-	 * @param assembly the assembly
-	 * @param titlePosition the title position
-	 * @return the conservation 46 way plot canvas
-	 */
-	public static Conservation46WayPlotCanvas create(ConservationAssembly assembly,
-			TitleProperties titlePosition) {
+  /** The m layer. */
+  private Conservation46WayCanvasLayer mLayer;
 
-		Conservation46WayPlotCanvas canvas = new Conservation46WayPlotCanvas(assembly,
-				titlePosition);
+  /**
+   * Instantiates a new conservation 46 way plot canvas.
+   *
+   * @param conservationAssembly
+   *          the conservation assembly
+   * @param titlePosition
+   *          the title position
+   */
+  public Conservation46WayPlotCanvas(ConservationAssembly conservationAssembly, TitleProperties titlePosition) {
+    mLayer = new Conservation46WayCanvasLayer(conservationAssembly);
 
-		// set the graph limits
-		canvas.currentAxes().getX1Axis().getTitle().setText(null);
-		canvas.currentAxes().getX1Axis().startEndTicksOnly();
+    currentAxes().addChild(mLayer);
 
-		canvas.currentAxes().getY1Axis().getTitle().setText(null);
-		canvas.currentAxes().getY1Axis().startEndTicksOnly();
+    Track.setTitle(Conservation46WayPlotTrack.TITLE, titlePosition, currentAxes());
+  }
 
-		canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
-		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+  /**
+   * Creates the.
+   *
+   * @param assembly
+   *          the assembly
+   * @param titlePosition
+   *          the title position
+   * @return the conservation 46 way plot canvas
+   */
+  public static Conservation46WayPlotCanvas create(ConservationAssembly assembly, TitleProperties titlePosition) {
 
-		
-		return canvas;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
-		
-		mLayer.update(displayRegion);
-	}
+    Conservation46WayPlotCanvas canvas = new Conservation46WayPlotCanvas(assembly, titlePosition);
+
+    // set the graph limits
+    canvas.currentAxes().getX1Axis().getTitle().setText(null);
+    canvas.currentAxes().getX1Axis().startEndTicksOnly();
+
+    canvas.currentAxes().getY1Axis().getTitle().setText(null);
+    canvas.currentAxes().getY1Axis().startEndTicksOnly();
+
+    canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
+    // canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.
+   * GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color,
+   * org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.update(displayRegion);
+  }
 }

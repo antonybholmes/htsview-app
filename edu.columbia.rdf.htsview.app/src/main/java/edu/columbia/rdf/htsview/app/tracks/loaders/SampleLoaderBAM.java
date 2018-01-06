@@ -35,129 +35,104 @@ import edu.columbia.rdf.htsview.app.SampleDialog;
  * The Class SampleLoaderBAM.
  */
 public class SampleLoaderBAM extends SampleLoaderBin {
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "BAM";
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
-	 */
-	@Override
-	public String getExt() {
-		return "bam";
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.loaders.SampleLoaderBin#open(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track open(ModernWindow parent,
-			Path file,
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(file)) {
-			return null;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "BAM";
+  }
 
-		Sample sample = new Sample(PathUtils.namePrefix(file));
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
+   */
+  @Override
+  public String getExt() {
+    return "bam";
+  }
 
-		SampleDialog dialog = new SampleDialog(parent, sample, true, null);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.loaders.SampleLoaderBin#open(org.abh.common.ui.window.
+   * ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track open(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(file)) {
+      return null;
+    }
 
-		dialog.setVisible(true);
+    Sample sample = new Sample(PathUtils.namePrefix(file));
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return null;
-		}
+    SampleDialog dialog = new SampleDialog(parent, sample, true, null);
 
-		Track ret = null;
+    dialog.setVisible(true);
 
-		if (dialog.getShowSample()) {
-			ret = openSample(parent,
-					sample,
-					file,
-					null,
-					root);
-		}
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return null;
+    }
 
-		if (dialog.getShowReads()) {
-			openReads(parent,
-					sample,
-					file,
-					null,
-					root);
-		}
+    Track ret = null;
 
-		return ret;
-	}
-	
-	
-	
-	
-	@Override
-	public Track openSample(ModernWindow parent,
-			Path file,
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(file)) {
-			return null;
-		}
+    if (dialog.getShowSample()) {
+      ret = openSample(parent, sample, file, null, root);
+    }
 
-		Sample sample = new Sample(PathUtils.namePrefix(file));
+    if (dialog.getShowReads()) {
+      openReads(parent, sample, file, null, root);
+    }
 
-		return openSample(parent,
-				sample,
-				file,
-				null,
-				root);
-	}
-	
-	@Override
-	public Track openSample(ModernWindow parent,
-			Sample sample,
-			Path file,
-			Json json,
-			TreeNode<Track> root) throws IOException {
-		//Sample sample = new Sample(PathUtils.namePrefix(file));
-		
-		return openSampleFs(sample, 
-				new SampleAssemblyBam(file), 
-				file,
-				root);
-	}
-	
+    return ret;
+  }
 
-	@Override
-	public Track openReads(ModernWindow parent,
-			Path file,
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(file)) {
-			return null;
-		}
+  @Override
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(file)) {
+      return null;
+    }
 
-		Sample sample = new Sample(PathUtils.namePrefix(file));
+    Sample sample = new Sample(PathUtils.namePrefix(file));
 
-		return openReads(parent,
-				sample,
-				file,
-				null,
-				root);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.loaders.SampleLoaderBin#openReads(org.abh.common.ui.window.ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openReads(ModernWindow parent,
-			Sample sample,
-			Path file,
-			Json json,
-			TreeNode<Track> root) throws IOException {
-		return openReadsFs(sample, 
-				new SampleAssemblyBam(file),
-				file,
-				root);
-	}
+    return openSample(parent, sample, file, null, root);
+  }
+
+  @Override
+  public Track openSample(ModernWindow parent, Sample sample, Path file, Json json, TreeNode<Track> root)
+      throws IOException {
+    // Sample sample = new Sample(PathUtils.namePrefix(file));
+
+    return openSampleFs(sample, new SampleAssemblyBam(file), file, root);
+  }
+
+  @Override
+  public Track openReads(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(file)) {
+      return null;
+    }
+
+    Sample sample = new Sample(PathUtils.namePrefix(file));
+
+    return openReads(parent, sample, file, null, root);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.loaders.SampleLoaderBin#openReads(org.abh.common.ui.window
+   * .ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path,
+   * org.abh.common.json.Json, org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openReads(ModernWindow parent, Sample sample, Path file, Json json, TreeNode<Track> root)
+      throws IOException {
+    return openReadsFs(sample, new SampleAssemblyBam(file), file, root);
+  }
 }

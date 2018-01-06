@@ -35,40 +35,46 @@ import edu.columbia.rdf.htsview.app.tracks.igv.seg.SegPlotTrack;
  */
 public class SegJsonParser extends TrackJsonParser {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.window.ModernWindow, java.lang.String, int, org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public boolean parse(ModernWindow window,
-			final String name,
-			int id,
-			ModernTree<Track> annotationTree,
-			final Json trackJson,
-			TreeNode<Track> rootNode) throws IOException {
-		Path file = getFile(trackJson);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
+   * window.ModernWindow, java.lang.String, int,
+   * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
+      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+    Path file = getFile(trackJson);
 
-		if (FileUtils.exists(file)) {
-			TrackTreeNode child = new TrackTreeNode(new SegPlotTrack(file));
+    if (FileUtils.exists(file)) {
+      TrackTreeNode child = new TrackTreeNode(new SegPlotTrack(file));
 
-			rootNode.addChild(child);
-		}
-		
-		return false;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Seg";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
-	 */
-	@Override
-	public String getType() {
-		return "seg";
-	}
+      rootNode.addChild(child);
+    }
+
+    return false;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Seg";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
+   */
+  @Override
+  public String getType() {
+    return "seg";
+  }
 }

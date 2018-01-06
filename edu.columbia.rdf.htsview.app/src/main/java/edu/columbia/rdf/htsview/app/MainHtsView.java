@@ -86,291 +86,295 @@ import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyWeb;
 import edu.columbia.rdf.htsview.tracks.view.ABIJsonParser;
 import edu.columbia.rdf.htsview.tracks.view.TrackParserService;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class MainReads.
  */
 public class MainHtsView {
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 * @throws FontFormatException the font format exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SAXException the SAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws UnsupportedLookAndFeelException the unsupported look and feel exception
-	 * @throws ServerException the server exception
-	 * @throws ParseException the parse exception
-	 */
-	public static final void main(String[] args) throws FontFormatException, IOException, SAXException, ParserConfigurationException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, ServerException, ParseException {
-		AppService.getInstance().setAppInfo("htsview");
+  /**
+   * The main method.
+   *
+   * @param args
+   *          the arguments
+   * @throws FontFormatException
+   *           the font format exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws SAXException
+   *           the SAX exception
+   * @throws ParserConfigurationException
+   *           the parser configuration exception
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws InstantiationException
+   *           the instantiation exception
+   * @throws IllegalAccessException
+   *           the illegal access exception
+   * @throws UnsupportedLookAndFeelException
+   *           the unsupported look and feel exception
+   * @throws ServerException
+   *           the server exception
+   * @throws ParseException
+   *           the parse exception
+   */
+  public static final void main(String[] args)
+      throws FontFormatException, IOException, SAXException, ParserConfigurationException, ClassNotFoundException,
+      InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, ServerException, ParseException {
+    AppService.getInstance().setAppInfo("htsview");
 
-		ThemeService.getInstance().setTheme(); //ColorTheme.GREEN);
+    ThemeService.getInstance().setTheme(); // ColorTheme.GREEN);
 
-		/*
-		try {
-			GeneService.getInstance().load(Resources.getResGzipReader("res/rdf_ucsc_refseq_genes_hg19.txt.gz"));
+    /*
+     * try { GeneService.getInstance().load(Resources.getResGzipReader(
+     * "res/rdf_ucsc_refseq_genes_hg19.txt.gz"));
+     * 
+     * // Load the cytobands Cytobands cytobands = new
+     * Cytobands(Resources.getResGzipReader("res/ucsc_cytobands_hg19.txt.gz"));
+     * 
+     * GenomeAssembly genomeAssembly = new GenomeAssemblyWeb(new
+     * URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
+     * 
+     * ConservationAssembly conservationAssembly = new ConservationAssemblyWeb(new
+     * URL(SettingsService.getInstance().getAsString(
+     * "edb.reads.conservation.remote-url")));
+     * 
+     * ConservationAssembly mouseConservationAssembly = new
+     * ConservationAssemblyWeb(new URL(SettingsService.getInstance().getAsString(
+     * "edb.reads.mouse.conservation.remote-url")));
+     * 
+     * 
+     * //ReadAssembly readAssembly = // new ReadAssemblyWeb(new
+     * URL(SettingsService.getInstance().getSetting("edb.reads.remote-url").getValue
+     * ()));
+     * 
+     * ChipSeqAssembly readAssembly = new ChipSeqAssemblyWeb(new
+     * URL(SettingsService.getInstance().getAsString("edb.reads.chip-seq.remote-url"
+     * )));
+     * 
+     * 
+     * ChromosomeSizes sizes = new
+     * ChromosomeSizes(Resources.getResGzipReader("res/hg19_chromosome_sizes.txt.gz"
+     * ));
+     * 
+     * AnnotationTracksTree tree = new AnnotationTracksTree(genomeAssembly,
+     * conservationAssembly, mouseConservationAssembly, sizes, cytobands);
+     * 
+     * MainReadsWindow mWindow = new MainReadsWindow(readAssembly, sizes, tree);
+     * 
+     * mWindow.setVisible(true); } catch (Exception e) { e.printStackTrace(); }
+     */
 
-			// Load the cytobands
-			Cytobands cytobands = 
-					new Cytobands(Resources.getResGzipReader("res/ucsc_cytobands_hg19.txt.gz"));
+    // ReadsSplashScreen window = new ReadsSplashScreen(new ReadsInfo());
 
-			GenomeAssembly genomeAssembly = 
-					new GenomeAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
+    // window.setVisible(true);
 
-			ConservationAssembly conservationAssembly = 
-					new ConservationAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.conservation.remote-url")));
+    PluginService.getInstance().addPlugin("htsview", CountsModule.class);
+    PluginService.getInstance().addPlugin("htsview", DnaModule.class);
 
-			ConservationAssembly mouseConservationAssembly = 
-					new ConservationAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.mouse.conservation.remote-url")));
+    EDBWLogin login = null;
 
+    if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
+      try {
+        /*
+         * login = new
+         * EDBWLogin(SettingsService.getInstance().getAsString("edb.modules.edbw.server"
+         * ), SettingsService.getInstance().getAsString("edb.modules.edbw.user"),
+         * SettingsService.getInstance().getAsString("edb.modules.edbw.key"),
+         * SettingsService.getInstance().getAsInt("edb.modules.edbw.topt.epoch"),
+         * SettingsService.getInstance().getAsInt("edb.modules.edbw.topt.step-size"));
+         */
 
-			//ReadAssembly readAssembly = 
-			//		new ReadAssemblyWeb(new URL(SettingsService.getInstance().getSetting("edb.reads.remote-url").getValue()));
+        login = EDBWLogin.loadFromSettings();
 
-			ChipSeqAssembly readAssembly = 
-					new ChipSeqAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.chip-seq.remote-url")));
+        HTSViewLoginDialog window = new HTSViewLoginDialog(login);
 
+        window.setVisible(true);
+      } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+      }
+    } else {
+      MainHtsView.main(null, Genome.HG19, null);
+    }
+  }
 
-			ChromosomeSizes sizes = 
-					new ChromosomeSizes(Resources.getResGzipReader("res/hg19_chromosome_sizes.txt.gz"));
+  /**
+   * Main.
+   *
+   * @param login
+   *          the login
+   * @throws ServerException
+   *           the server exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws SAXException
+   *           the SAX exception
+   * @throws ParserConfigurationException
+   *           the parser configuration exception
+   */
+  public static void main(EDBWLogin login)
+      throws ServerException, IOException, ClassNotFoundException, SAXException, ParserConfigurationException {
+    main(login, Genome.HG19, null);
+  }
 
-			AnnotationTracksTree tree = new AnnotationTracksTree(genomeAssembly,
-					conservationAssembly,
-					mouseConservationAssembly,
-					sizes, 
-					cytobands);
+  /**
+   * Main.
+   *
+   * @param login
+   *          the login
+   * @param genome
+   *          the genome
+   * @param samples
+   *          the samples
+   * @throws ServerException
+   *           the server exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws ClassNotFoundException
+   *           the class not found exception
+   * @throws SAXException
+   *           the SAX exception
+   * @throws ParserConfigurationException
+   *           the parser configuration exception
+   */
+  public static void main(EDBWLogin login, String genome, Collection<Sample> samples)
+      throws ServerException, IOException, ClassNotFoundException, SAXException, ParserConfigurationException {
+    // Map<String, Genes> geneMap = new HashMap<String, Genes>();
 
-			MainReadsWindow mWindow = new MainReadsWindow(readAssembly, sizes, tree);
+    List<Path> dirs = FileUtils.lsdir(PathUtils.getPath("res", "genomes"));
 
-			mWindow.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		 */
+    for (Path dir : dirs) {
+      String g = PathUtils.namePrefix(dir);
 
-		//ReadsSplashScreen window = new ReadsSplashScreen(new ReadsInfo());
+      String namePrefix = "_" + g;
 
-		//window.setVisible(true);
+      CytobandsService.getInstance().load(g, FileUtils.newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
 
-		PluginService.getInstance().addPlugin("htsview", CountsModule.class);
-		PluginService.getInstance().addPlugin("htsview", DnaModule.class);
+      ChromosomeSizesService.getInstance().load(g,
+          FileUtils.newBufferedReader(dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
 
-		EDBWLogin login = null;
+      List<Path> files = FileUtils.ls(dir.resolve("genes"));
 
-		if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
-			try {
-				/*
-				login = new EDBWLogin(SettingsService.getInstance().getAsString("edb.modules.edbw.server"),
-						SettingsService.getInstance().getAsString("edb.modules.edbw.user"),
-						SettingsService.getInstance().getAsString("edb.modules.edbw.key"),
-						SettingsService.getInstance().getAsInt("edb.modules.edbw.topt.epoch"),
-						SettingsService.getInstance().getAsInt("edb.modules.edbw.topt.step-size"));
-				 */
+      for (Path file : files) {
+        String filename = PathUtils.getName(file);
 
-				login = EDBWLogin.loadFromSettings();
+        String db = PathUtils.namePrefix(file, namePrefix);
 
-				HTSViewLoginDialog window = new HTSViewLoginDialog(login);
+        if (filename.contains("gff3")) {
+          GenesService.getInstance().put(g, db,
+              new LazyGenes(file, Genes.gff3Parser().setKeepExons(true).setLevels(GeneType.GENE, GeneType.TRANSCRIPT)));
+        } else if (filename.contains("gtf")) {
+          GenesService.getInstance().put(g, db,
+              new LazyGenes(file, Genes.gff3Parser().setKeepExons(true).setLevels(GeneType.TRANSCRIPT)));
+        } else if (filename.contains("gtbz")) {
+          GenesService.getInstance().put(g, db,
+              new GTBZGenes(file, new GTBZParser().setKeepExons(true).setLevels(GeneType.TRANSCRIPT)));
+        } else if (filename.contains("gtb2")) {
+          GenesService.getInstance().put(g, db,
+              new LazyGenes(file, Genes.gtb2Parser().setKeepExons(true).setLevels(GeneType.TRANSCRIPT)));
+        } else if (filename.contains("gtb")) {
+          GenesService.getInstance().put(g, db,
+              new LazyGenes(file, Genes.gtbParser().setKeepExons(true).setLevels(GeneType.TRANSCRIPT)));
+        } else {
+          // Do nothing
+        }
+      }
 
-				window.setVisible(true);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		} else {
-			MainHtsView.main(null, Genome.HG19, null);
-		}
-	}
+    }
 
-	/**
-	 * Main.
-	 *
-	 * @param login the login
-	 * @throws ServerException the server exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws SAXException the SAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 */
-	public static void main(EDBWLogin login) throws ServerException, IOException, ClassNotFoundException, SAXException, ParserConfigurationException {
-		main(login, Genome.HG19, null);
-	}
+    /*
+     * Path path = SettingsService.getInstance().getAsFile(
+     * "htsview.annotation.ucsc.hg19.refseq.genes.gff");
+     * geneMap.put(GenomeAssembly.HG19,
+     * Genes.fromGFF3(Resources.getGzipReader(path)));
+     * 
+     * path = SettingsService.getInstance().getAsFile(
+     * "htsview.annotation.ucsc.mm10.refseq.genes.gff");
+     * geneMap.put(GenomeAssembly.MM10,
+     * Genes.fromGFF3(Resources.getGzipReader(path)));
+     * 
+     * path = SettingsService.getInstance().getAsFile(
+     * "htsview.annotation.ucsc.hg19.cytobands");
+     * CytobandsService.getInstance().load(GenomeAssembly.HG19,
+     * Resources.getGzipReader(path));
+     * 
+     * path = SettingsService.getInstance().getAsFile(
+     * "htsview.annotation.ucsc.mm10.cytobands");
+     * CytobandsService.getInstance().load(GenomeAssembly.MM10,
+     * Resources.getGzipReader(path));
+     * 
+     * path = SettingsService.getInstance().getAsFile(
+     * "htsview.annotation.ucsc.hg19.chr-sizes");
+     * ChromosomeSizesService.getInstance().load(GenomeAssembly.HG19,
+     * Resources.getGzipReader(path));
+     * 
+     * path = SettingsService.getInstance().getAsFile(
+     * "htsview.annotation.ucsc.mm10.chr-sizes");
+     * ChromosomeSizesService.getInstance().load(GenomeAssembly.MM10,
+     * Resources.getGzipReader(path));
+     */
 
-	/**
-	 * Main.
-	 *
-	 * @param login the login
-	 * @param genome the genome
-	 * @param samples the samples
-	 * @throws ServerException the server exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws SAXException the SAX exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 */
-	public static void main(EDBWLogin login, 
-			String genome, 
-			Collection<Sample> samples) throws ServerException, IOException, ClassNotFoundException, SAXException, ParserConfigurationException {
-		//Map<String, Genes> geneMap = new HashMap<String, Genes>();
+    GenomeAssembly genomeAssembly = new GenomeAssemblyWeb(
+        new URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
 
-		List<Path> dirs = FileUtils.lsdir(PathUtils.getPath("res", "genomes"));
+    ConservationAssembly conservationAssembly = new ConservationAssemblyWeb(
+        new URL(SettingsService.getInstance().getAsString("edb.reads.conservation.remote-url")));
 
-		for (Path dir : dirs) {
-			String g = PathUtils.namePrefix(dir);
+    ConservationAssembly mouseConservationAssembly = new ConservationAssemblyWeb(
+        new URL(SettingsService.getInstance().getAsString("edb.reads.mouse.conservation.remote-url")));
 
-			String namePrefix = "_" + g;
+    if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
+      ChipSeqRepositoryCache session = new ChipSeqRepositoryCache(login);
 
-			CytobandsService.getInstance().load(g,
-					FileUtils.newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
+      Repository repository = session.restore();
 
-			ChromosomeSizesService.getInstance().load(g,
-					FileUtils.newBufferedReader(dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
+      RepositoryService.getInstance().setRepository("chipseq", repository);
 
-			List<Path> files = FileUtils.ls(dir.resolve("genes"));
+      UrlBuilder url = SettingsService.getInstance().getSetting("edb.reads.chip-seq.remote-url").getAsUrlBuilder();
 
-			for (Path file : files) {
-				String filename = PathUtils.getName(file);
+      WebAssemblyService.getInstance().setSampleAssembly(new SampleAssemblyWeb(login, url));
+      WebAssemblyService.getInstance().setPeakAssembly(new PeakAssemblyWeb(login));
+    }
 
-				String db = PathUtils.namePrefix(file, namePrefix);
+    GenomeAssembly dnaAssembly;
 
-				if (filename.contains("gff3")) {
-					GenesService.getInstance().put(g, 
-							db, 
-							new LazyGenes(file, Genes.gff3Parser()
-									.setKeepExons(true)
-									.setLevels(GeneType.GENE, 
-											GeneType.TRANSCRIPT)));
-				} else if (filename.contains("gtf")) {
-					GenesService.getInstance().put(g, 
-							db, 
-							new LazyGenes(file, Genes.gff3Parser()
-									.setKeepExons(true)
-									.setLevels(GeneType.TRANSCRIPT)));
-				} else if (filename.contains("gtbz")) {
-					GenesService.getInstance().put(g, 
-							db, 
-							new GTBZGenes(file, 
-									new GTBZParser()
-									.setKeepExons(true)
-									.setLevels(GeneType.TRANSCRIPT)));
-				} else if (filename.contains("gtb2")) {
-					GenesService.getInstance().put(g, 
-							db, 
-							new LazyGenes(file, 
-									Genes.gtb2Parser()
-									.setKeepExons(true)
-									.setLevels(GeneType.TRANSCRIPT)));
-				} else if (filename.contains("gtb")) {
-					GenesService.getInstance().put(g, 
-							db, 
-							new LazyGenes(file, Genes.gtbParser()
-									.setKeepExons(true)
-									.setLevels(GeneType.TRANSCRIPT)));
-				} else {
-					// Do nothing
-				}
-			}
+    if (SettingsService.getInstance().getAsBool("htsview.dna.web-mode")) {
+      dnaAssembly = new GenomeAssemblyWeb(
+          new URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
+    } else {
+      dnaAssembly = new GenomeAssemblyZip(Dna.RES_DIR);
+    }
 
-		}
+    AnnotationTracksTree tree = new AnnotationTracksTree(dnaAssembly, conservationAssembly, mouseConservationAssembly);
 
-		/*
-		Path path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.hg19.refseq.genes.gff");
-		geneMap.put(GenomeAssembly.HG19, 
-				Genes.fromGFF3(Resources.getGzipReader(path)));
+    // Register some functions to parse various files
+    TrackParserService.getInstance().register(new SampleJsonParser());
+    TrackParserService.getInstance().register(new SampleFSJsonParser());
+    TrackParserService.getInstance().register(new ReadsJsonParser());
+    TrackParserService.getInstance().register(new ReadsFSJsonParser());
+    TrackParserService.getInstance().register(new PeaksJsonParser());
+    TrackParserService.getInstance().register(new GenesJsonParser());
+    TrackParserService.getInstance().register(new BedJsonParser());
+    TrackParserService.getInstance().register(new BedGraphJsonParser());
+    TrackParserService.getInstance().register(new AnnotationJsonParser());
+    TrackParserService.getInstance().register(new SegJsonParser());
+    TrackParserService.getInstance().register(new ABIJsonParser());
 
-		path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.mm10.refseq.genes.gff");
-		geneMap.put(GenomeAssembly.MM10, 
-				Genes.fromGFF3(Resources.getGzipReader(path)));
+    SampleLoaderService.getInstance().register(new SampleLoaderBCT());
+    SampleLoaderService.getInstance().register(new SampleLoaderBAM());
+    SampleLoaderService.getInstance().register(new SampleLoaderBRT2());
+    SampleLoaderService.getInstance().register(new SampleLoaderBRT3());
+    SampleLoaderService.getInstance().register(new SampleLoaderBVT());
+    SampleLoaderService.getInstance().register(new SampleLoaderBedGraph());
+    SampleLoaderService.getInstance().register(new SampleLoaderBed());
+    SampleLoaderService.getInstance().register(new SampleLoaderGFF());
+    SampleLoaderService.getInstance().register(new SampleLoaderSeg());
+    SampleLoaderService.getInstance().register(new SampleLoaderABI());
 
-		path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.hg19.cytobands");
-		CytobandsService.getInstance().load(GenomeAssembly.HG19,
-				Resources.getGzipReader(path));
+    MainHtsViewWindow window = new MainHtsViewWindow(genome, tree, samples);
 
-		path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.mm10.cytobands");
-		CytobandsService.getInstance().load(GenomeAssembly.MM10, 
-				Resources.getGzipReader(path));
+    window.setVisible(true);
 
-		path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.hg19.chr-sizes");
-		ChromosomeSizesService.getInstance().load(GenomeAssembly.HG19,
-				Resources.getGzipReader(path));
-
-		path = SettingsService.getInstance().getAsFile("htsview.annotation.ucsc.mm10.chr-sizes");
-		ChromosomeSizesService.getInstance().load(GenomeAssembly.MM10, 
-				Resources.getGzipReader(path));
-		 */
-
-		GenomeAssembly genomeAssembly = 
-				new GenomeAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
-
-		ConservationAssembly conservationAssembly = 
-				new ConservationAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.conservation.remote-url")));
-
-		ConservationAssembly mouseConservationAssembly = 
-				new ConservationAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.mouse.conservation.remote-url")));
-
-		if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
-			ChipSeqRepositoryCache session = new ChipSeqRepositoryCache(login);
-
-			Repository repository = session.restore();
-
-			RepositoryService.getInstance().setRepository("chipseq", repository);
-
-			UrlBuilder url = SettingsService.getInstance()
-					.getSetting("edb.reads.chip-seq.remote-url")
-					.getAsUrlBuilder();
-
-			WebAssemblyService.getInstance().setSampleAssembly(new SampleAssemblyWeb(login, url));
-			WebAssemblyService.getInstance().setPeakAssembly(new PeakAssemblyWeb(login));
-		}
-
-		GenomeAssembly dnaAssembly;
-
-		if (SettingsService.getInstance().getAsBool("htsview.dna.web-mode")) {
-			dnaAssembly = 
-					new GenomeAssemblyWeb(new URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
-		} else {
-			dnaAssembly = new GenomeAssemblyZip(Dna.RES_DIR);
-		}
-
-
-
-		AnnotationTracksTree tree = new AnnotationTracksTree(dnaAssembly,
-				conservationAssembly,
-				mouseConservationAssembly);
-
-		// Register some functions to parse various files
-		TrackParserService.getInstance().register(new SampleJsonParser());
-		TrackParserService.getInstance().register(new SampleFSJsonParser());
-		TrackParserService.getInstance().register(new ReadsJsonParser());
-		TrackParserService.getInstance().register(new ReadsFSJsonParser());
-		TrackParserService.getInstance().register(new PeaksJsonParser());
-		TrackParserService.getInstance().register(new GenesJsonParser());
-		TrackParserService.getInstance().register(new BedJsonParser());
-		TrackParserService.getInstance().register(new BedGraphJsonParser());
-		TrackParserService.getInstance().register(new AnnotationJsonParser());
-		TrackParserService.getInstance().register(new SegJsonParser());
-		TrackParserService.getInstance().register(new ABIJsonParser());
-
-		SampleLoaderService.getInstance().register(new SampleLoaderBCT());
-		SampleLoaderService.getInstance().register(new SampleLoaderBAM());
-		SampleLoaderService.getInstance().register(new SampleLoaderBRT2());
-		SampleLoaderService.getInstance().register(new SampleLoaderBRT3());
-		SampleLoaderService.getInstance().register(new SampleLoaderBVT());
-		SampleLoaderService.getInstance().register(new SampleLoaderBedGraph());
-		SampleLoaderService.getInstance().register(new SampleLoaderBed());
-		SampleLoaderService.getInstance().register(new SampleLoaderGFF());
-		SampleLoaderService.getInstance().register(new SampleLoaderSeg());
-		SampleLoaderService.getInstance().register(new SampleLoaderABI());
-
-		MainHtsViewWindow window = new MainHtsViewWindow(genome,
-				tree,
-				samples);
-
-		window.setVisible(true);
-
-	}
+  }
 }

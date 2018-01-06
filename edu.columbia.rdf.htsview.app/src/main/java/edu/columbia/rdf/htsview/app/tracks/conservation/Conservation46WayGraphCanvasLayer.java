@@ -36,77 +36,78 @@ import edu.columbia.rdf.htsview.app.tracks.dna.DnaPlotTrack;
  * The Class Conservation46WayGraphCanvasLayer.
  */
 public class Conservation46WayGraphCanvasLayer extends AxesClippedLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m display region. */
-	private GenomicRegion mDisplayRegion;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m assembly. */
-	private ConservationAssembly mAssembly;
-	
-	/**
-	 * Instantiates a new conservation 46 way graph canvas layer.
-	 *
-	 * @param assembly the assembly
-	 */
-	public Conservation46WayGraphCanvasLayer(ConservationAssembly assembly) {
-		mAssembly = assembly;
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 */
-	public void update(GenomicRegion displayRegion) {
-		mDisplayRegion = displayRegion;
-	}
+  /** The m display region. */
+  private GenomicRegion mDisplayRegion;
 
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void plotLayer(Graphics2D g2, 
-			DrawingContext context,
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
-		
-		// So that we don't attempt to pull a whole chromosome
-		if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
-			return;
-		}
+  /** The m assembly. */
+  private ConservationAssembly mAssembly;
 
-		
-		int h = axes.getInternalSize().getH();
-		int y1 = h;
-		
-		try {
-			List<Double> scores = mAssembly.getScores(mDisplayRegion);
+  /**
+   * Instantiates a new conservation 46 way graph canvas layer.
+   *
+   * @param assembly
+   *          the assembly
+   */
+  public Conservation46WayGraphCanvasLayer(ConservationAssembly assembly) {
+    mAssembly = assembly;
+  }
 
-			int start = mDisplayRegion.getStart();
-			int x1 = 0;
-			int w;
-			int y;
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   */
+  public void update(GenomicRegion displayRegion) {
+    mDisplayRegion = displayRegion;
+  }
 
-			g2.setColor(Color.BLACK);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
 
-			for (double score : scores)	{
-				y = (int)(h * score / 100.0);
-				
-				x1 = axes.toPlotX1(start);
-				w = Math.max(1, axes.toPlotX1(start + 1) - x1);
-				
-				g2.fillRect(x1, y1 - y, w, y);
+    // So that we don't attempt to pull a whole chromosome
+    if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
+      return;
+    }
 
-				++start;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+    int h = axes.getInternalSize().getH();
+    int y1 = h;
+
+    try {
+      List<Double> scores = mAssembly.getScores(mDisplayRegion);
+
+      int start = mDisplayRegion.getStart();
+      int x1 = 0;
+      int w;
+      int y;
+
+      g2.setColor(Color.BLACK);
+
+      for (double score : scores) {
+        y = (int) (h * score / 100.0);
+
+        x1 = axes.toPlotX1(start);
+        w = Math.max(1, axes.toPlotX1(start + 1) - x1);
+
+        g2.fillRect(x1, y1 - y, w, y);
+
+        ++start;
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+  }
 }

@@ -37,150 +37,132 @@ import edu.columbia.rdf.htsview.tracks.Track;
  * The Class GenesPlotSubFigure.
  */
 public class GenesPlotSubFigure extends FixedSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m genes layer. */
-	private GenesPlotLayer mGenesLayer;
+  /** The m genes layer. */
+  private GenesPlotLayer mGenesLayer;
 
-	/** The m properties. */
-	private GenesProperties mProperties;
+  /** The m properties. */
+  private GenesProperties mProperties;
 
+  /** The m genome. */
+  private String mGenome;
 
-	/** The m genome. */
-	private String mGenome;
+  /** The m genes id. */
+  private String mGenesId;
 
+  /**
+   * Instantiates a new genes plot sub figure.
+   *
+   * @param name
+   *          the name
+   * @param properties
+   *          the properties
+   * @param genome
+   *          the genome
+   * @param id
+   *          the id
+   * @param titlePosition
+   *          the title position
+   */
+  public GenesPlotSubFigure(String name, GenesProperties properties, String genome, String id,
+      TitleProperties titlePosition) {
+    mProperties = properties;
 
-	/** The m genes id. */
-	private String mGenesId;
+    mGenome = genome;
+    mGenesId = id;
 
+    mGenesLayer = new GenesPlotLayer(properties);
 
-	/**
-	 * Instantiates a new genes plot sub figure.
-	 *
-	 * @param name the name
-	 * @param properties the properties
-	 * @param genome the genome
-	 * @param id the id
-	 * @param titlePosition the title position
-	 */
-	public GenesPlotSubFigure(String name, 
-			GenesProperties properties,
-			String genome,
-			String id,
-			TitleProperties titlePosition) {
-		mProperties = properties;
+    currentAxes().addChild(mGenesLayer);
 
-		mGenome = genome;
-		mGenesId = id;
-		
-		mGenesLayer = new GenesPlotLayer(properties);
+    Track.setTitle(name, titlePosition, currentAxes());
+  }
 
-		currentAxes().addChild(mGenesLayer);
+  /**
+   * Creates the.
+   *
+   * @param name
+   *          the name
+   * @param genesProperties
+   *          the genes properties
+   * @param genome
+   *          the genome
+   * @param genesId
+   *          the genes id
+   * @param titlePosition
+   *          the title position
+   * @return the genes plot sub figure
+   */
+  public static GenesPlotSubFigure create(String name, GenesProperties genesProperties, String genome, String genesId,
+      TitleProperties titlePosition) {
 
-		Track.setTitle(name, titlePosition, currentAxes());
-	}
+    // Now lets create a plot
+    GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, genesProperties, genome, genesId, titlePosition);
 
-	/**
-	 * Creates the.
-	 *
-	 * @param name the name
-	 * @param genesProperties the genes properties
-	 * @param genome the genome
-	 * @param genesId the genes id
-	 * @param titlePosition the title position
-	 * @return the genes plot sub figure
-	 */
-	public static GenesPlotSubFigure create(String name, 
-			GenesProperties genesProperties,
-			String genome,
-			String genesId,
-			TitleProperties titlePosition) {
+    return canvas;
+  }
 
-		// Now lets create a plot
-		GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, 
-				genesProperties,
-				genome,
-				genesId,
-				titlePosition);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.FixedSubFigure#update(org.jebtk.
+   * bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    Collection<Gene> genes = GenesService.getInstance().getGenes(mGenome, mGenesId).findGenes(displayRegion);
 
-		return canvas;
-	}
+    IterMap<String, Set<Gene>> geneMap = DefaultTreeMap.create(new TreeSetCreator<Gene>());
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.FixedSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		Collection<Gene> genes = GenesService.getInstance()
-				.getGenes(mGenome, mGenesId)
-				.findGenes(displayRegion);
+    GenesView view = mProperties.getView();
 
-		IterMap<String, Set<Gene>> geneMap =
-				DefaultTreeMap.create(new TreeSetCreator<Gene>());
+    switch (view) {
+    case COMPACT:
+    case DENSE:
+      for (Gene g : genes) {
+        geneMap.get(g.getSymbol()).add(g);
+      }
 
-		GenesView view = mProperties.getView();
-		
-		switch (view) {
-		case COMPACT:
-		case DENSE:
-			for (Gene g : genes) {
-				geneMap.get(g.getSymbol()).add(g);
-			}
-			
-			break;
-		default:
-			//full
-			for (Gene g : genes) {
-				String id = g.getSymbol();
+      break;
+    default:
+      // full
+      for (Gene g : genes) {
+        String id = g.getSymbol();
 
-				if (!g.getRefSeq().equals(TextUtils.NA)) {
-					id += " (" + g.getRefSeq() + ")";
-				}
-				
-				if (!g.getTranscriptId().equals(TextUtils.NA)) {
-					id += " (" + g.getTranscriptId() + ")";
-				}
+        if (!g.getRefSeq().equals(TextUtils.NA)) {
+          id += " (" + g.getRefSeq() + ")";
+        }
 
-				geneMap.get(id).add(g);
-			}
-			
-			break;
-		}
+        if (!g.getTranscriptId().equals(TextUtils.NA)) {
+          id += " (" + g.getTranscriptId() + ")";
+        }
 
-		// Include extra space to allow the title to be draw in the margin,
-		// otherwise there is overwriting
-		
-		int s;
-		
-		if (view == GenesView.COMPACT) {
-			s = 1;
-		} else {
-			s = geneMap.size();
-		}
-			
-		height = GenesPlotLayer.GAP * s;
+        geneMap.get(id).add(g);
+      }
 
-		mGenesLayer.update(geneMap, displayRegion);
+      break;
+    }
 
-		super.update(displayRegion, 
-				resolution, 
-				genes.size(), 
-				width, 
-				height, 
-				margin, 
-				lineColor, 
-				fillColor,
-				style);
-	}
+    // Include extra space to allow the title to be draw in the margin,
+    // otherwise there is overwriting
+
+    int s;
+
+    if (view == GenesView.COMPACT) {
+      s = 1;
+    } else {
+      s = geneMap.size();
+    }
+
+    height = GenesPlotLayer.GAP * s;
+
+    mGenesLayer.update(geneMap, displayRegion);
+
+    super.update(displayRegion, resolution, genes.size(), width, height, margin, lineColor, fillColor, style);
+  }
 }

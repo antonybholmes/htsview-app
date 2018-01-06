@@ -36,37 +36,43 @@ import edu.columbia.rdf.edb.Sample;
  */
 public class SampleLoaderBVT extends SampleLoaderFS {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openSample(ModernWindow parent,
-			Path metaFile, 
-			TreeNode<Track> root) throws IOException {
-		if (!FileUtils.exists(metaFile)) {
-			return null;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * common.ui.window.ModernWindow, java.nio.file.Path,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openSample(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+    if (!FileUtils.exists(metaFile)) {
+      return null;
+    }
 
-		Json json = JsonParser.json(metaFile);
+    Json json = JsonParser.json(metaFile);
 
-		Sample sample = SampleTracks.getSampleFromTrack(json);
+    Sample sample = SampleTracks.getSampleFromTrack(json);
 
-		return openSampleFs(sample, new SampleAssemblyBVT(metaFile), metaFile, root);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "BVT";
-	}
+    return openSampleFs(sample, new SampleAssemblyBVT(metaFile), metaFile, root);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
-	 */
-	@Override
-	public String getExt() {
-		return "bvtj";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "BVT";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
+   */
+  @Override
+  public String getExt() {
+    return "bvtj";
+  }
 }

@@ -21,78 +21,79 @@ import edu.columbia.rdf.htsview.app.tracks.peaks.PeakAssembly;
 
 // TODO: Auto-generated Javadoc
 /**
- * Stores references to assembly services connecting to databases. This 
- * is so only one connection object need be in existence.
+ * Stores references to assembly services connecting to databases. This is so
+ * only one connection object need be in existence.
  * 
  * @author Antony Holmes Holmes
  *
  */
 public class WebAssemblyService {
-	/**
-	 * The Class SettingsServiceLoader.
-	 */
-	private static class AssemblyServiceLoader {
-		
-		/** The Constant INSTANCE. */
-		private static final WebAssemblyService INSTANCE = 
-				new WebAssemblyService();
-	}
+  /**
+   * The Class SettingsServiceLoader.
+   */
+  private static class AssemblyServiceLoader {
 
-	/**
-	 * Gets the single instance of SettingsService.
-	 *
-	 * @return single instance of SettingsService
-	 */
-	public static WebAssemblyService getInstance() {
-		return AssemblyServiceLoader.INSTANCE;
-	}
+    /** The Constant INSTANCE. */
+    private static final WebAssemblyService INSTANCE = new WebAssemblyService();
+  }
 
-	/** The m peak assembly. */
-	private PeakAssembly mPeakAssembly = null;
-	
-	/** The m sample assembly. */
-	private SampleAssembly mSampleAssembly = null;
-	
-	/**
-	 * Instantiates a new web assembly service.
-	 */
-	private WebAssemblyService() {
-		// Do nothing
-	}
-	
-	/**
-	 * Sets the peak assembly.
-	 *
-	 * @param peakAssembly the new peak assembly
-	 */
-	public void setPeakAssembly(PeakAssembly peakAssembly) {
-		mPeakAssembly = peakAssembly;
-	}
-	
-	/**
-	 * Gets the peak assembly.
-	 *
-	 * @return the peak assembly
-	 */
-	public PeakAssembly getPeakAssembly() {
-		return mPeakAssembly;
-	}
+  /**
+   * Gets the single instance of SettingsService.
+   *
+   * @return single instance of SettingsService
+   */
+  public static WebAssemblyService getInstance() {
+    return AssemblyServiceLoader.INSTANCE;
+  }
 
-	/**
-	 * Sets the sample assembly.
-	 *
-	 * @param sampleAssembly the new sample assembly
-	 */
-	public void setSampleAssembly(SampleAssembly sampleAssembly) {
-		mSampleAssembly = sampleAssembly;
-	}
-	
-	/**
-	 * Gets the sample assembly.
-	 *
-	 * @return the sample assembly
-	 */
-	public SampleAssembly getSampleAssembly() {
-		return mSampleAssembly;
-	}
+  /** The m peak assembly. */
+  private PeakAssembly mPeakAssembly = null;
+
+  /** The m sample assembly. */
+  private SampleAssembly mSampleAssembly = null;
+
+  /**
+   * Instantiates a new web assembly service.
+   */
+  private WebAssemblyService() {
+    // Do nothing
+  }
+
+  /**
+   * Sets the peak assembly.
+   *
+   * @param peakAssembly
+   *          the new peak assembly
+   */
+  public void setPeakAssembly(PeakAssembly peakAssembly) {
+    mPeakAssembly = peakAssembly;
+  }
+
+  /**
+   * Gets the peak assembly.
+   *
+   * @return the peak assembly
+   */
+  public PeakAssembly getPeakAssembly() {
+    return mPeakAssembly;
+  }
+
+  /**
+   * Sets the sample assembly.
+   *
+   * @param sampleAssembly
+   *          the new sample assembly
+   */
+  public void setSampleAssembly(SampleAssembly sampleAssembly) {
+    mSampleAssembly = sampleAssembly;
+  }
+
+  /**
+   * Gets the sample assembly.
+   *
+   * @return the sample assembly
+   */
+  public SampleAssembly getSampleAssembly() {
+    return mSampleAssembly;
+  }
 }

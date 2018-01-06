@@ -35,70 +35,76 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GenesView;
  */
 public class GenesJsonParser extends TrackJsonParser {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.window.ModernWindow, java.lang.String, int, org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public boolean parse(ModernWindow window,
-			final String name,
-			int id,
-			ModernTree<Track> annotationTree,
-			final Json trackJson,
-			TreeNode<Track> rootNode) throws IOException {
-		TreeNode<Track> node = annotationTree.matchFirst(name);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
+   * window.ModernWindow, java.lang.String, int,
+   * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
+      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+    TreeNode<Track> node = annotationTree.matchFirst(name);
 
-		GenesPlotTrack track = (GenesPlotTrack)node.getValue();
+    GenesPlotTrack track = (GenesPlotTrack) node.getValue();
 
-		Color color = null;
+    Color color = null;
 
-		if (trackJson.containsKey("color")) {
-			color = trackJson.getAsColor("color");
-		} else {
-			color = Color.LIGHT_GRAY;
-		}
+    if (trackJson.containsKey("color")) {
+      color = trackJson.getAsColor("color");
+    } else {
+      color = Color.LIGHT_GRAY;
+    }
 
-		track.setFillColor(color);
+    track.setFillColor(color);
 
-		if (trackJson.containsKey("color")) {
-			color = trackJson.getAsColor("other-color");
-		} else {
-			color = Color.LIGHT_GRAY;
-		}
-		
-		track.setOtherColor(color);
+    if (trackJson.containsKey("color")) {
+      color = trackJson.getAsColor("other-color");
+    } else {
+      color = Color.LIGHT_GRAY;
+    }
 
-		if (trackJson.containsKey("color")) {
-			color = trackJson.getAsColor("utr-fill-color");
-		} else {
-			color = Color.LIGHT_GRAY;
-		}
-		
-		track.setUTRFillColor(color);
+    track.setOtherColor(color);
 
-		track.setShowTssArrows(trackJson.getAsBool("show-tss-arrows"));
-		track.setShowExonArrows(trackJson.getAsBool("show-exon-arrows"));
-		track.setView(GenesView.parse(trackJson.getAsString("view")));
+    if (trackJson.containsKey("color")) {
+      color = trackJson.getAsColor("utr-fill-color");
+    } else {
+      color = Color.LIGHT_GRAY;
+    }
 
-		TrackTreeNode child = new TrackTreeNode(track);
+    track.setUTRFillColor(color);
 
-		rootNode.addChild(child);
+    track.setShowTssArrows(trackJson.getAsBool("show-tss-arrows"));
+    track.setShowExonArrows(trackJson.getAsBool("show-exon-arrows"));
+    track.setView(GenesView.parse(trackJson.getAsString("view")));
 
-		return true;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Genes";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
-	 */
-	@Override
-	public String getType() {
-		return "genes";
-	}
+    TrackTreeNode child = new TrackTreeNode(track);
+
+    rootNode.addChild(child);
+
+    return true;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Genes";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
+   */
+  @Override
+  public String getType() {
+    return "genes";
+  }
 }

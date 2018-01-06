@@ -23,24 +23,26 @@ import org.jebtk.modern.io.GuiFileExtFilter;
  */
 public class ReadsJsonViewGuiFileFilter extends GuiFileExtFilter {
 
-	/**
-	 * The constant EXT.
-	 */
-	public static final String EXT = "readsj";
+  /**
+   * The constant EXT.
+   */
+  public static final String EXT = "readsj";
 
-	/**
-	 * Instantiates a new reads json view gui file filter.
-	 */
-	public ReadsJsonViewGuiFileFilter() {
-		super(EXT);
-	}
+  /**
+   * Instantiates a new reads json view gui file filter.
+   */
+  public ReadsJsonViewGuiFileFilter() {
+    super(EXT);
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	@Override
-	public String getDescription() {
-		return "Reads View (*.readsj)";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  @Override
+  public String getDescription() {
+    return "Reads View (*.readsj)";
+  }
 
 }

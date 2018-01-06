@@ -32,79 +32,83 @@ import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
  */
 public class DnaTask extends SwingWorker<Void, Void> {
 
-	/** The m matrices. */
-	private DataFrame mMatrice;
-	
-	/** The m parent. */
-	private ModernRibbonWindow mParent;
+  /** The m matrices. */
+  private DataFrame mMatrice;
 
+  /** The m parent. */
+  private ModernRibbonWindow mParent;
 
-	private GenomicRegionModel mGenomicModel;
+  private GenomicRegionModel mGenomicModel;
 
-	/**
-	 * Instantiates a new DNA task.
-	 *
-	 * @param parent the parent
-	 * @param genomicModel the genome model
-	 */
-	public DnaTask(ModernRibbonWindow parent, GenomicRegionModel genomicModel) {
-		mParent = parent;
-		mGenomicModel = genomicModel;
-	}
+  /**
+   * Instantiates a new DNA task.
+   *
+   * @param parent
+   *          the parent
+   * @param genomicModel
+   *          the genome model
+   */
+  public DnaTask(ModernRibbonWindow parent, GenomicRegionModel genomicModel) {
+    mParent = parent;
+    mGenomicModel = genomicModel;
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.swing.SwingWorker#doInBackground()
-	 */
-	@Override
-	public Void doInBackground() {
-		try {
-			mMatrice = createMatrix();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.SwingWorker#doInBackground()
+   */
+  @Override
+  public Void doInBackground() {
+    try {
+      mMatrice = createMatrix();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.swing.SwingWorker#done()
-	 */
-	@Override
-	public void done() {
-		MainMatCalcWindow window;
-		
-		try {
-			
-			ModuleLoader ml = new BioModuleLoader()
-					.addModule(edu.columbia.rdf.matcalc.toolbox.dna.DnaModule.class)
-					.addModule(edu.columbia.rdf.matcalc.toolbox.motifs.MotifsModule.class);
-			
-			window = MainMatCalc.main(mParent.getAppInfo(), ml);
-		
-			window.openMatrix(mMatrice);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.SwingWorker#done()
+   */
+  @Override
+  public void done() {
+    MainMatCalcWindow window;
 
-			window.runModule("DNA");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    try {
 
-		
-	}
+      ModuleLoader ml = new BioModuleLoader().addModule(edu.columbia.rdf.matcalc.toolbox.dna.DnaModule.class)
+          .addModule(edu.columbia.rdf.matcalc.toolbox.motifs.MotifsModule.class);
 
-	/**
-	 * Creates the heat map matrices.
-	 *
-	 * @return the list
-	 * @throws Exception the exception
-	 */
-	private DataFrame createMatrix() throws Exception {
-		DataFrame m = DataFrame.createTextMatrix(1, 1);
-			
-		m.setName("DNA");
-			
-		m.setColumnName(0, "Location");
-		m.set(0, 0, mGenomicModel.get().getLocation());
-			
-		return m;
-	}
+      window = MainMatCalc.main(mParent.getAppInfo(), ml);
+
+      window.openMatrix(mMatrice);
+
+      window.runModule("DNA");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  /**
+   * Creates the heat map matrices.
+   *
+   * @return the list
+   * @throws Exception
+   *           the exception
+   */
+  private DataFrame createMatrix() throws Exception {
+    DataFrame m = DataFrame.createTextMatrix(1, 1);
+
+    m.setName("DNA");
+
+    m.setColumnName(0, "Location");
+    m.set(0, 0, mGenomicModel.get().getLocation());
+
+    return m;
+  }
 }

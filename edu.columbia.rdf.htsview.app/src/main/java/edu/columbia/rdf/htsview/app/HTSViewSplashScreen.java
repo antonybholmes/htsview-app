@@ -31,52 +31,57 @@ import edu.columbia.rdf.edb.ui.network.ServerException;
  * The class MatCalcSplashScreen.
  */
 public class HTSViewSplashScreen extends ModernTaskSplashScreen2 {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Load a matrix then run a module function.
-	 *
-	 * @param m the m
-	 * @param module the module
-	 * @param args the args
-	 */
-	public HTSViewSplashScreen(DataFrame m, 
-			String module, 
-			String... args) {
-		super(new HTSViewInfo());
-		
-		init();
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.window.ModernTaskSplashScreen2#appSetup()
-	 */
-	@Override
-	public void appSetup() {
-		
-	}
+  /**
+   * Load a matrix then run a module function.
+   *
+   * @param m
+   *          the m
+   * @param module
+   *          the module
+   * @param args
+   *          the args
+   */
+  public HTSViewSplashScreen(DataFrame m, String module, String... args) {
+    super(new HTSViewInfo());
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.ui.modern.window.ModernTaskSplashScreen2#appSetupFinished()
-	 */
-	@Override
-	public void appSetupFinished() {
-		try {
-			MainHtsView.main(null, Genome.HG19, null);
-		} catch (ServerException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-	}
+    init();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.window.ModernTaskSplashScreen2#appSetup()
+   */
+  @Override
+  public void appSetup() {
+
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.ui.modern.window.ModernTaskSplashScreen2#appSetupFinished()
+   */
+  @Override
+  public void appSetupFinished() {
+    try {
+      MainHtsView.main(null, Genome.HG19, null);
+    } catch (ServerException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (SAXException e) {
+      e.printStackTrace();
+    } catch (ParserConfigurationException e) {
+      e.printStackTrace();
+    }
+  }
 }

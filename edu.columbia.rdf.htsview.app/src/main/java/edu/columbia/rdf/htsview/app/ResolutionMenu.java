@@ -28,62 +28,64 @@ import org.jebtk.modern.menu.ModernScrollPopupMenu;
  */
 public class ResolutionMenu extends ModernScrollPopupMenu {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The constant MENU_SIZE.
-	 */
-	private static final Dimension MENU_SIZE = 
-			new Dimension(200, 36);
-	
-	/**
-	 * The class ResolutionMenuItem.
-	 */
-	private class ResolutionMenuItem extends ModernIconMenuItem {
+  /**
+   * The constant MENU_SIZE.
+   */
+  private static final Dimension MENU_SIZE = new Dimension(200, 36);
 
-		/**
-		 * The constant serialVersionUID.
-		 */
-		private static final long serialVersionUID = 1L;
+  /**
+   * The class ResolutionMenuItem.
+   */
+  private class ResolutionMenuItem extends ModernIconMenuItem {
 
-		/**
-		 * Instantiates a new resolution menu item.
-		 *
-		 * @param text the text
-		 */
-		public ResolutionMenuItem(String text) {
-			super(text);
-			
-			UI.setSize(this, MENU_SIZE);
-		}
-		
-		/**
-		 * Instantiates a new resolution menu item.
-		 *
-		 * @param text the text
-		 * @param icon the icon
-		 */
-		public ResolutionMenuItem(String text, ModernIcon icon) {
-			super(text, icon);
-			
-			UI.setSize(this, MENU_SIZE);
-		}
-		
-	}
-	
-	/**
-	 * Instantiates a new resolution menu.
-	 */
-	public ResolutionMenu() {
-		addScrollMenuItem(new ResolutionMenuItem("1 bp"));
-		addScrollMenuItem(new ResolutionMenuItem("10 bp"));
-		addScrollMenuItem(new ResolutionMenuItem("100 bp"));
-		addScrollMenuItem(new ResolutionMenuItem("1 kb"));
-		addScrollMenuItem(new ResolutionMenuItem("10 kb"));
-		addScrollMenuItem(new ResolutionMenuItem("100 kb"));
-		addScrollMenuItem(new ResolutionMenuItem("1 Mb"));
-	}
+    /**
+     * The constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Instantiates a new resolution menu item.
+     *
+     * @param text
+     *          the text
+     */
+    public ResolutionMenuItem(String text) {
+      super(text);
+
+      UI.setSize(this, MENU_SIZE);
+    }
+
+    /**
+     * Instantiates a new resolution menu item.
+     *
+     * @param text
+     *          the text
+     * @param icon
+     *          the icon
+     */
+    public ResolutionMenuItem(String text, ModernIcon icon) {
+      super(text, icon);
+
+      UI.setSize(this, MENU_SIZE);
+    }
+
+  }
+
+  /**
+   * Instantiates a new resolution menu.
+   */
+  public ResolutionMenu() {
+    addScrollMenuItem(new ResolutionMenuItem("1 bp"));
+    addScrollMenuItem(new ResolutionMenuItem("10 bp"));
+    addScrollMenuItem(new ResolutionMenuItem("100 bp"));
+    addScrollMenuItem(new ResolutionMenuItem("1 kb"));
+    addScrollMenuItem(new ResolutionMenuItem("10 kb"));
+    addScrollMenuItem(new ResolutionMenuItem("100 kb"));
+    addScrollMenuItem(new ResolutionMenuItem("1 Mb"));
+  }
 }

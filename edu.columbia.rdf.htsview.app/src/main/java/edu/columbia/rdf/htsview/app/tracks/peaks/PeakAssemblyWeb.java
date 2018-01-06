@@ -34,78 +34,76 @@ import edu.columbia.rdf.edb.EDBWLogin;
  * Maintains a connection to a caArray server.
  */
 public class PeakAssemblyWeb extends PeakAssembly {
-	
-	/** The Constant LOG. */
-	private static final Logger LOG = 
-			LoggerFactory.getLogger(PeakAssemblyWeb.class);
-					
-	/** The m auth V 1. */
-	private UrlBuilder mAuthV1;
-	
-	/**
-	 * Instantiates a new track assembly web.
-	 *
-	 * @param login the login
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public PeakAssemblyWeb(EDBWLogin login) throws IOException {
-		mAuthV1 = login.getOTKAuthUrl();
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.peaks.PeakAssembly#getJsonPeaks(int)
-	 */
-	@Override
-	public List<PeakSet> getJsonPeaks(int sampleId) throws IOException {
-		List<PeakSet> ret = new ArrayList<PeakSet>(1000);
-		
-		UrlBuilder peaksUrl = mAuthV1
-				.resolve("samples")
-				.resolve(sampleId)
-				.resolve("chipseq")
-				.resolve("peaks");
-		
-		LOG.info("peaks url: {}", peaksUrl);
-		
-		Json json = new JsonParser().parse(peaksUrl.toUrl());
-				
-		for (int i = 0; i < json.size(); ++i) {
-			ret.add(PeakSet.createPeaks(json.get(i).getAsInt(EDB.HEADING_ID), json.get(i).getAsString(EDB.HEADING_NAME)));
-		}
 
-		return ret;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.peaks.PeakAssembly#downloadJsonPeaks(int, int)
-	 */
-	@Override
-	public List<GenomicRegion> downloadJsonPeaks(int sampleId, int peaksId) throws IOException {
-		List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
-		
-		UrlBuilder peaksUrl = mAuthV1
-				//.resolve("samples")
-				//.resolve(sampleId)
-				.resolve("chipseq")
-				.resolve("peaks")
-				.resolve("download")
-				.resolve(peaksId);
-				//.param("id", peaksId);
-		
-		LOG.info("peaks url: {}", peaksUrl);
-		
-		Json json = new JsonParser().parse(peaksUrl.toUrl());
-			
-		//Json locationsJson = json.get(0).get("l");
-			
-		for (int i = 0; i < json.size(); ++i) {
-			GenomicRegion region = GenomicRegion.parse(json.get(i).getAsString());
-			
-			if (region != null) {
-				ret.add(region);
-			}
-		}
+  /** The Constant LOG. */
+  private static final Logger LOG = LoggerFactory.getLogger(PeakAssemblyWeb.class);
 
-		return ret;
-	}
+  /** The m auth V 1. */
+  private UrlBuilder mAuthV1;
+
+  /**
+   * Instantiates a new track assembly web.
+   *
+   * @param login
+   *          the login
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public PeakAssemblyWeb(EDBWLogin login) throws IOException {
+    mAuthV1 = login.getOTKAuthUrl();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.htsview.tracks.peaks.PeakAssembly#getJsonPeaks(int)
+   */
+  @Override
+  public List<PeakSet> getJsonPeaks(int sampleId) throws IOException {
+    List<PeakSet> ret = new ArrayList<PeakSet>(1000);
+
+    UrlBuilder peaksUrl = mAuthV1.resolve("samples").resolve(sampleId).resolve("chipseq").resolve("peaks");
+
+    LOG.info("peaks url: {}", peaksUrl);
+
+    Json json = new JsonParser().parse(peaksUrl.toUrl());
+
+    for (int i = 0; i < json.size(); ++i) {
+      ret.add(PeakSet.createPeaks(json.get(i).getAsInt(EDB.HEADING_ID), json.get(i).getAsString(EDB.HEADING_NAME)));
+    }
+
+    return ret;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.htsview.tracks.peaks.PeakAssembly#downloadJsonPeaks(int, int)
+   */
+  @Override
+  public List<GenomicRegion> downloadJsonPeaks(int sampleId, int peaksId) throws IOException {
+    List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
+
+    UrlBuilder peaksUrl = mAuthV1
+        // .resolve("samples")
+        // .resolve(sampleId)
+        .resolve("chipseq").resolve("peaks").resolve("download").resolve(peaksId);
+    // .param("id", peaksId);
+
+    LOG.info("peaks url: {}", peaksUrl);
+
+    Json json = new JsonParser().parse(peaksUrl.toUrl());
+
+    // Json locationsJson = json.get(0).get("l");
+
+    for (int i = 0; i < json.size(); ++i) {
+      GenomicRegion region = GenomicRegion.parse(json.get(i).getAsString());
+
+      if (region != null) {
+        ret.add(region);
+      }
+    }
+
+    return ret;
+  }
 }

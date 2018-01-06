@@ -49,157 +49,157 @@ import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
  */
 public class AnnotationTracksTree extends ModernTree<Track> {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new annotation tracks tree.
-	 *
-	 * @param genomeAssembly the genome assembly
-	 * @param conservationAssembly the conservation assembly
-	 * @param mouseConservationAssembly the mouse conservation assembly
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public AnnotationTracksTree(GenomeAssembly dnaAssembly,
-			ConservationAssembly conservationAssembly,
-			ConservationAssembly mouseConservationAssembly) throws IOException {
-		Track track;
-		TreeNode<Track> node;
+  /**
+   * Instantiates a new annotation tracks tree.
+   *
+   * @param genomeAssembly
+   *          the genome assembly
+   * @param conservationAssembly
+   *          the conservation assembly
+   * @param mouseConservationAssembly
+   *          the mouse conservation assembly
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public AnnotationTracksTree(GenomeAssembly dnaAssembly, ConservationAssembly conservationAssembly,
+      ConservationAssembly mouseConservationAssembly) throws IOException {
+    Track track;
+    TreeNode<Track> node;
 
-		TreeRootNode<Track> root = new TreeRootNode<Track>();
+    TreeRootNode<Track> root = new TreeRootNode<Track>();
 
-		TreeNode<Track> genomicNode = new TreeNode<Track>("Genomic");
+    TreeNode<Track> genomicNode = new TreeNode<Track>("Genomic");
 
-		TreeNode<Track> genesNode = new TreeNode<Track>("Gene Annotation");
+    TreeNode<Track> genesNode = new TreeNode<Track>("Gene Annotation");
 
-		//track = new EnsemblGenesPlotTrack();
-		//node = new TreeNode<Track>(track.getName(), track);
-		//genesNode.addChild(node);
+    // track = new EnsemblGenesPlotTrack();
+    // node = new TreeNode<Track>(track.getName(), track);
+    // genesNode.addChild(node);
 
-		track = new RefSeqGenesPlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		genesNode.addChild(node);
-		
-		track = new GencodeGenesPlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		genesNode.addChild(node);
-		
-		//track = new GencodePolyAPlotTrack();
-		//node = new TreeNode<Track>(track.getName(), track);
-		//genesNode.addChild(node);
-		
-		//track = new UcscGenesPlotTrack();
-		//node = new TreeNode<Track>(track.getName(), track);
-		//genesNode.addChild(node);
+    track = new RefSeqGenesPlotTrack();
+    node = new TreeNode<Track>(track.getName(), track);
+    genesNode.addChild(node);
 
-		//track = new VegaGenesPlotTrack();
-		//node = new TreeNode<Track>(track.getName(), track);
-		//genesNode.addChild(node);
+    track = new GencodeGenesPlotTrack();
+    node = new TreeNode<Track>(track.getName(), track);
+    genesNode.addChild(node);
 
-		genomicNode.addChild(genesNode);
+    // track = new GencodePolyAPlotTrack();
+    // node = new TreeNode<Track>(track.getName(), track);
+    // genesNode.addChild(node);
 
-		TreeNode<Track> dnaNode = new TreeNode<Track>("DNA Annotation");
+    // track = new UcscGenesPlotTrack();
+    // node = new TreeNode<Track>(track.getName(), track);
+    // genesNode.addChild(node);
 
-		track = new DnaBasesPlotTrack(dnaAssembly);
-		node = new TreeNode<Track>(track.getName(), track);
-		dnaNode.addChild(node);
+    // track = new VegaGenesPlotTrack();
+    // node = new TreeNode<Track>(track.getName(), track);
+    // genesNode.addChild(node);
 
-		track = new DnaColorPlotTrack(dnaAssembly);
-		node = new TreeNode<Track>(track.getName(), track);
-		dnaNode.addChild(node);
+    genomicNode.addChild(genesNode);
 
-		track = new DnaRepeatMaskPlotTrack(dnaAssembly);
-		node = new TreeNode<Track>(track.getName(), track);
-		dnaNode.addChild(node);
+    TreeNode<Track> dnaNode = new TreeNode<Track>("DNA Annotation");
 
-		genomicNode.addChild(dnaNode);
+    track = new DnaBasesPlotTrack(dnaAssembly);
+    node = new TreeNode<Track>(track.getName(), track);
+    dnaNode.addChild(node);
 
-		TreeNode<Track> conservationNode = new TreeNode<Track>("Conservation");
+    track = new DnaColorPlotTrack(dnaAssembly);
+    node = new TreeNode<Track>(track.getName(), track);
+    dnaNode.addChild(node);
 
-		track = new Conservation46WayPlotTrack(conservationAssembly);
-		node = new TreeNode<Track>(track.getName(), track);
-		conservationNode.addChild(node);
+    track = new DnaRepeatMaskPlotTrack(dnaAssembly);
+    node = new TreeNode<Track>(track.getName(), track);
+    dnaNode.addChild(node);
 
-		track = new Conservation46WayGraphPlotTrack(conservationAssembly);
-		node = new TreeNode<Track>(track.getName(), track);
-		conservationNode.addChild(node);
+    genomicNode.addChild(dnaNode);
 
-		track = new MouseConservationPlotTrack(mouseConservationAssembly);
-		node = new TreeNode<Track>(track.getName(), track);
-		conservationNode.addChild(node);
+    TreeNode<Track> conservationNode = new TreeNode<Track>("Conservation");
 
-		genomicNode.addChild(conservationNode);
-		
-		TreeNode<Track> chrNode = new TreeNode<Track>("Chromosome");
-		
-		track = new CytobandsPlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		chrNode.addChild(node);
-		genomicNode.addChild(chrNode);
-		
-		TreeNode<Track> microarrayNode = new TreeNode<Track>("Microarray");
+    track = new Conservation46WayPlotTrack(conservationAssembly);
+    node = new TreeNode<Track>(track.getName(), track);
+    conservationNode.addChild(node);
 
-		track = new BedPlotTrack(PathUtils.getPath("res/tracks/HG-U133_Plus_2.probes.hg19.bed.gz"), 
-				TrackDisplayMode.FULL);
-		node = new TreeNode<Track>(track.getName(), track);
-		microarrayNode.addChild(node);
-		
-		genomicNode.addChild(microarrayNode);
-		
-		/*
-		TreeNode<Track> otherNode = new TreeNode<Track>("Other");
-		
-		track = new AnnotationBedPlotTrack(Bed.parseTracks("DDS_IgLocusMap", 
-				Resources.getResGzipReader("res/tracks/DDS_IgLocusMap.bed.gz")).get(0));
-		node = new TreeNode<Track>(track.getName(), track);
-		otherNode.addChild(node);
-		genomicNode.addChild(otherNode);
-		*/
-		
-		root.addChild(genomicNode);
-		
-		//
-		// Mouse
-		//
-		
-		//TreeNode<Track> mouseNode = new TreeNode<Track>("Mouse");
+    track = new Conservation46WayGraphPlotTrack(conservationAssembly);
+    node = new TreeNode<Track>(track.getName(), track);
+    conservationNode.addChild(node);
 
-		//genesNode = new TreeNode<Track>("Gene Annotation");
+    track = new MouseConservationPlotTrack(mouseConservationAssembly);
+    node = new TreeNode<Track>(track.getName(), track);
+    conservationNode.addChild(node);
 
-		//track = new MouseRefSeqGenesPlotTrack(geneMap);
-		//node = new TreeNode<Track>(track.getName(), track);
-		//mouseNode.addChild(node);
+    genomicNode.addChild(conservationNode);
 
-		//mouseNode.addChild(genesNode);
+    TreeNode<Track> chrNode = new TreeNode<Track>("Chromosome");
 
-		//track = new MouseCytobandsPlotTrack();
-		//node = new TreeNode<Track>(track.getName(), track);
-		//mouseNode.addChild(node);
-		
-		//root.addChild(mouseNode);
-		
-		//
-		// Measure
-		//
-		
-		TreeNode<Track> measureNode = new TreeNode<Track>("Measurement");
+    track = new CytobandsPlotTrack();
+    node = new TreeNode<Track>(track.getName(), track);
+    chrNode.addChild(node);
+    genomicNode.addChild(chrNode);
 
-		track = new RangePlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		measureNode.addChild(node);
+    TreeNode<Track> microarrayNode = new TreeNode<Track>("Microarray");
 
-		track = new RulerPlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		measureNode.addChild(node);
+    track = new BedPlotTrack(PathUtils.getPath("res/tracks/HG-U133_Plus_2.probes.hg19.bed.gz"), TrackDisplayMode.FULL);
+    node = new TreeNode<Track>(track.getName(), track);
+    microarrayNode.addChild(node);
 
-		track = new ScalePlotTrack();
-		node = new TreeNode<Track>(track.getName(), track);
-		measureNode.addChild(node);
-		
-		root.addChild(measureNode);
+    genomicNode.addChild(microarrayNode);
 
-		setRoot(root);
-	}
+    /*
+     * TreeNode<Track> otherNode = new TreeNode<Track>("Other");
+     * 
+     * track = new AnnotationBedPlotTrack(Bed.parseTracks("DDS_IgLocusMap",
+     * Resources.getResGzipReader("res/tracks/DDS_IgLocusMap.bed.gz")).get(0)); node
+     * = new TreeNode<Track>(track.getName(), track); otherNode.addChild(node);
+     * genomicNode.addChild(otherNode);
+     */
 
+    root.addChild(genomicNode);
+
+    //
+    // Mouse
+    //
+
+    // TreeNode<Track> mouseNode = new TreeNode<Track>("Mouse");
+
+    // genesNode = new TreeNode<Track>("Gene Annotation");
+
+    // track = new MouseRefSeqGenesPlotTrack(geneMap);
+    // node = new TreeNode<Track>(track.getName(), track);
+    // mouseNode.addChild(node);
+
+    // mouseNode.addChild(genesNode);
+
+    // track = new MouseCytobandsPlotTrack();
+    // node = new TreeNode<Track>(track.getName(), track);
+    // mouseNode.addChild(node);
+
+    // root.addChild(mouseNode);
+
+    //
+    // Measure
+    //
+
+    TreeNode<Track> measureNode = new TreeNode<Track>("Measurement");
+
+    track = new RangePlotTrack();
+    node = new TreeNode<Track>(track.getName(), track);
+    measureNode.addChild(node);
+
+    track = new RulerPlotTrack();
+    node = new TreeNode<Track>(track.getName(), track);
+    measureNode.addChild(node);
+
+    track = new ScalePlotTrack();
+    node = new TreeNode<Track>(track.getName(), track);
+    measureNode.addChild(node);
+
+    root.addChild(measureNode);
+
+    setRoot(root);
+  }
 
 }

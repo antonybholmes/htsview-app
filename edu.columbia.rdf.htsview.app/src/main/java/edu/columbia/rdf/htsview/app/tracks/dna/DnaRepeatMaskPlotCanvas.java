@@ -28,75 +28,73 @@ import org.jebtk.graphplot.figure.PlotStyle;
  * The Class DnaRepeatMaskPlotCanvas.
  */
 public class DnaRepeatMaskPlotCanvas extends DnaSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m layer. */
-	private DnaRepeatMaskCanvasLayer mLayer;
-	
-	/**
-	 * Instantiates a new dna repeat mask plot canvas.
-	 *
-	 * @param genome the genome
-	 * @param genomeAssembly the genome assembly
-	 * @param titlePosition the title position
-	 */
-	public DnaRepeatMaskPlotCanvas(String genome,
-			GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition) {
-		mLayer = new DnaRepeatMaskCanvasLayer(genome, genomeAssembly);
-		
-		currentAxes().addChild(mLayer);
 
-		Track.setTitle(DnaRepeatMaskPlotTrack.TITLE, titlePosition, currentAxes());
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates the.
-	 *
-	 * @param genome the genome
-	 * @param genomeAssembly the genome assembly
-	 * @param titlePosition the title position
-	 * @return the dna repeat mask plot canvas
-	 */
-	public static DnaRepeatMaskPlotCanvas create(String genome,
-			GenomeAssembly genomeAssembly,
-			TitleProperties titlePosition) {
+  /** The m layer. */
+  private DnaRepeatMaskCanvasLayer mLayer;
 
-		DnaRepeatMaskPlotCanvas canvas = new DnaRepeatMaskPlotCanvas(genome,
-				genomeAssembly,
-				titlePosition);
+  /**
+   * Instantiates a new dna repeat mask plot canvas.
+   *
+   * @param genome
+   *          the genome
+   * @param genomeAssembly
+   *          the genome assembly
+   * @param titlePosition
+   *          the title position
+   */
+  public DnaRepeatMaskPlotCanvas(String genome, GenomeAssembly genomeAssembly, TitleProperties titlePosition) {
+    mLayer = new DnaRepeatMaskCanvasLayer(genome, genomeAssembly);
 
-		// set the graph limits
-		canvas.currentAxes().getX1Axis().getTitle().setText(null);
-		canvas.currentAxes().getX1Axis().startEndTicksOnly();
+    currentAxes().addChild(mLayer);
 
-		canvas.currentAxes().getY1Axis().getTitle().setText(null);
-		canvas.currentAxes().getY1Axis().startEndTicksOnly();
+    Track.setTitle(DnaRepeatMaskPlotTrack.TITLE, titlePosition, currentAxes());
+  }
 
-		canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
-		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+  /**
+   * Creates the.
+   *
+   * @param genome
+   *          the genome
+   * @param genomeAssembly
+   *          the genome assembly
+   * @param titlePosition
+   *          the title position
+   * @return the dna repeat mask plot canvas
+   */
+  public static DnaRepeatMaskPlotCanvas create(String genome, GenomeAssembly genomeAssembly,
+      TitleProperties titlePosition) {
 
-		
-		return canvas;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+    DnaRepeatMaskPlotCanvas canvas = new DnaRepeatMaskPlotCanvas(genome, genomeAssembly, titlePosition);
 
-		mLayer.update(displayRegion);
-	}
+    // set the graph limits
+    canvas.currentAxes().getX1Axis().getTitle().setText(null);
+    canvas.currentAxes().getX1Axis().startEndTicksOnly();
+
+    canvas.currentAxes().getY1Axis().getTitle().setText(null);
+    canvas.currentAxes().getY1Axis().startEndTicksOnly();
+
+    canvas.currentAxes().setInternalSize(Track.SMALL_TRACK_SIZE);
+    // canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.dna.DnaSubFigure#update(org.jebtk.bioinformatics.genome.
+   * GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color,
+   * org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.update(displayRegion);
+  }
 }

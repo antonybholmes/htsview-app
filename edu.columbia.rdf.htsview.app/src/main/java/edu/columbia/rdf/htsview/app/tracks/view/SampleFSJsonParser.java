@@ -35,87 +35,90 @@ import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
  */
 public class SampleFSJsonParser extends TrackJsonParser {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.window.ModernWindow, java.lang.String, int, org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public boolean parse(ModernWindow window,
-			final String name,
-			int id,
-			ModernTree<Track> annotationTree,
-			final Json trackJson,
-			TreeNode<Track> rootNode) throws IOException {
-		Path metaFile = getFile(trackJson);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
+   * window.ModernWindow, java.lang.String, int,
+   * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
+      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+    Path metaFile = getFile(trackJson);
 
-		boolean validTrack = false;
-		
-		if (FileUtils.exists(metaFile)) {
+    boolean validTrack = false;
 
-			Track track = SampleLoaderService.getInstance().openSample(window, 
-					metaFile,
-					rootNode);
+    if (FileUtils.exists(metaFile)) {
 
-			Color lineColor = null;
+      Track track = SampleLoaderService.getInstance().openSample(window, metaFile, rootNode);
 
-			if (trackJson.containsKey("line-color")) {
-				lineColor = trackJson.getAsColor("line-color");
-			} else if (trackJson.containsKey("color")) {
-				lineColor = trackJson.getAsColor("color");
-			} else {
-				lineColor = Color.GRAY;
-			}
-			
-			track.setLineColor(lineColor);
+      Color lineColor = null;
 
-			Color fillColor = null;
+      if (trackJson.containsKey("line-color")) {
+        lineColor = trackJson.getAsColor("line-color");
+      } else if (trackJson.containsKey("color")) {
+        lineColor = trackJson.getAsColor("color");
+      } else {
+        lineColor = Color.GRAY;
+      }
 
-			if (trackJson.containsKey("fill-color")) {
-				fillColor = trackJson.getAsColor("fill-color");
-			} else {
-				fillColor = Color.LIGHT_GRAY;
-			}
-			
-			track.setFillColor(fillColor);
+      track.setLineColor(lineColor);
 
-			if (trackJson.containsKey("auto-y")) {
-				track.setAutoY(trackJson.getAsBool("auto-y"));
-			}
+      Color fillColor = null;
 
-			if (trackJson.containsKey("common-y")) {
-				track.setCommonY(trackJson.getAsBool("common-y"));
-			}
+      if (trackJson.containsKey("fill-color")) {
+        fillColor = trackJson.getAsColor("fill-color");
+      } else {
+        fillColor = Color.LIGHT_GRAY;
+      }
 
-			if (trackJson.containsKey("normalize-y")) {
-				track.setNormalizeY(trackJson.getAsBool("normalize-y"));
-			}
+      track.setFillColor(fillColor);
 
-			if (trackJson.containsKey("y-max")) {
-				track.setYMax(trackJson.getAsInt("y-max"));
-			}
+      if (trackJson.containsKey("auto-y")) {
+        track.setAutoY(trackJson.getAsBool("auto-y"));
+      }
 
-			
-			//TrackTreeNode child = new TrackTreeNode(track);
-			//rootNode.addChild(child);
+      if (trackJson.containsKey("common-y")) {
+        track.setCommonY(trackJson.getAsBool("common-y"));
+      }
 
-			validTrack = true;
-		}
-		
-		return validTrack;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "SampleFS";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
-	 */
-	@Override
-	public String getType() {
-		return "sample-fs";
-	}
+      if (trackJson.containsKey("normalize-y")) {
+        track.setNormalizeY(trackJson.getAsBool("normalize-y"));
+      }
+
+      if (trackJson.containsKey("y-max")) {
+        track.setYMax(trackJson.getAsInt("y-max"));
+      }
+
+      // TrackTreeNode child = new TrackTreeNode(track);
+      // rootNode.addChild(child);
+
+      validTrack = true;
+    }
+
+    return validTrack;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "SampleFS";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
+   */
+  @Override
+  public String getType() {
+    return "sample-fs";
+  }
 }

@@ -23,14 +23,15 @@ import java.io.IOException;
  */
 public class RefSeqGenesPlotTrack extends GenesPlotTrack {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new ref seq genes plot track.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public RefSeqGenesPlotTrack() throws IOException {
-		super("RefSeq genes", "refseq");
-	}
+  /**
+   * Instantiates a new ref seq genes plot track.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public RefSeqGenesPlotTrack() throws IOException {
+    super("RefSeq genes", "refseq");
+  }
 }

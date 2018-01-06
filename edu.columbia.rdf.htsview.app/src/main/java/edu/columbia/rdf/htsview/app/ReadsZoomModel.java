@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.app;
 
 import org.jebtk.modern.zoom.SettingsZoomModel;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Zoom model that responds to settings.
@@ -27,15 +26,15 @@ import org.jebtk.modern.zoom.SettingsZoomModel;
  */
 public class ReadsZoomModel extends SettingsZoomModel {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Instantiates a new reads zoom model.
-	 */
-	public ReadsZoomModel() {
-		super("edb.reads.zoom.current", "reads.zoom.min", "reads.zoom.max");
-	}
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new reads zoom model.
+   */
+  public ReadsZoomModel() {
+    super("edb.reads.zoom.current", "reads.zoom.min", "reads.zoom.max");
+  }
 }

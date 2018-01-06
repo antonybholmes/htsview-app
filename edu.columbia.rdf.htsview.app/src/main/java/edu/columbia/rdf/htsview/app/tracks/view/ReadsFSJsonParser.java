@@ -35,88 +35,87 @@ import org.jebtk.modern.window.ModernWindow;
  */
 public class ReadsFSJsonParser extends TrackJsonParser {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.window.ModernWindow, java.lang.String, int, org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public boolean parse(ModernWindow window,
-			final String name,
-			int id,
-			ModernTree<Track> annotationTree,
-			final Json trackJson,
-			TreeNode<Track> rootNode) throws IOException {
-		Path metaFile = getFile(trackJson);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
+   * window.ModernWindow, java.lang.String, int,
+   * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
+      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+    Path metaFile = getFile(trackJson);
 
-		ReadsFsPlotTrack track = 
-				(ReadsFsPlotTrack)SampleLoaderService.getInstance().openReads(window, 
-						metaFile, 
-						rootNode); //tracksPanel.loadReadTrack(metaFile);
+    ReadsFsPlotTrack track = (ReadsFsPlotTrack) SampleLoaderService.getInstance().openReads(window, metaFile, rootNode); // tracksPanel.loadReadTrack(metaFile);
 
-		boolean visible = trackJson.getAsBool("visible");
+    boolean visible = trackJson.getAsBool("visible");
 
-		Color lineColor = null;
+    Color lineColor = null;
 
-		if (trackJson.containsKey("line-color")) {
-			lineColor = trackJson.getAsColor("line-color");
-		} else if (trackJson.containsKey("color")) {
-			lineColor = trackJson.getAsColor("color");
-		} else {
-			lineColor = Color.GRAY;
-		}
+    if (trackJson.containsKey("line-color")) {
+      lineColor = trackJson.getAsColor("line-color");
+    } else if (trackJson.containsKey("color")) {
+      lineColor = trackJson.getAsColor("color");
+    } else {
+      lineColor = Color.GRAY;
+    }
 
-		Color fillColor = null;
+    Color fillColor = null;
 
-		if (trackJson.containsKey("fill-color")) {
-			fillColor = trackJson.getAsColor("fill-color");
-		} else {
-			fillColor = Color.LIGHT_GRAY;
-		}
+    if (trackJson.containsKey("fill-color")) {
+      fillColor = trackJson.getAsColor("fill-color");
+    } else {
+      fillColor = Color.LIGHT_GRAY;
+    }
 
-		boolean antiSenseVisible = 
-				trackJson.getAsBool("anti-sense-visible");
+    boolean antiSenseVisible = trackJson.getAsBool("anti-sense-visible");
 
-		Color antiSenseLineColor = 
-				trackJson.getAsColor("anti-sense-color");
+    Color antiSenseLineColor = trackJson.getAsColor("anti-sense-color");
 
-		Color antiSenseFillColor = 
-				trackJson.getAsColor("anti-sense-fill-color");
+    Color antiSenseFillColor = trackJson.getAsColor("anti-sense-fill-color");
 
-		int readHeight = trackJson.getAsInt("read-height");
-		int gap = trackJson.getAsInt("gap");
+    int readHeight = trackJson.getAsInt("read-height");
+    int gap = trackJson.getAsInt("gap");
 
-		track.setForwardVisible(visible);
-		track.setAntiSenseVisible(antiSenseVisible);
+    track.setForwardVisible(visible);
+    track.setAntiSenseVisible(antiSenseVisible);
 
-		track.setLineColor(lineColor);
-		track.setFillColor(fillColor);
+    track.setLineColor(lineColor);
+    track.setFillColor(fillColor);
 
-		track.setAntiSenseLineColor(antiSenseLineColor);
-		track.setAntiSenseFillColor(antiSenseFillColor);
+    track.setAntiSenseLineColor(antiSenseLineColor);
+    track.setAntiSenseFillColor(antiSenseFillColor);
 
-		track.setReadHeight(readHeight);
-		track.setGap(gap);
+    track.setReadHeight(readHeight);
+    track.setGap(gap);
 
+    TrackTreeNode child = new TrackTreeNode(track);
 
-		TrackTreeNode child = new TrackTreeNode(track);
+    rootNode.addChild(child);
 
-		rootNode.addChild(child);
+    return true;
+  }
 
-		return true;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "ReadsFS";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
-	 */
-	@Override
-	public String getType() {
-		return "reads-fs";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "ReadsFS";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
+   */
+  @Override
+  public String getType() {
+    return "reads-fs";
+  }
 }

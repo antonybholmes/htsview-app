@@ -23,19 +23,21 @@ import org.jebtk.modern.io.GuiFileExtFilter;
  */
 public class ReadsAllSupportedGuiFileFilter extends GuiFileExtFilter {
 
-	/**
-	 * Instantiates a new reads all supported gui file filter.
-	 */
-	public ReadsAllSupportedGuiFileFilter() {
-		super("bam", "bct.json", "brt2j", "bvtj", "bed", "bedgraph", "gff", "readsj", "readsx");
-	}
+  /**
+   * Instantiates a new reads all supported gui file filter.
+   */
+  public ReadsAllSupportedGuiFileFilter() {
+    super("bam", "bct.json", "brt2j", "bvtj", "bed", "bedgraph", "gff", "readsj", "readsx");
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	@Override
-	public String getDescription() {
-		return "All Reads Files (*.bam;*.bct.json;*.brt2j;*.bvtj;*.bed;*.bedgraph;*.gff;*.readsj;*.readsx)";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  @Override
+  public String getDescription() {
+    return "All Reads Files (*.bam;*.bct.json;*.brt2j;*.bvtj;*.bed;*.bedgraph;*.gff;*.readsj;*.readsx)";
+  }
 
 }

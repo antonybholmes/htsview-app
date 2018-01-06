@@ -23,19 +23,21 @@ import org.jebtk.modern.io.GuiFileExtFilter;
  */
 public class ReadsViewGuiFileFilter extends GuiFileExtFilter {
 
-	/**
-	 * Instantiates a new reads xml view gui file filter.
-	 */
-	public ReadsViewGuiFileFilter() {
-		super(ReadsXmlViewGuiFileFilter.EXT, ReadsJsonViewGuiFileFilter.EXT);
-	}
+  /**
+   * Instantiates a new reads xml view gui file filter.
+   */
+  public ReadsViewGuiFileFilter() {
+    super(ReadsXmlViewGuiFileFilter.EXT, ReadsJsonViewGuiFileFilter.EXT);
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	@Override
-	public String getDescription() {
-		return "Reads View (*.readsx; *.readsj)";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  @Override
+  public String getDescription() {
+    return "Reads View (*.readsx; *.readsj)";
+  }
 
 }

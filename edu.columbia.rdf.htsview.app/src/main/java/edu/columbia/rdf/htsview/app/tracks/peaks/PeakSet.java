@@ -23,25 +23,29 @@ import org.jebtk.bioinformatics.annotation.Type;
  */
 public class PeakSet extends Type {
 
-	/**
-	 * Instantiates a new peaks.
-	 *
-	 * @param id the id
-	 * @param name the name
-	 */
-	public PeakSet(int id, String name) {
-		super(id, name);
-	}
+  /**
+   * Instantiates a new peaks.
+   *
+   * @param id
+   *          the id
+   * @param name
+   *          the name
+   */
+  public PeakSet(int id, String name) {
+    super(id, name);
+  }
 
-	/**
-	 * Creates the peaks.
-	 *
-	 * @param id the id
-	 * @param name the name
-	 * @return the peaks
-	 */
-	public static PeakSet createPeaks(int id, String name) {
-		return new PeakSet(id, name);
-	}
+  /**
+   * Creates the peaks.
+   *
+   * @param id
+   *          the id
+   * @param name
+   *          the name
+   * @return the peaks
+   */
+  public static PeakSet createPeaks(int id, String name) {
+    return new PeakSet(id, name);
+  }
 
 }

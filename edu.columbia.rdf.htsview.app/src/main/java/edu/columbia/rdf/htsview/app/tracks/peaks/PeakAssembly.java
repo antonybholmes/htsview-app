@@ -28,74 +28,86 @@ import edu.columbia.rdf.edb.Sample;
  */
 public abstract class PeakAssembly {
 
-	/**
-	 * Download json peaks.
-	 *
-	 * @param sample the sample
-	 * @param peaksId the peaks id
-	 * @return the list
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<GenomicRegion> downloadJsonPeaks(Sample sample, 
-			int peaksId) throws IOException {
-		return downloadJsonPeaks(sample.getId(), peaksId);
-	}
-	
-	/**
-	 * Download json peaks.
-	 *
-	 * @param sampleId the sample id
-	 * @param peaks the peaks
-	 * @return the list
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<GenomicRegion> downloadJsonPeaks(int sampleId, 
-			PeakSet peaks) throws IOException {
-		return downloadJsonPeaks(sampleId, peaks.getId());
-	}
-	
-	/**
-	 * Download json peaks.
-	 *
-	 * @param sample the sample
-	 * @param peaks the peaks
-	 * @return the list
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<GenomicRegion> downloadJsonPeaks(Sample sample, 
-			PeakSet peaks) throws IOException {
-		return downloadJsonPeaks(sample.getId(), peaks.getId());
-	}
-	
-	/**
-	 * Download json peaks.
-	 *
-	 * @param sampleId the sample id
-	 * @param peaksId the peaks id
-	 * @return the list
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public abstract List<GenomicRegion> downloadJsonPeaks(int sampleId, 
-			int peaksId) throws IOException;
+  /**
+   * Download json peaks.
+   *
+   * @param sample
+   *          the sample
+   * @param peaksId
+   *          the peaks id
+   * @return the list
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<GenomicRegion> downloadJsonPeaks(Sample sample, int peaksId) throws IOException {
+    return downloadJsonPeaks(sample.getId(), peaksId);
+  }
 
-	/**
-	 * Gets the json peaks.
-	 *
-	 * @param sample the sample
-	 * @return the json peaks
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<PeakSet> getJsonPeaks(Sample sample) throws IOException {
-		return getJsonPeaks(sample.getId());
-	}
-	
-	/**
-	 * Returns a list of the Peak sets associated with a given sample.
-	 *
-	 * @param sampleId the sample id
-	 * @return the json peaks
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public abstract List<PeakSet> getJsonPeaks(int sampleId) throws IOException;
+  /**
+   * Download json peaks.
+   *
+   * @param sampleId
+   *          the sample id
+   * @param peaks
+   *          the peaks
+   * @return the list
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<GenomicRegion> downloadJsonPeaks(int sampleId, PeakSet peaks) throws IOException {
+    return downloadJsonPeaks(sampleId, peaks.getId());
+  }
+
+  /**
+   * Download json peaks.
+   *
+   * @param sample
+   *          the sample
+   * @param peaks
+   *          the peaks
+   * @return the list
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<GenomicRegion> downloadJsonPeaks(Sample sample, PeakSet peaks) throws IOException {
+    return downloadJsonPeaks(sample.getId(), peaks.getId());
+  }
+
+  /**
+   * Download json peaks.
+   *
+   * @param sampleId
+   *          the sample id
+   * @param peaksId
+   *          the peaks id
+   * @return the list
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public abstract List<GenomicRegion> downloadJsonPeaks(int sampleId, int peaksId) throws IOException;
+
+  /**
+   * Gets the json peaks.
+   *
+   * @param sample
+   *          the sample
+   * @return the json peaks
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<PeakSet> getJsonPeaks(Sample sample) throws IOException {
+    return getJsonPeaks(sample.getId());
+  }
+
+  /**
+   * Returns a list of the Peak sets associated with a given sample.
+   *
+   * @param sampleId
+   *          the sample id
+   * @return the json peaks
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public abstract List<PeakSet> getJsonPeaks(int sampleId) throws IOException;
 
 }

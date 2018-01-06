@@ -20,13 +20,13 @@ package edu.columbia.rdf.htsview.app.modules.heatmap;
  * The Enum HeatMapSort.
  */
 public enum HeatMapSort {
-	
-	/** The none. */
-	NONE,
-	
-	/** The tss distance. */
-	TSS_DISTANCE, 
-	
-	/** The intensity. */
-	INTENSITY
+
+  /** The none. */
+  NONE,
+
+  /** The tss distance. */
+  TSS_DISTANCE,
+
+  /** The intensity. */
+  INTENSITY
 }

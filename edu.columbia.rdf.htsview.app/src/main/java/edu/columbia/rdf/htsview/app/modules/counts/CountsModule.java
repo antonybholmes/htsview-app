@@ -46,98 +46,93 @@ import edu.columbia.rdf.htsview.app.modules.HTSViewModule;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
-
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class CountsModule extends HTSViewModule implements ModernClickListener  {	
-	private static final Logger LOG = 
-			LoggerFactory.getLogger(CountsModule.class);
+public class CountsModule extends HTSViewModule implements ModernClickListener {
+  private static final Logger LOG = LoggerFactory.getLogger(CountsModule.class);
 
-	/**
-	 * The member convert button.
-	 */
-	private ModernButton mCountsButton = new RibbonLargeButton("Counts", 
-			UIService.getInstance().loadIcon("read_dist", 32),
-			UIService.getInstance().loadIcon("read_dist", 24));
+  /**
+   * The member convert button.
+   */
+  private ModernButton mCountsButton = new RibbonLargeButton("Counts",
+      UIService.getInstance().loadIcon("read_dist", 32), UIService.getInstance().loadIcon("read_dist", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainHtsViewWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainHtsViewWindow mWindow;
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Counts";
+  }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainHtsViewWindow window) {
+    mWindow = window;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Counts";
-	}
+    // home
+    mCountsButton.setToolTip(new ModernToolTip("Fill Gaps", "Fill gaps using reference."),
+        mWindow.getRibbon().getToolTipModel());
+    mCountsButton.setClickMessage("Fill Gaps");
+    mWindow.getRibbon().getToolbar("Tools").getSection("Fill Gaps").add(mCountsButton);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainHtsViewWindow window) {
-		mWindow = window;
+    mCountsButton.addClickListener(this);
+  }
 
-		// home
-		mCountsButton.setToolTip(new ModernToolTip("Fill Gaps", 
-				"Fill gaps using reference."), 
-				mWindow.getRibbon().getToolTipModel());
-		mCountsButton.setClickMessage("Fill Gaps");
-		mWindow.getRibbon().getToolbar("Tools").getSection("Fill Gaps").add(mCountsButton);
+  @Override
+  public void clicked(ModernClickEvent e) {
+    counts();
+  }
 
-		mCountsButton.addClickListener(this);
-	}
+  private void counts() {
+    List<SamplePlotTrack> sampleTracks = new ArrayList<SamplePlotTrack>();
 
-	@Override
-	public void clicked(ModernClickEvent e) {
-		counts();
-	}
+    for (Track track : mWindow.getTracksPanel().getSelectedTracks()) {
+      if (track instanceof SamplePlotTrack) {
+        sampleTracks.add((SamplePlotTrack) track);
+      }
+    }
 
-	private void counts() {
-		List<SamplePlotTrack> sampleTracks = new ArrayList<SamplePlotTrack>();
+    if (sampleTracks.size() == 0) {
+      ModernMessageDialog.createWarningDialog(mWindow, "You must select a sample.");
+      return;
+    }
 
-		for (Track track : mWindow.getTracksPanel().getSelectedTracks()) {
-			if (track instanceof SamplePlotTrack) {
-				sampleTracks.add((SamplePlotTrack)track);
-			}
-		}
+    CountsDialog dialog = new CountsDialog(mWindow, sampleTracks);
 
-		if (sampleTracks.size() == 0) {
-			ModernMessageDialog.createWarningDialog(mWindow, 
-					"You must select a sample.");
-			return;
-		}
+    dialog.setVisible(true);
 
-		CountsDialog dialog = new CountsDialog(mWindow, sampleTracks);
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		dialog.setVisible(true);
+    ModernDialogStatus status = ModernMessageDialog.createOkCancelInfoDialog(mWindow,
+        "Generating distribution plots can take several minutes.");
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    if (status == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		ModernDialogStatus status = ModernMessageDialog
-				.createOkCancelInfoDialog(mWindow, 
-				"Generating distribution plots can take several minutes.");
+    CountTask task = new CountTask(sampleTracks, dialog.getRegions(), dialog.getNorm());
 
-		if (status == ModernDialogStatus.CANCEL) {
-			return;
-		}
-
-		CountTask task = new CountTask(sampleTracks, 
-				dialog.getRegions(),
-				dialog.getNorm());
-
-		task.doInBackground();
-	}
+    task.doInBackground();
+  }
 }

@@ -27,22 +27,21 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GeneProperties;
  * The Class VariantGeneProperties.
  */
 public class VariantGeneProperties extends GeneProperties {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The Constant COLOR. */
-	private static final Color COLOR = 
-			SettingsService.getInstance().getAsColor("htsview.genes.main-variant-color");
 
-	/**
-	 * Instantiates a new variant gene properties.
-	 */
-	public VariantGeneProperties() {
-		mLineStyle.setColor(COLOR);
-		mExons.getLineStyle().setColor(COLOR);
-		mExons.setFillColor(COLOR);
-		mFont.setColor(COLOR);
-		mFont.setFont(ModernPlotCanvas.PLOT_FONT);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /** The Constant COLOR. */
+  private static final Color COLOR = SettingsService.getInstance().getAsColor("htsview.genes.main-variant-color");
+
+  /**
+   * Instantiates a new variant gene properties.
+   */
+  public VariantGeneProperties() {
+    mLineStyle.setColor(COLOR);
+    mExons.getLineStyle().setColor(COLOR);
+    mExons.setFillColor(COLOR);
+    mFont.setColor(COLOR);
+    mFont.setFont(ModernPlotCanvas.PLOT_FONT);
+  }
 }

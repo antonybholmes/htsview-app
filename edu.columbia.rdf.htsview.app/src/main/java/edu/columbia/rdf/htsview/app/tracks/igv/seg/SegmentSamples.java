@@ -37,116 +37,122 @@ import org.jebtk.core.text.TextUtils;
  */
 public class SegmentSamples implements Iterable<String>, NameProperty {
 
-	/** The m segments. */
-	private Map<String, ChrSegments> mSegments = new TreeMap<String, ChrSegments>();
-	
-	/** The m name. */
-	private String mName;
-	
-	/**
-	 * Instantiates a new segment samples.
-	 *
-	 * @param name the name
-	 */
-	public SegmentSamples(String name) {
-		mName = name;
-	}
-	
-	/**
-	 * Adds the.
-	 *
-	 * @param segments the segments
-	 */
-	public void add(ChrSegments segments) {
-		mSegments.put(segments.getName(), segments);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return mName;
-	}
+  /** The m segments. */
+  private Map<String, ChrSegments> mSegments = new TreeMap<String, ChrSegments>();
 
-	/**
-	 * Size.
-	 *
-	 * @return the int
-	 */
-	public int size() {
-		return mSegments.size();
-	}
-	
-	/**
-	 * Gets the.
-	 *
-	 * @param name the name
-	 * @return the chr segments
-	 */
-	public ChrSegments get(String name) {
-		return mSegments.get(name);
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Iterable#iterator()
-	 */
-	@Override
-	public Iterator<String> iterator() {
-		return mSegments.keySet().iterator();
-	}
+  /** The m name. */
+  private String mName;
 
-	/**
-	 * Parses the.
-	 *
-	 * @param file the file
-	 * @return the segment samples
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static SegmentSamples parse(Path file) throws IOException {
-		BufferedReader reader = FileUtils.newBufferedReader(file);
-		
-		String line;
-		List<String> tokens;
-		
-		SegmentSamples samples = new SegmentSamples(PathUtils.getNameNoExt(file));
+  /**
+   * Instantiates a new segment samples.
+   *
+   * @param name
+   *          the name
+   */
+  public SegmentSamples(String name) {
+    mName = name;
+  }
 
-		try {
-			// Skip header
-			reader.readLine();
-			
-			while ((line = reader.readLine()) != null) {
-				if (Io.isEmptyLine(line)) {
-					continue;
-				}
+  /**
+   * Adds the.
+   *
+   * @param segments
+   *          the segments
+   */
+  public void add(ChrSegments segments) {
+    mSegments.put(segments.getName(), segments);
+  }
 
-				tokens = TextUtils.tabSplit(line);
-				
-				String name = tokens.get(0);
-				Chromosome chr = ChromosomeService.getInstance().guess(file, tokens.get(1));
-				int start = Integer.parseInt(tokens.get(2));
-				int end = Integer.parseInt(tokens.get(3));
-				int markers = Integer.parseInt(tokens.get(4));
-				double mean = Double.parseDouble(tokens.get(5));
-				
-				if (!samples.mSegments.containsKey(name)) {
-					samples.mSegments.put(name, new ChrSegments(name));
-				}
-				
-				if (!samples.mSegments.get(name).contains(chr)) {
-					samples.mSegments.get(name).add(chr, new Segments());
-				}
-				
-				samples.mSegments.get(name).get(chr).add(new Segment(chr, start, end, markers, mean));
-			}
-		} finally {
-			reader.close();
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return mName;
+  }
 
-		return samples;
-	}
+  /**
+   * Size.
+   *
+   * @return the int
+   */
+  public int size() {
+    return mSegments.size();
+  }
 
-	
+  /**
+   * Gets the.
+   *
+   * @param name
+   *          the name
+   * @return the chr segments
+   */
+  public ChrSegments get(String name) {
+    return mSegments.get(name);
+  }
 
-	
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Iterable#iterator()
+   */
+  @Override
+  public Iterator<String> iterator() {
+    return mSegments.keySet().iterator();
+  }
+
+  /**
+   * Parses the.
+   *
+   * @param file
+   *          the file
+   * @return the segment samples
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public static SegmentSamples parse(Path file) throws IOException {
+    BufferedReader reader = FileUtils.newBufferedReader(file);
+
+    String line;
+    List<String> tokens;
+
+    SegmentSamples samples = new SegmentSamples(PathUtils.getNameNoExt(file));
+
+    try {
+      // Skip header
+      reader.readLine();
+
+      while ((line = reader.readLine()) != null) {
+        if (Io.isEmptyLine(line)) {
+          continue;
+        }
+
+        tokens = TextUtils.tabSplit(line);
+
+        String name = tokens.get(0);
+        Chromosome chr = ChromosomeService.getInstance().guess(file, tokens.get(1));
+        int start = Integer.parseInt(tokens.get(2));
+        int end = Integer.parseInt(tokens.get(3));
+        int markers = Integer.parseInt(tokens.get(4));
+        double mean = Double.parseDouble(tokens.get(5));
+
+        if (!samples.mSegments.containsKey(name)) {
+          samples.mSegments.put(name, new ChrSegments(name));
+        }
+
+        if (!samples.mSegments.get(name).contains(chr)) {
+          samples.mSegments.get(name).add(chr, new Segments());
+        }
+
+        samples.mSegments.get(name).get(chr).add(new Segment(chr, start, end, markers, mean));
+      }
+    } finally {
+      reader.close();
+    }
+
+    return samples;
+  }
+
 }

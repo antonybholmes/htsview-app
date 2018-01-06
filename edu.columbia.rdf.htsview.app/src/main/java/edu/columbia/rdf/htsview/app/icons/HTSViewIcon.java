@@ -23,11 +23,11 @@ import org.jebtk.modern.graphics.icons.ModernApplicationIcon;
  * The Class HTSViewIcon.
  */
 public class HTSViewIcon extends ModernApplicationIcon {
-	
-	/**
-	 * Instantiates a new HTS view icon.
-	 */
-	public HTSViewIcon() {
-		super("H", "s", ColorTheme.BLUE);
-	}
+
+  /**
+   * Instantiates a new HTS view icon.
+   */
+  public HTSViewIcon() {
+    super("H", "s", ColorTheme.BLUE);
+  }
 }

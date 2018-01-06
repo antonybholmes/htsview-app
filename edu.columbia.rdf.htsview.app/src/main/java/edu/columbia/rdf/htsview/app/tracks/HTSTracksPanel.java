@@ -65,358 +65,356 @@ import edu.columbia.rdf.htsview.app.tracks.peaks.PeaksPlotTrack;
  * The Class HTSTracksPanel.
  */
 public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m open button. */
-	private ModernButton mOpenButton = 
-			new ModernButton(UIService.getInstance().loadIcon(OpenTrack16VectorIcon.class, 16));
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m delete button. */
-	private ModernButton mDeleteButton = 
-			new RibbonButton(UIService.getInstance().loadIcon("trash_bw", 16));
+  /** The m open button. */
+  private ModernButton mOpenButton = new ModernButton(
+      UIService.getInstance().loadIcon(OpenTrack16VectorIcon.class, 16));
 
-	/** The m tracks button. */
-	private ModernButton mTracksButton = 
-			new RibbonButton(UIService.getInstance().loadIcon("tracks", 16));
-
-	/** The m edit button. */
-	private ModernButton mEditButton = 
-			new RibbonButton(UIService.getInstance().loadIcon("edit_bw", 16));
-
-	/** The m clear button. */
-	private ModernButton mClearButton = 
-			new RibbonButton(UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
-
-	/** The m samples button. */
-	private ModernButton mSamplesButton = 
-			new RibbonButton("Samples", UIService.getInstance().loadIcon("samples", 16));
-
-
-	/** The m search model. */
-	private SearchModel mSearchModel = new SearchModel();
-
-	//private Map<String, ChromosomeSizes> mChrMap;
-
-
-	/**
-	 * Instantiates a new HTS tracks panel.
-	 *
-	 * @param parent the parent
-	 * @param tree the tree
-	 * @param trackList the track list
-	 */
-	public HTSTracksPanel(ModernRibbonWindow parent,
-			ModernTree<Track> tree, 
-			TrackTree trackList) {
-		super(parent, tree, trackList);
-
-		setup();
-
-		createUi();
-	}
-
-	/**
-	 * Creates the ui.
-	 */
-	private void createUi() {
-		//Box box = VBox.create();
-
-		//HTabToolbar toolbar = new HTabToolbar("Tracks");
-
-		//box.add(toolbar);
-
-		Box box2 = HBox.create();
-
-		if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
-			mSamplesButton.setToolTip("Samples Database", 
-					"Load ChIP-seq samples from database.");
-
-			box2.add(mSamplesButton);
-			box2.add(ModernPanel.createHGap());
-			box2.add(new RibbonSubSectionSeparator());
-			box2.add(ModernPanel.createHGap());
-
-
-		}
-
-		//mOpenButton.setToolTip("Open Samples", 
-		//		"Load additional samples from disk.");
-		//toolbar.add(mOpenButton);
-		//toolbar.add(ModernPanel.createHGap());
-
-		mTracksButton.setToolTip("Annotation Tracks", 
-				"Load additional annotation tracks.");
-		box2.add(mTracksButton);
-		//toolbar.add(ModernPanel.createHGap());
-		mEditButton.setToolTip("Edit Tracks", 
-				"Edit track properties.");
-		box2.add(mEditButton);
-		//toolbar.add(ModernPanel.createHGap());
-		mDeleteButton.setToolTip("Delete", 
-				"Delete selected tracks.");
-		box2.add(mDeleteButton);
-		
-		box2.setBorder(DOUBLE_BORDER);
-
-		//box.add(box2);
-
-		//toolbar.setBorder(BorderService.getInstance().createBottomBorder(DOUBLE_PADDING));
-
-		setHeader(box2);
-		
-		setBorder(BORDER);
-	}
-
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		//mTrackList.addMouseListener(new TrackMouseEvents());
-
-		mSamplesButton.addClickListener(this);
-		mOpenButton.addClickListener(this);
-		mDeleteButton.addClickListener(this);
-		mClearButton.addClickListener(this);
-		mTracksButton.addClickListener(this);
-		mEditButton.addClickListener(this);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mSamplesButton)) {
-			try {
-				loadSamples();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else if (e.getSource().equals(mTracksButton)) {
-			try {
-				loadTracks();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else if (e.getSource().equals(mEditButton)) {
-			editTracks();
-		} else if (e.getSource().equals(mDeleteButton)) {
-			deleteTracks();
-		} else if (e.getSource().equals(mClearButton)) {
-			clearTracks();
-		} else {
-			// do nothing
-		}
-	}
-
-	// Allow user to edit tracks
-
-	/**
-	 * Load samples.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void loadSamples() throws IOException {
-		ChipSeqSamplesDialog dialog = 
-				new ChipSeqSamplesDialog(mParent, mSearchModel);
-
-		dialog.setVisible(true);
-
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-
-		loadSamples(dialog.getSelectedSamples());
-	}
-	
-	/**
-	 * Load samples.
-	 *
-	 * @param samples the samples
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public void loadSamples(Collection<Sample> samples) throws IOException {
-		loadSamples(samples, true);
-	}
-
-	/**
-	 * Load samples.
-	 *
-	 * @param samples the samples
-	 * @param interactive the interactive
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public void loadSamples(Collection<Sample> samples, boolean interactive) throws IOException {
-		if (CollectionUtils.isNullOrEmpty(samples)) {
-			return;
-		}
-
-		SampleAssembly sampleAssembly = 
-				WebAssemblyService.getInstance().getSampleAssembly();
-
-		PeakAssembly peakAssembly = 
-				WebAssemblyService.getInstance().getPeakAssembly();
-
-		for (Sample sample : samples) {
-			//tracks.add(new SamplePlotTrack(sample, mAssembly));
-
-			boolean hasReadSupport = sampleAssembly.hasReadSupport(sample);
-
-			int n = peakAssembly.getJsonPeaks(sample).size();
-
-			// Only show the dialog if either the sample supports having
-			// reads or there are peak lists we can show
-			if (interactive && (hasReadSupport || n > 0)) {
-
-				SampleDialog dialog = new SampleDialog(mParent, 
-						sample, 
-						hasReadSupport, 
-						peakAssembly);
-
-				dialog.setVisible(true);
-
-				if (dialog.getStatus() == ModernDialogStatus.OK) {
-					if (hasReadSupport) {
-						SamplePlotTrack track;
-						if (dialog.getShowSample()) {
-							track = new SamplePlotTrack(sample, sampleAssembly);
-
-							mTrackList.getRoot().addChild(new TrackTreeNode(track));
-						}
-
-						if (dialog.getShowReads()) {
-							track = new ReadsPlotTrack(sample, sampleAssembly);
-
-							mTrackList.getRoot().addChild(new TrackTreeNode(track));
-						}
-					} else {
-						mTrackList.getRoot().addChild(new TreeNode<Track>(sample.getName(), 
-								new SamplePlotTrack(sample, sampleAssembly)));
-					}
-
-					if (peakAssembly != null) {
-						// Display some peaks
-						for (PeakSet peaks : dialog.getShowPeaks()) {
-
-							List<GenomicRegion> locations = 
-									peakAssembly.downloadJsonPeaks(sample, peaks);
-
-							Bed bed = Bed.create(peaks.getName(), locations);
-
-							mTrackList.getRoot().addChild(new TreeNode<Track>(peaks.getName(), 
-									new PeaksPlotTrack(sample.getId(), peaks, bed)));
-						}
-					}
-				}
-			} else {
-				mTrackList.getRoot().addChild(new TreeNode<Track>(sample.getName(), 
-						new SamplePlotTrack(sample, sampleAssembly)));
-			}
-		}
-
-		//mListModel.addValues(tracks);
-	}
-
-	/**
-	 * Browse for file.
-	 *
-	 * @throws Exception the exception
-	 */
-	public void browseForFile() throws Exception {
-		browseForFile(RecentFilesService.getInstance().getPwd());
-	}
-
-	/**
-	 * Browse for file.
-	 *
-	 * @param pwd the pwd
-	 * @throws Exception the exception
-	 */
-	public void browseForFile(Path pwd) throws Exception {
-		openFiles(BioInfDialog.open(mParent).bedAndBedgraph().getFiles(pwd));
-	}
-
-	/**
-	 * Open files.
-	 *
-	 * @param files the files
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public void openFiles(List<Path> files) throws IOException {
-		SampleLoaderService.getInstance().openFiles(mParent, files, mTrackList.getRoot());
-	}
-
-	/**
-	 * Open file.
-	 *
-	 * @param file the file
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public void openFile(Path file) throws IOException {
-		openFiles(CollectionUtils.asList(file));
-	}
-
-
-	/**
-	 * Browse for tracks.
-	 *
-	 * @throws ParseException the parse exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	//public void browseForSamples() throws IOException {
-	//	browseForSamples(RecentFilesService.getInstance().getPwd());
-	//}
-
-	/**
-	 * Browse for tracks.
-	 *
-	 * @param pwd the pwd
-	 * @throws ParseException the parse exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	//public void browseForSamples(Path pwd) throws IOException {
-	//	openSamples(FileDialog.open(mParent).dirs().getFiles(pwd));
-	//}
-
-	/**
-	 * Open tracks.
-	 *
-	 * @param dirs the dirs
-	 * @throws ParseException the parse exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	//public void openSamples(List<Path> dirs) throws IOException {
-	//	for (Path dir : dirs) {
-	//		openSample(dir);
-	//	}
-	//}
-
-	/*
-	public void openSample(Path dir) throws IOException {
-		if (SampleTracks.isBRT2Track(dir)) {
-			openBRT2Sample(dir);
-		} else if (SampleTracks.isBRTTrack(dir)) {
-			openBRTSample(dir);
-		} else if (SampleTracks.isBVTTrack(dir)) {
-			openBVTSample(dir);
-		} else {
-			open16bitSample(dir);
-		}
-	}
-	 */
-
-	/**
-	public void open16bitSample(Path metaFile) throws IOException {
-		Json json = new JsonParser().parse(metaFile);
-
-		Sample sample = SampleTracks.getSampleFromTrack(json);
-
-		openSampleFs(sample, 
-				new SampleAssembly16bit(metaFile, json.getAsInt("Mapped Reads")), 
-				metaFile);
-	}
-	 */
+  /** The m delete button. */
+  private ModernButton mDeleteButton = new RibbonButton(UIService.getInstance().loadIcon("trash_bw", 16));
+
+  /** The m tracks button. */
+  private ModernButton mTracksButton = new RibbonButton(UIService.getInstance().loadIcon("tracks", 16));
+
+  /** The m edit button. */
+  private ModernButton mEditButton = new RibbonButton(UIService.getInstance().loadIcon("edit_bw", 16));
+
+  /** The m clear button. */
+  private ModernButton mClearButton = new RibbonButton(UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
+
+  /** The m samples button. */
+  private ModernButton mSamplesButton = new RibbonButton("Samples", UIService.getInstance().loadIcon("samples", 16));
+
+  /** The m search model. */
+  private SearchModel mSearchModel = new SearchModel();
+
+  // private Map<String, ChromosomeSizes> mChrMap;
+
+  /**
+   * Instantiates a new HTS tracks panel.
+   *
+   * @param parent
+   *          the parent
+   * @param tree
+   *          the tree
+   * @param trackList
+   *          the track list
+   */
+  public HTSTracksPanel(ModernRibbonWindow parent, ModernTree<Track> tree, TrackTree trackList) {
+    super(parent, tree, trackList);
+
+    setup();
+
+    createUi();
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private void createUi() {
+    // Box box = VBox.create();
+
+    // HTabToolbar toolbar = new HTabToolbar("Tracks");
+
+    // box.add(toolbar);
+
+    Box box2 = HBox.create();
+
+    if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
+      mSamplesButton.setToolTip("Samples Database", "Load ChIP-seq samples from database.");
+
+      box2.add(mSamplesButton);
+      box2.add(ModernPanel.createHGap());
+      box2.add(new RibbonSubSectionSeparator());
+      box2.add(ModernPanel.createHGap());
+
+    }
+
+    // mOpenButton.setToolTip("Open Samples",
+    // "Load additional samples from disk.");
+    // toolbar.add(mOpenButton);
+    // toolbar.add(ModernPanel.createHGap());
+
+    mTracksButton.setToolTip("Annotation Tracks", "Load additional annotation tracks.");
+    box2.add(mTracksButton);
+    // toolbar.add(ModernPanel.createHGap());
+    mEditButton.setToolTip("Edit Tracks", "Edit track properties.");
+    box2.add(mEditButton);
+    // toolbar.add(ModernPanel.createHGap());
+    mDeleteButton.setToolTip("Delete", "Delete selected tracks.");
+    box2.add(mDeleteButton);
+
+    box2.setBorder(DOUBLE_BORDER);
+
+    // box.add(box2);
+
+    // toolbar.setBorder(BorderService.getInstance().createBottomBorder(DOUBLE_PADDING));
+
+    setHeader(box2);
+
+    setBorder(BORDER);
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    // mTrackList.addMouseListener(new TrackMouseEvents());
+
+    mSamplesButton.addClickListener(this);
+    mOpenButton.addClickListener(this);
+    mDeleteButton.addClickListener(this);
+    mClearButton.addClickListener(this);
+    mTracksButton.addClickListener(this);
+    mEditButton.addClickListener(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+   * ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mSamplesButton)) {
+      try {
+        loadSamples();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getSource().equals(mTracksButton)) {
+      try {
+        loadTracks();
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getSource().equals(mEditButton)) {
+      editTracks();
+    } else if (e.getSource().equals(mDeleteButton)) {
+      deleteTracks();
+    } else if (e.getSource().equals(mClearButton)) {
+      clearTracks();
+    } else {
+      // do nothing
+    }
+  }
+
+  // Allow user to edit tracks
+
+  /**
+   * Load samples.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private void loadSamples() throws IOException {
+    ChipSeqSamplesDialog dialog = new ChipSeqSamplesDialog(mParent, mSearchModel);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    loadSamples(dialog.getSelectedSamples());
+  }
+
+  /**
+   * Load samples.
+   *
+   * @param samples
+   *          the samples
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public void loadSamples(Collection<Sample> samples) throws IOException {
+    loadSamples(samples, true);
+  }
+
+  /**
+   * Load samples.
+   *
+   * @param samples
+   *          the samples
+   * @param interactive
+   *          the interactive
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public void loadSamples(Collection<Sample> samples, boolean interactive) throws IOException {
+    if (CollectionUtils.isNullOrEmpty(samples)) {
+      return;
+    }
+
+    SampleAssembly sampleAssembly = WebAssemblyService.getInstance().getSampleAssembly();
+
+    PeakAssembly peakAssembly = WebAssemblyService.getInstance().getPeakAssembly();
+
+    for (Sample sample : samples) {
+      // tracks.add(new SamplePlotTrack(sample, mAssembly));
+
+      boolean hasReadSupport = sampleAssembly.hasReadSupport(sample);
+
+      int n = peakAssembly.getJsonPeaks(sample).size();
+
+      // Only show the dialog if either the sample supports having
+      // reads or there are peak lists we can show
+      if (interactive && (hasReadSupport || n > 0)) {
+
+        SampleDialog dialog = new SampleDialog(mParent, sample, hasReadSupport, peakAssembly);
+
+        dialog.setVisible(true);
+
+        if (dialog.getStatus() == ModernDialogStatus.OK) {
+          if (hasReadSupport) {
+            SamplePlotTrack track;
+            if (dialog.getShowSample()) {
+              track = new SamplePlotTrack(sample, sampleAssembly);
+
+              mTrackList.getRoot().addChild(new TrackTreeNode(track));
+            }
+
+            if (dialog.getShowReads()) {
+              track = new ReadsPlotTrack(sample, sampleAssembly);
+
+              mTrackList.getRoot().addChild(new TrackTreeNode(track));
+            }
+          } else {
+            mTrackList.getRoot()
+                .addChild(new TreeNode<Track>(sample.getName(), new SamplePlotTrack(sample, sampleAssembly)));
+          }
+
+          if (peakAssembly != null) {
+            // Display some peaks
+            for (PeakSet peaks : dialog.getShowPeaks()) {
+
+              List<GenomicRegion> locations = peakAssembly.downloadJsonPeaks(sample, peaks);
+
+              Bed bed = Bed.create(peaks.getName(), locations);
+
+              mTrackList.getRoot()
+                  .addChild(new TreeNode<Track>(peaks.getName(), new PeaksPlotTrack(sample.getId(), peaks, bed)));
+            }
+          }
+        }
+      } else {
+        mTrackList.getRoot()
+            .addChild(new TreeNode<Track>(sample.getName(), new SamplePlotTrack(sample, sampleAssembly)));
+      }
+    }
+
+    // mListModel.addValues(tracks);
+  }
+
+  /**
+   * Browse for file.
+   *
+   * @throws Exception
+   *           the exception
+   */
+  public void browseForFile() throws Exception {
+    browseForFile(RecentFilesService.getInstance().getPwd());
+  }
+
+  /**
+   * Browse for file.
+   *
+   * @param pwd
+   *          the pwd
+   * @throws Exception
+   *           the exception
+   */
+  public void browseForFile(Path pwd) throws Exception {
+    openFiles(BioInfDialog.open(mParent).bedAndBedgraph().getFiles(pwd));
+  }
+
+  /**
+   * Open files.
+   *
+   * @param files
+   *          the files
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public void openFiles(List<Path> files) throws IOException {
+    SampleLoaderService.getInstance().openFiles(mParent, files, mTrackList.getRoot());
+  }
+
+  /**
+   * Open file.
+   *
+   * @param file
+   *          the file
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public void openFile(Path file) throws IOException {
+    openFiles(CollectionUtils.asList(file));
+  }
+
+  /**
+   * Browse for tracks.
+   *
+   * @throws ParseException
+   *           the parse exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  // public void browseForSamples() throws IOException {
+  // browseForSamples(RecentFilesService.getInstance().getPwd());
+  // }
+
+  /**
+   * Browse for tracks.
+   *
+   * @param pwd
+   *          the pwd
+   * @throws ParseException
+   *           the parse exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  // public void browseForSamples(Path pwd) throws IOException {
+  // openSamples(FileDialog.open(mParent).dirs().getFiles(pwd));
+  // }
+
+  /**
+   * Open tracks.
+   *
+   * @param dirs
+   *          the dirs
+   * @throws ParseException
+   *           the parse exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  // public void openSamples(List<Path> dirs) throws IOException {
+  // for (Path dir : dirs) {
+  // openSample(dir);
+  // }
+  // }
+
+  /*
+   * public void openSample(Path dir) throws IOException { if
+   * (SampleTracks.isBRT2Track(dir)) { openBRT2Sample(dir); } else if
+   * (SampleTracks.isBRTTrack(dir)) { openBRTSample(dir); } else if
+   * (SampleTracks.isBVTTrack(dir)) { openBVTSample(dir); } else {
+   * open16bitSample(dir); } }
+   */
+
+  /**
+   * public void open16bitSample(Path metaFile) throws IOException { Json json =
+   * new JsonParser().parse(metaFile);
+   * 
+   * Sample sample = SampleTracks.getSampleFromTrack(json);
+   * 
+   * openSampleFs(sample, new SampleAssembly16bit(metaFile, json.getAsInt("Mapped
+   * Reads")), metaFile); }
+   */
 
 }

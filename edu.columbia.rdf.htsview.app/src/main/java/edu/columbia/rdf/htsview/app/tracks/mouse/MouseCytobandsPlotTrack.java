@@ -35,67 +35,67 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
 
-	/**
-	 * Instantiates a new mouse cytobands plot track.
-	 */
-	public MouseCytobandsPlotTrack() {
-		super("Mouse Cytobands");
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
-	 */
-	@Override
-	public Color getFillColor() {
-		return Color.GRAY;
-	}
+  /**
+   * Instantiates a new mouse cytobands plot track.
+   */
+  public MouseCytobandsPlotTrack() {
+    super("Mouse Cytobands");
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) throws IOException {
-		
-		//
-		// Display some genes
-		//
-		
-		
-		mSubFigure = CytobandsSubFigure.create("Cytobands mm10", 
-				ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.MM10), 
-				CytobandsService.getInstance().getCytobands(GenomeAssembly.MM10), 
-				titlePosition);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
+   */
+  @Override
+  public Color getFillColor() {
+    return Color.GRAY;
+  }
 
-		switch(titlePosition.getPosition()) {
-		case RIGHT:
-		case COMPACT_RIGHT:
-			mSubFigure.currentAxes().setMargins(SMALL_MARGIN, 
-					MARGINS.getLeft(), 
-					SMALL_MARGIN, 
-					HUGE_MARGIN);
-			break;
-		default:
-			mSubFigure.currentAxes().setMargins(MARGINS);
-		}
-		
-		return mSubFigure;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, int, int, int)
-	 */
-	@Override
-	public TrackSubFigure updateGraph(GenomicRegion displayRegion, 
-			int resolution,
-			int width,
-			int height,
-			int margin) throws IOException {
-		
-		//mSubFigure.setForwardCanvasEventsEnabled(false);
-		mSubFigure.update(displayRegion, resolution, width, height, margin);
-		//mSubFigure.setForwardCanvasEventsEnabled(true);
-		
-		return mSubFigure;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+
+    //
+    // Display some genes
+    //
+
+    mSubFigure = CytobandsSubFigure.create("Cytobands mm10",
+        ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.MM10),
+        CytobandsService.getInstance().getCytobands(GenomeAssembly.MM10), titlePosition);
+
+    switch (titlePosition.getPosition()) {
+    case RIGHT:
+    case COMPACT_RIGHT:
+      mSubFigure.currentAxes().setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, HUGE_MARGIN);
+      break;
+    default:
+      mSubFigure.currentAxes().setMargins(MARGINS);
+    }
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
+      throws IOException {
+
+    // mSubFigure.setForwardCanvasEventsEnabled(false);
+    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    // mSubFigure.setForwardCanvasEventsEnabled(true);
+
+    return mSubFigure;
+  }
 }

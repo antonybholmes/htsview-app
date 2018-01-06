@@ -38,131 +38,126 @@ import org.jebtk.modern.widget.ModernWidget;
  */
 public class SegmentsPlotLayer extends AxesLayer {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	//private static final int BAR_HEIGHT = 20;
+  // private static final int BAR_HEIGHT = 20;
 
-	/** The m bed graph group. */
-	protected BedGraphGroupModel mBedGraphGroup;
+  /** The m bed graph group. */
+  protected BedGraphGroupModel mBedGraphGroup;
 
-	/** The m regions. */
-	private IterMap<String, List<Segment>> mRegions;
+  /** The m regions. */
+  private IterMap<String, List<Segment>> mRegions;
 
-	/** The m color map. */
-	private ColorMap mColorMap;
+  /** The m color map. */
+  private ColorMap mColorMap;
 
+  /**
+   * Instantiates a new segments plot layer.
+   *
+   * @param colorMap
+   *          the color map
+   */
+  public SegmentsPlotLayer(ColorMap colorMap) {
+    mColorMap = colorMap; // ColorMap.createBlueWhiteRedMap();
+  }
 
-	/**
-	 * Instantiates a new segments plot layer.
-	 *
-	 * @param colorMap the color map
-	 */
-	public SegmentsPlotLayer(ColorMap colorMap) {
-		mColorMap = colorMap; //ColorMap.createBlueWhiteRedMap();
-	}
+  /**
+   * Update.
+   *
+   * @param regions
+   *          the regions
+   * @param colorMap
+   *          the color map
+   */
+  public void update(IterMap<String, List<Segment>> regions, ColorMap colorMap) {
+    mRegions = regions;
 
-	/**
-	 * Update.
-	 *
-	 * @param regions the regions
-	 * @param colorMap the color map
-	 */
-	public void update(IterMap<String, List<Segment>> regions, 
-			ColorMap colorMap) {
-		mRegions = regions;
-		
-		setColorMap(colorMap);
-	}
-	
-	/**
-	 * Sets the color map.
-	 *
-	 * @param colorMap the new color map
-	 */
-	public void setColorMap(ColorMap colorMap) {
-		mColorMap = colorMap;
-	}
+    setColorMap(colorMap);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void drawPlot(Graphics2D g2, 
-			DrawingContext context, 
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
+  /**
+   * Sets the color map.
+   *
+   * @param colorMap
+   *          the new color map
+   */
+  public void setColorMap(ColorMap colorMap) {
+    mColorMap = colorMap;
+  }
 
-		if (CollectionUtils.isNullOrEmpty(mRegions)) {
-			return;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void drawPlot(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
 
-		int x1;
-		int x2;
-		
-		int textX = -20;
-		int textY;
+    if (CollectionUtils.isNullOrEmpty(mRegions)) {
+      return;
+    }
 
-		//int h = BAR_HEIGHT; //space.getPlotSize().getH();
-		int w;
-		int y = 0;
-		
-		g2.setColor(Color.LIGHT_GRAY);
-		g2.fillRect(0, 
-				y, 
-				axes.toPlotX1(axes.getX1Axis().getMax()), 
-				BedPlotTrack.BAR_HEIGHT * mRegions.size());
-		
+    int x1;
+    int x2;
 
-		for (String name : mRegions) {
-			
-			g2.setColor(Color.BLACK);
-			textY = y + ModernWidget.getTextYPosCenter(g2, BedPlotTrack.BAR_HEIGHT);
-			g2.drawString(name, textX - g2.getFontMetrics().stringWidth(name), textY);
-			
-			
-			List<Segment> segments = mRegions.get(name);
+    int textX = -20;
+    int textY;
 
-			for (Segment segment : segments) {
+    // int h = BAR_HEIGHT; //space.getPlotSize().getH();
+    int w;
+    int y = 0;
 
-				x1 = axes.toPlotX1(segment.getStart());
-				x2 = axes.toPlotX1(segment.getEnd());
+    g2.setColor(Color.LIGHT_GRAY);
+    g2.fillRect(0, y, axes.toPlotX1(axes.getX1Axis().getMax()), BedPlotTrack.BAR_HEIGHT * mRegions.size());
 
-				
-				//figure.get
-				
-				// Lets use what IGV does
-				double v = Mathematics.bound(segment.getMean(), -1.5, 1.5);
-				
-				// scale between 0 and 1
-				v = (v + 1.5) / 3;
-				
-				g2.setColor(mColorMap.getColor(v));
-				
-				//if (segment.getMean() > 0) {
-				//	g2.setColor(Color.RED);
-				//} else {
-				//	g2.setColor(Color.BLUE);
-				//}
+    for (String name : mRegions) {
 
+      g2.setColor(Color.BLACK);
+      textY = y + ModernWidget.getTextYPosCenter(g2, BedPlotTrack.BAR_HEIGHT);
+      g2.drawString(name, textX - g2.getFontMetrics().stringWidth(name), textY);
 
-				// Default mode when there are no blocks is to draw a block
-				// spanning the whole region
+      List<Segment> segments = mRegions.get(name);
 
-				// Must be a minimum of 1 pixel wide
-				w = Math.max(1, x2 - x1 + 1);
+      for (Segment segment : segments) {
 
-				if (w > 1) {
-					g2.fillRect(x1, y, w, SegPlotTrack.BAR_HEIGHT);
-				} else {
-					// If the bar is one pixel wide, draw it as a line
-					// rather than rectangle.
-					g2.drawLine(x1, y, x1, y + SegPlotTrack.BAR_HEIGHT);
-				}
-			}
-			
-			y += SegPlotTrack.BAR_HEIGHT;
-		}
-	}
+        x1 = axes.toPlotX1(segment.getStart());
+        x2 = axes.toPlotX1(segment.getEnd());
+
+        // figure.get
+
+        // Lets use what IGV does
+        double v = Mathematics.bound(segment.getMean(), -1.5, 1.5);
+
+        // scale between 0 and 1
+        v = (v + 1.5) / 3;
+
+        g2.setColor(mColorMap.getColor(v));
+
+        // if (segment.getMean() > 0) {
+        // g2.setColor(Color.RED);
+        // } else {
+        // g2.setColor(Color.BLUE);
+        // }
+
+        // Default mode when there are no blocks is to draw a block
+        // spanning the whole region
+
+        // Must be a minimum of 1 pixel wide
+        w = Math.max(1, x2 - x1 + 1);
+
+        if (w > 1) {
+          g2.fillRect(x1, y, w, SegPlotTrack.BAR_HEIGHT);
+        } else {
+          // If the bar is one pixel wide, draw it as a line
+          // rather than rectangle.
+          g2.drawLine(x1, y, x1, y + SegPlotTrack.BAR_HEIGHT);
+        }
+      }
+
+      y += SegPlotTrack.BAR_HEIGHT;
+    }
+  }
 }

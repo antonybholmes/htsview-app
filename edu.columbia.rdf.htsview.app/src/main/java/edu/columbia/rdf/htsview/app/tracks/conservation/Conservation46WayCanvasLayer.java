@@ -22,16 +22,17 @@ import org.jebtk.bioinformatics.conservation.ConservationAssembly;
  * The Class Conservation46WayCanvasLayer.
  */
 public class Conservation46WayCanvasLayer extends ConservationCanvasLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new conservation 46 way canvas layer.
-	 *
-	 * @param assembly the assembly
-	 */
-	public Conservation46WayCanvasLayer(ConservationAssembly assembly) {
-		super(Conservation46WayPlotTrack.TITLE, assembly, 100);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new conservation 46 way canvas layer.
+   *
+   * @param assembly
+   *          the assembly
+   */
+  public Conservation46WayCanvasLayer(ConservationAssembly assembly) {
+    super(Conservation46WayPlotTrack.TITLE, assembly, 100);
+  }
 }

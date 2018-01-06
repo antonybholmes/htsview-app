@@ -26,34 +26,37 @@ import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
  */
 public abstract class DnaPlotTrack extends AnnotationPlotTrack {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/** The m genome assembly. */
-	protected GenomeAssembly mGenomeAssembly;
-	
-	/** The Constant MAX_DISPLAY_BASES. */
-	public static final int MAX_DISPLAY_BASES = 100;
-	
-	public static final int MAX_DISPLAY_COLOR_BASES = 1000;
+  /** The m genome assembly. */
+  protected GenomeAssembly mGenomeAssembly;
 
+  /** The Constant MAX_DISPLAY_BASES. */
+  public static final int MAX_DISPLAY_BASES = 100;
 
-	/**
-	 * Instantiates a new dna plot track.
-	 *
-	 * @param name the name
-	 * @param genomeAssembly the genome assembly
-	 */
-	public DnaPlotTrack(String name, GenomeAssembly genomeAssembly) {
-		super(name);
-		
-		mGenomeAssembly = genomeAssembly;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
-	 */
-	@Override
-	public Color getFillColor() {
-		return Color.BLACK;
-	}
+  public static final int MAX_DISPLAY_COLOR_BASES = 1000;
+
+  /**
+   * Instantiates a new dna plot track.
+   *
+   * @param name
+   *          the name
+   * @param genomeAssembly
+   *          the genome assembly
+   */
+  public DnaPlotTrack(String name, GenomeAssembly genomeAssembly) {
+    super(name);
+
+    mGenomeAssembly = genomeAssembly;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
+   */
+  @Override
+  public Color getFillColor() {
+    return Color.BLACK;
+  }
 }

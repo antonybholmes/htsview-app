@@ -24,44 +24,49 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
  */
 public class Segment extends GenomicRegion {
 
-	/** The m markers. */
-	private int mMarkers;
-	
-	/** The m mean. */
-	private double mMean;
+  /** The m markers. */
+  private int mMarkers;
 
-	/**
-	 * Instantiates a new segment.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param markers the markers
-	 * @param mean the mean
-	 */
-	public Segment(Chromosome chr, int start, int end, int markers, double mean) {
-		super(chr, start, end);
-		
-		mMarkers = markers;
-		mMean = mean;
-	}
-	
-	/**
-	 * Gets the markers.
-	 *
-	 * @return the markers
-	 */
-	public int getMarkers() {
-		return mMarkers;
-	}
+  /** The m mean. */
+  private double mMean;
 
-	/**
-	 * Gets the mean.
-	 *
-	 * @return the mean
-	 */
-	public double getMean() {
-		return mMean;
-	}
+  /**
+   * Instantiates a new segment.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param markers
+   *          the markers
+   * @param mean
+   *          the mean
+   */
+  public Segment(Chromosome chr, int start, int end, int markers, double mean) {
+    super(chr, start, end);
+
+    mMarkers = markers;
+    mMean = mean;
+  }
+
+  /**
+   * Gets the markers.
+   *
+   * @return the markers
+   */
+  public int getMarkers() {
+    return mMarkers;
+  }
+
+  /**
+   * Gets the mean.
+   *
+   * @return the mean
+   */
+  public double getMean() {
+    return mMean;
+  }
 
 }

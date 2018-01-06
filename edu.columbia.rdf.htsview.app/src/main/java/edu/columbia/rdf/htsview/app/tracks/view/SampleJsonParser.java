@@ -39,117 +39,117 @@ import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
  */
 public class SampleJsonParser extends TrackJsonParser {
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.window.ModernWindow, java.lang.String, int, org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public boolean parse(ModernWindow window,
-			final String name,
-			int id,
-			ModernTree<Track> annotationTree,
-			final Json trackJson,
-			TreeNode<Track> rootNode) throws IOException {
-		Repository store = 
-				RepositoryService.getInstance().getCurrentRepository();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
+   * window.ModernWindow, java.lang.String, int,
+   * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
+      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+    Repository store = RepositoryService.getInstance().getCurrentRepository();
 
-		Sample sample = null;
+    Sample sample = null;
 
-		try {
-			sample = store.getSample(id);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    try {
+      sample = store.getSample(id);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-		if (sample == null) {
-			try {
-				sample = store.getSample(name);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+    if (sample == null) {
+      try {
+        sample = store.getSample(name);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
 
-		boolean validTrack = false;
-		
-		if (sample != null) {
-			Track track = null;
+    boolean validTrack = false;
 
-			Color lineColor = null;
+    if (sample != null) {
+      Track track = null;
 
-			if (trackJson.containsKey("line-color")) {
-				lineColor = trackJson.getAsColor("line-color");
-			} else if (trackJson.containsKey("color")) {
-				lineColor = trackJson.getAsColor("color");
-			} else {
-				lineColor = Color.GRAY;
-			}
+      Color lineColor = null;
 
-			Color fillColor = null;
+      if (trackJson.containsKey("line-color")) {
+        lineColor = trackJson.getAsColor("line-color");
+      } else if (trackJson.containsKey("color")) {
+        lineColor = trackJson.getAsColor("color");
+      } else {
+        lineColor = Color.GRAY;
+      }
 
-			if (trackJson.containsKey("fill-color")) {
-				fillColor = trackJson.getAsColor("fill-color");
-			} else {
-				fillColor = Color.LIGHT_GRAY;
-			}
+      Color fillColor = null;
 
+      if (trackJson.containsKey("fill-color")) {
+        fillColor = trackJson.getAsColor("fill-color");
+      } else {
+        fillColor = Color.LIGHT_GRAY;
+      }
 
-			int height = -1;
+      int height = -1;
 
-			if (trackJson.containsKey("height-px")) {
-				height = trackJson.getAsInt("height-px");
-			} else if (trackJson.containsKey("height")) {
-				height = trackJson.getAsInt("height");
-			} else {
-				height = GraphPlotTrack.PLOT_SIZE.height;
-			}
+      if (trackJson.containsKey("height-px")) {
+        height = trackJson.getAsInt("height-px");
+      } else if (trackJson.containsKey("height")) {
+        height = trackJson.getAsInt("height");
+      } else {
+        height = GraphPlotTrack.PLOT_SIZE.height;
+      }
 
-			System.err.println("sample " + name);
+      System.err.println("sample " + name);
 
-			track = new SamplePlotTrack(name,
-					sample, 
-					WebAssemblyService.getInstance().getSampleAssembly(),
-					lineColor,
-					fillColor,
-					height);
+      track = new SamplePlotTrack(name, sample, WebAssemblyService.getInstance().getSampleAssembly(), lineColor,
+          fillColor, height);
 
-			if (trackJson.containsKey("auto-y")) {
-				track.setAutoY(trackJson.getAsBool("auto-y"));
-			}
+      if (trackJson.containsKey("auto-y")) {
+        track.setAutoY(trackJson.getAsBool("auto-y"));
+      }
 
-			if (trackJson.containsKey("common-y")) {
-				track.setCommonY(trackJson.getAsBool("common-y"));
-			}
+      if (trackJson.containsKey("common-y")) {
+        track.setCommonY(trackJson.getAsBool("common-y"));
+      }
 
-			if (trackJson.containsKey("normalize-y")) {
-				track.setNormalizeY(trackJson.getAsBool("normalize-y"));
-			}
+      if (trackJson.containsKey("normalize-y")) {
+        track.setNormalizeY(trackJson.getAsBool("normalize-y"));
+      }
 
-			if (trackJson.containsKey("y-max")) {
-				track.setYMax(trackJson.getAsDouble("y-max"));
-			}
+      if (trackJson.containsKey("y-max")) {
+        track.setYMax(trackJson.getAsDouble("y-max"));
+      }
 
-			TrackTreeNode child = new TrackTreeNode(track);
+      TrackTreeNode child = new TrackTreeNode(track);
 
-			rootNode.addChild(child);
+      rootNode.addChild(child);
 
-			validTrack = true;
-		}
-		
-		return validTrack;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Sample";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
-	 */
-	@Override
-	public String getType() {
-		return "sample";
-	}
+      validTrack = true;
+    }
+
+    return validTrack;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Sample";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#getType()
+   */
+  @Override
+  public String getType() {
+    return "sample";
+  }
 }

@@ -21,10 +21,10 @@ package edu.columbia.rdf.htsview.app.icons;
  */
 public class Resolution100Icon extends ResolutionIcon {
 
-	/**
-	 * Instantiates a new resolution 100 icon.
-	 */
-	public Resolution100Icon() {
-		super("100");
-	}
+  /**
+   * Instantiates a new resolution 100 icon.
+   */
+  public Resolution100Icon() {
+    super("100");
+  }
 }

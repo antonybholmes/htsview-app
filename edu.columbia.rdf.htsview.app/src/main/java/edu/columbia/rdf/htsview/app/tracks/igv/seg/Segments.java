@@ -28,60 +28,63 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
  */
 public class Segments implements Iterable<Segment> {
 
-	/** The m segments. */
-	private List<Segment> mSegments = new ArrayList<Segment>();
-	
-	/** The m updated. */
-	//private String mName;
-	private boolean mUpdated = false;
-	
-	/** The m search. */
-	private FixedGapSearch<Segment> mSearch;
-	//private GapSearch<Segment> mSearch;
+  /** The m segments. */
+  private List<Segment> mSegments = new ArrayList<Segment>();
 
+  /** The m updated. */
+  // private String mName;
+  private boolean mUpdated = false;
 
-	/**
-	 * Adds the.
-	 *
-	 * @param segment the segment
-	 */
-	public void add(Segment segment) {
-		mSegments.add(segment);
+  /** The m search. */
+  private FixedGapSearch<Segment> mSearch;
+  // private GapSearch<Segment> mSearch;
 
-		mUpdated = true;
-	}
+  /**
+   * Adds the.
+   *
+   * @param segment
+   *          the segment
+   */
+  public void add(Segment segment) {
+    mSegments.add(segment);
 
-	//@Override
-	//public String getName() {
-	//	return mName;
-	//}
+    mUpdated = true;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Iterable#iterator()
-	 */
-	@Override
-	public Iterator<Segment> iterator() {
-		return mSegments.iterator();
-	}
+  // @Override
+  // public String getName() {
+  // return mName;
+  // }
 
-	/**
-	 * Search for segments in a region.
-	 *
-	 * @param region the region
-	 * @return the list
-	 */
-	public List<Segment> search(GenomicRegion region) {
-		
-		if (mUpdated) {
-			mSearch = new FixedGapSearch<Segment>();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Iterable#iterator()
+   */
+  @Override
+  public Iterator<Segment> iterator() {
+    return mSegments.iterator();
+  }
 
-			for (Segment s : mSegments) {
-				mSearch.add(s, s);
-			}
+  /**
+   * Search for segments in a region.
+   *
+   * @param region
+   *          the region
+   * @return the list
+   */
+  public List<Segment> search(GenomicRegion region) {
 
-			mUpdated = false;
-		}
-		
-		return mSearch.getFeatureSet(region);
-	}
+    if (mUpdated) {
+      mSearch = new FixedGapSearch<Segment>();
+
+      for (Segment s : mSegments) {
+        mSearch.add(s, s);
+      }
+
+      mUpdated = false;
+    }
+
+    return mSearch.getFeatureSet(region);
+  }
 }

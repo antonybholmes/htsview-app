@@ -37,92 +37,93 @@ import edu.columbia.rdf.htsview.app.tracks.dna.DnaPlotTrack;
  * The Class ConservationCanvasLayer.
  */
 public class ConservationCanvasLayer extends AxesClippedLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m display region. */
-	private GenomicRegion mDisplayRegion;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m assembly. */
-	private ConservationAssembly mAssembly;
+  /** The m display region. */
+  private GenomicRegion mDisplayRegion;
 
-	/** The m max. */
-	private double mMax;
-	
-	/** The Constant COLOR_MAP. */
-	private static final ColorMap COLOR_MAP = 
-			ColorMap.createGrayMap();
+  /** The m assembly. */
+  private ConservationAssembly mAssembly;
 
-	/**
-	 * Instantiates a new conservation canvas layer.
-	 *
-	 * @param title the title
-	 * @param assembly the assembly
-	 * @param max the max
-	 */
-	public ConservationCanvasLayer(String title,
-			ConservationAssembly assembly,
-			double max) {
-		mAssembly = assembly;
-		mMax = max;
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 */
-	public void update(GenomicRegion displayRegion) {
-		mDisplayRegion = displayRegion;
-	}
+  /** The m max. */
+  private double mMax;
 
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void plotLayer(Graphics2D g2,
-			DrawingContext context,
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
-		
-		// So that we don't attempt to pull a whole chromosome
-		if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
-			return;
-		}
+  /** The Constant COLOR_MAP. */
+  private static final ColorMap COLOR_MAP = ColorMap.createGrayMap();
 
-		int y = 0;
-		int h = axes.getInternalSize().getH();
+  /**
+   * Instantiates a new conservation canvas layer.
+   *
+   * @param title
+   *          the title
+   * @param assembly
+   *          the assembly
+   * @param max
+   *          the max
+   */
+  public ConservationCanvasLayer(String title, ConservationAssembly assembly, double max) {
+    mAssembly = assembly;
+    mMax = max;
+  }
 
-		try {
-			List<Double> scores = mAssembly.getScores(mDisplayRegion);
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   */
+  public void update(GenomicRegion displayRegion) {
+    mDisplayRegion = displayRegion;
+  }
 
-			int start = mDisplayRegion.getStart();
-			int x1 = 0;
-			int w;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
 
-			double s;
-			
-			g2.setColor(Color.BLACK);
+    // So that we don't attempt to pull a whole chromosome
+    if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
+      return;
+    }
 
-			for (double score : scores)	{
-				
-				s = 100 * score / mMax;
-				
-				g2.setColor(COLOR_MAP.getColorByIndex((int)s));
-				
-				x1 = axes.toPlotX1(start);
-				w = axes.toPlotX1(start + 1) - x1;
-				
-				g2.fillRect(x1, y, w, h);
+    int y = 0;
+    int h = axes.getInternalSize().getH();
 
-				++start;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
+    try {
+      List<Double> scores = mAssembly.getScores(mDisplayRegion);
+
+      int start = mDisplayRegion.getStart();
+      int x1 = 0;
+      int w;
+
+      double s;
+
+      g2.setColor(Color.BLACK);
+
+      for (double score : scores) {
+
+        s = 100 * score / mMax;
+
+        g2.setColor(COLOR_MAP.getColorByIndex((int) s));
+
+        x1 = axes.toPlotX1(start);
+        w = axes.toPlotX1(start + 1) - x1;
+
+        g2.fillRect(x1, y, w, h);
+
+        ++start;
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+  }
 }

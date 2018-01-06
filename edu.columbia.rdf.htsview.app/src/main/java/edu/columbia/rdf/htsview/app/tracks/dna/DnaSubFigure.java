@@ -27,32 +27,22 @@ import org.jebtk.graphplot.figure.PlotStyle;
  * The Class DnaSubFigure.
  */
 public abstract class DnaSubFigure extends FixedSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.FixedSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		
-		super.update(displayRegion, 
-				resolution,
-				yMax,
-				width, 
-				Track.SMALL_TRACK_SIZE.height,
-				margin,
-				lineColor, 
-				fillColor,
-				style);
-	}
+
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.FixedSubFigure#update(org.jebtk.
+   * bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+
+    super.update(displayRegion, resolution, yMax, width, Track.SMALL_TRACK_SIZE.height, margin, lineColor, fillColor,
+        style);
+  }
 }

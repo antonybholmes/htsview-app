@@ -21,27 +21,25 @@ import org.jebtk.core.settings.SettingsService;
 
 import edu.columbia.rdf.htsview.app.tracks.genes.GeneProperties;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class OtherGeneProperties.
  */
 public class OtherGeneProperties extends GeneProperties {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The Constant COLOR. */
-	private static final Color COLOR =
-			SettingsService.getInstance().getAsColor("edb.reads.genes.color");
-	
-	/**
-	 * Instantiates a new other gene properties.
-	 */
-	public OtherGeneProperties() {
-		mLineStyle.setColor(COLOR);
-		mExons.getLineStyle().setColor(COLOR);
-		mExons.setFillColor(COLOR);
-		mFont.setColor(COLOR);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /** The Constant COLOR. */
+  private static final Color COLOR = SettingsService.getInstance().getAsColor("edb.reads.genes.color");
+
+  /**
+   * Instantiates a new other gene properties.
+   */
+  public OtherGeneProperties() {
+    mLineStyle.setColor(COLOR);
+    mExons.getLineStyle().setColor(COLOR);
+    mExons.setFillColor(COLOR);
+    mFont.setColor(COLOR);
+  }
 }

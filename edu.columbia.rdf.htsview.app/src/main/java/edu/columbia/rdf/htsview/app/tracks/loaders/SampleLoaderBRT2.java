@@ -31,50 +31,51 @@ import edu.columbia.rdf.edb.Sample;
  * The Class SampleLoaderBRT2.
  */
 public class SampleLoaderBRT2 extends SampleLoaderBin {
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "BRT2";
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
-	 */
-	@Override
-	public String getExt() {
-		return "brt2j";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "BRT2";
+  }
 
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.loaders.SampleLoaderBin#openSample(org.abh.common.ui.window.ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openSample(ModernWindow parent,
-			Sample sample,
-			Path metaFile,
-			Json json,
-			TreeNode<Track> root) throws IOException {
-		return openSampleFs(sample, 
-				new SampleAssemblyBRT2(metaFile), 
-				metaFile,
-				root);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
+   */
+  @Override
+  public String getExt() {
+    return "brt2j";
+  }
 
-	/* (non-Javadoc)
-	 * @see org.htsview.tracks.loaders.SampleLoaderBin#openReads(org.abh.common.ui.window.ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path, org.abh.common.json.Json, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openReads(ModernWindow parent,
-			Sample sample,
-			Path metaFile,
-			Json json,
-			TreeNode<Track> root) throws IOException {
-		return openReadsFs(sample, 
-				new SampleAssemblyBRT2(metaFile),
-				metaFile,
-				root);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.htsview.tracks.loaders.SampleLoaderBin#openSample(org.abh.common.ui.
+   * window.ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path,
+   * org.abh.common.json.Json, org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openSample(ModernWindow parent, Sample sample, Path metaFile, Json json, TreeNode<Track> root)
+      throws IOException {
+    return openSampleFs(sample, new SampleAssemblyBRT2(metaFile), metaFile, root);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.htsview.tracks.loaders.SampleLoaderBin#openReads(org.abh.common.ui.window
+   * .ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path,
+   * org.abh.common.json.Json, org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openReads(ModernWindow parent, Sample sample, Path metaFile, Json json, TreeNode<Track> root)
+      throws IOException {
+    return openReadsFs(sample, new SampleAssemblyBRT2(metaFile), metaFile, root);
+  }
 }

@@ -24,34 +24,31 @@ import org.jebtk.modern.combobox.ModernComboBox;
  */
 public class ResolutionComboBox extends ModernComboBox {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/*
-	private class ClickEvents implements ModernClickListener {
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		
+  /*
+   * private class ClickEvents implements ModernClickListener {
+   * 
+   * 
+   * 
+   * @Override public void clicked(ModernClickEvent e) { mText1 = e.getMessage();
+   * 
+   * repaint(); }
+   * 
+   * }
+   */
 
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mText1 = e.getMessage();
+  /**
+   * Instantiates a new resolution combo box.
+   */
+  public ResolutionComboBox() {
+    for (int resolution : ResolutionService.getInstance()) {
+      addMenuItem(ResolutionService.getHumanReadable(resolution));
+    }
 
-			repaint();
-		}
-		
-	}
-	*/
-	
-	/**
-	 * Instantiates a new resolution combo box.
-	 */
-	public ResolutionComboBox() {
-		for (int resolution : ResolutionService.getInstance()) {
-			addMenuItem(ResolutionService.getHumanReadable(resolution));
-		}
-		
-		setText("10 bp");
-	}
+    setText("10 bp");
+  }
 }

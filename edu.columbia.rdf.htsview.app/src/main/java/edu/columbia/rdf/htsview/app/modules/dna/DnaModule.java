@@ -40,67 +40,65 @@ import org.slf4j.LoggerFactory;
 import edu.columbia.rdf.htsview.app.MainHtsViewWindow;
 import edu.columbia.rdf.htsview.app.modules.HTSViewModule;
 
-
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class DnaModule extends HTSViewModule implements ModernClickListener  {	
-	private static final Logger LOG = 
-			LoggerFactory.getLogger(DnaModule.class);
+public class DnaModule extends HTSViewModule implements ModernClickListener {
+  private static final Logger LOG = LoggerFactory.getLogger(DnaModule.class);
 
-	/**
-	 * The member convert button.
-	 */
-	private ModernButton mDnaButton = new RibbonLargeButton("DNA", 
-			UIService.getInstance().loadIcon("dna", 24));
+  /**
+   * The member convert button.
+   */
+  private ModernButton mDnaButton = new RibbonLargeButton("DNA", UIService.getInstance().loadIcon("dna", 24));
 
-	/**
-	 * The member window.
-	 */
-	private MainHtsViewWindow mWindow;
+  /**
+   * The member window.
+   */
+  private MainHtsViewWindow mWindow;
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "DNA";
+  }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * matcalc.MainMatCalcWindow)
+   */
+  @Override
+  public void init(MainHtsViewWindow window) {
+    mWindow = window;
 
-	/* (non-Javadoc)
-	 * @see org.abh.lib.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "DNA";
-	}
+    // home
+    mDnaButton.setToolTip(new ModernToolTip("DNA", "Get DNA sequence for region."),
+        mWindow.getRibbon().getToolTipModel());
+    mDnaButton.setClickMessage("DNA");
+    mWindow.getRibbon().getToolbar("Tools").getSection("DNA").add(mDnaButton);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.matcalc.MainMatCalcWindow)
-	 */
-	@Override
-	public void init(MainHtsViewWindow window) {
-		mWindow = window;
+    mDnaButton.addClickListener(this);
+  }
 
-		// home
-		mDnaButton.setToolTip(new ModernToolTip("DNA", 
-				"Get DNA sequence for region."), 
-				mWindow.getRibbon().getToolTipModel());
-		mDnaButton.setClickMessage("DNA");
-		mWindow.getRibbon().getToolbar("Tools").getSection("DNA").add(mDnaButton);
+  @Override
+  public void clicked(ModernClickEvent e) {
+    dna();
+  }
 
-		mDnaButton.addClickListener(this);
-	}
+  private void dna() {
+    DnaTask task = new DnaTask(mWindow, mWindow.getGenomicModel());
 
-	@Override
-	public void clicked(ModernClickEvent e) {
-		dna();
-	}
-
-	private void dna() {
-		DnaTask task = new DnaTask(mWindow, 
-				mWindow.getGenomicModel());
-
-		task.doInBackground();
-		task.done();
-	}
+    task.doInBackground();
+    task.done();
+  }
 }

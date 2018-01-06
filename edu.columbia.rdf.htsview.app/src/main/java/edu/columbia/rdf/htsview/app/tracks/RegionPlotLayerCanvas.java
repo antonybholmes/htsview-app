@@ -32,92 +32,97 @@ import org.jebtk.modern.graphics.DrawingContext;
 /**
  * The Class RegionPlotLayerCanvas.
  *
- * @param <T> the generic type
+ * @param <T>
+ *          the generic type
  */
 public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedLayer {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	//private static final int BAR_HEIGHT = 20;
+  // private static final int BAR_HEIGHT = 20;
 
-	/** The m bed graph group. */
-	protected BedGraphGroupModel mBedGraphGroup;
+  /** The m bed graph group. */
+  protected BedGraphGroupModel mBedGraphGroup;
 
-	/** The m regions. */
-	private List<T> mRegions;
+  /** The m regions. */
+  private List<T> mRegions;
 
-	/** The m color. */
-	private Color mColor;
+  /** The m color. */
+  private Color mColor;
 
-	//private GenomicRegionsModel mGenomicModel;
+  // private GenomicRegionsModel mGenomicModel;
 
-	//private GenomicRegion mDisplayRegion;
+  // private GenomicRegion mDisplayRegion;
 
+  /**
+   * Instantiates a new region plot layer canvas.
+   *
+   * @param color
+   *          the color
+   */
+  public RegionPlotLayerCanvas(Color color) {
+    mColor = color;
+  }
 
-	/**
-	 * Instantiates a new region plot layer canvas.
-	 *
-	 * @param color the color
-	 */
-	public RegionPlotLayerCanvas(Color color) {
-		mColor = color;
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param regions the regions
-	 */
-	public void update(List<T> regions) {
-		mRegions = regions;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void plotLayer(Graphics2D g2,
-			DrawingContext context,
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
-		
-		if (CollectionUtils.isNullOrEmpty(mRegions)) {
-			return;
-		}
-	
-		//int minX = space.toPlotX(space.getGraphProperties().getXAxisProperties().getMin());
-		//int maxX = space.toPlotX(space.getGraphProperties().getXAxisProperties().getMax());
+  /**
+   * Update.
+   *
+   * @param regions
+   *          the regions
+   */
+  public void update(List<T> regions) {
+    mRegions = regions;
+  }
 
-		int x1;
-		int x2;
-		//int px1;
-		//int px2;
-		int y1 = 0;
-		int h = axes.getInternalSize().getH();
-		int w;
-		
-		g2.setColor(mColor);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
 
-	
-		for (GenomicRegion region : mRegions) {
-			//if (!space.getGraphProperties().getXAxisProperties().withinBounds(region.getStart()) &&
-			//		!space.getGraphProperties().getXAxisProperties().withinBounds(region.getEnd())) {
-			//	continue;
-			//}
-			
+    if (CollectionUtils.isNullOrEmpty(mRegions)) {
+      return;
+    }
 
-			x1 = axes.toPlotX1(region.getStart());
-			x2 = axes.toPlotX1(region.getEnd());
-			
-			//px1 = Mathematics.bound(x1, minX, maxX);
-			//px2 = Mathematics.bound(x2, minX, maxX);
+    // int minX =
+    // space.toPlotX(space.getGraphProperties().getXAxisProperties().getMin());
+    // int maxX =
+    // space.toPlotX(space.getGraphProperties().getXAxisProperties().getMax());
 
-			// Every feature must be one pixel wide so it can be seen
-			w = Math.max(1, x2 - x1);
-			
-			g2.fillRect(x1, y1, w, h);
-		}
-	}
+    int x1;
+    int x2;
+    // int px1;
+    // int px2;
+    int y1 = 0;
+    int h = axes.getInternalSize().getH();
+    int w;
+
+    g2.setColor(mColor);
+
+    for (GenomicRegion region : mRegions) {
+      // if
+      // (!space.getGraphProperties().getXAxisProperties().withinBounds(region.getStart())
+      // &&
+      // !space.getGraphProperties().getXAxisProperties().withinBounds(region.getEnd()))
+      // {
+      // continue;
+      // }
+
+      x1 = axes.toPlotX1(region.getStart());
+      x2 = axes.toPlotX1(region.getEnd());
+
+      // px1 = Mathematics.bound(x1, minX, maxX);
+      // px2 = Mathematics.bound(x2, minX, maxX);
+
+      // Every feature must be one pixel wide so it can be seen
+      w = Math.max(1, x2 - x1);
+
+      g2.fillRect(x1, y1, w, h);
+    }
+  }
 }

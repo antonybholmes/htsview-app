@@ -34,82 +34,84 @@ import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
  * The Class AnnotationTracksTreePanel.
  */
 public class AnnotationTracksTreePanel extends ModernWidget {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The Constant NO_TRACKS. */
-	private static final List<Track> NO_TRACKS = 
-			Collections.unmodifiableList(new ArrayList<Track>());
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m tree. */
-	private AnnotationTracksTree mTree;
-	
+  /** The Constant NO_TRACKS. */
+  private static final List<Track> NO_TRACKS = Collections.unmodifiableList(new ArrayList<Track>());
 
-	/**
-	 * Instantiates a new annotation tracks tree panel.
-	 *
-	 * @param tree the tree
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public AnnotationTracksTreePanel(AnnotationTracksTree tree) throws IOException {
-		mTree = tree;
+  /** The m tree. */
+  private AnnotationTracksTree mTree;
 
-		createUi();
-	}
+  /**
+   * Instantiates a new annotation tracks tree panel.
+   *
+   * @param tree
+   *          the tree
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public AnnotationTracksTreePanel(AnnotationTracksTree tree) throws IOException {
+    mTree = tree;
 
-	/**
-	 * Creates the ui.
-	 */
-	public void createUi() {
-		ModernScrollPane scrollPane = new ModernScrollPane(mTree);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
+    createUi();
+  }
 
-		add(scrollPane, BorderLayout.CENTER);
-	}
+  /**
+   * Creates the ui.
+   */
+  public void createUi() {
+    ModernScrollPane scrollPane = new ModernScrollPane(mTree);
+    scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
 
-	/**
-	 * Sets the selected.
-	 *
-	 * @param i the new selected
-	 */
-	public void setSelected(int i) {
-		mTree.selectNode(i);
-	}
+    add(scrollPane, BorderLayout.CENTER);
+  }
 
-	/**
-	 * Gets the selected tracks.
-	 *
-	 * @return the selected tracks
-	 */
-	public List<Track> getSelectedTracks() {
-		if (mTree.getSelectedNodes().size() == 0) {
-			return NO_TRACKS; //new ArrayList<ExperimentSearchResult>();
-		}
+  /**
+   * Sets the selected.
+   *
+   * @param i
+   *          the new selected
+   */
+  public void setSelected(int i) {
+    mTree.selectNode(i);
+  }
 
-		List<Track> tracks = new ArrayList<Track>();
+  /**
+   * Gets the selected tracks.
+   *
+   * @return the selected tracks
+   */
+  public List<Track> getSelectedTracks() {
+    if (mTree.getSelectedNodes().size() == 0) {
+      return NO_TRACKS; // new ArrayList<ExperimentSearchResult>();
+    }
 
-		for (TreeNode<Track> node : mTree.getSelectedNodes()) {
-			selectedTracks(node, tracks);
-		}
+    List<Track> tracks = new ArrayList<Track>();
 
-		return tracks;
-	}
+    for (TreeNode<Track> node : mTree.getSelectedNodes()) {
+      selectedTracks(node, tracks);
+    }
 
-	/**
-	 * Recursively examine a node and its children to find those with experiments.
-	 *
-	 * @param node the node
-	 * @param tracks the tracks
-	 */
-	private void selectedTracks(TreeNode<Track> node, 
-			List<Track> tracks) {
-		if (node.getValue() != null) {
-			tracks.add(node.getValue());
-		}
+    return tracks;
+  }
 
-		for (TreeNode<Track> child : node) {
-			selectedTracks(child, tracks);
-		}
-	}
+  /**
+   * Recursively examine a node and its children to find those with experiments.
+   *
+   * @param node
+   *          the node
+   * @param tracks
+   *          the tracks
+   */
+  private void selectedTracks(TreeNode<Track> node, List<Track> tracks) {
+    if (node.getValue() != null) {
+      tracks.add(node.getValue());
+    }
+
+    for (TreeNode<Track> child : node) {
+      selectedTracks(child, tracks);
+    }
+  }
 }

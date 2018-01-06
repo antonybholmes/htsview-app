@@ -34,100 +34,101 @@ import org.jebtk.modern.graphics.DrawingContext;
  * The Class DnaRepeatMaskCanvasLayer.
  */
 public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m display region. */
-	private GenomicRegion mDisplayRegion;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m assembly. */
-	private GenomeAssembly mAssembly;
+  /** The m display region. */
+  private GenomicRegion mDisplayRegion;
 
-	/** The m genome. */
-	private String mGenome;
+  /** The m assembly. */
+  private GenomeAssembly mAssembly;
 
-	/**
-	 * Instantiates a new dna repeat mask canvas layer.
-	 *
-	 * @param genome the genome
-	 * @param assembly the assembly
-	 */
-	public DnaRepeatMaskCanvasLayer(String genome, GenomeAssembly assembly) {
-		mGenome = genome;
-		mAssembly = assembly;
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 */
-	public void update(GenomicRegion displayRegion) {
-		mDisplayRegion = displayRegion;
-	}
+  /** The m genome. */
+  private String mGenome;
 
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void plotLayer(Graphics2D g2,
-			DrawingContext context,
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
-		
-		// So that we don't attempt to pull a whole chromosome
-		if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
-			return;
-		}
+  /**
+   * Instantiates a new dna repeat mask canvas layer.
+   *
+   * @param genome
+   *          the genome
+   * @param assembly
+   *          the assembly
+   */
+  public DnaRepeatMaskCanvasLayer(String genome, GenomeAssembly assembly) {
+    mGenome = genome;
+    mAssembly = assembly;
+  }
 
-		int y = 0;
-		int h = axes.getInternalSize().getH();
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   */
+  public void update(GenomicRegion displayRegion) {
+    mDisplayRegion = displayRegion;
+  }
 
-		try {
-			SequenceRegion sequence = mAssembly.getSequence(mGenome, 
-					mDisplayRegion, 
-					RepeatMaskType.N);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
 
-			int start = mDisplayRegion.getStart();
-			int x1 = 0;
-			int x2 = 0;
-			int w;
-			boolean started = false;
-			
-			g2.setColor(Color.BLACK);
+    // So that we don't attempt to pull a whole chromosome
+    if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
+      return;
+    }
 
-			for (char c : sequence.getSequence().toArray())	{
-				if (c == 'N') {
-					if (started) {
-						x2 = axes.toPlotX1(start);
-					} else {
-						x1 = axes.toPlotX1(start);
-					}
-					
-					started = true;
-				} else {
-					if (started) {
-						w = x2 - x1;
-						
-						g2.fillRect(x1, y, w, h);
-						
-						started = false;
-					}
-				}
+    int y = 0;
+    int h = axes.getInternalSize().getH();
 
-				++start;
-			}
-			
-			// capture the end case
-			if (started) {
-				w = x2 - x1;
-				
-				g2.fillRect(x1, y, w, h);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    try {
+      SequenceRegion sequence = mAssembly.getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
+
+      int start = mDisplayRegion.getStart();
+      int x1 = 0;
+      int x2 = 0;
+      int w;
+      boolean started = false;
+
+      g2.setColor(Color.BLACK);
+
+      for (char c : sequence.getSequence().toArray()) {
+        if (c == 'N') {
+          if (started) {
+            x2 = axes.toPlotX1(start);
+          } else {
+            x1 = axes.toPlotX1(start);
+          }
+
+          started = true;
+        } else {
+          if (started) {
+            w = x2 - x1;
+
+            g2.fillRect(x1, y, w, h);
+
+            started = false;
+          }
+        }
+
+        ++start;
+      }
+
+      // capture the end case
+      if (started) {
+        w = x2 - x1;
+
+        g2.fillRect(x1, y, w, h);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }
