@@ -37,10 +37,8 @@ public class HeatMapIdLocation {
   /**
    * Instantiates a new heat map id location.
    *
-   * @param id
-   *          the id
-   * @param region
-   *          the region
+   * @param id the id
+   * @param region the region
    */
   public HeatMapIdLocation(String id, GenomicRegion region) {
     mId = id;
@@ -70,13 +68,10 @@ public class HeatMapIdLocation {
   /**
    * Parses the.
    *
-   * @param id
-   *          the id
-   * @param model
-   *          the model
+   * @param id the id
+   * @param model the model
    * @return the heat map id location
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public static HeatMapIdLocation parse(String id, GenomeModel model) {
     GenomicRegion region = GenomicRegion.parse(id);
@@ -89,7 +84,8 @@ public class HeatMapIdLocation {
     } else {
       // might be a gene symbol, in which case report the tss
 
-      Gene gene = GenesService.getInstance().getGenes(model.get(), "refseq").lookup(id);
+      Gene gene = GenesService.getInstance().getGenes(model.get(), "refseq")
+          .lookup(id);
 
       if (gene != null) {
         GenomicRegion tss = Gene.tssRegion(gene);

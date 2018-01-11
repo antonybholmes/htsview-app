@@ -40,12 +40,9 @@ public class HTSViewSplashScreen extends ModernTaskSplashScreen2 {
   /**
    * Load a matrix then run a module function.
    *
-   * @param m
-   *          the m
-   * @param module
-   *          the module
-   * @param args
-   *          the args
+   * @param m the m
+   * @param module the module
+   * @param args the args
    */
   public HTSViewSplashScreen(DataFrame m, String module, String... args) {
     super(new HTSViewInfo());
@@ -66,7 +63,8 @@ public class HTSViewSplashScreen extends ModernTaskSplashScreen2 {
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.lib.ui.modern.window.ModernTaskSplashScreen2#appSetupFinished()
+   * @see
+   * org.abh.lib.ui.modern.window.ModernTaskSplashScreen2#appSetupFinished()
    */
   @Override
   public void appSetupFinished() {

@@ -28,8 +28,7 @@ public class VegaGenesPlotTrack extends GenesPlotTrack {
   /**
    * Instantiates a new vega genes plot track.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public VegaGenesPlotTrack() throws IOException {
     super("Vega genes", "vega");

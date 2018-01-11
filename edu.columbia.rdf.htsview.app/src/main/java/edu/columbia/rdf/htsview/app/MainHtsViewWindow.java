@@ -66,7 +66,6 @@ import org.jebtk.graphplot.Image;
 import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.Graph2dStyleModel;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
@@ -156,7 +155,8 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleRibbonSection;
  * @author Antony Holmes Holmes
  *
  */
-public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClickListener {
+public class MainHtsViewWindow extends ModernRibbonWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -164,7 +164,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   private static final long serialVersionUID = 1L;
 
   /** The Constant LOG. */
-  private final static Logger LOG = LoggerFactory.getLogger(MainHtsViewWindow.class);
+  private final static Logger LOG = LoggerFactory
+      .getLogger(MainHtsViewWindow.class);
 
   /**
    * The constant MAX_PLOT_POINTS.
@@ -284,7 +285,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -300,13 +302,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
       try {
         style();
-      } catch (IOException | TransformerException | ParserConfigurationException e1) {
+      } catch (IOException | TransformerException
+          | ParserConfigurationException e1) {
         e1.printStackTrace();
       }
     }
@@ -320,7 +324,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -340,13 +345,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
       try {
         updateResolution();
-      } catch (IOException | ParseException | TransformerException | ParserConfigurationException e1) {
+      } catch (IOException | ParseException | TransformerException
+          | ParserConfigurationException e1) {
         e1.printStackTrace();
       }
     }
@@ -360,7 +367,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -380,7 +388,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -400,14 +409,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+     * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.
+     * ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
       try {
         updatePlots();
-      } catch (TransformerException | ParserConfigurationException | IOException e1) {
+      } catch (TransformerException | ParserConfigurationException
+          | IOException e1) {
         e1.printStackTrace();
       }
     }
@@ -422,7 +432,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.tree.TreeNodeEventListener#nodeChanged(org.abh.lib.event.
+     * @see
+     * org.abh.lib.tree.TreeNodeEventListener#nodeChanged(org.abh.lib.event.
      * ChangeEvent)
      */
     @Override
@@ -437,7 +448,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.tree.TreeNodeEventListener#nodeUpdated(org.abh.lib.event.
+     * @see
+     * org.abh.lib.tree.TreeNodeEventListener#nodeUpdated(org.abh.lib.event.
      * ChangeEvent)
      */
     @Override
@@ -471,10 +483,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /**
      * Instantiates a new export call back.
      *
-     * @param pwd
-     *          the pwd
-     * @param file
-     *          the file
+     * @param pwd the pwd
+     * @param file the file
      */
     public ExportCallBack(Path pwd, Path file) {
       mFile = file;
@@ -485,8 +495,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.dialog.DialogEventListener#statusChanged(org.abh.common.
-     * ui.ui.dialog.DialogEvent)
+     * org.abh.common.ui.ui.dialog.DialogEventListener#statusChanged(org.abh.
+     * common. ui.ui.dialog.DialogEvent)
      */
     @Override
     public void statusChanged(DialogEvent e) {
@@ -514,10 +524,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     /**
      * Instantiates a new close save call back.
      *
-     * @param pwd
-     *          the pwd
-     * @param file
-     *          the file
+     * @param pwd the pwd
+     * @param file the file
      */
     public CloseSaveCallBack(Path pwd, Path file) {
       super(file, pwd);
@@ -527,8 +535,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
      * (non-Javadoc)
      * 
      * @see
-     * org.htsview.app.MainHtsViewWindow.ExportCallBack#statusChanged(org.abh.common
-     * .ui.dialog.DialogEvent)
+     * org.htsview.app.MainHtsViewWindow.ExportCallBack#statusChanged(org.abh.
+     * common .ui.dialog.DialogEvent)
      */
     @Override
     public void statusChanged(DialogEvent e) {
@@ -611,20 +619,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Instantiates a new main reads window.
    *
-   * @param genome
-   *          the genome
-   * @param tree
-   *          the tree
-   * @param samples
-   *          the samples
-   * @throws SAXException
-   *           the SAX exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param genome the genome
+   * @param tree the tree
+   * @param samples the samples
+   * @throws SAXException the SAX exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  public MainHtsViewWindow(String genome, AnnotationTracksTree tree, Collection<Sample> samples)
+  public MainHtsViewWindow(String genome, AnnotationTracksTree tree,
+      Collection<Sample> samples)
       throws SAXException, IOException, ParserConfigurationException {
     super(new HTSViewInfo());
 
@@ -638,24 +641,23 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Inits the.
    *
-   * @param samples
-   *          the samples
-   * @throws SAXException
-   *           the SAX exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param samples the samples
+   * @throws SAXException the SAX exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void init(Collection<Sample> samples) throws SAXException, IOException, ParserConfigurationException {
+  private void init(Collection<Sample> samples)
+      throws SAXException, IOException, ParserConfigurationException {
     JComponent content = (JComponent) getContentPane();
 
-    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "open");
+    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+        KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK),
+        "open");
     content.getActionMap().put("open", new OpenAction());
 
-    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "save");
+    content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+        KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK),
+        "save");
     content.getActionMap().put("save", new SaveAction());
 
     // mTracksFigure = new TracksFigure(mGenomicModel,
@@ -684,7 +686,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     // GenomicRegion region =
     // mGeneMap.get(mGenomeModel.get()).findMainVariant("BCL6");
 
-    GenomicRegion region = GenomicRegion.parse(SettingsService.getInstance().getAsString("edb.reads.default-location"));
+    GenomicRegion region = GenomicRegion.parse(SettingsService.getInstance()
+        .getAsString("edb.reads.default-location"));
 
     mGenomicModel.set(region);
 
@@ -736,14 +739,12 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Load samples.
    *
-   * @param samples
-   *          the samples
-   * @param interactive
-   *          the interactive
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param samples the samples
+   * @param interactive the interactive
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void loadSamples(Collection<Sample> samples, boolean interactive) throws IOException {
+  private void loadSamples(Collection<Sample> samples, boolean interactive)
+      throws IOException {
     mTracksPanel.loadSamples(samples, interactive);
   }
 
@@ -789,14 +790,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     // Ribbon2 ribbon = new Ribbon2();
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
-    button = new QuickAccessButton(
-        UIService.getInstance().loadIcon(QuickOpenVectorIcon.class, Ribbon.BAR_BACKGROUND, 16));
+    button = new QuickAccessButton(UIService.getInstance()
+        .loadIcon(QuickOpenVectorIcon.class, Ribbon.BAR_BACKGROUND, 16));
     button.setClickMessage(UI.MENU_OPEN);
     button.setToolTip(new ModernToolTip("Open", "Open peak files."));
     button.addClickListener(this);
     addQuickAccessButton(button);
 
-    button = new QuickAccessButton(UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+    button = new QuickAccessButton(
+        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip(new ModernToolTip("Save", "Save the current image."));
     button.addClickListener(this);
@@ -810,26 +812,35 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     // toolbarSection = new ClipboardRibbonSection(ribbon);
     // toolbar.add(toolbarSection);
 
-    getRibbon().getHomeToolbar().add(new GenomeRibbonSection(getRibbon(), mGenomeModel));
+    getRibbon().getHomeToolbar()
+        .add(new GenomeRibbonSection(getRibbon(), mGenomeModel));
 
-    getRibbon().getHomeToolbar().add(new HTSGenomicRibbonSection(getRibbon(), mGenomicModel, mGenomeModel));
-    getRibbon().getHomeToolbar().add(new ScaleRibbonSection(getRibbon(), "Y Scale", mYAxisLimitModel));
+    getRibbon().getHomeToolbar().add(
+        new HTSGenomicRibbonSection(getRibbon(), mGenomicModel, mGenomeModel));
+    getRibbon().getHomeToolbar()
+        .add(new ScaleRibbonSection(getRibbon(), "Y Scale", mYAxisLimitModel));
     // getRibbon().getHomeToolbar().add(new HeightRibbonSection(mHeightModel));
-    getRibbon().getHomeToolbar().add(new ResolutionRibbonSection(getRibbon(), mResolutionModel));
-    getRibbon().getHomeToolbar().add(new Graph2dStyleRibbonSection(getRibbon(), mPeakStyleModel));
+    getRibbon().getHomeToolbar()
+        .add(new ResolutionRibbonSection(getRibbon(), mResolutionModel));
+    getRibbon().getHomeToolbar()
+        .add(new Graph2dStyleRibbonSection(getRibbon(), mPeakStyleModel));
 
     mFontSection = new FontRibbonSection(this);
     mFontSection.setup(mTracksFigurePanel.getFont(), Color.BLACK);
     getRibbon().getToolbar("Layout").add(mFontSection);
-    getRibbon().getToolbar("Layout").add(new LayoutRibbonSection(getRibbon(), mTitlePositionModel));
-    getRibbon().getToolbar("Layout").add(new MarginRibbonSection(getRibbon(), mMarginModel));
-    getRibbon().getToolbar("Layout").add(new SizeRibbonSection(getRibbon(), mWidthModel, mHeightModel));
+    getRibbon().getToolbar("Layout")
+        .add(new LayoutRibbonSection(getRibbon(), mTitlePositionModel));
+    getRibbon().getToolbar("Layout")
+        .add(new MarginRibbonSection(getRibbon(), mMarginModel));
+    getRibbon().getToolbar("Layout")
+        .add(new SizeRibbonSection(getRibbon(), mWidthModel, mHeightModel));
 
     //
     // View
     //
 
-    button = new RibbonLargeButton("Locations", UIService.getInstance().loadIcon("locations", 24), "Locations List",
+    button = new RibbonLargeButton("Locations",
+        UIService.getInstance().loadIcon("locations", 24), "Locations List",
         "Show a list of locations");
     button.addClickListener(this);
     getRibbon().getToolbar("View").getSection("Locations").add(button);
@@ -838,7 +849,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
       @Override
       public void changed(ChangeEvent e) {
-        mTracksFigure.setFont(mFontSection.getUserFont(), mFontSection.getFontColor());
+        mTracksFigure.setFont(mFontSection.getUserFont(),
+            mFontSection.getFontColor());
       }
     });
 
@@ -848,17 +860,21 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     // Tools
     //
 
-    button = new RibbonLargeButton("Read Distribution", UIService.getInstance().loadIcon("read_dist", 32),
-        UIService.getInstance().loadIcon("read_dist", 24), "Read Distribution", "Read distribution plot");
+    button = new RibbonLargeButton("Read Distribution",
+        UIService.getInstance().loadIcon("read_dist", 32),
+        UIService.getInstance().loadIcon("read_dist", 24), "Read Distribution",
+        "Read distribution plot");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
 
-    button = new RibbonLargeButton("Heat Map", UIService.getInstance().loadIcon("tss_heatmap", 32), "TSS Heat Map",
+    button = new RibbonLargeButton("Heat Map",
+        UIService.getInstance().loadIcon("tss_heatmap", 32), "TSS Heat Map",
         "Create TSS Heat Map");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
 
-    button = new RibbonLargeButton("Reads", UIService.getInstance().loadIcon("reads", 24), "Reads",
+    button = new RibbonLargeButton("Reads",
+        UIService.getInstance().loadIcon("reads", 24), "Reads",
         "Create table of reads from selected samples");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
@@ -878,8 +894,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
     /*
      * button = new RibbonLargeButton2("Format", new Raster32Icon(new
-     * FormatPlot32VectorIcon())); button.addClickListener(new ModernClickListener()
-     * {
+     * FormatPlot32VectorIcon())); button.addClickListener(new
+     * ModernClickListener() {
      * 
      * @Override public void clicked(ModernClickEvent e) { addFormatPane(); }});
      * 
@@ -931,8 +947,10 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
     // panel.setBorder(ModernPanel.BORDER);
 
-    mContentPane.getModel().setCenterTab(new ModernComponent(
-        new CardPanel(new ModernComponent(scrollPane, ModernWidget.BORDER)), ModernWidget.DOUBLE_BORDER));
+    mContentPane.getModel()
+        .setCenterTab(new ModernComponent(
+            new CardPanel(new ModernComponent(scrollPane, ModernWidget.BORDER)),
+            ModernWidget.DOUBLE_BORDER));
 
     // mPanel = new Graph2dPanel(this,
     // mCanvas,
@@ -951,7 +969,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     // addLocationsPane();
   }
 
-  private void loadModules() throws InstantiationException, IllegalAccessException {
+  private void loadModules()
+      throws InstantiationException, IllegalAccessException {
     Module module;
 
     for (Plugin plugin : PluginService.getInstance().iterator("htsview")) {
@@ -970,10 +989,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Run module.
    *
-   * @param module
-   *          the module
-   * @param args
-   *          the args
+   * @param module the module
+   * @param args the args
    * @return true, if successful
    */
   public boolean runModule(String module, String... args) {
@@ -1024,7 +1041,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
       return;
     }
 
-    SizableContentPane sizePane = new SizableContentPane("Tracks", mTracksPanel, 250, 100, 500);
+    SizableContentPane sizePane = new SizableContentPane("Tracks", mTracksPanel,
+        250, 100, 500);
 
     // CollapseHTab htab = new CollapseHTab(sizePane, mTracksPanel);
 
@@ -1045,8 +1063,10 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
     // sizePane.setComponent(htab);
 
-    mContentPane.getModel().getRightTabs().addTab(new SizableContentPane("Locations",
-        new CloseableHTab("Locations", mLocationsPanel, mContentPane), 250, 100, 500));
+    mContentPane.getModel().getRightTabs()
+        .addTab(new SizableContentPane("Locations",
+            new CloseableHTab("Locations", mLocationsPanel, mContentPane), 250,
+            100, 500));
   }
 
   /*
@@ -1062,22 +1082,24 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
     if (e.getMessage().equals(UI.MENU_NEW_WINDOW)) {
       MainHtsViewWindow window;
       try {
-        window = new MainHtsViewWindow(mGenomeModel.get(), mAnnotationTree, null);
+        window = new MainHtsViewWindow(mGenomeModel.get(), mAnnotationTree,
+            null);
 
         window.setVisible(true);
       } catch (SAXException | IOException | ParserConfigurationException e1) {
         e1.printStackTrace();
       }
 
-    } else if (e.getMessage().equals(UI.MENU_OPEN) || e.getMessage().equals(UI.MENU_BROWSE)) {
+    } else if (e.getMessage().equals(UI.MENU_OPEN)
+        || e.getMessage().equals(UI.MENU_BROWSE)) {
       try {
         browseForFiles();
       } catch (Exception e1) {
@@ -1163,8 +1185,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Import sam.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void importSam() throws ParseException {
     ImportDialog dialog = new ImportDialog(this);
@@ -1182,13 +1203,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     }
 
     if (dialog.getDir() == null) {
-      ModernMessageDialog.createWarningDialog(this, "You must select a directory.");
+      ModernMessageDialog.createWarningDialog(this,
+          "You must select a directory.");
 
       return;
     }
 
-    EncodeWorker task = new Import.EncodeWorker(this, dialog.getSamFile(), dialog.getDir(), dialog.getName(),
-        dialog.getOrganism(), dialog.getGenome(), dialog.getReadLength(), dialog.getResolutions());
+    EncodeWorker task = new Import.EncodeWorker(this, dialog.getSamFile(),
+        dialog.getDir(), dialog.getName(), dialog.getOrganism(),
+        dialog.getGenome(), dialog.getReadLength(), dialog.getResolutions());
 
     try {
       task.doInBackground();
@@ -1201,12 +1224,13 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Force the whole plot to be recreated. This is more expensive than updating.
    *
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
   private void recreatePlots() throws Exception {
 
-    mTracksFigure.setTracks(mTracksPanel.getTree(), mGenomeModel.get(), mPeakStyleModel.get(),
+    mTracksFigure.setTracks(mTracksPanel.getTree(),
+        mGenomeModel.get(),
+        mPeakStyleModel.get(),
         mTitlePositionModel.get());
 
     // Save the view for reloading.
@@ -1216,15 +1240,16 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Update plots.
    *
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void updatePlots() throws TransformerException, ParserConfigurationException, IOException {
-    mTracksFigure.refresh(mGenomicModel.get(), mResolutionModel.get(), mWidthModel.get(), mHeightModel.get(),
+  private void updatePlots()
+      throws TransformerException, ParserConfigurationException, IOException {
+    mTracksFigure.refresh(mGenomicModel.get(),
+        mResolutionModel.get(),
+        mWidthModel.get(),
+        mHeightModel.get(),
         mMarginModel.get());
 
     mSuggestSave = true;
@@ -1241,7 +1266,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   private void setResolution() {
     try {
       updateResolution();
-    } catch (IOException | ParseException | TransformerException | ParserConfigurationException e) {
+    } catch (IOException | ParseException | TransformerException
+        | ParserConfigurationException e) {
       createResolutionErrorDialog();
 
       e.printStackTrace();
@@ -1253,10 +1279,12 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
    */
   private void createResolutionErrorDialog() {
     ModernMessageDialog.createWarningDialog(this,
-        "The samples cannot be displayed at a " + ResolutionService.getHumanReadable(mResolutionModel.get())
+        "The samples cannot be displayed at a "
+            + ResolutionService.getHumanReadable(mResolutionModel.get())
             + " resolution.",
         "The resolution will be adjusted back to the previous setting of "
-            + ResolutionService.getHumanReadable(mResolutionModel.getPrevious()) + ".");
+            + ResolutionService.getHumanReadable(mResolutionModel.getPrevious())
+            + ".");
 
     mResolutionModel.set(mResolutionModel.getPrevious());
   }
@@ -1264,17 +1292,13 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Update resolution.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void updateResolution()
-      throws IOException, ParseException, TransformerException, ParserConfigurationException {
+  private void updateResolution() throws IOException, ParseException,
+      TransformerException, ParserConfigurationException {
 
     GenomicRegion displayRegion = mGenomicModel.get();
 
@@ -1302,16 +1326,13 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Update axis events.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void axis() throws IOException, ParseException, TransformerException, ParserConfigurationException {
+  private void axis() throws IOException, ParseException, TransformerException,
+      ParserConfigurationException {
     for (TreeNode<Track> node : mTracksPanel.getTree()) {
       Track track = node.getValue();
 
@@ -1326,14 +1347,12 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Style.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void style() throws IOException, TransformerException, ParserConfigurationException {
+  private void style()
+      throws IOException, TransformerException, ParserConfigurationException {
     for (TreeNode<Track> node : mTracksPanel.getTree()) {
       Track track = node.getValue();
 
@@ -1348,16 +1367,13 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Heat map.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
-  private void heatMap() throws IOException, SAXException, ParserConfigurationException, ParseException {
+  private void heatMap() throws IOException, SAXException,
+      ParserConfigurationException, ParseException {
     List<SamplePlotTrack> tracks = new ArrayList<SamplePlotTrack>();
 
     for (Track track : mTracksPanel.getSelectedTracks()) {
@@ -1367,7 +1383,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     }
 
     if (tracks.size() == 0) {
-      ModernMessageDialog.createWarningDialog(this, "You must select at least one sample.");
+      ModernMessageDialog.createWarningDialog(this,
+          "You must select at least one sample.");
       return;
     }
 
@@ -1379,8 +1396,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
       return;
     }
 
-    HeatMapTask task = new HeatMapTask(this, tracks, dialog.getInput(), dialog.getRegions(), dialog.getPadding(),
-        dialog.getBinSize(), dialog.getSortType(), mGenomeModel);
+    HeatMapTask task = new HeatMapTask(this, tracks, dialog.getInput(),
+        dialog.getRegions(), dialog.getPadding(), dialog.getBinSize(),
+        dialog.getSortType(), mGenomeModel);
 
     // task.execute();
     task.doInBackground();
@@ -1390,8 +1408,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Read dist.
    *
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   private void readDist() throws ParseException {
 
@@ -1404,11 +1421,13 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     }
 
     if (sampleTracks.size() == 0) {
-      ModernMessageDialog.createWarningDialog(this, "You must select a sample.");
+      ModernMessageDialog.createWarningDialog(this,
+          "You must select a sample.");
       return;
     }
 
-    ReadDistDialog dialog = new ReadDistDialog(this, mGenomeModel, sampleTracks);
+    ReadDistDialog dialog = new ReadDistDialog(this, mGenomeModel,
+        sampleTracks);
 
     dialog.setVisible(true);
 
@@ -1416,23 +1435,25 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
       return;
     }
 
-    ModernDialogStatus status = ModernMessageDialog.createOkCancelInfoDialog(this,
+    ModernDialogStatus status = ModernMessageDialog.createOkCancelInfoDialog(
+        this,
         "Generating distribution plots can take several minutes.");
 
     if (status == ModernDialogStatus.CANCEL) {
       return;
     }
 
-    ReadDistTask task = new ReadDistTask(this, dialog.getPlotName(), sampleTracks, dialog.getRegions(),
-        dialog.getPadding(), dialog.getBinSize(), dialog.getAverage());
+    ReadDistTask task = new ReadDistTask(this, dialog.getPlotName(),
+        sampleTracks, dialog.getRegions(), dialog.getPadding(),
+        dialog.getBinSize(), dialog.getAverage());
 
     task.doInBackground(); // execute();
 
     /*
      * HeatMapTask task = new HeatMapTask(this, dialog.getSample(),
      * dialog.getInput(), dialog.getRegions(), dialog.getPadding(),
-     * dialog.getBinSize(), dialog.getSortType(), dialog.getShouldPlot(), mGeneMap,
-     * mGenomeModel);
+     * dialog.getBinSize(), dialog.getSortType(), dialog.getShouldPlot(),
+     * mGeneMap, mGenomeModel);
      * 
      * task.execute();
      */
@@ -1452,7 +1473,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     }
 
     if (sampleTracks.size() == 0) {
-      ModernMessageDialog.createWarningDialog(this, "You must select some samples");
+      ModernMessageDialog.createWarningDialog(this,
+          "You must select some samples");
 
       return;
     }
@@ -1465,7 +1487,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
 
     for (SamplePlotTrack track : sampleTracks) {
       try {
-        starts.addAll(track.getAssembly().getStarts(track.getSample(), region, -1));
+        starts.addAll(
+            track.getAssembly().getStarts(track.getSample(), region, -1));
 
         if (track.getAssembly().getReadLength(track.getSample()) > 0) {
           l = track.getAssembly().getReadLength(track.getSample());
@@ -1489,7 +1512,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     }
 
     try {
-      MainMatCalcWindow window = MainMatCalc.main(getAppInfo(), new BioModuleLoader());
+      MainMatCalcWindow window = MainMatCalc.main(getAppInfo(),
+          new BioModuleLoader());
 
       window.openMatrix(m);
     } catch (ClassNotFoundException e) {
@@ -1510,38 +1534,39 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Browse for files.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  public void browseForFiles() throws IOException, ParseException, SAXException, ParserConfigurationException {
+  public void browseForFiles() throws IOException, ParseException, SAXException,
+      ParserConfigurationException {
     browseForFiles(RecentFilesService.getInstance().getPwd());
   }
 
   /**
    * Browse for files.
    *
-   * @param pwd
-   *          the pwd
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param pwd the pwd
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  public void browseForFiles(Path pwd) throws IOException, ParseException, SAXException, ParserConfigurationException {
+  public void browseForFiles(Path pwd) throws IOException, ParseException,
+      SAXException, ParserConfigurationException {
     openFiles(FileDialog.open(this)
-        .filter(new ReadsAllSupportedGuiFileFilter(), new BamGuiFileFilter(), new BctGuiFileFilter(),
-            new Brt2GuiFileFilter(), new Brt3GuiFileFilter(), new BvtGuiFileFilter(), new BedGuiFileFilter(),
-            new BedGraphGuiFileFilter(), new GFFGuiFileFilter(), new SegGuiFileFilter(), new ABIGuiFileFilter(),
+        .filter(new ReadsAllSupportedGuiFileFilter(),
+            new BamGuiFileFilter(),
+            new BctGuiFileFilter(),
+            new Brt2GuiFileFilter(),
+            new Brt3GuiFileFilter(),
+            new BvtGuiFileFilter(),
+            new BedGuiFileFilter(),
+            new BedGraphGuiFileFilter(),
+            new GFFGuiFileFilter(),
+            new SegGuiFileFilter(),
+            new ABIGuiFileFilter(),
             new ReadsViewGuiFileFilter())
         .getFiles(pwd));
   }
@@ -1549,43 +1574,35 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Open files.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  public void openFiles(Path file) throws IOException, ParseException, SAXException, ParserConfigurationException {
+  public void openFiles(Path file) throws IOException, ParseException,
+      SAXException, ParserConfigurationException {
     openFiles(CollectionUtils.asList(file));
   }
 
   /**
    * Open files.
    *
-   * @param files
-   *          the files
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws SAXException
-   *           the SAX exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param files the files
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  public void openFiles(List<Path> files)
-      throws ParseException, IOException, SAXException, ParserConfigurationException {
+  public void openFiles(List<Path> files) throws ParseException, IOException,
+      SAXException, ParserConfigurationException {
     List<Path> otherFiles = new ArrayList<Path>();
 
     for (Path file : files) {
       if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT).test(file)) {
         loadJsonView(file);
-      } else if (PathUtils.ext().type(ReadsXmlViewGuiFileFilter.EXT).test(file)) {
+      } else if (PathUtils.ext().type(ReadsXmlViewGuiFileFilter.EXT)
+          .test(file)) {
         // loadXmlView(file);
       } else {
         otherFiles.add(file);
@@ -1595,24 +1612,23 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     }
 
     if (otherFiles.size() > 0) {
-      SampleLoaderService.getInstance().openFiles(this, files, mTrackList.getRoot());
+      SampleLoaderService.getInstance()
+          .openFiles(this, files, mTrackList.getRoot());
     }
   }
 
   /**
    * Load xml view.
    *
-   * @param jsonFile
-   *          the json file
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param jsonFile the json file
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   /*
    * public void loadXmlView(Path file) throws SAXException, IOException,
    * ParserConfigurationException { SAXParserFactory factory =
-   * SAXParserFactory.newInstance(); SAXParser saxParser = factory.newSAXParser();
+   * SAXParserFactory.newInstance(); SAXParser saxParser =
+   * factory.newSAXParser();
    * 
    * TracksXmlHandler handler = new TracksXmlHandler(mAssembly, mAnnotationTree,
    * mTracksPanel);
@@ -1629,15 +1645,18 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Load json view.
    *
-   * @param jsonFile
-   *          the json file
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param jsonFile the json file
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public void loadJsonView(Path jsonFile) throws ParseException, IOException {
-    TrackView.loadJsonView(this, jsonFile, mTracksPanel, mAnnotationTree, mWidthModel, mMarginModel, mGenomicModel,
+    TrackView.loadJsonView(this,
+        jsonFile,
+        mTracksPanel,
+        mAnnotationTree,
+        mWidthModel,
+        mMarginModel,
+        mGenomicModel,
         mTitlePositionModel);
 
     mViewFile = jsonFile;
@@ -1647,10 +1666,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Export to bed graph.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
   private void exportToBedGraph() throws IOException {
     Path tmp = Temp.createTempFile("bedgraph");
@@ -1664,10 +1681,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
    * Gets the bed graphs.
    *
    * @return the bed graphs
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
   private List<UCSCTrack> getBedGraphs() throws IOException {
     List<UCSCTrack> bedgraphs = new ArrayList<UCSCTrack>();
@@ -1675,7 +1690,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
     for (TreeNode<Track> node : mTracksPanel.getTree()) {
       Track track = node.getValue();
 
-      UCSCTrack bedGraph = track.getBedGraph(mGenomicModel.get(), mResolutionModel.get());
+      UCSCTrack bedGraph = track.getBedGraph(mGenomicModel.get(),
+          mResolutionModel.get());
 
       if (bedGraph == null) {
         bedgraphs.add(bedGraph);
@@ -1688,42 +1704,37 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Export.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
-  private void export()
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
+  private void export() throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException, ParseException {
     export(RecentFilesService.getInstance().getPwd());
   }
 
   /**
    * Export.
    *
-   * @param pwd
-   *          the pwd
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @param pwd the pwd
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
-  private void export(Path pwd)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
-    Path file = FileDialog.save(this).filter(new SvgGuiFileFilter(), new PngGuiFileFilter(), new PdfGuiFileFilter(),
-        new JpgGuiFileFilter(), new BedGraphGuiFileFilter(), new ReadsJsonViewGuiFileFilter()).getFile(pwd);
+  private void export(Path pwd) throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException, ParseException {
+    Path file = FileDialog.save(this)
+        .filter(new SvgGuiFileFilter(),
+            new PngGuiFileFilter(),
+            new PdfGuiFileFilter(),
+            new JpgGuiFileFilter(),
+            new BedGraphGuiFileFilter(),
+            new ReadsJsonViewGuiFileFilter())
+        .getFile(pwd);
 
     save(pwd, file);
 
@@ -1735,8 +1746,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
      * 
      * return; } }
      * 
-     * if (Io.getFileExtension(file).equals("readsx")) { saveView(file); } else if
-     * (Io.getFileExtension(file).equals("bed")) {
+     * if (Io.getFileExtension(file).equals("readsx")) { saveView(file); } else
+     * if (Io.getFileExtension(file).equals("bed")) {
      * Bed.writeBedGraphAsBed(mTracksModel.getBedGraphs(mGenomicModel.get(),
      * mResolutionModel.get()), file);
      * 
@@ -1754,14 +1765,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
      */
   }
 
-  private void saveView()
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
+  private void saveView() throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException, ParseException {
     saveView(RecentFilesService.getInstance().getPwd());
   }
 
-  public void saveView(Path pwd)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
-    Path file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter()).getFile(pwd);
+  public void saveView(Path pwd) throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException, ParseException {
+    Path file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter())
+        .getFile(pwd);
 
     save(pwd, file);
   }
@@ -1769,49 +1781,36 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Save.
    *
-   * @param pwd
-   *          the pwd
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @param pwd the pwd
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
   private void save(Path pwd, Path file)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
+      throws IOException, TranscoderException, TransformerException,
+      ParserConfigurationException, ParseException {
     save(pwd, file, new ExportCallBack(pwd, file));
   }
 
   /**
    * Save.
    *
-   * @param pwd
-   *          the pwd
-   * @param file
-   *          the file
-   * @param l
-   *          the l
+   * @param pwd the pwd
+   * @param file the file
+   * @param l the l
    * @return
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
   private boolean save(Path pwd, Path file, DialogEventListener l)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
+      throws IOException, TranscoderException, TransformerException,
+      ParserConfigurationException, ParseException {
     if (file == null) {
       return false;
     }
@@ -1828,29 +1827,24 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Save.
    *
-   * @param file
-   *          the file
+   * @param file the file
    * @return
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
-  private boolean save(Path file)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException {
+  private boolean save(Path file) throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException {
     if (file == null) {
       return false;
     }
 
     if (PathUtils.ext().type(ReadsXmlViewGuiFileFilter.EXT).test(file)) {
       saveXmlView(file);
-    } else if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT).test(file)) {
+    } else if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT)
+        .test(file)) {
       saveJsonView(file);
     } else if (BioPathUtils.ext().bedgraph().test(file)) {
       exportToBedGraph();
@@ -1868,15 +1862,16 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Save xml view.
    *
-   * @param file
-   *          the file
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param file the file
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  private void saveXmlView(Path file) throws TransformerException, ParserConfigurationException {
-    mTracksPanel.saveXmlView(file, mGenomicModel.get(), mWidthModel.get(), mMarginModel.get());
+  private void saveXmlView(Path file)
+      throws TransformerException, ParserConfigurationException {
+    mTracksPanel.saveXmlView(file,
+        mGenomicModel.get(),
+        mWidthModel.get(),
+        mMarginModel.get());
 
     RecentFilesService.getInstance().add(file);
   }
@@ -1884,13 +1879,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Save json view.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void saveJsonView(Path file) throws IOException {
-    TrackView.saveJsonView(file, mTrackList, mGenomicModel.get(), mTitlePositionModel.get(), mWidthModel.get(),
+    TrackView.saveJsonView(file,
+        mTrackList,
+        mGenomicModel.get(),
+        mTitlePositionModel.get(),
+        mWidthModel.get(),
         mMarginModel.get());
 
     // Once a view is saved, stop asking the user until they
@@ -1917,23 +1914,26 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   @Override
   public void close() {
     if (mSuggestSave) {
-      ModernDialogStatus status = ModernMessageDialog.createDialog(this, MessageDialogType.WARNING_YES_NO,
-          "The current view has not been saved.", "Would you like to save it?");
+      ModernDialogStatus status = ModernMessageDialog.createDialog(this,
+          MessageDialogType.WARNING_YES_NO,
+          "The current view has not been saved.",
+          "Would you like to save it?");
 
       if (status == ModernDialogStatus.OK) {
         if (mViewFile != null) {
           // If the view exists, save it.
           try {
             save(mViewFile);
-          } catch (IOException | TranscoderException | TransformerException | ParserConfigurationException e) {
+          } catch (IOException | TranscoderException | TransformerException
+              | ParserConfigurationException e) {
             e.printStackTrace();
           }
         } else {
           // If the view does not exist, prompt user for location.
           try {
             saveView();
-          } catch (IOException | TranscoderException | TransformerException | ParserConfigurationException
-              | ParseException e) {
+          } catch (IOException | TranscoderException | TransformerException
+              | ParserConfigurationException | ParseException e) {
             e.printStackTrace();
           }
         }
@@ -1967,50 +1967,40 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Close save.
    *
-   * @param pwd
-   *          the pwd
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @param pwd the pwd
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
-  private void closeSave(Path pwd)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
+  private void closeSave(Path pwd) throws IOException, TranscoderException,
+      TransformerException, ParserConfigurationException, ParseException {
     closeSave(pwd, null);
   }
 
   /**
    * Close save.
    *
-   * @param pwd
-   *          the pwd
-   * @param suggested
-   *          the suggested
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws TranscoderException
-   *           the transcoder exception
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
-   * @throws ParseException
-   *           the parse exception
+   * @param pwd the pwd
+   * @param suggested the suggested
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws TranscoderException the transcoder exception
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws ParseException the parse exception
    */
   private void closeSave(Path pwd, Path suggested)
-      throws IOException, TranscoderException, TransformerException, ParserConfigurationException, ParseException {
+      throws IOException, TranscoderException, TransformerException,
+      ParserConfigurationException, ParseException {
     Path file;
 
     if (suggested != null) {
-      file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter()).suggested(suggested).getFile(pwd);
+      file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter())
+          .suggested(suggested).getFile(pwd);
     } else {
-      file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter()).getFile(pwd);
+      file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter())
+          .getFile(pwd);
     }
 
     save(pwd, file, new CloseSaveCallBack(pwd, file));
@@ -2023,7 +2013,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
    */
   @Override
   public void restart() {
-    if (ModernMessageDialog.createRestartDialog(this) == ModernDialogStatus.OK) {
+    if (ModernMessageDialog
+        .createRestartDialog(this) == ModernDialogStatus.OK) {
       close();
 
       try {
@@ -2055,8 +2046,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow implements ModernClick
   /**
    * Gets the file.
    *
-   * @param json
-   *          the json
+   * @param json the json
    * @return the file
    */
   private static Path getFile(Json json) {

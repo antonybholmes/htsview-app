@@ -48,7 +48,8 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   private LineProperties mStyle = new LineProperties();
 
   /** The m max genes. */
-  private int mMaxGenes = SettingsService.getInstance().getAsInt("edb.reads.max-display-genes");
+  private int mMaxGenes = SettingsService.getInstance()
+      .getAsInt("edb.reads.max-display-genes");
 
   /** The m draw tss arrows. */
   private boolean mDrawTssArrows = false;
@@ -109,8 +110,8 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.event.ChangeListener#changed(org.abh.common.event.ChangeEvent)
+   * @see org.abh.common.event.ChangeListener#changed(org.abh.common.event.
+   * ChangeEvent)
    */
   @Override
   public void changed(ChangeEvent e) {
@@ -129,8 +130,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   /**
    * Sets the max genes.
    *
-   * @param max
-   *          the new max genes
+   * @param max the new max genes
    */
   public void setMaxGenes(int max) {
     mMaxGenes = max;
@@ -150,8 +150,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   /**
    * Sets the show tss arrows.
    *
-   * @param draw
-   *          the new show tss arrows
+   * @param draw the new show tss arrows
    */
   public void setShowTssArrows(boolean draw) {
     mDrawTssArrows = draw;
@@ -171,8 +170,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   /**
    * Sets the show exon arrows.
    *
-   * @param draw
-   *          the new show exon arrows
+   * @param draw the new show exon arrows
    */
   public void setShowExonArrows(boolean draw) {
     mDrawExonArrows = draw;
@@ -192,8 +190,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   /**
    * Sets the view.
    *
-   * @param view
-   *          the new view
+   * @param view the new view
    */
   public void setView(GenesView view) {
     mView = view;
@@ -211,8 +208,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   /**
    * Sets the show arrows.
    *
-   * @param draw
-   *          the new show arrows
+   * @param draw the new show arrows
    */
   public void setShowArrows(boolean draw) {
     mDrawArrows = draw;

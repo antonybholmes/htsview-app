@@ -31,8 +31,7 @@ public class MouseConservationCanvasLayer extends ConservationCanvasLayer {
   /**
    * Instantiates a new mouse conservation canvas layer.
    *
-   * @param assembly
-   *          the assembly
+   * @param assembly the assembly
    */
   public MouseConservationCanvasLayer(ConservationAssembly assembly) {
     super(MouseConservationPlotTrack.TITLE, assembly, 1);

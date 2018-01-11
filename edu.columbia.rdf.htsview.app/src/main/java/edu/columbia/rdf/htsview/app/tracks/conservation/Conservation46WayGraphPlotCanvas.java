@@ -19,11 +19,11 @@ import java.awt.Color;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.TitleProperties;
-import edu.columbia.rdf.htsview.tracks.Track;
 import org.jebtk.graphplot.figure.PlotStyle;
 
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaSubFigure;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
+import edu.columbia.rdf.htsview.tracks.Track;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,34 +40,37 @@ public class Conservation46WayGraphPlotCanvas extends DnaSubFigure {
   /**
    * Instantiates a new conservation 46 way graph plot canvas.
    *
-   * @param conservationAssembly
-   *          the conservation assembly
-   * @param titlePosition
-   *          the title position
+   * @param conservationAssembly the conservation assembly
+   * @param titlePosition the title position
    */
-  public Conservation46WayGraphPlotCanvas(ConservationAssembly conservationAssembly, TitleProperties titlePosition) {
+  public Conservation46WayGraphPlotCanvas(
+      ConservationAssembly conservationAssembly,
+      TitleProperties titlePosition) {
     mLayer = new Conservation46WayGraphCanvasLayer(conservationAssembly);
 
     currentAxes().addChild(mLayer);
 
-    Track.setTitle(Conservation46WayGraphPlotTrack.TITLE, titlePosition, currentAxes());
+    Track.setTitle(Conservation46WayGraphPlotTrack.TITLE,
+        titlePosition,
+        currentAxes());
   }
 
   /**
    * Creates the.
    *
-   * @param assembly
-   *          the assembly
-   * @param titlePosition
-   *          the title position
+   * @param assembly the assembly
+   * @param titlePosition the title position
    * @return the conservation 46 way graph plot canvas
    */
-  public static Conservation46WayGraphPlotCanvas create(ConservationAssembly assembly, TitleProperties titlePosition) {
+  public static Conservation46WayGraphPlotCanvas create(
+      ConservationAssembly assembly,
+      TitleProperties titlePosition) {
 
     // mBedGraphGroup = bedGraphGroup;
     // mGenomicModel = genomicModel;
 
-    Conservation46WayGraphPlotCanvas canvas = new Conservation46WayGraphPlotCanvas(assembly, titlePosition);
+    Conservation46WayGraphPlotCanvas canvas = new Conservation46WayGraphPlotCanvas(
+        assembly, titlePosition);
 
     // set the graph limits
     canvas.currentAxes().getX1Axis().getTitle().setText(null);
@@ -91,9 +94,24 @@ public class Conservation46WayGraphPlotCanvas extends DnaSubFigure {
    * org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     mLayer.update(displayRegion);
   }

@@ -33,9 +33,11 @@ public class HTSViewInfo extends GuiAppInfo {
    * Instantiates a new reads info.
    */
   public HTSViewInfo() {
-    super("HTS View", new AppVersion(6), "Copyright (C) 2014-${year} Antony Holmes",
+    super("HTS View", new AppVersion(6),
+        "Copyright (C) 2014-${year} Antony Holmes",
         UIService.getInstance().loadIcon(HTSViewIcon.class, 32),
-        UIService.getInstance().loadIcon(HTSViewIcon.class, 128), "View read track data at multiple resolutions.");
+        UIService.getInstance().loadIcon(HTSViewIcon.class, 128),
+        "View read track data at multiple resolutions.");
   }
 
 }

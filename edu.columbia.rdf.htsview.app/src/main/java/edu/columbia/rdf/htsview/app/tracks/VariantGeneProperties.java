@@ -32,7 +32,8 @@ public class VariantGeneProperties extends GeneProperties {
   private static final long serialVersionUID = 1L;
 
   /** The Constant COLOR. */
-  private static final Color COLOR = SettingsService.getInstance().getAsColor("htsview.genes.main-variant-color");
+  private static final Color COLOR = SettingsService.getInstance()
+      .getAsColor("htsview.genes.main-variant-color");
 
   /**
    * Instantiates a new variant gene properties.

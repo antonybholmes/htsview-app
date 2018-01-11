@@ -23,8 +23,8 @@ import java.util.List;
 import javax.swing.Box;
 
 import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
-import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.bioinformatics.ui.external.samtools.SamGuiFileFilter;
+import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.combobox.ModernComboBox;
@@ -69,7 +69,8 @@ public class ImportDialog extends ModernDialogTaskWindow {
      * Instantiates a new genome chr combo.
      */
     public GenomeChrCombo() {
-      for (String genome : CollectionUtils.sort(ChromosomeSizesService.getInstance())) {
+      for (String genome : CollectionUtils
+          .sort(ChromosomeSizesService.getInstance())) {
         addScrollMenuItem(genome);
       }
     }
@@ -128,12 +129,14 @@ public class ImportDialog extends ModernDialogTaskWindow {
   /**
    * The m field organism.
    */
-  private InputFieldBox mFieldOrganism = new InputFieldBox("Organism", "Homo Sapiens", 100, 300);
+  private InputFieldBox mFieldOrganism = new InputFieldBox("Organism",
+      "Homo Sapiens", 100, 300);
 
   /**
    * The m field read length.
    */
-  private InputNumericalFieldBox mFieldReadLength = new InputNumericalFieldBox("Read Length", 101, 100, 50);
+  private InputNumericalFieldBox mFieldReadLength = new InputNumericalFieldBox(
+      "Read Length", 101, 100, 50);
 
   /**
    * The m genome chr combo.
@@ -143,8 +146,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
   /**
    * Instantiates a new import dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public ImportDialog(ModernWindow parent) {
     super(parent);
@@ -246,8 +248,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
    * Gets the read length.
    *
    * @return the read length
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public int getReadLength() throws ParseException {
     return mFieldReadLength.getAsInt();

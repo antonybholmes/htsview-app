@@ -19,15 +19,16 @@ import java.awt.Color;
 import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
-import edu.columbia.rdf.htsview.tracks.TitleProperties;
-import edu.columbia.rdf.htsview.tracks.Track;
 import org.jebtk.core.collections.ArrayListCreator;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.IterMap;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.modern.graphics.colormap.ColorMap;
+
+import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
+import edu.columbia.rdf.htsview.tracks.Track;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -54,14 +55,12 @@ public class SegmentsSubFigure extends FixedSubFigure {
   /**
    * Instantiates a new segments sub figure.
    *
-   * @param segments
-   *          the segments
-   * @param colorMap
-   *          the color map
-   * @param titlePosition
-   *          the title position
+   * @param segments the segments
+   * @param colorMap the color map
+   * @param titlePosition the title position
    */
-  public SegmentsSubFigure(SegmentSamples segments, ColorMap colorMap, TitleProperties titlePosition) {
+  public SegmentsSubFigure(SegmentSamples segments, ColorMap colorMap,
+      TitleProperties titlePosition) {
     mSegments = segments;
     mLayer = new SegmentsPlotLayer(colorMap);
 
@@ -78,19 +77,19 @@ public class SegmentsSubFigure extends FixedSubFigure {
   /**
    * Creates the.
    *
-   * @param segments
-   *          the segments
-   * @param colorMap
-   *          the color map
-   * @param titlePosition
-   *          the title position
+   * @param segments the segments
+   * @param colorMap the color map
+   * @param titlePosition the title position
    * @return the segments sub figure
    */
-  public static SegmentsSubFigure create(SegmentSamples segments, ColorMap colorMap, TitleProperties titlePosition) {
+  public static SegmentsSubFigure create(SegmentSamples segments,
+      ColorMap colorMap,
+      TitleProperties titlePosition) {
 
     // Now lets create a plot
 
-    SegmentsSubFigure canvas = new SegmentsSubFigure(segments, colorMap, titlePosition);
+    SegmentsSubFigure canvas = new SegmentsSubFigure(segments, colorMap,
+        titlePosition);
 
     return canvas;
   }
@@ -114,10 +113,18 @@ public class SegmentsSubFigure extends FixedSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion region, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion region,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
-    IterMap<String, List<Segment>> regions = DefaultTreeMap.create(new ArrayListCreator<Segment>());
+    IterMap<String, List<Segment>> regions = DefaultTreeMap
+        .create(new ArrayListCreator<Segment>());
 
     for (String name : mSegments) {
       Segments segments = mSegments.get(name).get(region.getChr());
@@ -129,7 +136,15 @@ public class SegmentsSubFigure extends FixedSubFigure {
 
     mLayer.update(regions, mColorMap);
 
-    super.update(region, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+    super.update(region,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     // GenesPlotCanvasLayer.GAP;
 

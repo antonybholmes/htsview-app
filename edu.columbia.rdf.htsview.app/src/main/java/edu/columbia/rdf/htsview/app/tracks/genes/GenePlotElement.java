@@ -22,6 +22,7 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.window.ModernWindow;
+
 import edu.columbia.rdf.matcalc.figure.ColoredPlotControl;
 
 // TODO: Auto-generated Javadoc
@@ -54,8 +55,8 @@ public class GenePlotElement extends Box {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-     * ModernClickEvent)
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * event. ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -72,8 +73,8 @@ public class GenePlotElement extends Box {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-     * ModernClickEvent)
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * event. ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -90,41 +91,43 @@ public class GenePlotElement extends Box {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-     * ModernClickEvent)
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * event. ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
-      mGenes.getExons().getLineStyle().setColor(mExonLineColor.getSelectedColor());
+      mGenes.getExons().getLineStyle()
+          .setColor(mExonLineColor.getSelectedColor());
     }
   }
 
   /**
    * Instantiates a new gene plot element.
    *
-   * @param parent
-   *          the parent
-   * @param genes
-   *          the genes
+   * @param parent the parent
+   * @param genes the genes
    */
   public GenePlotElement(ModernWindow parent, GeneProperties genes) {
     super(BoxLayout.PAGE_AXIS);
 
     mGenes = genes;
 
-    mLineColor = new ColoredPlotControl(parent, "Line", genes.getLineStyle().getColor());
+    mLineColor = new ColoredPlotControl(parent, "Line",
+        genes.getLineStyle().getColor());
 
     add(mLineColor);
 
     add(ModernPanel.createVGap());
 
-    mExonLineColor = new ColoredPlotControl(parent, "Exon Outline", genes.getExons().getLineStyle().getColor());
+    mExonLineColor = new ColoredPlotControl(parent, "Exon Outline",
+        genes.getExons().getLineStyle().getColor());
 
     add(mExonLineColor);
 
     add(ModernPanel.createVGap());
 
-    mExonFillColor = new ColoredPlotControl(parent, "Exon Fill", genes.getExons().getFillStyle().getColor());
+    mExonFillColor = new ColoredPlotControl(parent, "Exon Fill",
+        genes.getExons().getFillStyle().getColor());
 
     add(mExonFillColor);
 

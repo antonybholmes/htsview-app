@@ -20,7 +20,6 @@ import java.awt.Graphics2D;
 import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.BedGraphGroupModel;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.IterMap;
@@ -31,6 +30,8 @@ import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 import org.jebtk.modern.widget.ModernWidget;
+
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -55,8 +56,7 @@ public class SegmentsPlotLayer extends AxesLayer {
   /**
    * Instantiates a new segments plot layer.
    *
-   * @param colorMap
-   *          the color map
+   * @param colorMap the color map
    */
   public SegmentsPlotLayer(ColorMap colorMap) {
     mColorMap = colorMap; // ColorMap.createBlueWhiteRedMap();
@@ -65,12 +65,11 @@ public class SegmentsPlotLayer extends AxesLayer {
   /**
    * Update.
    *
-   * @param regions
-   *          the regions
-   * @param colorMap
-   *          the color map
+   * @param regions the regions
+   * @param colorMap the color map
    */
-  public void update(IterMap<String, List<Segment>> regions, ColorMap colorMap) {
+  public void update(IterMap<String, List<Segment>> regions,
+      ColorMap colorMap) {
     mRegions = regions;
 
     setColorMap(colorMap);
@@ -79,8 +78,7 @@ public class SegmentsPlotLayer extends AxesLayer {
   /**
    * Sets the color map.
    *
-   * @param colorMap
-   *          the new color map
+   * @param colorMap the new color map
    */
   public void setColorMap(ColorMap colorMap) {
     mColorMap = colorMap;
@@ -94,7 +92,11 @@ public class SegmentsPlotLayer extends AxesLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void drawPlot(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void drawPlot(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     if (CollectionUtils.isNullOrEmpty(mRegions)) {
       return;
@@ -111,7 +113,10 @@ public class SegmentsPlotLayer extends AxesLayer {
     int y = 0;
 
     g2.setColor(Color.LIGHT_GRAY);
-    g2.fillRect(0, y, axes.toPlotX1(axes.getX1Axis().getMax()), BedPlotTrack.BAR_HEIGHT * mRegions.size());
+    g2.fillRect(0,
+        y,
+        axes.toPlotX1(axes.getX1Axis().getMax()),
+        BedPlotTrack.BAR_HEIGHT * mRegions.size());
 
     for (String name : mRegions) {
 

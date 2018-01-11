@@ -54,7 +54,8 @@ public class ImportMultiRes {
   /**
    * The constant LOG.
    */
-  private static final Logger LOG = LoggerFactory.getLogger(ImportMultiRes.class);
+  private static final Logger LOG = LoggerFactory
+      .getLogger(ImportMultiRes.class);
 
   /**
    * The constant LOWER_MASK.
@@ -130,25 +131,18 @@ public class ImportMultiRes {
     /**
      * Instantiates a new encode worker.
      *
-     * @param parent
-     *          the parent
-     * @param samFile
-     *          the sam file
-     * @param dir
-     *          the dir
-     * @param name
-     *          the name
-     * @param organism
-     *          the organism
-     * @param genome
-     *          the genome
-     * @param readLength
-     *          the read length
-     * @param minRes
-     *          the min res
+     * @param parent the parent
+     * @param samFile the sam file
+     * @param dir the dir
+     * @param name the name
+     * @param organism the organism
+     * @param genome the genome
+     * @param readLength the read length
+     * @param minRes the min res
      */
-    public EncodeWorker(ModernWindow parent, Path samFile, Path dir, String name, String organism, String genome,
-        int readLength, int minRes) {
+    public EncodeWorker(ModernWindow parent, Path samFile, Path dir,
+        String name, String organism, String genome, int readLength,
+        int minRes) {
       mParent = parent;
       mSamFile = samFile;
       mDir = dir;
@@ -179,7 +173,8 @@ public class ImportMultiRes {
      */
     @Override
     public void done() {
-      ModernMessageDialog.createInformationDialog(mParent, PathUtils.getName(mSamFile) + " has been imported.",
+      ModernMessageDialog.createInformationDialog(mParent,
+          PathUtils.getName(mSamFile) + " has been imported.",
           "You can now load this track.");
     }
   }
@@ -217,14 +212,10 @@ public class ImportMultiRes {
     /**
      * Instantiates a new block.
      *
-     * @param start
-     *          the start
-     * @param width
-     *          the width
-     * @param so
-     *          the so
-     * @param eo
-     *          the eo
+     * @param start the start
+     * @param width the width
+     * @param so the so
+     * @param eo the eo
      */
     public Block(int start, int width, int so, int eo) {
       this.start = start;
@@ -263,23 +254,20 @@ public class ImportMultiRes {
   /**
    * Creates the meta file.
    *
-   * @param dir
-   *          the dir
-   * @param name
-   *          the name
-   * @param organism
-   *          the organism
-   * @param genome
-   *          the genome
-   * @param readLength
-   *          the read length
-   * @param reads
-   *          the reads
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param dir the dir
+   * @param name the name
+   * @param organism the organism
+   * @param genome the genome
+   * @param readLength the read length
+   * @param reads the reads
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static void createMetaFile(Path dir, String name, String organism, String genome, int readLength, int reads)
-      throws IOException {
+  public static void createMetaFile(Path dir,
+      String name,
+      String organism,
+      String genome,
+      int readLength,
+      int reads) throws IOException {
     Json json = new JsonObject();
 
     json.add("Name", name);
@@ -295,31 +283,31 @@ public class ImportMultiRes {
   /**
    * Encode.
    *
-   * @param samFile
-   *          the sam file
-   * @param dir
-   *          the dir
-   * @param name
-   *          the name
-   * @param organism
-   *          the organism
-   * @param genome
-   *          the genome
-   * @param readLength
-   *          the read length
-   * @param minRes
-   *          the min res
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param samFile the sam file
+   * @param dir the dir
+   * @param name the name
+   * @param organism the organism
+   * @param genome the genome
+   * @param readLength the read length
+   * @param minRes the min res
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public static void encode(Path samFile, Path dir, String name, String organism, String genome, int readLength,
+  public static void encode(Path samFile,
+      Path dir,
+      String name,
+      String organism,
+      String genome,
+      int readLength,
       int minRes) throws IOException, ParseException {
 
     FileUtils.mkdir(dir);
 
-    int reads = encodeMultiResFileOrdered(samFile, dir, minRes, genome, readLength);
+    int reads = encodeMultiResFileOrdered(samFile,
+        dir,
+        minRes,
+        genome,
+        readLength);
 
     createMetaFile(dir, name, organism, genome, readLength, reads);
 
@@ -328,11 +316,9 @@ public class ImportMultiRes {
   /**
    * Read count.
    *
-   * @param samFile
-   *          the sam file
+   * @param samFile the sam file
    * @return the int
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static int readCount(Path samFile) throws IOException {
     LOG.info("Counting reads {}...", samFile);
@@ -353,9 +339,9 @@ public class ImportMultiRes {
   }
 
   /*
-   * public static void encodeMultiResFile(Path samFile, Path dir, Chromosome chr,
-   * int minRes, String genome, int readLength, int readCount) throws IOException,
-   * ParseException {
+   * public static void encodeMultiResFile(Path samFile, Path dir, Chromosome
+   * chr, int minRes, String genome, int readLength, int readCount) throws
+   * IOException, ParseException {
    * 
    * LOG.info("Finding read starts {}...", samFile);
    * 
@@ -391,24 +377,20 @@ public class ImportMultiRes {
   /**
    * Import an ordered sam file.
    *
-   * @param samFile
-   *          the sam file
-   * @param dir
-   *          the dir
-   * @param minRes
-   *          the min res
-   * @param genome
-   *          the genome
-   * @param readLength
-   *          the read length
+   * @param samFile the sam file
+   * @param dir the dir
+   * @param minRes the min res
+   * @param genome the genome
+   * @param readLength the read length
    * @return the int
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public static int encodeMultiResFileOrdered(Path samFile, Path dir, int minRes, String genome, int readLength)
-      throws IOException, ParseException {
+  public static int encodeMultiResFileOrdered(Path samFile,
+      Path dir,
+      int minRes,
+      String genome,
+      int readLength) throws IOException, ParseException {
 
     LOG.info("Finding read starts {}...", samFile);
 
@@ -468,26 +450,24 @@ public class ImportMultiRes {
   /**
    * Encode multi res file.
    *
-   * @param samFile
-   *          the sam file
-   * @param dir
-   *          the dir
-   * @param chr
-   *          the chr
-   * @param minRes
-   *          the min res
-   * @param readLength
-   *          the read length
-   * @param starts
-   *          the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param samFile the sam file
+   * @param dir the dir
+   * @param chr the chr
+   * @param minRes the min res
+   * @param readLength the read length
+   * @param starts the starts
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static void encodeMultiResFile(Path samFile, Path dir, Chromosome chr, int minRes, int readLength,
+  public static void encodeMultiResFile(Path samFile,
+      Path dir,
+      Chromosome chr,
+      int minRes,
+      int readLength,
       List<Integer> starts) throws IOException {
     int blockCount = 0;
 
-    Map<Integer, IterMap<Integer, Block>> blockMap = DefaultTreeMap.create(new TreeMapCreator<Integer, Block>());
+    Map<Integer, IterMap<Integer, Block>> blockMap = DefaultTreeMap
+        .create(new TreeMapCreator<Integer, Block>());
 
     for (int i = 0; i < starts.size(); ++i) {
       int s = starts.get(i);
@@ -531,7 +511,8 @@ public class ImportMultiRes {
       int bin = child.start / binWidth;
       int bs = bin * binWidth;
 
-      // System.err.println("new bin " + binWidth + " " + bs + " start:" + child.start
+      // System.err.println("new bin " + binWidth + " " + bs + " start:" +
+      // child.start
       // + " " + MAX_BLOCK_WIDTH);
 
       if (binWidth <= MAX_BLOCK_WIDTH) {
@@ -561,7 +542,8 @@ public class ImportMultiRes {
         // blockMap.get(binWidth).get(bs).children.add(0, child);
         blockMap.get(binWidth).get(bs).children.add(child);
 
-        // System.err.println("add child " + bs + " " + binWidth + " " + child.start + "
+        // System.err.println("add child " + bs + " " + binWidth + " " +
+        // child.start + "
         // " + child.width);
       }
     }
@@ -603,7 +585,8 @@ public class ImportMultiRes {
     int dataStartOffset = blockCount * BLOCK_SIZE_BYTES;
 
     Path file = dir.resolve(chr.toString() + ".reads.rtb");
-    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(FileUtils.newOutputStream(file)));
+    DataOutputStream out = new DataOutputStream(
+        new BufferedOutputStream(FileUtils.newOutputStream(file)));
 
     LOG.info("Writing {}...", file);
 
@@ -625,13 +608,15 @@ public class ImportMultiRes {
           out.writeInt(block.width);
 
           if (block.start == 199999000) {
-            System.err
-                .println("write block " + block.start + " " + block.width + " " + block.children.size() + " " + fo);
-            System.err.println("write block2 " + dataStartOffset + " " + block.endOffset + " "
-                + (dataStartOffset + block.endOffset * READ_START_BYTES));
+            System.err.println("write block " + block.start + " " + block.width
+                + " " + block.children.size() + " " + fo);
+            System.err.println(
+                "write block2 " + dataStartOffset + " " + block.endOffset + " "
+                    + (dataStartOffset + block.endOffset * READ_START_BYTES));
           }
 
-          // out.writeInt(dataStartOffset + block.startOffset * READ_START_BYTES);
+          // out.writeInt(dataStartOffset + block.startOffset *
+          // READ_START_BYTES);
           // out.writeInt(dataStartOffset + block.endOffset * READ_START_BYTES);
 
           out.writeInt(block.startOffset);
@@ -666,12 +651,9 @@ public class ImportMultiRes {
   /**
    * Write int to bytes.
    *
-   * @param v
-   *          the v
-   * @param bytes
-   *          the bytes
-   * @param p
-   *          the p
+   * @param v the v
+   * @param bytes the bytes
+   * @param p the p
    * @return the int
    */
   public static int writeIntToBytes(int v, byte[] bytes, int p) {
@@ -686,8 +668,7 @@ public class ImportMultiRes {
   /**
    * Count children.
    *
-   * @param block
-   *          the block
+   * @param block the block
    * @return the int
    */
   public static int countChildren(final Block block) {
@@ -717,8 +698,7 @@ public class ImportMultiRes {
   /**
    * Gets the min s.
    *
-   * @param block
-   *          the block
+   * @param block the block
    * @return the min s
    */
   public static int getMinS(final Block block) {
@@ -748,8 +728,7 @@ public class ImportMultiRes {
   /**
    * Gets the max s.
    *
-   * @param block
-   *          the block
+   * @param block the block
    * @return the max s
    */
   public static int getMaxS(final Block block) {

@@ -43,8 +43,7 @@ public class GenomicRegionsPanel extends ModernWidget {
   /**
    * Instantiates a new regions panel.
    *
-   * @param genomeModel
-   *          the genome model
+   * @param genomeModel the genome model
    */
   public GenomicRegionsPanel() {
     ModernScrollPane scrollPane = new ModernScrollPane(mGenesField);
@@ -60,16 +59,17 @@ public class GenomicRegionsPanel extends ModernWidget {
    * Gets the regions.
    *
    * @return the regions
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public List<GenomicRegion> getRegions() {
-    List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(), TextUtils.NEW_LINE_DELIMITER);
+    List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(),
+        TextUtils.NEW_LINE_DELIMITER);
 
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>();
 
     for (String line : lines) {
-      // line = line.replaceAll(TextUtils.COMMA_DELIMITER, TextUtils.EMPTY_STRING);
+      // line = line.replaceAll(TextUtils.COMMA_DELIMITER,
+      // TextUtils.EMPTY_STRING);
 
       if (line.length() > 0) {
         for (String id : TextUtils.scSplit(line)) {
@@ -88,8 +88,7 @@ public class GenomicRegionsPanel extends ModernWidget {
   /**
    * Sets the text.
    *
-   * @param text
-   *          the new text
+   * @param text the new text
    */
   public void setText(String text) {
     mGenesField.setText(text);

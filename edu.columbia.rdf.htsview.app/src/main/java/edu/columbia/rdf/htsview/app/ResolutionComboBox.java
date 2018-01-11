@@ -15,8 +15,9 @@
  */
 package edu.columbia.rdf.htsview.app;
 
-import edu.columbia.rdf.htsview.tracks.ResolutionService;
 import org.jebtk.modern.combobox.ModernComboBox;
+
+import edu.columbia.rdf.htsview.tracks.ResolutionService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,7 +35,8 @@ public class ResolutionComboBox extends ModernComboBox {
    * 
    * 
    * 
-   * @Override public void clicked(ModernClickEvent e) { mText1 = e.getMessage();
+   * @Override public void clicked(ModernClickEvent e) { mText1 =
+   * e.getMessage();
    * 
    * repaint(); }
    * 

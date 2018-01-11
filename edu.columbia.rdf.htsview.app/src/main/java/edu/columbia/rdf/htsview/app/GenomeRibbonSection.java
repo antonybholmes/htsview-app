@@ -16,9 +16,8 @@
 package edu.columbia.rdf.htsview.app;
 
 import org.jebtk.bioinformatics.genomic.GenesService;
-import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.bioinformatics.ui.GenomeModel;
-import org.jebtk.modern.UI;
+import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -36,7 +35,8 @@ import org.jebtk.modern.ribbon.RibbonSize;
  *
  * @author Antony Holmes Holmes
  */
-public class GenomeRibbonSection extends RibbonSection implements ModernClickListener {
+public class GenomeRibbonSection extends RibbonSection
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -44,7 +44,8 @@ public class GenomeRibbonSection extends RibbonSection implements ModernClickLis
   private static final long serialVersionUID = 1L;
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance().loadIcon("genome", 24);
+  private static final ModernIcon ICON = UIService.getInstance()
+      .loadIcon("genome", 24);
 
   /**
    * The m human button.
@@ -71,10 +72,8 @@ public class GenomeRibbonSection extends RibbonSection implements ModernClickLis
   /**
    * Instantiates a new genome ribbon section.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public GenomeRibbonSection(Ribbon ribbon, GenomeModel model) {
     super(ribbon, "Genome");
@@ -85,11 +84,14 @@ public class GenomeRibbonSection extends RibbonSection implements ModernClickLis
 
     ModernPopupMenu popup = new ModernPopupMenu();
 
-    for (String genome : CollectionUtils.sort(GenesService.getInstance().getGenomes())) {
-      popup.addMenuItem(new ModernTwoLineMenuItem(genome, "Switch to the " + genome + " genome.", ICON));
+    for (String genome : CollectionUtils
+        .sort(GenesService.getInstance().getGenomes())) {
+      popup.addMenuItem(new ModernTwoLineMenuItem(genome,
+          "Switch to the " + genome + " genome.", ICON));
     }
 
-    mButton = new RibbonLargeDropDownButton("Genome", popup).setMinWidth(RibbonSize.COMPACT, 72);
+    mButton = new RibbonLargeDropDownButton("Genome", popup)
+        .setMinWidth(RibbonSize.COMPACT, 72);
     mButton.setToolTip("Genome", "Change the genome reference.");
     add(mButton);
 
@@ -121,8 +123,7 @@ public class GenomeRibbonSection extends RibbonSection implements ModernClickLis
   /**
    * Change.
    *
-   * @param e
-   *          the e
+   * @param e the e
    */
   private void change(ModernClickEvent e) {
     // if (mHumanButton.isSelected()) {
@@ -140,8 +141,8 @@ public class GenomeRibbonSection extends RibbonSection implements ModernClickLis
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

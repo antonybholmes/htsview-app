@@ -41,7 +41,8 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
 
-  private static final Font DNA_FONT = FontService.getInstance().loadFont("Courier New", 16);
+  private static final Font DNA_FONT = FontService.getInstance()
+      .loadFont("Courier New", 16);
 
   /** The m display region. */
   private GenomicRegion mDisplayRegion;
@@ -57,12 +58,11 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
   /**
    * Instantiates a new dna bases canvas layer.
    *
-   * @param genome
-   *          the genome
-   * @param assembly
-   *          the assembly
+   * @param genome the genome
+   * @param assembly the assembly
    */
-  public DnaBasesCanvasLayer(String genome, GenomeAssembly assembly, boolean colorMode) {
+  public DnaBasesCanvasLayer(String genome, GenomeAssembly assembly,
+      boolean colorMode) {
     mGenome = genome;
     mAssembly = assembly;
     mColorMode = colorMode;
@@ -71,8 +71,7 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
+   * @param displayRegion the display region
    */
   public void update(GenomicRegion displayRegion) {
     mDisplayRegion = displayRegion;
@@ -86,7 +85,11 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     // So that we don't attempt to pull a whole chromosome
     if (mDisplayRegion.getLength() <= DnaPlotTrack.MAX_DISPLAY_BASES) {
@@ -96,7 +99,11 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
     }
   }
 
-  private void plotBases(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  private void plotBases(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     g2.setFont(DNA_FONT);
 
@@ -108,7 +115,8 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
     int hbw = bw / 2;
 
     try {
-      SequenceRegion sequence = mAssembly.getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
+      SequenceRegion sequence = mAssembly
+          .getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
 
@@ -146,7 +154,8 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
 
         String s = Character.toString(c);
 
-        x1 = axes.toPlotX1(start) - hbw; // (axes.toPlotX1(start) + axes.toPlotX1(start + 1)) / 2 - hbw;
+        x1 = axes.toPlotX1(start) - hbw; // (axes.toPlotX1(start) +
+                                         // axes.toPlotX1(start + 1)) / 2 - hbw;
         // w = axes.toPlotX1(start + 1) - x1;
         // x1 += (w - bw) / 2;
 
@@ -159,7 +168,11 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
     }
   }
 
-  private void plotColors(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  private void plotColors(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_COLOR_BASES) {
       return;
@@ -170,12 +183,14 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
     int h = axes.getInternalSize().getH();
 
     try {
-      SequenceRegion sequence = mAssembly.getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
+      SequenceRegion sequence = mAssembly
+          .getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
       int w;
 
-      // System.err.println(w + " " + space.getLayoutProperties().getPlotSize().getW()
+      // System.err.println(w + " " +
+      // space.getLayoutProperties().getPlotSize().getW()
       // + " " + mDisplayRegion.getLength());
 
       for (char c : sequence.getSequence().toArray()) {

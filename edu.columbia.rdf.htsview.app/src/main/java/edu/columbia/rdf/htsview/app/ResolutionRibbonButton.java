@@ -38,7 +38,8 @@ public class ResolutionRibbonButton extends RibbonLargeDropDownButton {
    * 
    * 
    * 
-   * @Override public void clicked(ModernClickEvent e) { mText1 = e.getMessage();
+   * @Override public void clicked(ModernClickEvent e) { mText1 =
+   * e.getMessage();
    * 
    * repaint(); }
    * 
@@ -59,9 +60,8 @@ public class ResolutionRibbonButton extends RibbonLargeDropDownButton {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.ui.ribbon2.RibbonLargeDropDownMenuButton2#drawForegroundAA(
-   * java.awt.Graphics2D)
+   * @see org.abh.common.ui.ui.ribbon2.RibbonLargeDropDownMenuButton2#
+   * drawForegroundAA( java.awt.Graphics2D)
    */
   @Override
   public void drawForegroundAAText(Graphics2D g2) {

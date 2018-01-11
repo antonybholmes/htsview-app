@@ -109,25 +109,18 @@ public class Import {
     /**
      * Instantiates a new encode worker.
      *
-     * @param parent
-     *          the parent
-     * @param samFile
-     *          the sam file
-     * @param dir
-     *          the dir
-     * @param name
-     *          the name
-     * @param organism
-     *          the organism
-     * @param genome
-     *          the genome
-     * @param readLength
-     *          the read length
-     * @param windows
-     *          the windows
+     * @param parent the parent
+     * @param samFile the sam file
+     * @param dir the dir
+     * @param name the name
+     * @param organism the organism
+     * @param genome the genome
+     * @param readLength the read length
+     * @param windows the windows
      */
-    public EncodeWorker(ModernWindow parent, Path samFile, Path dir, String name, String organism, String genome,
-        int readLength, List<Integer> windows) {
+    public EncodeWorker(ModernWindow parent, Path samFile, Path dir,
+        String name, String organism, String genome, int readLength,
+        List<Integer> windows) {
       mParent = parent;
       mSamFile = samFile;
       mDir = dir;
@@ -168,7 +161,8 @@ public class Import {
      */
     @Override
     public void done() {
-      ModernMessageDialog.createInformationDialog(mParent, PathUtils.getName(mSamFile) + " has been imported.",
+      ModernMessageDialog.createInformationDialog(mParent,
+          PathUtils.getName(mSamFile) + " has been imported.",
           "You can now load this track.");
     }
   }
@@ -176,23 +170,20 @@ public class Import {
   /**
    * Creates the meta file.
    *
-   * @param dir
-   *          the dir
-   * @param name
-   *          the name
-   * @param organism
-   *          the organism
-   * @param genome
-   *          the genome
-   * @param readLength
-   *          the read length
-   * @param reads
-   *          the reads
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param dir the dir
+   * @param name the name
+   * @param organism the organism
+   * @param genome the genome
+   * @param readLength the read length
+   * @param reads the reads
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static void createMetaFile(Path dir, String name, String organism, String genome, int readLength, int reads)
-      throws IOException {
+  public static void createMetaFile(Path dir,
+      String name,
+      String organism,
+      String genome,
+      int readLength,
+      int reads) throws IOException {
 
     Path file = dir.resolve("meta.json");
 
@@ -213,11 +204,9 @@ public class Import {
   /**
    * Read count.
    *
-   * @param samFile
-   *          the sam file
+   * @param samFile the sam file
    * @return the int
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static int readCount(Path samFile) throws IOException {
     BufferedReader reader = FileUtils.newBufferedReader(samFile);
@@ -238,27 +227,24 @@ public class Import {
   /**
    * Encode sam16 bit.
    *
-   * @param samFile
-   *          the sam file
-   * @param dir
-   *          the dir
-   * @param chr
-   *          the chr
-   * @param window
-   *          the window
-   * @param genome
-   *          the genome
-   * @param readLength
-   *          the read length
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param samFile the sam file
+   * @param dir the dir
+   * @param chr the chr
+   * @param window the window
+   * @param genome the genome
+   * @param readLength the read length
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public static void encodeSam16Bit(Path samFile, Path dir, Chromosome chr, int window, String genome, int readLength)
-      throws IOException, ParseException {
+  public static void encodeSam16Bit(Path samFile,
+      Path dir,
+      Chromosome chr,
+      int window,
+      String genome,
+      int readLength) throws IOException, ParseException {
 
-    int size = (ChromosomeSizesService.getInstance().getSizes(genome).getSize(chr) / window) + 1;
+    int size = (ChromosomeSizesService.getInstance().getSizes(genome)
+        .getSize(chr) / window) + 1;
 
     LOG.info("Reading {} {} {}...", dir, samFile, size);
 
@@ -275,7 +261,8 @@ public class Import {
       while ((line = reader.readLine()) != null) {
         tokens = TextUtils.tabSplit(line);
 
-        Chromosome c = ChromosomeService.getInstance().guess(samFile, tokens.get(2));
+        Chromosome c = ChromosomeService.getInstance().guess(samFile,
+            tokens.get(2));
 
         if (c == null || (currentChr != null && !c.equals(currentChr))) {
           break;

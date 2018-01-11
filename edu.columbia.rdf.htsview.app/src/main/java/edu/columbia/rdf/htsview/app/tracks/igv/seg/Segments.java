@@ -42,8 +42,7 @@ public class Segments implements Iterable<Segment> {
   /**
    * Adds the.
    *
-   * @param segment
-   *          the segment
+   * @param segment the segment
    */
   public void add(Segment segment) {
     mSegments.add(segment);
@@ -69,8 +68,7 @@ public class Segments implements Iterable<Segment> {
   /**
    * Search for segments in a region.
    *
-   * @param region
-   *          the region
+   * @param region the region
    * @return the list
    */
   public List<Segment> search(GenomicRegion region) {

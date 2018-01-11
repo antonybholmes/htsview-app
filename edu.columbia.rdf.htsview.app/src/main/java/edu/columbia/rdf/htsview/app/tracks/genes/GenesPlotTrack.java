@@ -19,11 +19,6 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
-import edu.columbia.rdf.htsview.tracks.TitleProperties;
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonBuilder;
@@ -35,6 +30,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
+import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
+import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -56,10 +56,8 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Instantiates a new genes plot track.
    *
-   * @param name
-   *          the name
-   * @param id
-   *          the id
+   * @param name the name
+   * @param id the id
    */
   public GenesPlotTrack(String name, String id) {
     super(name);
@@ -93,8 +91,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Sets the other color.
    *
-   * @param color
-   *          the new other color
+   * @param color the new other color
    */
   public void setOtherColor(Color color) {
     mGenesProperties.getOtherGene().getLineStyle().setColor(color);
@@ -124,22 +121,21 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Sets the UTR fill color.
    *
-   * @param color
-   *          the new UTR fill color
+   * @param color the new UTR fill color
    */
   public void setUTRFillColor(Color color) {
     mGenesProperties.getUTR().getFillStyle().setColor(color);
   }
 
   public Color getExonFillColor() {
-    return mGenesProperties.getVariantGene().getExons().getLineStyle().getColor();
+    return mGenesProperties.getVariantGene().getExons().getLineStyle()
+        .getColor();
   }
 
   /**
    * Sets the UTR fill color.
    *
-   * @param color
-   *          the new UTR fill color
+   * @param color the new UTR fill color
    */
   public void setArrowColor(Color color) {
     mGenesProperties.setArrowColor(color);
@@ -153,8 +149,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Sets the UTR fill color.
    *
-   * @param color
-   *          the new UTR fill color
+   * @param color the new UTR fill color
    */
   public void setExonFillColor(Color color) {
     mGenesProperties.getVariantGene().getExons().getLineStyle().setColor(color);
@@ -173,8 +168,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Sets the show tss arrows.
    *
-   * @param show
-   *          the new show tss arrows
+   * @param show the new show tss arrows
    */
   public void setShowTssArrows(boolean show) {
     mGenesProperties.setShowTssArrows(show);
@@ -192,8 +186,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Sets the show exon arrows.
    *
-   * @param show
-   *          the new show exon arrows
+   * @param show the new show exon arrows
    */
   public void setShowExonArrows(boolean show) {
     mGenesProperties.setShowExonArrows(show);
@@ -211,8 +204,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Sets the show arrows.
    *
-   * @param show
-   *          the new show arrows
+   * @param show the new show arrows
    */
   public void setShowArrows(boolean show) {
     mGenesProperties.setShowArrows(show);
@@ -221,8 +213,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Sets the view.
    *
-   * @param view
-   *          the new view
+   * @param view the new view
    */
   public void setView(GenesView view) {
     mGenesProperties.setView(view);
@@ -244,12 +235,14 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
     //
     // Display some genes
     //
 
-    mSubFigure = GenesPlotSubFigure.create(getName(), mGenesProperties, genome, mGenesId, titlePosition);
+    mSubFigure = GenesPlotSubFigure
+        .create(getName(), mGenesProperties, genome, mGenesId, titlePosition);
 
     setMargins(getName(), titlePosition, mSubFigure);
 
@@ -264,8 +257,11 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
     //
     // Display some genes
     //
@@ -317,17 +313,15 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /**
    * Process json view.
    *
-   * @param name
-   *          The name of the track.
-   * @param annotationTree
-   *          The annotation tree of current tracks
-   * @param trackJson
-   *          The json to process
-   * @param rootNode
-   *          The root node o
+   * @param name The name of the track.
+   * @param annotationTree The annotation tree of current tracks
+   * @param trackJson The json to process
+   * @param rootNode The root node o
    * @return true, if successful
    */
-  public boolean processJsonView(String name, AnnotationTracksTree annotationTree, Json trackJson,
+  public boolean processJsonView(String name,
+      AnnotationTracksTree annotationTree,
+      Json trackJson,
       TreeNode<Track> rootNode) {
     TreeNode<Track> node = annotationTree.matchFirst(name);
 
@@ -339,13 +333,15 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
       track.setFillColor(color);
     }
 
-    Color otherColor = ColorUtils.decodeHtmlColor(trackJson.getAsString("other-color"));
+    Color otherColor = ColorUtils
+        .decodeHtmlColor(trackJson.getAsString("other-color"));
 
     if (otherColor != null) {
       track.setOtherColor(otherColor);
     }
 
-    Color utrColor = ColorUtils.decodeHtmlColor(trackJson.getAsString("utr-color"));
+    Color utrColor = ColorUtils
+        .decodeHtmlColor(trackJson.getAsString("utr-color"));
 
     if (utrColor != null) {
       track.setUTRFillColor(utrColor);
@@ -377,9 +373,12 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
     element.setAttribute("name", getName());
     element.setAttribute("color", ColorUtils.toHtml(getFillColor()));
     element.setAttribute("other-color", ColorUtils.toHtml(getOtherColor()));
-    element.setAttribute("show-tss-arrows", getShowTssArrows() ? TextUtils.TRUE : TextUtils.FALSE);
-    element.setAttribute("show-exon-arrows", getShowExonArrows() ? TextUtils.TRUE : TextUtils.FALSE);
-    element.setAttribute("show-arrows", getShowArrows() ? TextUtils.TRUE : TextUtils.FALSE);
+    element.setAttribute("show-tss-arrows",
+        getShowTssArrows() ? TextUtils.TRUE : TextUtils.FALSE);
+    element.setAttribute("show-exon-arrows",
+        getShowExonArrows() ? TextUtils.TRUE : TextUtils.FALSE);
+    element.setAttribute("show-arrows",
+        getShowArrows() ? TextUtils.TRUE : TextUtils.FALSE);
     element.setAttribute("view", getView().toString().toLowerCase());
 
     return element;

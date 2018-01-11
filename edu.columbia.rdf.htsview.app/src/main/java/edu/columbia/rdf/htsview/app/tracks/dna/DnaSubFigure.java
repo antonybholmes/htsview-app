@@ -18,9 +18,10 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 import java.awt.Color;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.graphplot.figure.PlotStyle;
+
 import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
 import edu.columbia.rdf.htsview.tracks.Track;
-import org.jebtk.graphplot.figure.PlotStyle;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,10 +40,24 @@ public abstract class DnaSubFigure extends FixedSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
-    super.update(displayRegion, resolution, yMax, width, Track.SMALL_TRACK_SIZE.height, margin, lineColor, fillColor,
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        Track.SMALL_TRACK_SIZE.height,
+        margin,
+        lineColor,
+        fillColor,
         style);
   }
 }

@@ -28,8 +28,7 @@ public class RefSeqGenesPlotTrack extends GenesPlotTrack {
   /**
    * Instantiates a new ref seq genes plot track.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public RefSeqGenesPlotTrack() throws IOException {
     super("RefSeq genes", "refseq");

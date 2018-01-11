@@ -29,8 +29,7 @@ public class Conservation46WayCanvasLayer extends ConservationCanvasLayer {
   /**
    * Instantiates a new conservation 46 way canvas layer.
    *
-   * @param assembly
-   *          the assembly
+   * @param assembly the assembly
    */
   public Conservation46WayCanvasLayer(ConservationAssembly assembly) {
     super(Conservation46WayPlotTrack.TITLE, assembly, 100);

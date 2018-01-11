@@ -30,13 +30,15 @@ import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
+
 import edu.columbia.rdf.matcalc.colormap.ColorMapButton;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SegEditDialog.
  */
-public class SegEditDialog extends ModernDialogTaskWindow implements ModernClickListener {
+public class SegEditDialog extends ModernDialogTaskWindow
+    implements ModernClickListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -53,10 +55,8 @@ public class SegEditDialog extends ModernDialogTaskWindow implements ModernClick
   /**
    * Instantiates a new seg edit dialog.
    *
-   * @param parent
-   *          the parent
-   * @param track
-   *          the track
+   * @param parent the parent
+   * @param track the track
    */
   public SegEditDialog(ModernWindow parent, SegPlotTrack track) {
     super(parent);
@@ -92,7 +92,8 @@ public class SegEditDialog extends ModernDialogTaskWindow implements ModernClick
     int[] rows = { ModernWidget.WIDGET_HEIGHT };
     int[] cols = { 80, 300 };
 
-    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Name"));
     matrixPanel.add(new ModernTextBorderPanel(mNameField));

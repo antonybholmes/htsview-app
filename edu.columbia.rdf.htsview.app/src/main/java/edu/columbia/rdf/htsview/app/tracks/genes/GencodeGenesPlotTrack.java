@@ -26,8 +26,7 @@ public class GencodeGenesPlotTrack extends GenesPlotTrack {
   /**
    * Instantiates a new gencode genes plot track.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public GencodeGenesPlotTrack() throws IOException {
     super("GENCODE genes", "gencode");

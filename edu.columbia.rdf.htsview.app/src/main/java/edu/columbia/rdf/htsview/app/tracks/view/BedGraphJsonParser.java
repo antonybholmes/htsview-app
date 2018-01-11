@@ -22,10 +22,6 @@ import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedGraphPlotTrack;
-import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
@@ -33,7 +29,10 @@ import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.tree.ModernTree;
 import org.jebtk.modern.window.ModernWindow;
 
-import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedGraphPlotTrack;
+import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -45,14 +44,18 @@ public class BedGraphJsonParser extends TrackJsonParser {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
-   * window.ModernWindow, java.lang.String, int,
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.
+   * ui. window.ModernWindow, java.lang.String, int,
    * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
    * org.abh.common.tree.TreeNode)
    */
   @Override
-  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
-      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+  public boolean parse(ModernWindow window,
+      final String name,
+      int id,
+      ModernTree<Track> annotationTree,
+      final Json trackJson,
+      TreeNode<Track> rootNode) throws IOException {
     Color color = null;
 
     if (trackJson.containsKey("color")) {
@@ -72,7 +75,8 @@ public class BedGraphJsonParser extends TrackJsonParser {
         for (UCSCTrack bedGraph : CollectionUtils.reverse(bedGraphs)) {
           bedGraph.setColor(color);
 
-          TrackTreeNode child = new TrackTreeNode(new BedGraphPlotTrack(bedGraph, file));
+          TrackTreeNode child = new TrackTreeNode(
+              new BedGraphPlotTrack(bedGraph, file));
 
           rootNode.addChild(child);
         }

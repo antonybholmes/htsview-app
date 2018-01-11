@@ -47,12 +47,9 @@ public class FormatPanel extends ModernWidget {
   /**
    * Instantiates a new format panel.
    *
-   * @param parent
-   *          the parent
-   * @param space
-   *          the space
-   * @param genes
-   *          the genes
+   * @param parent the parent
+   * @param space the space
+   * @param genes the genes
    */
   public FormatPanel(ModernWindow parent, Axes space, GenesProperties genes) {
 

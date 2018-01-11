@@ -27,7 +27,6 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.MatrixNormalization;
 import org.jebtk.core.io.Temp;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.status.StatusService;
 
@@ -52,22 +51,16 @@ public class CountTask extends SwingWorker<Void, Void> {
   /**
    * Instantiates a new read dist task.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param tracks
-   *          the tracks
-   * @param regions
-   *          the regions
-   * @param padding
-   *          the padding
-   * @param window
-   *          the window
-   * @param average
-   *          the average
+   * @param parent the parent
+   * @param name the name
+   * @param tracks the tracks
+   * @param regions the regions
+   * @param padding the padding
+   * @param window the window
+   * @param average the average
    */
-  public CountTask(List<SamplePlotTrack> tracks, List<GenomicRegion> regions, NormalizationMethod norm) {
+  public CountTask(List<SamplePlotTrack> tracks, List<GenomicRegion> regions,
+      NormalizationMethod norm) {
     mTracks = tracks;
     mLocations = regions;
     mNorm = norm;
@@ -93,8 +86,9 @@ public class CountTask extends SwingWorker<Void, Void> {
       window = MainMatCalc.main(new BioModuleLoader());
 
       window.openMatrix(normMatrix); // .openFile(normFile).rowAnnotations(1).autoOpen();
-    } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException
-        | FontFormatException | UnsupportedLookAndFeelException e) {
+    } catch (IOException | ClassNotFoundException | InstantiationException
+        | IllegalAccessException | FontFormatException
+        | UnsupportedLookAndFeelException e) {
       e.printStackTrace();
     }
 
@@ -116,11 +110,11 @@ public class CountTask extends SwingWorker<Void, Void> {
    * 
    * @return
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private DataFrame createCountsFile(Path countsFile) throws IOException {
-    DataFrame matrix = DataFrame.createNumericalMatrix(mLocations.size(), mTracks.size());
+    DataFrame matrix = DataFrame.createNumericalMatrix(mLocations.size(),
+        mTracks.size());
 
     for (int i = 0; i < mTracks.size(); ++i) {
       matrix.setColumnName(i, mTracks.get(i).getName());
@@ -206,17 +200,14 @@ public class CountTask extends SwingWorker<Void, Void> {
   /**
    * Get the counts and subtract the input if necessary.
    *
-   * @param track
-   *          the track
-   * @param ext
-   *          the ext
-   * @param mWindow
-   *          the m window
+   * @param track the track
+   * @param ext the ext
+   * @param mWindow the m window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private int getCounts(SamplePlotTrack track, GenomicRegion r) throws IOException {
+  private int getCounts(SamplePlotTrack track, GenomicRegion r)
+      throws IOException {
     return track.getAssembly().getStarts(track.getSample(), r, -1).size();
   }
 }

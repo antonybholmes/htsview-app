@@ -32,10 +32,10 @@ import org.jebtk.modern.graphics.DrawingContext;
 /**
  * The Class RegionPlotLayerCanvas.
  *
- * @param <T>
- *          the generic type
+ * @param <T> the generic type
  */
-public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedLayer {
+public class RegionPlotLayerCanvas<T extends GenomicRegion>
+    extends AxesClippedLayer {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -58,8 +58,7 @@ public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedL
   /**
    * Instantiates a new region plot layer canvas.
    *
-   * @param color
-   *          the color
+   * @param color the color
    */
   public RegionPlotLayerCanvas(Color color) {
     mColor = color;
@@ -68,8 +67,7 @@ public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedL
   /**
    * Update.
    *
-   * @param regions
-   *          the regions
+   * @param regions the regions
    */
   public void update(List<T> regions) {
     mRegions = regions;
@@ -83,7 +81,11 @@ public class RegionPlotLayerCanvas<T extends GenomicRegion> extends AxesClippedL
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     if (CollectionUtils.isNullOrEmpty(mRegions)) {
       return;

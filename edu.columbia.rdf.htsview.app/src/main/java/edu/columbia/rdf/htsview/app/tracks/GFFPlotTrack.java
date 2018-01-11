@@ -20,11 +20,11 @@ import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
-import edu.columbia.rdf.htsview.tracks.TitleProperties;
-import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 import org.jebtk.core.io.PathUtils;
 
 import edu.columbia.rdf.htsview.app.tracks.genes.GenesPlotTrack;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
+import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -38,10 +38,8 @@ public class GFFPlotTrack extends GenesPlotTrack {
   /**
    * Instantiates a new GFF plot track.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public GFFPlotTrack(Path file) throws IOException {
     super(PathUtils.getName(file), PathUtils.getName(file));
@@ -56,10 +54,12 @@ public class GFFPlotTrack extends GenesPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
 
     if (GenesService.getInstance().getGenes(genome, mGenesId) == null) {
-      GenesService.getInstance().put(genome, mGenesId, Genes.gff3Parser().parse(mFile));
+      GenesService.getInstance()
+          .put(genome, mGenesId, Genes.gff3Parser().parse(mFile));
     }
 
     return super.createGraph(genome, titlePosition);

@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.app;
 
-import edu.columbia.rdf.htsview.tracks.ResolutionModel;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -24,13 +23,16 @@ import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 
+import edu.columbia.rdf.htsview.tracks.ResolutionModel;
+
 // TODO: Auto-generated Javadoc
 /**
  * Allows user to select the resolution to view sequences.
  *
  * @author Antony Holmes Holmes
  */
-public class ResolutionRibbonSection extends RibbonSection implements ModernClickListener, ChangeListener {
+public class ResolutionRibbonSection extends RibbonSection
+    implements ModernClickListener, ChangeListener {
 
   /**
    * The constant serialVersionUID.
@@ -61,7 +63,8 @@ public class ResolutionRibbonSection extends RibbonSection implements ModernClic
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
@@ -73,10 +76,8 @@ public class ResolutionRibbonSection extends RibbonSection implements ModernClic
   /**
    * Instantiates a new resolution ribbon section2.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public ResolutionRibbonSection(Ribbon ribbon, ResolutionModel model) {
     super(ribbon, "Resolution");
@@ -142,8 +143,8 @@ public class ResolutionRibbonSection extends RibbonSection implements ModernClic
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -176,7 +177,8 @@ public class ResolutionRibbonSection extends RibbonSection implements ModernClic
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+   * @see
+   * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
    */
   @Override
   public void changed(ChangeEvent e) {

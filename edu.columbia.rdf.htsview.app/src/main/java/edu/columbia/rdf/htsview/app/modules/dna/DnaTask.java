@@ -43,10 +43,8 @@ public class DnaTask extends SwingWorker<Void, Void> {
   /**
    * Instantiates a new DNA task.
    *
-   * @param parent
-   *          the parent
-   * @param genomicModel
-   *          the genome model
+   * @param parent the parent
+   * @param genomicModel the genome model
    */
   public DnaTask(ModernRibbonWindow parent, GenomicRegionModel genomicModel) {
     mParent = parent;
@@ -80,8 +78,10 @@ public class DnaTask extends SwingWorker<Void, Void> {
 
     try {
 
-      ModuleLoader ml = new BioModuleLoader().addModule(edu.columbia.rdf.matcalc.toolbox.dna.DnaModule.class)
-          .addModule(edu.columbia.rdf.matcalc.toolbox.motifs.MotifsModule.class);
+      ModuleLoader ml = new BioModuleLoader()
+          .addModule(edu.columbia.rdf.matcalc.toolbox.dna.DnaModule.class)
+          .addModule(
+              edu.columbia.rdf.matcalc.toolbox.motifs.MotifsModule.class);
 
       window = MainMatCalc.main(mParent.getAppInfo(), ml);
 
@@ -98,8 +98,7 @@ public class DnaTask extends SwingWorker<Void, Void> {
    * Creates the heat map matrices.
    *
    * @return the list
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
   private DataFrame createMatrix() throws Exception {
     DataFrame m = DataFrame.createTextMatrix(1, 1);

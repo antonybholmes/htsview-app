@@ -21,7 +21,6 @@ import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
 import edu.columbia.rdf.htsview.app.tracks.conservation.ConservationPlotTrack;
-
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 
@@ -37,8 +36,7 @@ public class MouseConservationPlotTrack extends ConservationPlotTrack {
   /**
    * Instantiates a new mouse conservation plot track.
    *
-   * @param conservationAssembly
-   *          the conservation assembly
+   * @param conservationAssembly the conservation assembly
    */
   public MouseConservationPlotTrack(ConservationAssembly conservationAssembly) {
     super(TITLE, conservationAssembly);
@@ -51,13 +49,15 @@ public class MouseConservationPlotTrack extends ConservationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
 
     //
     // Display some genes
     //
 
-    mSubFigure = MouseConservationPlotCanvas.create(mConservationAssembly, titlePosition);
+    mSubFigure = MouseConservationPlotCanvas.create(mConservationAssembly,
+        titlePosition);
 
     setMargins(getName(), titlePosition, mSubFigure);
 
@@ -72,8 +72,11 @@ public class MouseConservationPlotTrack extends ConservationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
     // mSubFigure.setForwardCanvasEventsEnabled(false);
     mSubFigure.update(displayRegion, resolution, width, height, margin);
     // mSubFigure.setForwardCanvasEventsEnabled(true);

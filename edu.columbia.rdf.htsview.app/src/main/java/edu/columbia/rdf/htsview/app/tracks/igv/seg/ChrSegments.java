@@ -37,8 +37,7 @@ public class ChrSegments implements Iterable<Chromosome>, NameProperty {
   /**
    * Instantiates a new chr segments.
    *
-   * @param name
-   *          the name
+   * @param name the name
    */
   public ChrSegments(String name) {
     mName = name;
@@ -47,10 +46,8 @@ public class ChrSegments implements Iterable<Chromosome>, NameProperty {
   /**
    * Adds the.
    *
-   * @param chr
-   *          the chr
-   * @param segments
-   *          the segments
+   * @param chr the chr
+   * @param segments the segments
    */
   public void add(Chromosome chr, Segments segments) {
     mSegments.put(chr, segments);
@@ -68,8 +65,7 @@ public class ChrSegments implements Iterable<Chromosome>, NameProperty {
   /**
    * Gets the.
    *
-   * @param chr
-   *          the chr
+   * @param chr the chr
    * @return the segments
    */
   public Segments get(Chromosome chr) {
@@ -99,8 +95,7 @@ public class ChrSegments implements Iterable<Chromosome>, NameProperty {
   /**
    * Contains.
    *
-   * @param chr
-   *          the chr
+   * @param chr the chr
    * @return true, if successful
    */
   public boolean contains(Chromosome chr) {

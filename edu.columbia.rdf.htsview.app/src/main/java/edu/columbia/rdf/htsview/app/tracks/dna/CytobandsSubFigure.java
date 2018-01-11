@@ -20,11 +20,12 @@ import java.awt.Color;
 import org.jebtk.bioinformatics.ext.ucsc.Cytobands;
 import org.jebtk.bioinformatics.genomic.ChromosomeSizes;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.ui.external.ucsc.CytobandsRegionLayer;
+import org.jebtk.graphplot.figure.PlotStyle;
+
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure;
-import org.jebtk.bioinformatics.ui.external.ucsc.CytobandsRegionLayer;
-import org.jebtk.graphplot.figure.PlotStyle;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -47,14 +48,12 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
   /**
    * Instantiates a new cytobands sub figure.
    *
-   * @param name
-   *          the name
-   * @param cytobands
-   *          the cytobands
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param cytobands the cytobands
+   * @param titlePosition the title position
    */
-  public CytobandsSubFigure(String name, Cytobands cytobands, TitleProperties titlePosition) {
+  public CytobandsSubFigure(String name, Cytobands cytobands,
+      TitleProperties titlePosition) {
     mName = name;
     mLayer = new CytobandsRegionLayer(cytobands);
 
@@ -66,22 +65,21 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
   /**
    * Creates the.
    *
-   * @param name
-   *          the name
-   * @param sizes
-   *          the sizes
-   * @param cytobands
-   *          the cytobands
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param sizes the sizes
+   * @param cytobands the cytobands
+   * @param titlePosition the title position
    * @return the cytobands sub figure
    */
-  public static CytobandsSubFigure create(String name, ChromosomeSizes sizes, Cytobands cytobands,
+  public static CytobandsSubFigure create(String name,
+      ChromosomeSizes sizes,
+      Cytobands cytobands,
       TitleProperties titlePosition) {
 
     mSizes = sizes;
 
-    CytobandsSubFigure canvas = new CytobandsSubFigure(name, cytobands, titlePosition);
+    CytobandsSubFigure canvas = new CytobandsSubFigure(name, cytobands,
+        titlePosition);
 
     canvas.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
 
@@ -92,22 +90,39 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.
-   * jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(
+   * org. jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     mLayer.setRegion(displayRegion);
 
     // Update the title to reflect changes
-    currentAxes().getTitle().setText(mName + " - " + displayRegion.getChr().toString());
+    currentAxes().getTitle()
+        .setText(mName + " - " + displayRegion.getChr().toString());
 
     // set the graph limits
-    currentAxes().getX1Axis().setLimits(1, mSizes.getSize(displayRegion.getChr()));
+    currentAxes().getX1Axis().setLimits(1,
+        mSizes.getSize(displayRegion.getChr()));
   }
 }

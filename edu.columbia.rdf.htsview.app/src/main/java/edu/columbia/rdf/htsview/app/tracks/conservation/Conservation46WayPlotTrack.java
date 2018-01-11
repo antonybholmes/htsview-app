@@ -19,9 +19,10 @@ import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.graphplot.figure.Axes;
+
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import org.jebtk.graphplot.figure.Axes;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,8 +36,7 @@ public class Conservation46WayPlotTrack extends ConservationPlotTrack {
   /**
    * Instantiates a new conservation 46 way plot track.
    *
-   * @param conservationAssembly
-   *          the conservation assembly
+   * @param conservationAssembly the conservation assembly
    */
   public Conservation46WayPlotTrack(ConservationAssembly conservationAssembly) {
     super(TITLE, conservationAssembly);
@@ -49,19 +49,22 @@ public class Conservation46WayPlotTrack extends ConservationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
 
     //
     // Display some genes
     //
 
-    mSubFigure = Conservation46WayPlotCanvas.create(mConservationAssembly, titlePosition);
+    mSubFigure = Conservation46WayPlotCanvas.create(mConservationAssembly,
+        titlePosition);
 
     switch (titlePosition.getPosition()) {
     case RIGHT:
     case COMPACT_RIGHT:
       int right = rightTitleWidth(getName());
-      mSubFigure.currentAxes().setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, right);
+      mSubFigure.currentAxes()
+          .setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, right);
       break;
     default:
       mSubFigure.currentAxes().setMargins(MARGINS);
@@ -80,8 +83,11 @@ public class Conservation46WayPlotTrack extends ConservationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
 
     mSubFigure.update(displayRegion, resolution, width, height, margin);
 

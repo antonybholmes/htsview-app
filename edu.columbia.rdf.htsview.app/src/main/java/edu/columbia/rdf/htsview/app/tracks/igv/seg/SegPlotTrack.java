@@ -19,9 +19,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.GraphPlotTrack;
-import edu.columbia.rdf.htsview.tracks.TitleProperties;
-import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.json.JsonBuilder;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -30,6 +27,10 @@ import org.jebtk.modern.graphics.colormap.ColorMapService;
 import org.jebtk.modern.window.ModernWindow;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import edu.columbia.rdf.htsview.tracks.GraphPlotTrack;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
+import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -64,10 +65,8 @@ public class SegPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new seg plot track.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public SegPlotTrack(Path file) throws IOException {
     mFile = file;
@@ -100,8 +99,7 @@ public class SegPlotTrack extends GraphPlotTrack {
   /**
    * Sets the color map.
    *
-   * @param colorMap
-   *          the new color map
+   * @param colorMap the new color map
    */
   public void setColorMap(ColorMap colorMap) {
     mColorMap = colorMap;
@@ -114,7 +112,8 @@ public class SegPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) {
     mSubFigure = SegmentsSubFigure.create(mSegments, mColorMap, titlePosition);
 
     // mPlot.getGraphSpace().setPlotSize(PLOT_SIZE);
@@ -135,7 +134,11 @@ public class SegPlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin) {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) {
 
     mSubFigure.setColorMap(mColorMap);
     // mPlot.setForwardCanvasEventsEnabled(false);
@@ -148,9 +151,8 @@ public class SegPlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.window.
-   * ModernWindow)
+   * @see edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.
+   * window. ModernWindow)
    */
   @Override
   public void edit(ModernWindow parent) {
@@ -186,8 +188,8 @@ public class SegPlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.
+   * JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {

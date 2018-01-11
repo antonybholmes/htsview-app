@@ -115,8 +115,7 @@ public class GenesPlotLayer extends AxesLayer {
   /**
    * Instantiates a new genes plot layer.
    *
-   * @param genesProperties
-   *          the genes properties
+   * @param genesProperties the genes properties
    */
   public GenesPlotLayer(GenesProperties genesProperties) {
     mGeneProperties = genesProperties;
@@ -125,12 +124,11 @@ public class GenesPlotLayer extends AxesLayer {
   /**
    * Update.
    *
-   * @param genes
-   *          the genes
-   * @param displayRegion
-   *          the display region
+   * @param genes the genes
+   * @param displayRegion the display region
    */
-  public void update(IterMap<String, Set<Gene>> genes, GenomicRegion displayRegion) {
+  public void update(IterMap<String, Set<Gene>> genes,
+      GenomicRegion displayRegion) {
     mGeneCache = genes;
   }
 
@@ -142,7 +140,11 @@ public class GenesPlotLayer extends AxesLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void drawPlot(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void drawPlot(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     aaPlot(g2, context, figure, subFigure, axes);
   }
@@ -155,7 +157,11 @@ public class GenesPlotLayer extends AxesLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void aaPlot(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void aaPlot(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     if (CollectionUtils.isNullOrEmpty(mGeneCache)) {
       return;
@@ -206,8 +212,11 @@ public class GenesPlotLayer extends AxesLayer {
       if (view != GenesView.COMPACT) {
         // g2.setFont(mGeneProperties.getVariantGene().getFont().getFont());
         g2.setColor(mGeneProperties.getVariantGene().getFont().getColor());
-        textY = y + (g2.getFontMetrics().getAscent() - g2.getFontMetrics().getDescent()) / 2;
-        g2.drawString(symbol, textX - g2.getFontMetrics().stringWidth(symbol), textY);
+        textY = y + (g2.getFontMetrics().getAscent()
+            - g2.getFontMetrics().getDescent()) / 2;
+        g2.drawString(symbol,
+            textX - g2.getFontMetrics().stringWidth(symbol),
+            textY);
       }
 
       // Set the strand to be that of the first gene we encounter
@@ -388,12 +397,9 @@ public class GenesPlotLayer extends AxesLayer {
   /**
    * Draw forward arrow.
    *
-   * @param g2
-   *          the g 2
-   * @param x
-   *          the x
-   * @param y
-   *          the y
+   * @param g2 the g 2
+   * @param x the x
+   * @param y the y
    */
   public static final void drawForwardArrow(Graphics2D g2, int x, int y) {
     Graphics2D g2Temp = (Graphics2D) g2.create();
@@ -409,12 +415,9 @@ public class GenesPlotLayer extends AxesLayer {
   /**
    * Draw reverse arrow.
    *
-   * @param g2
-   *          the g 2
-   * @param x
-   *          the x
-   * @param y
-   *          the y
+   * @param g2 the g 2
+   * @param x the x
+   * @param y the y
    */
   public final static void drawReverseArrow(Graphics2D g2, int x, int y) {
     Graphics2D g2Temp = (Graphics2D) g2.create();
@@ -430,20 +433,19 @@ public class GenesPlotLayer extends AxesLayer {
   /**
    * Draw arrows.
    *
-   * @param g2
-   *          the g 2
-   * @param strand
-   *          the strand
-   * @param x1
-   *          the x 1
-   * @param x2
-   *          the x 2
-   * @param y1
-   *          the y 1
-   * @param color
-   *          the color
+   * @param g2 the g 2
+   * @param strand the strand
+   * @param x1 the x 1
+   * @param x2 the x 2
+   * @param y1 the y 1
+   * @param color the color
    */
-  public final static void drawArrows(Graphics2D g2, Strand strand, int x1, int x2, int y1, Color color) {
+  public final static void drawArrows(Graphics2D g2,
+      Strand strand,
+      int x1,
+      int x2,
+      int y1,
+      Color color) {
     Graphics2D g2Temp = ImageUtils.clone(g2);
 
     int x;

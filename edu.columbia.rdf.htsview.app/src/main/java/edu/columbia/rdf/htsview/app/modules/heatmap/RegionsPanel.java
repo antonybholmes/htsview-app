@@ -19,8 +19,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.bioinformatics.ui.GenomeModel;
+import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.panel.ModernLineBorderPanel;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
@@ -46,8 +46,7 @@ public class RegionsPanel extends ModernWidget {
   /**
    * Instantiates a new regions panel.
    *
-   * @param genomeModel
-   *          the genome model
+   * @param genomeModel the genome model
    */
   public RegionsPanel(GenomeModel genomeModel) {
     mGenomeModel = genomeModel;
@@ -75,16 +74,17 @@ public class RegionsPanel extends ModernWidget {
    * Gets the regions.
    *
    * @return the regions
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public List<HeatMapIdLocation> getRegions() throws ParseException {
-    List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(), TextUtils.NEW_LINE_DELIMITER);
+    List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(),
+        TextUtils.NEW_LINE_DELIMITER);
 
     List<HeatMapIdLocation> ret = new ArrayList<HeatMapIdLocation>();
 
     for (String line : lines) {
-      // line = line.replaceAll(TextUtils.COMMA_DELIMITER, TextUtils.EMPTY_STRING);
+      // line = line.replaceAll(TextUtils.COMMA_DELIMITER,
+      // TextUtils.EMPTY_STRING);
 
       if (line.length() > 0) {
         for (String id : TextUtils.scSplit(line)) {
@@ -103,8 +103,7 @@ public class RegionsPanel extends ModernWidget {
   /**
    * Sets the text.
    *
-   * @param text
-   *          the new text
+   * @param text the new text
    */
   public void setText(String text) {
     mGenesField.setText(text);

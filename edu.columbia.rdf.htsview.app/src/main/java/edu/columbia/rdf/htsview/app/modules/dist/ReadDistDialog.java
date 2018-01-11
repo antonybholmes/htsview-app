@@ -88,7 +88,8 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   private static final long serialVersionUID = 1L;
 
   /** The m samples button. */
-  private ModernButton mSamplesButton = new ModernDialogFlatButton("Samples...");
+  private ModernButton mSamplesButton = new ModernDialogFlatButton(
+      "Samples...");
 
   /** The m file button. */
   private ModernButton mFileButton = new ModernButton(UI.MENU_LOAD,
@@ -133,14 +134,12 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new read dist dialog.
    *
-   * @param parent
-   *          the parent
-   * @param genomeModel
-   *          the genome model
-   * @param samples
-   *          the samples
+   * @param parent the parent
+   * @param genomeModel the genome model
+   * @param samples the samples
    */
-  public ReadDistDialog(ModernWindow parent, GenomeModel genomeModel, List<SamplePlotTrack> samples) {
+  public ReadDistDialog(ModernWindow parent, GenomeModel genomeModel,
+      List<SamplePlotTrack> samples) {
     super(parent, "htsview.modules.read-dist.help.url");
 
     mGenomeModel = genomeModel;
@@ -180,14 +179,16 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
 
     box2 = HBox.create();
     box2.add(new ModernAutoSizeLabel("Name", 100));
-    box2.add(new ModernTextBorderPanel(mNameField, ModernWidget.VERY_LARGE_SIZE));
+    box2.add(
+        new ModernTextBorderPanel(mNameField, ModernWidget.VERY_LARGE_SIZE));
     box.add(box2);
 
     midSectionHeader("Samples", box);
 
     ModernScrollPane scrollPane = new ModernScrollPane(mSamplesList);
     scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-    ModernLineBorderPanel panel = new ModernLineBorderPanel(scrollPane, LIST_SIZE);
+    ModernLineBorderPanel panel = new ModernLineBorderPanel(scrollPane,
+        LIST_SIZE);
     box.add(panel);
 
     midSectionHeader("Plot Locations", box);
@@ -213,7 +214,8 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
     box2 = HBox.create();
     box2.add(new ModernAutoSizeLabel("Extend"));
     box2.add(UI.createHGap(10));
-    box2.add(new ModernTextBorderPanel(mTextPadding, ModernWidget.STANDARD_SIZE));
+    box2.add(
+        new ModernTextBorderPanel(mTextPadding, ModernWidget.STANDARD_SIZE));
     box2.add(ModernPanel.createHGap());
     box2.add(new ModernAutoSizeLabel("bp"));
     box2.add(UI.createHGap(40));
@@ -247,7 +249,8 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
 
           close();
         } else {
-          ModernMessageDialog.createWarningDialog(mParent, "You must enter at least one gene or region to plot.");
+          ModernMessageDialog.createWarningDialog(mParent,
+              "You must enter at least one gene or region to plot.");
         }
       } catch (ParseException e1) {
         e1.printStackTrace();
@@ -266,8 +269,8 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   }
 
   /*
-   * private void loadSamples() throws IOException { ChipSeqSamplesDialog dialog =
-   * new ChipSeqSamplesDialog(mParent, mAssembly, mSearchModel);
+   * private void loadSamples() throws IOException { ChipSeqSamplesDialog dialog
+   * = new ChipSeqSamplesDialog(mParent, mAssembly, mSearchModel);
    * 
    * dialog.setVisible(true);
    * 
@@ -279,8 +282,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   /**
    * Load samples.
    *
-   * @param samples
-   *          the samples
+   * @param samples the samples
    */
   private void loadSamples(List<SamplePlotTrack> samples) {
     mSamples = samples;
@@ -300,22 +302,24 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   private void loadTss() {
     Set<String> genes = new HashSet<String>();
 
-    for (String refseq : GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").getRefSeqIds()) {
-      Gene gene = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").getGene(refseq);
+    for (String refseq : GenesService.getInstance()
+        .getGenes(mGenomeModel.get(), "refseq").getRefSeqIds()) {
+      Gene gene = GenesService.getInstance()
+          .getGenes(mGenomeModel.get(), "refseq").getGene(refseq);
 
       // GenomicRegion tss = Gene.tssRegion(gene);
 
       genes.add(gene.getSymbol());
     }
 
-    mRegionsPanel.setText(TextUtils.join(CollectionUtils.sort(genes), TextUtils.NEW_LINE_DELIMITER));
+    mRegionsPanel.setText(TextUtils.join(CollectionUtils.sort(genes),
+        TextUtils.NEW_LINE_DELIMITER));
   }
 
   /**
    * Browse for file.
    *
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
   private void browseForFile() throws Exception {
     browseForFile(RecentFilesService.getInstance().getPwd());
@@ -324,23 +328,24 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   /**
    * Browse for file.
    *
-   * @param workingDirectory
-   *          the working directory
-   * @throws Exception
-   *           the exception
+   * @param workingDirectory the working directory
+   * @throws Exception the exception
    */
   private void browseForFile(Path workingDirectory) throws Exception {
-    openFile(FileDialog.openFile(getParentWindow(), workingDirectory, new AllXlsxGuiFileFilter(),
-        new XlsxGuiFileFilter(), new TxtGuiFileFilter(), new BedGuiFileFilter(), new BedGraphGuiFileFilter()));
+    openFile(FileDialog.openFile(getParentWindow(),
+        workingDirectory,
+        new AllXlsxGuiFileFilter(),
+        new XlsxGuiFileFilter(),
+        new TxtGuiFileFilter(),
+        new BedGuiFileFilter(),
+        new BedGraphGuiFileFilter()));
   }
 
   /**
    * Open file.
    *
-   * @param file
-   *          the file
-   * @throws Exception
-   *           the exception
+   * @param file the file
+   * @throws Exception the exception
    */
   private void openFile(Path file) throws Exception {
     if (file == null) {
@@ -348,7 +353,9 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
     }
 
     if (!FileUtils.exists(file)) {
-      ModernMessageDialog.createFileDoesNotExistDialog(getParentWindow(), getAppInfo().getName(), file);
+      ModernMessageDialog.createFileDoesNotExistDialog(getParentWindow(),
+          getAppInfo().getName(),
+          file);
 
       return;
     }
@@ -364,7 +371,11 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
 
       model = new BedGraphTableModel(bed);
     } else {
-      model = Bioinformatics.getModel(file, true, TextUtils.emptyList(), 0, TextUtils.TAB_DELIMITER);
+      model = Bioinformatics.getModel(file,
+          true,
+          TextUtils.emptyList(),
+          0,
+          TextUtils.TAB_DELIMITER);
     }
 
     StringBuilder buffer = new StringBuilder();
@@ -380,7 +391,9 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
       } else if (model.getValueAsString(i, 0).startsWith("chr")) {
         // three column format
 
-        region = new GenomicRegion(ChromosomeService.getInstance().guess(file, model.getValueAsString(i, 0)),
+        region = new GenomicRegion(
+            ChromosomeService.getInstance().guess(file,
+                model.getValueAsString(i, 0)),
             model.getValueAsInt(i, 1), model.getValueAsInt(i, 2));
 
         GenomicRegion mid = GenomicRegion.midRegion(region);
@@ -388,7 +401,8 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
         buffer.append(mid.toString()).append(TextUtils.NEW_LINE_DELIMITER);
       } else {
         // assume its a gene id/symbol etc.
-        buffer.append(model.getValueAsString(i, 0)).append(TextUtils.NEW_LINE_DELIMITER);
+        buffer.append(model.getValueAsString(i, 0))
+            .append(TextUtils.NEW_LINE_DELIMITER);
       }
     }
 
@@ -401,8 +415,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
    * Gets the regions.
    *
    * @return the regions
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public List<HeatMapIdLocation> getRegions() throws ParseException {
     return mRegionsPanel.getRegions();

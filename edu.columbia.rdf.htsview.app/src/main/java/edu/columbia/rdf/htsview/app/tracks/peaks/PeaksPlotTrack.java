@@ -17,11 +17,12 @@ package edu.columbia.rdf.htsview.app.tracks.peaks;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.JsonBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -50,12 +51,9 @@ public class PeaksPlotTrack extends UcscPlotTrack {
   /**
    * Instantiates a new peaks plot track.
    *
-   * @param sampleId
-   *          the sample id
-   * @param peaks
-   *          the peaks
-   * @param bed
-   *          the bed
+   * @param sampleId the sample id
+   * @param peaks the peaks
+   * @param bed the bed
    */
   public PeaksPlotTrack(int sampleId, PeakSet peaks, Bed bed) {
     this(sampleId, peaks, bed, TrackDisplayMode.COMPACT);
@@ -64,16 +62,13 @@ public class PeaksPlotTrack extends UcscPlotTrack {
   /**
    * Instantiates a new peaks plot track.
    *
-   * @param sampleId
-   *          the sample id
-   * @param peaks
-   *          the peaks
-   * @param bed
-   *          the bed
-   * @param mode
-   *          the mode
+   * @param sampleId the sample id
+   * @param peaks the peaks
+   * @param bed the bed
+   * @param mode the mode
    */
-  public PeaksPlotTrack(int sampleId, PeakSet peaks, Bed bed, TrackDisplayMode mode) {
+  public PeaksPlotTrack(int sampleId, PeakSet peaks, Bed bed,
+      TrackDisplayMode mode) {
     super(bed, mode);
 
     mSampleId = sampleId;
@@ -113,9 +108,8 @@ public class PeaksPlotTrack extends UcscPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toJson(org.abh.common.
-   * json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toJson(org.abh.
+   * common. json.JsonBuilder)
    */
   public void toJson(JsonBuilder json) {
     json.startObject();

@@ -46,8 +46,7 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
   /**
    * Instantiates a new segment samples.
    *
-   * @param name
-   *          the name
+   * @param name the name
    */
   public SegmentSamples(String name) {
     mName = name;
@@ -56,8 +55,7 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
   /**
    * Adds the.
    *
-   * @param segments
-   *          the segments
+   * @param segments the segments
    */
   public void add(ChrSegments segments) {
     mSegments.put(segments.getName(), segments);
@@ -85,8 +83,7 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
   /**
    * Gets the.
    *
-   * @param name
-   *          the name
+   * @param name the name
    * @return the chr segments
    */
   public ChrSegments get(String name) {
@@ -106,11 +103,9 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
   /**
    * Parses the.
    *
-   * @param file
-   *          the file
+   * @param file the file
    * @return the segment samples
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static SegmentSamples parse(Path file) throws IOException {
     BufferedReader reader = FileUtils.newBufferedReader(file);
@@ -132,7 +127,8 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
         tokens = TextUtils.tabSplit(line);
 
         String name = tokens.get(0);
-        Chromosome chr = ChromosomeService.getInstance().guess(file, tokens.get(1));
+        Chromosome chr = ChromosomeService.getInstance().guess(file,
+            tokens.get(1));
         int start = Integer.parseInt(tokens.get(2));
         int end = Integer.parseInt(tokens.get(3));
         int markers = Integer.parseInt(tokens.get(4));
@@ -146,7 +142,8 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
           samples.mSegments.get(name).add(chr, new Segments());
         }
 
-        samples.mSegments.get(name).get(chr).add(new Segment(chr, start, end, markers, mean));
+        samples.mSegments.get(name).get(chr)
+            .add(new Segment(chr, start, end, markers, mean));
       }
     } finally {
       reader.close();

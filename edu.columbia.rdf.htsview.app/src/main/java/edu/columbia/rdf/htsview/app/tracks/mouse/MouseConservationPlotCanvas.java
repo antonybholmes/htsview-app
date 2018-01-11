@@ -19,12 +19,12 @@ import java.awt.Color;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.tracks.TitleProperties;
-import edu.columbia.rdf.htsview.tracks.Track;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaSubFigure;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
+import edu.columbia.rdf.htsview.tracks.Track;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,31 +41,33 @@ public class MouseConservationPlotCanvas extends DnaSubFigure {
   /**
    * Instantiates a new mouse conservation plot canvas.
    *
-   * @param conservationAssembly
-   *          the conservation assembly
-   * @param titlePosition
-   *          the title position
+   * @param conservationAssembly the conservation assembly
+   * @param titlePosition the title position
    */
-  public MouseConservationPlotCanvas(ConservationAssembly conservationAssembly, TitleProperties titlePosition) {
+  public MouseConservationPlotCanvas(ConservationAssembly conservationAssembly,
+      TitleProperties titlePosition) {
     mLayer = new MouseConservationCanvasLayer(conservationAssembly);
 
     currentAxes().addChild(mLayer);
 
-    Track.setTitle(MouseConservationPlotTrack.TITLE, titlePosition, currentAxes());
+    Track.setTitle(MouseConservationPlotTrack.TITLE,
+        titlePosition,
+        currentAxes());
   }
 
   /**
    * Creates the.
    *
-   * @param assembly
-   *          the assembly
-   * @param titlePosition
-   *          the title position
+   * @param assembly the assembly
+   * @param titlePosition the title position
    * @return the mouse conservation plot canvas
    */
-  public static MouseConservationPlotCanvas create(ConservationAssembly assembly, TitleProperties titlePosition) {
+  public static MouseConservationPlotCanvas create(
+      ConservationAssembly assembly,
+      TitleProperties titlePosition) {
 
-    MouseConservationPlotCanvas canvas = new MouseConservationPlotCanvas(assembly, titlePosition);
+    MouseConservationPlotCanvas canvas = new MouseConservationPlotCanvas(
+        assembly, titlePosition);
 
     Axes axes = canvas.currentAxes();
 
@@ -91,9 +93,24 @@ public class MouseConservationPlotCanvas extends DnaSubFigure {
    * org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     mLayer.update(displayRegion);
   }

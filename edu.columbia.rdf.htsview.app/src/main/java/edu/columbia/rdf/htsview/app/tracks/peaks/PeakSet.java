@@ -26,10 +26,8 @@ public class PeakSet extends Type {
   /**
    * Instantiates a new peaks.
    *
-   * @param id
-   *          the id
-   * @param name
-   *          the name
+   * @param id the id
+   * @param name the name
    */
   public PeakSet(int id, String name) {
     super(id, name);
@@ -38,10 +36,8 @@ public class PeakSet extends Type {
   /**
    * Creates the peaks.
    *
-   * @param id
-   *          the id
-   * @param name
-   *          the name
+   * @param id the id
+   * @param name the name
    * @return the peaks
    */
   public static PeakSet createPeaks(int id, String name) {

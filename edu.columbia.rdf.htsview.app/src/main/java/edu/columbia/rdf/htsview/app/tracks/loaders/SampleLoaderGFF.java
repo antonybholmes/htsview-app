@@ -18,13 +18,13 @@ package edu.columbia.rdf.htsview.app.tracks.loaders;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.htsview.app.tracks.GFFPlotTrack;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,12 +35,14 @@ public class SampleLoaderGFF extends SampleLoaderFS {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * @see
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
    * common.ui.window.ModernWindow, java.nio.file.Path,
    * org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     if (!FileUtils.exists(file)) {
       return null;
     }

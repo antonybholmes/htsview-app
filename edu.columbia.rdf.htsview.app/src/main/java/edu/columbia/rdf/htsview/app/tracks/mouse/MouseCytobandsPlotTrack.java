@@ -24,7 +24,6 @@ import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
 import edu.columbia.rdf.htsview.app.tracks.dna.CytobandsSubFigure;
-
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
@@ -59,7 +58,8 @@ public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
 
     //
     // Display some genes
@@ -67,12 +67,16 @@ public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
 
     mSubFigure = CytobandsSubFigure.create("Cytobands mm10",
         ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.MM10),
-        CytobandsService.getInstance().getCytobands(GenomeAssembly.MM10), titlePosition);
+        CytobandsService.getInstance().getCytobands(GenomeAssembly.MM10),
+        titlePosition);
 
     switch (titlePosition.getPosition()) {
     case RIGHT:
     case COMPACT_RIGHT:
-      mSubFigure.currentAxes().setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, HUGE_MARGIN);
+      mSubFigure.currentAxes().setMargins(SMALL_MARGIN,
+          MARGINS.getLeft(),
+          SMALL_MARGIN,
+          HUGE_MARGIN);
       break;
     default:
       mSubFigure.currentAxes().setMargins(MARGINS);
@@ -89,8 +93,11 @@ public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
 
     // mSubFigure.setForwardCanvasEventsEnabled(false);
     mSubFigure.update(displayRegion, resolution, width, height, margin);

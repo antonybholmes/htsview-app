@@ -19,15 +19,16 @@ import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import org.jebtk.core.json.Json;
+import org.jebtk.core.tree.TreeNode;
+import org.jebtk.modern.tree.ModernTree;
+import org.jebtk.modern.window.ModernWindow;
+
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
 import edu.columbia.rdf.htsview.tracks.sample.ReadsFsPlotTrack;
 import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
-import org.jebtk.core.json.Json;
-import org.jebtk.core.tree.TreeNode;
-import org.jebtk.modern.tree.ModernTree;
-import org.jebtk.modern.window.ModernWindow;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,17 +40,22 @@ public class ReadsFSJsonParser extends TrackJsonParser {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
-   * window.ModernWindow, java.lang.String, int,
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.
+   * ui. window.ModernWindow, java.lang.String, int,
    * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
    * org.abh.common.tree.TreeNode)
    */
   @Override
-  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
-      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+  public boolean parse(ModernWindow window,
+      final String name,
+      int id,
+      ModernTree<Track> annotationTree,
+      final Json trackJson,
+      TreeNode<Track> rootNode) throws IOException {
     Path metaFile = getFile(trackJson);
 
-    ReadsFsPlotTrack track = (ReadsFsPlotTrack) SampleLoaderService.getInstance().openReads(window, metaFile, rootNode); // tracksPanel.loadReadTrack(metaFile);
+    ReadsFsPlotTrack track = (ReadsFsPlotTrack) SampleLoaderService
+        .getInstance().openReads(window, metaFile, rootNode); // tracksPanel.loadReadTrack(metaFile);
 
     boolean visible = trackJson.getAsBool("visible");
 

@@ -31,7 +31,6 @@ import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.graphics.icons.RunVectorIcon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.widget.tooltip.ModernToolTip;
 import org.slf4j.Logger;
@@ -54,7 +53,8 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
   /**
    * The member convert button.
    */
-  private ModernButton mDnaButton = new RibbonLargeButton("DNA", UIService.getInstance().loadIcon("dna", 24));
+  private ModernButton mDnaButton = new RibbonLargeButton("DNA",
+      UIService.getInstance().loadIcon("dna", 24));
 
   /**
    * The member window.
@@ -74,7 +74,8 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -82,7 +83,8 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
     mWindow = window;
 
     // home
-    mDnaButton.setToolTip(new ModernToolTip("DNA", "Get DNA sequence for region."),
+    mDnaButton.setToolTip(
+        new ModernToolTip("DNA", "Get DNA sequence for region."),
         mWindow.getRibbon().getToolTipModel());
     mDnaButton.setClickMessage("DNA");
     mWindow.getRibbon().getToolbar("Tools").getSection("DNA").add(mDnaButton);

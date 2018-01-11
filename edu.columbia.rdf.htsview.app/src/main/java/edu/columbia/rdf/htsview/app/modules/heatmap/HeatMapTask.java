@@ -91,25 +91,18 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   /**
    * Instantiates a new heat map task.
    *
-   * @param parent
-   *          the parent
-   * @param samples
-   *          the samples
-   * @param input
-   *          the input
-   * @param regions
-   *          the regions
-   * @param padding
-   *          the padding
-   * @param window
-   *          the window
-   * @param heatMapSort
-   *          the heat map sort
-   * @param genomeModel
-   *          the genome model
+   * @param parent the parent
+   * @param samples the samples
+   * @param input the input
+   * @param regions the regions
+   * @param padding the padding
+   * @param window the window
+   * @param heatMapSort the heat map sort
+   * @param genomeModel the genome model
    */
-  public HeatMapTask(ModernRibbonWindow parent, List<SamplePlotTrack> samples, Sample input,
-      List<HeatMapIdLocation> regions, int padding, int window, HeatMapSort heatMapSort, GenomeModel genomeModel) {
+  public HeatMapTask(ModernRibbonWindow parent, List<SamplePlotTrack> samples,
+      Sample input, List<HeatMapIdLocation> regions, int padding, int window,
+      HeatMapSort heatMapSort, GenomeModel genomeModel) {
     mParent = parent;
     mSamples = samples;
     mInput = input;
@@ -150,12 +143,14 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
     properties.setProperty("plot.show-grid-color", false);
     properties.setProperty("plot.show-outline-color", false);
     properties.setProperty("plot.show-row-labels", false);
-    properties.setProperty("plot.color.standardization", ColorNormalizationType.ZSCORE_MATRIX);
+    properties.setProperty("plot.color.standardization",
+        ColorNormalizationType.ZSCORE_MATRIX);
 
     properties.setProperty("plot.color.intensity", 2);
 
     try {
-      MainMatCalcWindow window = MainMatCalc.main(mParent.getAppInfo(), new BioModuleLoader());
+      MainMatCalcWindow window = MainMatCalc.main(mParent.getAppInfo(),
+          new BioModuleLoader());
 
       window.openMatrices(mMatrices);
 
@@ -169,8 +164,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
    * Creates the heat map matrices.
    *
    * @return the list
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
   private List<DataFrame> createHeatMapMatrices() throws Exception {
     // int window = 100;
@@ -218,18 +212,14 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   /**
    * Sort none.
    *
-   * @param sample
-   *          the sample
-   * @param bins
-   *          the bins
-   * @param m
-   *          the m
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param sample the sample
+   * @param bins the bins
+   * @param m the m
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  private void sortNone(SamplePlotTrack sample, int bins, DataFrame m) throws IOException, ParseException {
+  private void sortNone(SamplePlotTrack sample, int bins, DataFrame m)
+      throws IOException, ParseException {
     // for (HeatMapIdLocation region : mRegions) {
     for (int i = 0; i < mRegions.size(); ++i) {
       HeatMapIdLocation region = mRegions.get(i);
@@ -238,7 +228,8 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
         continue;
       }
 
-      GenomicRegion ext = GenomicRegion.extend(region.getRegion(), mPadding, mPadding);
+      GenomicRegion ext = GenomicRegion
+          .extend(region.getRegion(), mPadding, mPadding);
 
       // +- 2kb
 
@@ -254,7 +245,8 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
       m.setRowAnnotation("Location", i, region.getRegion().toString());
 
       for (int j = 0; j < counts.size(); ++j) {
-        // System.err.println("heat " + i + " " + j + " " + counts.get(j) + " " +
+        // System.err.println("heat " + i + " " + j + " " + counts.get(j) + " "
+        // +
         // region.getRegion().toString());
         m.set(i, j, counts.get(j));
       }
@@ -268,18 +260,14 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   /**
    * Sort tss dist.
    *
-   * @param sample
-   *          the sample
-   * @param bins
-   *          the bins
-   * @param m
-   *          the m
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param sample the sample
+   * @param bins the bins
+   * @param m the m
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  private void sortTssDist(SamplePlotTrack sample, int bins, DataFrame m) throws IOException, ParseException {
+  private void sortTssDist(SamplePlotTrack sample, int bins, DataFrame m)
+      throws IOException, ParseException {
     Map<Integer, Set<String>> tssMap = new TreeMap<Integer, Set<String>>();
 
     Set<String> used = new HashSet<String>();
@@ -291,13 +279,15 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
         continue;
       }
 
-      Iterable<Gene> closestGenes = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq")
+      Iterable<Gene> closestGenes = GenesService.getInstance()
+          .getGenes(mGenomeModel.get(), "refseq")
           .findClosestGenesByTss(region.getRegion());
 
       // System.err.println("sym " + closestGenes.get(0).getSymbol());
 
-      int tssDistance = Gene.tssDist5p(closestGenes.iterator().next(), region.getRegion()); // GenomicRegion.midDist(region.getRegion(),
-                                                                                            // Gene.tssRegion(closestGenes.get(0)));
+      int tssDistance = Gene.tssDist5p(closestGenes.iterator().next(),
+          region.getRegion()); // GenomicRegion.midDist(region.getRegion(),
+                               // Gene.tssRegion(closestGenes.get(0)));
 
       // System.err.println("tss " + tssDistance + " " +
       // closestGenes.get(0).getLocation() + " " + region.getRegion());
@@ -320,7 +310,8 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
     for (int tssDist : tssMap.keySet()) {
       for (String refseq : tssMap.get(tssDist)) {
-        Gene gene = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").getGene(refseq);
+        Gene gene = GenesService.getInstance()
+            .getGenes(mGenomeModel.get(), "refseq").getGene(refseq);
 
         GenomicRegion tssRegion = Gene.tssRegion(gene);
 
@@ -345,21 +336,18 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   /**
    * Sort intensity.
    *
-   * @param sample
-   *          the sample
-   * @param bins
-   *          the bins
-   * @param m
-   *          the m
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param sample the sample
+   * @param bins the bins
+   * @param m the m
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  private void sortIntensity(SamplePlotTrack sample, int bins, DataFrame m) throws IOException, ParseException {
-    Map<Double, Set<GenomicRegion>> tssMap = DefaultTreeMap.create(new TreeSetCreator<GenomicRegion>()); // new
-                                                                                                         // TreeMap<Double,
-                                                                                                         // Set<GenomicRegion>>();
+  private void sortIntensity(SamplePlotTrack sample, int bins, DataFrame m)
+      throws IOException, ParseException {
+    Map<Double, Set<GenomicRegion>> tssMap = DefaultTreeMap
+        .create(new TreeSetCreator<GenomicRegion>()); // new
+                                                      // TreeMap<Double,
+                                                      // Set<GenomicRegion>>();
 
     Map<GenomicRegion, List<Double>> countMap = new HashMap<GenomicRegion, List<Double>>();
 
@@ -383,7 +371,8 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
       // System.err.println("closest " + r.toString());
 
       // Find closest tss to peak and center on that
-      // GenomicRegion ext = GenomicRegion.extend(Gene.tssRegion(closestGenes.get(0)),
+      // GenomicRegion ext =
+      // GenomicRegion.extend(Gene.tssRegion(closestGenes.get(0)),
       // mPadding,
       // mPadding);
 
@@ -404,9 +393,11 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
     int i = 0;
 
-    for (double sum : CollectionUtils.reverse(CollectionUtils.sort(tssMap.keySet()))) {
+    for (double sum : CollectionUtils
+        .reverse(CollectionUtils.sort(tssMap.keySet()))) {
       for (GenomicRegion region : tssMap.get(sum)) {
-        GenomicRegion ext = extMap.get(region); // GenomicRegion.extend(GenomicRegion.midRegion(region), mPadding,
+        GenomicRegion ext = extMap.get(region); // GenomicRegion.extend(GenomicRegion.midRegion(region),
+                                                // mPadding,
                                                 // mPadding);
 
         // +- 2kb
@@ -428,20 +419,16 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   /**
    * Get the counts and subtract the input if necessary.
    *
-   * @param sample
-   *          the sample
-   * @param ext
-   *          the ext
-   * @param mWindow
-   *          the m window
+   * @param sample the sample
+   * @param ext the ext
+   * @param mWindow the m window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  private List<Double> getCounts(SamplePlotTrack sample, GenomicRegion ext, int mWindow)
-      throws IOException, ParseException {
+  private List<Double> getCounts(SamplePlotTrack sample,
+      GenomicRegion ext,
+      int mWindow) throws IOException, ParseException {
     SampleAssembly assembly = sample.getAssembly();
 
     List<Double> counts = assembly.getRPM(sample.getSample(), ext, mWindow);

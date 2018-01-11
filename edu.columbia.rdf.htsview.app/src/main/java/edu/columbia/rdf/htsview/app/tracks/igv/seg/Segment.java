@@ -33,16 +33,11 @@ public class Segment extends GenomicRegion {
   /**
    * Instantiates a new segment.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param markers
-   *          the markers
-   * @param mean
-   *          the mean
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param markers the markers
+   * @param mean the mean
    */
   public Segment(Chromosome chr, int start, int end, int markers, double mean) {
     super(chr, start, end);

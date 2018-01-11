@@ -27,7 +27,8 @@ public class ReadsAllSupportedGuiFileFilter extends GuiFileExtFilter {
    * Instantiates a new reads all supported gui file filter.
    */
   public ReadsAllSupportedGuiFileFilter() {
-    super("bam", "bct.json", "brt2j", "bvtj", "bed", "bedgraph", "gff", "readsj", "readsx");
+    super("bam", "bct.json", "brt2j", "bvtj", "bed", "bedgraph", "gff",
+        "readsj", "readsx");
   }
 
   /*

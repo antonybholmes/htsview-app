@@ -56,14 +56,12 @@ public class ConservationCanvasLayer extends AxesClippedLayer {
   /**
    * Instantiates a new conservation canvas layer.
    *
-   * @param title
-   *          the title
-   * @param assembly
-   *          the assembly
-   * @param max
-   *          the max
+   * @param title the title
+   * @param assembly the assembly
+   * @param max the max
    */
-  public ConservationCanvasLayer(String title, ConservationAssembly assembly, double max) {
+  public ConservationCanvasLayer(String title, ConservationAssembly assembly,
+      double max) {
     mAssembly = assembly;
     mMax = max;
   }
@@ -71,8 +69,7 @@ public class ConservationCanvasLayer extends AxesClippedLayer {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
+   * @param displayRegion the display region
    */
   public void update(GenomicRegion displayRegion) {
     mDisplayRegion = displayRegion;
@@ -86,7 +83,11 @@ public class ConservationCanvasLayer extends AxesClippedLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     // So that we don't attempt to pull a whole chromosome
     if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {

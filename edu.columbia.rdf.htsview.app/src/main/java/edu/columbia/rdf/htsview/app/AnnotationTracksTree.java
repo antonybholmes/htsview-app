@@ -18,10 +18,8 @@ package edu.columbia.rdf.htsview.app;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
-import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
-import org.jebtk.core.Resources;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.core.tree.TreeRootNode;
@@ -37,7 +35,6 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GencodeGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.genes.RefSeqGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.mouse.MouseConservationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.AnnotationBedPlotTrack;
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 import edu.columbia.rdf.htsview.tracks.measurement.RangePlotTrack;
 import edu.columbia.rdf.htsview.tracks.measurement.RulerPlotTrack;
@@ -55,16 +52,13 @@ public class AnnotationTracksTree extends ModernTree<Track> {
   /**
    * Instantiates a new annotation tracks tree.
    *
-   * @param genomeAssembly
-   *          the genome assembly
-   * @param conservationAssembly
-   *          the conservation assembly
-   * @param mouseConservationAssembly
-   *          the mouse conservation assembly
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param genomeAssembly the genome assembly
+   * @param conservationAssembly the conservation assembly
+   * @param mouseConservationAssembly the mouse conservation assembly
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public AnnotationTracksTree(GenomeAssembly dnaAssembly, ConservationAssembly conservationAssembly,
+  public AnnotationTracksTree(GenomeAssembly dnaAssembly,
+      ConservationAssembly conservationAssembly,
       ConservationAssembly mouseConservationAssembly) throws IOException {
     Track track;
     TreeNode<Track> node;
@@ -142,7 +136,9 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 
     TreeNode<Track> microarrayNode = new TreeNode<Track>("Microarray");
 
-    track = new BedPlotTrack(PathUtils.getPath("res/tracks/HG-U133_Plus_2.probes.hg19.bed.gz"), TrackDisplayMode.FULL);
+    track = new BedPlotTrack(
+        PathUtils.getPath("res/tracks/HG-U133_Plus_2.probes.hg19.bed.gz"),
+        TrackDisplayMode.FULL);
     node = new TreeNode<Track>(track.getName(), track);
     microarrayNode.addChild(node);
 
@@ -152,9 +148,9 @@ public class AnnotationTracksTree extends ModernTree<Track> {
      * TreeNode<Track> otherNode = new TreeNode<Track>("Other");
      * 
      * track = new AnnotationBedPlotTrack(Bed.parseTracks("DDS_IgLocusMap",
-     * Resources.getResGzipReader("res/tracks/DDS_IgLocusMap.bed.gz")).get(0)); node
-     * = new TreeNode<Track>(track.getName(), track); otherNode.addChild(node);
-     * genomicNode.addChild(otherNode);
+     * Resources.getResGzipReader("res/tracks/DDS_IgLocusMap.bed.gz")).get(0));
+     * node = new TreeNode<Track>(track.getName(), track);
+     * otherNode.addChild(node); genomicNode.addChild(otherNode);
      */
 
     root.addChild(genomicNode);

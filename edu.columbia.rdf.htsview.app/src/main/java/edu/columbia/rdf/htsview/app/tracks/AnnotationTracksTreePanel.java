@@ -21,13 +21,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import edu.columbia.rdf.htsview.tracks.Track;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
+import edu.columbia.rdf.htsview.tracks.Track;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,7 +39,8 @@ public class AnnotationTracksTreePanel extends ModernWidget {
   private static final long serialVersionUID = 1L;
 
   /** The Constant NO_TRACKS. */
-  private static final List<Track> NO_TRACKS = Collections.unmodifiableList(new ArrayList<Track>());
+  private static final List<Track> NO_TRACKS = Collections
+      .unmodifiableList(new ArrayList<Track>());
 
   /** The m tree. */
   private AnnotationTracksTree mTree;
@@ -47,12 +48,11 @@ public class AnnotationTracksTreePanel extends ModernWidget {
   /**
    * Instantiates a new annotation tracks tree panel.
    *
-   * @param tree
-   *          the tree
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param tree the tree
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public AnnotationTracksTreePanel(AnnotationTracksTree tree) throws IOException {
+  public AnnotationTracksTreePanel(AnnotationTracksTree tree)
+      throws IOException {
     mTree = tree;
 
     createUi();
@@ -71,8 +71,7 @@ public class AnnotationTracksTreePanel extends ModernWidget {
   /**
    * Sets the selected.
    *
-   * @param i
-   *          the new selected
+   * @param i the new selected
    */
   public void setSelected(int i) {
     mTree.selectNode(i);
@@ -100,10 +99,8 @@ public class AnnotationTracksTreePanel extends ModernWidget {
   /**
    * Recursively examine a node and its children to find those with experiments.
    *
-   * @param node
-   *          the node
-   * @param tracks
-   *          the tracks
+   * @param node the node
+   * @param tracks the tracks
    */
   private void selectedTracks(TreeNode<Track> node, List<Track> tracks) {
     if (node.getValue() != null) {

@@ -45,14 +45,12 @@ public class HTSGenomicRibbonSection extends GenomicRegionRibbonSection {
   /**
    * Instantiates a new HTS genomic ribbon section.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
-   * @param genomeModel
-   *          the genome model
+   * @param ribbon the ribbon
+   * @param model the model
+   * @param genomeModel the genome model
    */
-  public HTSGenomicRibbonSection(Ribbon ribbon, GenomicRegionModel model, GenomeModel genomeModel) {
+  public HTSGenomicRibbonSection(Ribbon ribbon, GenomicRegionModel model,
+      GenomeModel genomeModel) {
     super(ribbon, model, genomeModel);
   }
 
@@ -70,9 +68,11 @@ public class HTSGenomicRibbonSection extends GenomicRegionRibbonSection {
       // MIN_SIZE
 
       if (region.getEnd() - region.getStart() < MIN_BASES) {
-        int size = ChromosomeSizesService.getInstance().getSizes(mGenomeModel.get()).getSize(region.getChr());
+        int size = ChromosomeSizesService.getInstance()
+            .getSizes(mGenomeModel.get()).getSize(region.getChr());
 
-        region = GenomicRegion.create(region.getChr(), region.getStart(),
+        region = GenomicRegion.create(region.getChr(),
+            region.getStart(),
             Math.min(region.getStart() + MIN_BASES, size));
       }
     }

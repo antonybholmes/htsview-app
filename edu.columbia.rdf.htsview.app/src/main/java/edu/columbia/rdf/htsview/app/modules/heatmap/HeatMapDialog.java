@@ -30,7 +30,6 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
@@ -94,10 +93,12 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   private static final Dimension LIST_SIZE = new Dimension(500, 100);
 
   /** The m sample button. */
-  private ModernButton mSampleButton = new ModernButton(UIService.getInstance().loadIcon("database", 16));
+  private ModernButton mSampleButton = new ModernButton(
+      UIService.getInstance().loadIcon("database", 16));
 
   /** The m input button. */
-  private ModernButton mInputButton = new ModernButton(UIService.getInstance().loadIcon("database", 16));
+  private ModernButton mInputButton = new ModernButton(
+      UIService.getInstance().loadIcon("database", 16));
 
   /** The m file button. */
   private ModernButton mFileButton = new ModernButton(UI.MENU_LOAD,
@@ -116,19 +117,23 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   private ModernTextField mTextBin = new ModernTextField("100");
 
   /** The m check use input. */
-  private ModernCheckBox mCheckUseInput = new ModernCheckBox("Subtract Input", 120);
+  private ModernCheckBox mCheckUseInput = new ModernCheckBox("Subtract Input",
+      120);
 
   /** The m check plot. */
   private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
 
   /** The m check sort none. */
-  private ModernRadioButton mCheckSortNone = new ModernRadioButton("None", true);
+  private ModernRadioButton mCheckSortNone = new ModernRadioButton("None",
+      true);
 
   /** The m check sort tss dist. */
-  private ModernRadioButton mCheckSortTssDist = new ModernRadioButton("TSS distance");
+  private ModernRadioButton mCheckSortTssDist = new ModernRadioButton(
+      "TSS distance");
 
   /** The m check sort intensity. */
-  private ModernRadioButton mCheckSortIntensity = new ModernRadioButton("Intensity");
+  private ModernRadioButton mCheckSortIntensity = new ModernRadioButton(
+      "Intensity");
 
   /** The m regions panel. */
   private RegionsPanel mRegionsPanel;
@@ -151,14 +156,12 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new heat map dialog.
    *
-   * @param parent
-   *          the parent
-   * @param genomeModel
-   *          the genome model
-   * @param samples
-   *          the samples
+   * @param parent the parent
+   * @param genomeModel the genome model
+   * @param samples the samples
    */
-  public HeatMapDialog(ModernWindow parent, GenomeModel genomeModel, List<SamplePlotTrack> samples) {
+  public HeatMapDialog(ModernWindow parent, GenomeModel genomeModel,
+      List<SamplePlotTrack> samples) {
     super(parent, "htsview.modules.heat-map.help.url");
 
     mGenomeModel = genomeModel;
@@ -192,8 +195,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   /**
    * Load samples.
    *
-   * @param samples
-   *          the samples
+   * @param samples the samples
    */
   private void loadSamples(List<SamplePlotTrack> samples) {
     mSamples = samples;
@@ -221,7 +223,8 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 
     ModernScrollPane scrollPane = new ModernScrollPane(mSamplesList);
     scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-    ModernLineBorderPanel panel = new ModernLineBorderPanel(scrollPane, LIST_SIZE);
+    ModernLineBorderPanel panel = new ModernLineBorderPanel(scrollPane,
+        LIST_SIZE);
     box.add(panel);
 
     /*
@@ -229,7 +232,8 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
      * 
      * box2 = HBox.create(); box2.add(mCheckUseInput); box2.add(new
      * ModernTextBorderPanel(mTextInput, ModernWidget.EXTRA_LARGE_SIZE));
-     * box2.add(ModernPanel.createHGap()); box2.add(mInputButton); box.add(box2);
+     * box2.add(ModernPanel.createHGap()); box2.add(mInputButton);
+     * box.add(box2);
      */
 
     midSectionHeader("Genomic Regions", box);
@@ -297,9 +301,8 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   @Override
   public final void clicked(ModernClickEvent e) {
@@ -329,11 +332,9 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   /**
    * Load sample.
    *
-   * @param field
-   *          the field
+   * @param field the field
    * @return the sample
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private Sample loadSample(ModernTextField field) throws IOException {
     List<Sample> samples = loadSamples();
@@ -351,11 +352,11 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
    * Load samples.
    *
    * @return the list
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private List<Sample> loadSamples() throws IOException {
-    ChipSeqSamplesDialog dialog = new ChipSeqSamplesDialog(mParent, mSearchModel);
+    ChipSeqSamplesDialog dialog = new ChipSeqSamplesDialog(mParent,
+        mSearchModel);
 
     dialog.setVisible(true);
 
@@ -374,22 +375,24 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 
     String genome = mGenomeModel.get();
 
-    for (String refseq : GenesService.getInstance().getGenes(genome, "refseq").getRefSeqIds()) {
-      Gene gene = GenesService.getInstance().getGenes(genome, "refseq").getGene(refseq);
+    for (String refseq : GenesService.getInstance().getGenes(genome, "refseq")
+        .getRefSeqIds()) {
+      Gene gene = GenesService.getInstance().getGenes(genome, "refseq")
+          .getGene(refseq);
 
       // GenomicRegion tss = Gene.tssRegion(gene);
 
       genes.add(gene.getSymbol());
     }
 
-    mRegionsPanel.setText(TextUtils.join(CollectionUtils.sort(genes), TextUtils.NEW_LINE_DELIMITER));
+    mRegionsPanel.setText(TextUtils.join(CollectionUtils.sort(genes),
+        TextUtils.NEW_LINE_DELIMITER));
   }
 
   /**
    * Browse for file.
    *
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
   private void browseForFile() throws Exception {
     browseForFile(RecentFilesService.getInstance().getPwd());
@@ -398,23 +401,24 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   /**
    * Browse for file.
    *
-   * @param pwd
-   *          the pwd
-   * @throws Exception
-   *           the exception
+   * @param pwd the pwd
+   * @throws Exception the exception
    */
   private void browseForFile(Path pwd) throws Exception {
-    openFile(FileDialog.open(mParent).filter(new AllXlsxGuiFileFilter(), new XlsxGuiFileFilter(),
-        new TxtGuiFileFilter(), new BedGuiFileFilter(), new BedGraphGuiFileFilter()).getFile(pwd));
+    openFile(FileDialog.open(mParent)
+        .filter(new AllXlsxGuiFileFilter(),
+            new XlsxGuiFileFilter(),
+            new TxtGuiFileFilter(),
+            new BedGuiFileFilter(),
+            new BedGraphGuiFileFilter())
+        .getFile(pwd));
   }
 
   /**
    * Open file.
    *
-   * @param file
-   *          the file
-   * @throws Exception
-   *           the exception
+   * @param file the file
+   * @throws Exception the exception
    */
   private void openFile(Path file) throws Exception {
     if (file == null) {
@@ -422,7 +426,9 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
     }
 
     if (!FileUtils.exists(file)) {
-      ModernMessageDialog.createFileDoesNotExistDialog(getParentWindow(), getAppInfo().getName(), file);
+      ModernMessageDialog.createFileDoesNotExistDialog(getParentWindow(),
+          getAppInfo().getName(),
+          file);
 
       return;
     }
@@ -438,7 +444,11 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 
       model = new BedGraphTableModel(bed);
     } else {
-      model = Bioinformatics.getModel(file, true, TextUtils.emptyList(), 0, TextUtils.TAB_DELIMITER);
+      model = Bioinformatics.getModel(file,
+          true,
+          TextUtils.emptyList(),
+          0,
+          TextUtils.TAB_DELIMITER);
     }
 
     StringBuilder buffer = new StringBuilder();
@@ -454,15 +464,19 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
       } else if (model.getValueAsString(i, 0).startsWith("chr")) {
         // three column format
 
-        region = new GenomicRegion(ChromosomeService.getInstance().guess(file, model.getValueAsString(i, 0)),
-            Integer.parseInt(model.getValueAsString(i, 1)), Integer.parseInt(model.getValueAsString(i, 2)));
+        region = new GenomicRegion(
+            ChromosomeService.getInstance().guess(file,
+                model.getValueAsString(i, 0)),
+            Integer.parseInt(model.getValueAsString(i, 1)),
+            Integer.parseInt(model.getValueAsString(i, 2)));
 
         GenomicRegion mid = GenomicRegion.midRegion(region);
 
         buffer.append(mid.toString()).append(TextUtils.NEW_LINE_DELIMITER);
       } else {
         // assume its a gene id/symbol etc.
-        buffer.append(model.getValueAsString(i, 0)).append(TextUtils.NEW_LINE_DELIMITER);
+        buffer.append(model.getValueAsString(i, 0))
+            .append(TextUtils.NEW_LINE_DELIMITER);
       }
     }
 
@@ -475,8 +489,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
    * Gets the regions.
    *
    * @return the regions
-   * @throws ParseException
-   *           the parse exception
+   * @throws ParseException the parse exception
    */
   public List<HeatMapIdLocation> getRegions() throws ParseException {
     return mRegionsPanel.getRegions();

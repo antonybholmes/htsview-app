@@ -64,13 +64,16 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
   private GenesPlotTrack mTrack;
 
   /** The m check draw tss arrows. */
-  private ModernTwoStateWidget mCheckDrawTssArrows = new ModernCheckSwitch("TSS arrows");
+  private ModernTwoStateWidget mCheckDrawTssArrows = new ModernCheckSwitch(
+      "TSS arrows");
 
   /** The m check draw exon arrows. */
-  private ModernTwoStateWidget mCheckDrawExonArrows = new ModernCheckSwitch("Exon arrows");
+  private ModernTwoStateWidget mCheckDrawExonArrows = new ModernCheckSwitch(
+      "Exon arrows");
 
   /** The m check draw arrows. */
-  private ModernTwoStateWidget mCheckDrawArrows = new ModernCheckSwitch("Arrows", true);
+  private ModernTwoStateWidget mCheckDrawArrows = new ModernCheckSwitch(
+      "Arrows", true);
 
   /** The m check full. */
   private ModernRadioButton mCheckFull = new ModernRadioButton("Full");
@@ -86,10 +89,8 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
   /**
    * Instantiates a new gene edit dialog.
    *
-   * @param parent
-   *          the parent
-   * @param track
-   *          the track
+   * @param parent the parent
+   * @param track the track
    */
   public GeneEditDialog(ModernWindow parent, GenesPlotTrack track) {
     super(parent);
@@ -151,7 +152,8 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
     int[] rows = { ModernWidget.WIDGET_HEIGHT };
     int[] cols = { 100, 300 };
 
-    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     mColorButton = new ColorSwatchButton(mParent, mTrack.getFillColor());
 
@@ -172,7 +174,8 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 
     matrixPanel.add(new ModernAutoSizeLabel("Exon Color"));
     box = HBox.create();
-    mExonColorButton = new ColorSwatchButton(mParent, mTrack.getExonFillColor());
+    mExonColorButton = new ColorSwatchButton(mParent,
+        mTrack.getExonFillColor());
     box.add(mExonColorButton);
     matrixPanel.add(box);
 

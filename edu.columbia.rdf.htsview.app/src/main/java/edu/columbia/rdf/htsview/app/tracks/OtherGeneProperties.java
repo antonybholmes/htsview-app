@@ -31,7 +31,8 @@ public class OtherGeneProperties extends GeneProperties {
   private static final long serialVersionUID = 1L;
 
   /** The Constant COLOR. */
-  private static final Color COLOR = SettingsService.getInstance().getAsColor("edb.reads.genes.color");
+  private static final Color COLOR = SettingsService.getInstance()
+      .getAsColor("edb.reads.genes.color");
 
   /**
    * Instantiates a new other gene properties.

@@ -39,16 +39,14 @@ public abstract class Module implements NameProperty {
    * Each module is given access to the app so that it can manipulate the UI and
    * add new functions.
    *
-   * @param window
-   *          the window
+   * @param window the window
    */
   public abstract void init(MainHtsViewWindow window);
 
   /**
    * Should run itself.
    *
-   * @param args
-   *          the args
+   * @param args the args
    */
   public abstract void run(String... args);
 }

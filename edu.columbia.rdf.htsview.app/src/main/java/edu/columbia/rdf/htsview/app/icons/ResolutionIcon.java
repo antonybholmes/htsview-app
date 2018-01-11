@@ -33,8 +33,7 @@ public class ResolutionIcon extends ModernVectorIcon {
   /**
    * Instantiates a new resolution icon.
    *
-   * @param name
-   *          the name
+   * @param name the name
    */
   public ResolutionIcon(String name) {
     mName = name;
@@ -48,7 +47,12 @@ public class ResolutionIcon extends ModernVectorIcon {
    * int, int, int, int)
    */
   @Override
-  public void drawIcon(Graphics2D g2, int x, int y, int w, int h, Object... params) {
+  public void drawIcon(Graphics2D g2,
+      int x,
+      int y,
+      int w,
+      int h,
+      Object... params) {
     g2.setColor(Color.WHITE);
     g2.fillRect(x, y, w, h);
 
@@ -58,7 +62,8 @@ public class ResolutionIcon extends ModernVectorIcon {
     g2.setFont(ModernWidget.FONT);
 
     x = x + (w - g2.getFontMetrics().stringWidth(mName)) / 2;
-    y = y + (h + g2.getFontMetrics().getAscent() - g2.getFontMetrics().getDescent()) / 2;
+    y = y + (h + g2.getFontMetrics().getAscent()
+        - g2.getFontMetrics().getDescent()) / 2;
 
     g2.setColor(Color.BLACK);
 

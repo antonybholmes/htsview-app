@@ -76,23 +76,17 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
   /**
    * Instantiates a new read dist task.
    *
-   * @param parent
-   *          the parent
-   * @param name
-   *          the name
-   * @param tracks
-   *          the tracks
-   * @param regions
-   *          the regions
-   * @param padding
-   *          the padding
-   * @param window
-   *          the window
-   * @param average
-   *          the average
+   * @param parent the parent
+   * @param name the name
+   * @param tracks the tracks
+   * @param regions the regions
+   * @param padding the padding
+   * @param window the window
+   * @param average the average
    */
-  public ReadDistTask(ModernRibbonWindow parent, String name, List<SamplePlotTrack> tracks,
-      List<HeatMapIdLocation> regions, int padding, int window, boolean average) {
+  public ReadDistTask(ModernRibbonWindow parent, String name,
+      List<SamplePlotTrack> tracks, List<HeatMapIdLocation> regions,
+      int padding, int window, boolean average) {
     mParent = parent;
     mName = name;
     mTracks = tracks;
@@ -139,8 +133,10 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
       int i = 0;
 
       for (Plot plot : axes.getPlots()) {
-        plot.getCurrentSeries().getStyle().getLineStyle().setColor(mTracks.get(i).getLineColor());
-        plot.getCurrentSeries().getStyle().getFillStyle().setColor(mTracks.get(i).getFillColor());
+        plot.getCurrentSeries().getStyle().getLineStyle()
+            .setColor(mTracks.get(i).getLineColor());
+        plot.getCurrentSeries().getStyle().getFillStyle()
+            .setColor(mTracks.get(i).getFillColor());
         plot.getCurrentSeries().getMarker().setVisible(false);
 
         ++i;
@@ -177,8 +173,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
   /**
    * Creates the counts file.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void createCountsFile() throws IOException {
 
@@ -186,7 +181,10 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
     int bins = 2 * (mPadding / mWindow) + 1;
 
     Map<Sample, IterMap<Integer, Double>> mBinCountMap = DefaultTreeMap
-        .create(new DefaultTreeMapCreator<Integer, Double>(0.0)); // new TreeMap<Sample, Map<Integer, Double>>();
+        .create(new DefaultTreeMapCreator<Integer, Double>(0.0)); // new
+                                                                  // TreeMap<Sample,
+                                                                  // Map<Integer,
+                                                                  // Double>>();
 
     // int c = 1;
 
@@ -207,14 +205,16 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         // the mid region will be the same as the TSS since it is a
         // single location, or else use the mid point of the region
         // since we must have uniform binning around each location
-        GenomicRegion ext = GenomicRegion.extend(GenomicRegion.midRegion(location.getRegion()), mPadding, mPadding);
+        GenomicRegion ext = GenomicRegion.extend(GenomicRegion
+            .midRegion(location.getRegion()), mPadding, mPadding);
 
         // +- 2kb
 
         List<Double> counts = getCounts(track, ext, mWindow);
 
         for (int i = 0; i < bins; ++i) {
-          mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) + counts.get(i));
+          mBinCountMap.get(sample).put(i,
+              mBinCountMap.get(sample).get(i) + counts.get(i));
         }
       }
     }
@@ -226,7 +226,8 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         Sample sample = track.getSample();
 
         for (int i : mBinCountMap.get(sample).keySet()) {
-          mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) / mLocations.size());
+          mBinCountMap.get(sample).put(i,
+              mBinCountMap.get(sample).get(i) / mLocations.size());
         }
       }
     }
@@ -256,7 +257,8 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         for (int j = 0; j < mTracks.size(); ++j) {
           writer.write(bin);
           writer.sep();
-          writer.write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
+          writer
+              .write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
 
           if (j < mTracks.size() - 1) {
             writer.sep();
@@ -273,18 +275,17 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
   /**
    * Get the counts and subtract the input if necessary.
    *
-   * @param track
-   *          the track
-   * @param ext
-   *          the ext
-   * @param mWindow
-   *          the m window
+   * @param track the track
+   * @param ext the ext
+   * @param mWindow the m window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private List<Double> getCounts(SamplePlotTrack track, GenomicRegion ext, int mWindow) throws IOException {
-    List<Double> counts = track.getAssembly().getRPM(track.getSample(), ext, mWindow);
+  private List<Double> getCounts(SamplePlotTrack track,
+      GenomicRegion ext,
+      int mWindow) throws IOException {
+    List<Double> counts = track.getAssembly()
+        .getRPM(track.getSample(), ext, mWindow);
 
     /*
      * if (mInput != null) { List<Double> inputCounts =

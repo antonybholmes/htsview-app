@@ -19,9 +19,10 @@ import java.awt.Color;
 
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.graphplot.figure.PlotStyle;
+
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
-import org.jebtk.graphplot.figure.PlotStyle;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -38,15 +39,12 @@ public class DnaBasesPlotSubFigure extends DnaSubFigure {
   /**
    * Instantiates a new dna bases plot canvas.
    *
-   * @param genome
-   *          the genome
-   * @param genomeAssembly
-   *          the genome assembly
-   * @param titlePosition
-   *          the title position
+   * @param genome the genome
+   * @param genomeAssembly the genome assembly
+   * @param titlePosition the title position
    */
-  public DnaBasesPlotSubFigure(String genome, GenomeAssembly genomeAssembly, TitleProperties titlePosition,
-      boolean colorMode) {
+  public DnaBasesPlotSubFigure(String genome, GenomeAssembly genomeAssembly,
+      TitleProperties titlePosition, boolean colorMode) {
     mLayer = new DnaBasesCanvasLayer(genome, genomeAssembly, colorMode);
 
     currentAxes().addChild(mLayer);
@@ -57,18 +55,18 @@ public class DnaBasesPlotSubFigure extends DnaSubFigure {
   /**
    * Creates the.
    *
-   * @param genome
-   *          the genome
-   * @param genomeAssembly
-   *          the genome assembly
-   * @param titlePosition
-   *          the title position
+   * @param genome the genome
+   * @param genomeAssembly the genome assembly
+   * @param titlePosition the title position
    * @return the dna bases plot canvas
    */
-  public static DnaBasesPlotSubFigure create(String genome, GenomeAssembly genomeAssembly,
-      TitleProperties titlePosition, boolean colorMode) {
+  public static DnaBasesPlotSubFigure create(String genome,
+      GenomeAssembly genomeAssembly,
+      TitleProperties titlePosition,
+      boolean colorMode) {
 
-    DnaBasesPlotSubFigure canvas = new DnaBasesPlotSubFigure(genome, genomeAssembly, titlePosition, colorMode);
+    DnaBasesPlotSubFigure canvas = new DnaBasesPlotSubFigure(genome,
+        genomeAssembly, titlePosition, colorMode);
 
     // set the graph limits
     canvas.currentAxes().getX1Axis().getTitle().setText(null);
@@ -92,9 +90,24 @@ public class DnaBasesPlotSubFigure extends DnaSubFigure {
    * org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     mLayer.update(displayRegion);
   }

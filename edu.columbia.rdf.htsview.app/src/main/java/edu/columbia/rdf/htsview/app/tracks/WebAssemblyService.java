@@ -15,9 +15,8 @@
  */
 package edu.columbia.rdf.htsview.app.tracks;
 
-import edu.columbia.rdf.htsview.tracks.SampleAssembly;
-
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeakAssembly;
+import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -62,8 +61,7 @@ public class WebAssemblyService {
   /**
    * Sets the peak assembly.
    *
-   * @param peakAssembly
-   *          the new peak assembly
+   * @param peakAssembly the new peak assembly
    */
   public void setPeakAssembly(PeakAssembly peakAssembly) {
     mPeakAssembly = peakAssembly;
@@ -81,8 +79,7 @@ public class WebAssemblyService {
   /**
    * Sets the sample assembly.
    *
-   * @param sampleAssembly
-   *          the new sample assembly
+   * @param sampleAssembly the new sample assembly
    */
   public void setSampleAssembly(SampleAssembly sampleAssembly) {
     mSampleAssembly = sampleAssembly;

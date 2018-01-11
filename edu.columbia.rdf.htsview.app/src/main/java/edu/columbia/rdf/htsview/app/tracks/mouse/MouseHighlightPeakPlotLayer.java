@@ -46,7 +46,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
   private static final long serialVersionUID = 1L;
 
   /** The Constant COLOR. */
-  private static final Color COLOR = ColorUtils.getTransparentColor50(Color.BLACK);
+  private static final Color COLOR = ColorUtils
+      .getTransparentColor50(Color.BLACK);
 
   /** The Constant SNAP_SIZE. */
   private static final int SNAP_SIZE = 5;
@@ -60,8 +61,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseClicked(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseClicked(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseClicked(CanvasMouseEvent e) {
@@ -73,8 +74,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseEntered(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseEntered(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseEntered(CanvasMouseEvent e) {
@@ -86,8 +87,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseExited(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseExited(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseExited(CanvasMouseEvent e) {
@@ -98,8 +99,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMousePressed(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMousePressed(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMousePressed(CanvasMouseEvent e) {
@@ -111,8 +112,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseReleased(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseReleased(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseReleased(CanvasMouseEvent e) {
@@ -124,8 +125,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseDragged(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseDragged(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseDragged(CanvasMouseEvent e) {
@@ -136,8 +137,8 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseMoved(org.abh
-     * .common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseMoved(org
+     * .abh .common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseMoved(CanvasMouseEvent e) {
@@ -174,8 +175,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
   /**
    * Instantiates a new mouse highlight peak plot layer.
    *
-   * @param series
-   *          the series
+   * @param series the series
    */
   public MouseHighlightPeakPlotLayer(String series) {
     super(series);
@@ -190,13 +190,20 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
    * org.abh.common.math.matrix.DataFrame, org.graphplot.figure.series.XYSeries)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes, Plot plot,
-      DataFrame m, XYSeries series) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes,
+      Plot plot,
+      DataFrame m,
+      XYSeries series) {
     if (context == DrawingContext.PRINT) {
       return;
     }
 
-    // System.err.println("mouse m " + m.getRowCount() + " " + m.getColumnNames() +
+    // System.err.println("mouse m " + m.getRowCount() + " " +
+    // m.getColumnNames() +
     // " " + series.getName() + series.iterator().next());
 
     if (mXy == null || !mM.equals(m)) {
@@ -218,10 +225,12 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
       if (p != null) {
         // String s = "(" + p.getX() + "," + p.getY() + ")";
 
-        // g2.drawString(s, mPoint.x - g2.getFontMetrics().stringWidth(s), mPoint.y);
+        // g2.drawString(s, mPoint.x - g2.getFontMetrics().stringWidth(s),
+        // mPoint.y);
 
         StatusService.getInstance()
-            .setStatus("x:" + Formatter.number().format((int) p.getX()) + ", y:" + Formatter.number().format(p.getY()));
+            .setStatus("x:" + Formatter.number().format((int) p.getX()) + ", y:"
+                + Formatter.number().format(p.getY()));
       }
     }
   }

@@ -21,10 +21,11 @@ import java.io.IOException;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
 import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.graphplot.figure.Axes;
+
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import org.jebtk.graphplot.figure.Axes;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -56,19 +57,25 @@ public class CytobandsPlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
 
     //
     // Display some genes
     //
 
-    mSubFigure = CytobandsSubFigure.create("Cytobands " + genome, ChromosomeSizesService.getInstance().getSizes(genome),
-        CytobandsService.getInstance().getCytobands(genome), titlePosition);
+    mSubFigure = CytobandsSubFigure.create("Cytobands " + genome,
+        ChromosomeSizesService.getInstance().getSizes(genome),
+        CytobandsService.getInstance().getCytobands(genome),
+        titlePosition);
 
     switch (titlePosition.getPosition()) {
     case RIGHT:
     case COMPACT_RIGHT:
-      mSubFigure.currentAxes().setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, HUGE_MARGIN);
+      mSubFigure.currentAxes().setMargins(SMALL_MARGIN,
+          MARGINS.getLeft(),
+          SMALL_MARGIN,
+          HUGE_MARGIN);
       break;
     default:
       mSubFigure.currentAxes().setMargins(MARGINS);
@@ -88,8 +95,11 @@ public class CytobandsPlotTrack extends AnnotationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
 
     // mPlot.setForwardCanvasEventsEnabled(false);
 

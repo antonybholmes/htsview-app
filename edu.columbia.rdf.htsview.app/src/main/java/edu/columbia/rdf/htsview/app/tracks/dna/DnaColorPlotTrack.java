@@ -19,9 +19,10 @@ import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.graphplot.figure.Axes;
+
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
-import org.jebtk.graphplot.figure.Axes;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,8 +36,7 @@ public class DnaColorPlotTrack extends DnaPlotTrack {
   /**
    * Instantiates a new dna color plot track.
    *
-   * @param genomeAssembly
-   *          the genome assembly
+   * @param genomeAssembly the genome assembly
    */
   public DnaColorPlotTrack(GenomeAssembly genomeAssembly) {
     super("DNA Color", genomeAssembly);
@@ -49,13 +49,15 @@ public class DnaColorPlotTrack extends DnaPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
 
     //
     // Display some genes
     //
 
-    mSubFigure = DnaColorPlotCanvas.create(genome, mGenomeAssembly, titlePosition);
+    mSubFigure = DnaColorPlotCanvas
+        .create(genome, mGenomeAssembly, titlePosition);
 
     switch (titlePosition.getPosition()) {
     case RIGHT:
@@ -80,8 +82,11 @@ public class DnaColorPlotTrack extends DnaPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
 
     // mPlot.setForwardCanvasEventsEnabled(false);
     mSubFigure.update(displayRegion, resolution, width, height, margin);

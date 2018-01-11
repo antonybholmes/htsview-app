@@ -50,10 +50,8 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
   /**
    * Instantiates a new dna repeat mask canvas layer.
    *
-   * @param genome
-   *          the genome
-   * @param assembly
-   *          the assembly
+   * @param genome the genome
+   * @param assembly the assembly
    */
   public DnaRepeatMaskCanvasLayer(String genome, GenomeAssembly assembly) {
     mGenome = genome;
@@ -63,8 +61,7 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
+   * @param displayRegion the display region
    */
   public void update(GenomicRegion displayRegion) {
     mDisplayRegion = displayRegion;
@@ -78,7 +75,11 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     // So that we don't attempt to pull a whole chromosome
     if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {
@@ -89,7 +90,8 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
     int h = axes.getInternalSize().getH();
 
     try {
-      SequenceRegion sequence = mAssembly.getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
+      SequenceRegion sequence = mAssembly
+          .getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
       int x1 = 0;

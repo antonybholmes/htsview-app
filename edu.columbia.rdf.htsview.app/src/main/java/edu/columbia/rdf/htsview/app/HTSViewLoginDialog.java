@@ -39,8 +39,7 @@ public class HTSViewLoginDialog extends LoginDialog {
   /**
    * Instantiates a new login dialog.
    *
-   * @param login
-   *          the login
+   * @param login the login
    */
   public HTSViewLoginDialog(EDBWLogin login) {
     super(new HTSViewInfo(), login);

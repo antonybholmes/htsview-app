@@ -24,19 +24,10 @@ import javax.swing.Box;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import edu.columbia.rdf.htsview.chipseq.ChipSeqSamplesDialog;
-import edu.columbia.rdf.htsview.tracks.SampleAssembly;
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.TrackTree;
-import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
-import edu.columbia.rdf.htsview.tracks.TracksPanel;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
-import edu.columbia.rdf.htsview.tracks.sample.ReadsPlotTrack;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
+import org.jebtk.bioinformatics.ui.BioInfDialog;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.tree.TreeNode;
-import org.jebtk.bioinformatics.ui.BioInfDialog;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
@@ -50,7 +41,6 @@ import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.ribbon.RibbonSubSectionSeparator;
 import org.jebtk.modern.search.SearchModel;
 import org.jebtk.modern.tree.ModernTree;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.edb.Sample;
@@ -59,6 +49,15 @@ import edu.columbia.rdf.htsview.app.icons.OpenTrack16VectorIcon;
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeakAssembly;
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeakSet;
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeaksPlotTrack;
+import edu.columbia.rdf.htsview.chipseq.ChipSeqSamplesDialog;
+import edu.columbia.rdf.htsview.tracks.SampleAssembly;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.TrackTree;
+import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
+import edu.columbia.rdf.htsview.tracks.TracksPanel;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
+import edu.columbia.rdf.htsview.tracks.sample.ReadsPlotTrack;
+import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -74,19 +73,24 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
       UIService.getInstance().loadIcon(OpenTrack16VectorIcon.class, 16));
 
   /** The m delete button. */
-  private ModernButton mDeleteButton = new RibbonButton(UIService.getInstance().loadIcon("trash_bw", 16));
+  private ModernButton mDeleteButton = new RibbonButton(
+      UIService.getInstance().loadIcon("trash_bw", 16));
 
   /** The m tracks button. */
-  private ModernButton mTracksButton = new RibbonButton(UIService.getInstance().loadIcon("tracks", 16));
+  private ModernButton mTracksButton = new RibbonButton(
+      UIService.getInstance().loadIcon("tracks", 16));
 
   /** The m edit button. */
-  private ModernButton mEditButton = new RibbonButton(UIService.getInstance().loadIcon("edit_bw", 16));
+  private ModernButton mEditButton = new RibbonButton(
+      UIService.getInstance().loadIcon("edit_bw", 16));
 
   /** The m clear button. */
-  private ModernButton mClearButton = new RibbonButton(UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
+  private ModernButton mClearButton = new RibbonButton(
+      UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
 
   /** The m samples button. */
-  private ModernButton mSamplesButton = new RibbonButton("Samples", UIService.getInstance().loadIcon("samples", 16));
+  private ModernButton mSamplesButton = new RibbonButton("Samples",
+      UIService.getInstance().loadIcon("samples", 16));
 
   /** The m search model. */
   private SearchModel mSearchModel = new SearchModel();
@@ -96,14 +100,12 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Instantiates a new HTS tracks panel.
    *
-   * @param parent
-   *          the parent
-   * @param tree
-   *          the tree
-   * @param trackList
-   *          the track list
+   * @param parent the parent
+   * @param tree the tree
+   * @param trackList the track list
    */
-  public HTSTracksPanel(ModernRibbonWindow parent, ModernTree<Track> tree, TrackTree trackList) {
+  public HTSTracksPanel(ModernRibbonWindow parent, ModernTree<Track> tree,
+      TrackTree trackList) {
     super(parent, tree, trackList);
 
     setup();
@@ -124,7 +126,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
     Box box2 = HBox.create();
 
     if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
-      mSamplesButton.setToolTip("Samples Database", "Load ChIP-seq samples from database.");
+      mSamplesButton.setToolTip("Samples Database",
+          "Load ChIP-seq samples from database.");
 
       box2.add(mSamplesButton);
       box2.add(ModernPanel.createHGap());
@@ -138,7 +141,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
     // toolbar.add(mOpenButton);
     // toolbar.add(ModernPanel.createHGap());
 
-    mTracksButton.setToolTip("Annotation Tracks", "Load additional annotation tracks.");
+    mTracksButton.setToolTip("Annotation Tracks",
+        "Load additional annotation tracks.");
     box2.add(mTracksButton);
     // toolbar.add(ModernPanel.createHGap());
     mEditButton.setToolTip("Edit Tracks", "Edit track properties.");
@@ -175,9 +179,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
@@ -209,11 +212,11 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Load samples.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void loadSamples() throws IOException {
-    ChipSeqSamplesDialog dialog = new ChipSeqSamplesDialog(mParent, mSearchModel);
+    ChipSeqSamplesDialog dialog = new ChipSeqSamplesDialog(mParent,
+        mSearchModel);
 
     dialog.setVisible(true);
 
@@ -227,10 +230,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Load samples.
    *
-   * @param samples
-   *          the samples
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param samples the samples
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public void loadSamples(Collection<Sample> samples) throws IOException {
     loadSamples(samples, true);
@@ -239,21 +240,21 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Load samples.
    *
-   * @param samples
-   *          the samples
-   * @param interactive
-   *          the interactive
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param samples the samples
+   * @param interactive the interactive
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public void loadSamples(Collection<Sample> samples, boolean interactive) throws IOException {
+  public void loadSamples(Collection<Sample> samples, boolean interactive)
+      throws IOException {
     if (CollectionUtils.isNullOrEmpty(samples)) {
       return;
     }
 
-    SampleAssembly sampleAssembly = WebAssemblyService.getInstance().getSampleAssembly();
+    SampleAssembly sampleAssembly = WebAssemblyService.getInstance()
+        .getSampleAssembly();
 
-    PeakAssembly peakAssembly = WebAssemblyService.getInstance().getPeakAssembly();
+    PeakAssembly peakAssembly = WebAssemblyService.getInstance()
+        .getPeakAssembly();
 
     for (Sample sample : samples) {
       // tracks.add(new SamplePlotTrack(sample, mAssembly));
@@ -266,7 +267,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
       // reads or there are peak lists we can show
       if (interactive && (hasReadSupport || n > 0)) {
 
-        SampleDialog dialog = new SampleDialog(mParent, sample, hasReadSupport, peakAssembly);
+        SampleDialog dialog = new SampleDialog(mParent, sample, hasReadSupport,
+            peakAssembly);
 
         dialog.setVisible(true);
 
@@ -285,26 +287,27 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
               mTrackList.getRoot().addChild(new TrackTreeNode(track));
             }
           } else {
-            mTrackList.getRoot()
-                .addChild(new TreeNode<Track>(sample.getName(), new SamplePlotTrack(sample, sampleAssembly)));
+            mTrackList.getRoot().addChild(new TreeNode<Track>(sample.getName(),
+                new SamplePlotTrack(sample, sampleAssembly)));
           }
 
           if (peakAssembly != null) {
             // Display some peaks
             for (PeakSet peaks : dialog.getShowPeaks()) {
 
-              List<GenomicRegion> locations = peakAssembly.downloadJsonPeaks(sample, peaks);
+              List<GenomicRegion> locations = peakAssembly
+                  .downloadJsonPeaks(sample, peaks);
 
               Bed bed = Bed.create(peaks.getName(), locations);
 
-              mTrackList.getRoot()
-                  .addChild(new TreeNode<Track>(peaks.getName(), new PeaksPlotTrack(sample.getId(), peaks, bed)));
+              mTrackList.getRoot().addChild(new TreeNode<Track>(peaks.getName(),
+                  new PeaksPlotTrack(sample.getId(), peaks, bed)));
             }
           }
         }
       } else {
-        mTrackList.getRoot()
-            .addChild(new TreeNode<Track>(sample.getName(), new SamplePlotTrack(sample, sampleAssembly)));
+        mTrackList.getRoot().addChild(new TreeNode<Track>(sample.getName(),
+            new SamplePlotTrack(sample, sampleAssembly)));
       }
     }
 
@@ -314,8 +317,7 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Browse for file.
    *
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
   public void browseForFile() throws Exception {
     browseForFile(RecentFilesService.getInstance().getPwd());
@@ -324,10 +326,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Browse for file.
    *
-   * @param pwd
-   *          the pwd
-   * @throws Exception
-   *           the exception
+   * @param pwd the pwd
+   * @throws Exception the exception
    */
   public void browseForFile(Path pwd) throws Exception {
     openFiles(BioInfDialog.open(mParent).bedAndBedgraph().getFiles(pwd));
@@ -336,22 +336,19 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Open files.
    *
-   * @param files
-   *          the files
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param files the files
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public void openFiles(List<Path> files) throws IOException {
-    SampleLoaderService.getInstance().openFiles(mParent, files, mTrackList.getRoot());
+    SampleLoaderService.getInstance()
+        .openFiles(mParent, files, mTrackList.getRoot());
   }
 
   /**
    * Open file.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public void openFile(Path file) throws IOException {
     openFiles(CollectionUtils.asList(file));
@@ -360,10 +357,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Browse for tracks.
    *
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   // public void browseForSamples() throws IOException {
   // browseForSamples(RecentFilesService.getInstance().getPwd());
@@ -372,12 +367,9 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Browse for tracks.
    *
-   * @param pwd
-   *          the pwd
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param pwd the pwd
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   // public void browseForSamples(Path pwd) throws IOException {
   // openSamples(FileDialog.open(mParent).dirs().getFiles(pwd));
@@ -386,12 +378,9 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /**
    * Open tracks.
    *
-   * @param dirs
-   *          the dirs
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param dirs the dirs
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   // public void openSamples(List<Path> dirs) throws IOException {
   // for (Path dir : dirs) {
@@ -413,8 +402,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
    * 
    * Sample sample = SampleTracks.getSampleFromTrack(json);
    * 
-   * openSampleFs(sample, new SampleAssembly16bit(metaFile, json.getAsInt("Mapped
-   * Reads")), metaFile); }
+   * openSampleFs(sample, new SampleAssembly16bit(metaFile,
+   * json.getAsInt("Mapped Reads")), metaFile); }
    */
 
 }

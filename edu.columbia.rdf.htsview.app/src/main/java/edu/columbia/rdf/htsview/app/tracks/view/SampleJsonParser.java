@@ -18,11 +18,6 @@ package edu.columbia.rdf.htsview.app.tracks.view;
 import java.awt.Color;
 import java.io.IOException;
 
-import edu.columbia.rdf.htsview.tracks.GraphPlotTrack;
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
-import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
-import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.tree.ModernTree;
@@ -32,6 +27,11 @@ import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.edb.ui.Repository;
 import edu.columbia.rdf.edb.ui.RepositoryService;
 import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
+import edu.columbia.rdf.htsview.tracks.GraphPlotTrack;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
+import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
+import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -43,14 +43,18 @@ public class SampleJsonParser extends TrackJsonParser {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.ui.
-   * window.ModernWindow, java.lang.String, int,
+   * edu.columbia.rdf.htsview.tracks.view.TrackJsonParser#parse(org.abh.common.
+   * ui. window.ModernWindow, java.lang.String, int,
    * org.abh.common.ui.tree.ModernTree, org.abh.common.json.Json,
    * org.abh.common.tree.TreeNode)
    */
   @Override
-  public boolean parse(ModernWindow window, final String name, int id, ModernTree<Track> annotationTree,
-      final Json trackJson, TreeNode<Track> rootNode) throws IOException {
+  public boolean parse(ModernWindow window,
+      final String name,
+      int id,
+      ModernTree<Track> annotationTree,
+      final Json trackJson,
+      TreeNode<Track> rootNode) throws IOException {
     Repository store = RepositoryService.getInstance().getCurrentRepository();
 
     Sample sample = null;
@@ -104,7 +108,8 @@ public class SampleJsonParser extends TrackJsonParser {
 
       System.err.println("sample " + name);
 
-      track = new SamplePlotTrack(name, sample, WebAssemblyService.getInstance().getSampleAssembly(), lineColor,
+      track = new SamplePlotTrack(name, sample,
+          WebAssemblyService.getInstance().getSampleAssembly(), lineColor,
           fillColor, height);
 
       if (trackJson.containsKey("auto-y")) {

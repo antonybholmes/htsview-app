@@ -56,19 +56,14 @@ public class GenesPlotSubFigure extends FixedSubFigure {
   /**
    * Instantiates a new genes plot sub figure.
    *
-   * @param name
-   *          the name
-   * @param properties
-   *          the properties
-   * @param genome
-   *          the genome
-   * @param id
-   *          the id
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param properties the properties
+   * @param genome the genome
+   * @param id the id
+   * @param titlePosition the title position
    */
-  public GenesPlotSubFigure(String name, GenesProperties properties, String genome, String id,
-      TitleProperties titlePosition) {
+  public GenesPlotSubFigure(String name, GenesProperties properties,
+      String genome, String id, TitleProperties titlePosition) {
     mProperties = properties;
 
     mGenome = genome;
@@ -84,23 +79,22 @@ public class GenesPlotSubFigure extends FixedSubFigure {
   /**
    * Creates the.
    *
-   * @param name
-   *          the name
-   * @param genesProperties
-   *          the genes properties
-   * @param genome
-   *          the genome
-   * @param genesId
-   *          the genes id
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param genesProperties the genes properties
+   * @param genome the genome
+   * @param genesId the genes id
+   * @param titlePosition the title position
    * @return the genes plot sub figure
    */
-  public static GenesPlotSubFigure create(String name, GenesProperties genesProperties, String genome, String genesId,
+  public static GenesPlotSubFigure create(String name,
+      GenesProperties genesProperties,
+      String genome,
+      String genesId,
       TitleProperties titlePosition) {
 
     // Now lets create a plot
-    GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, genesProperties, genome, genesId, titlePosition);
+    GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, genesProperties,
+        genome, genesId, titlePosition);
 
     return canvas;
   }
@@ -113,11 +107,20 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
-    Collection<Gene> genes = GenesService.getInstance().getGenes(mGenome, mGenesId).findGenes(displayRegion);
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
+    Collection<Gene> genes = GenesService.getInstance()
+        .getGenes(mGenome, mGenesId).findGenes(displayRegion);
 
-    IterMap<String, Set<Gene>> geneMap = DefaultTreeMap.create(new TreeSetCreator<Gene>());
+    IterMap<String, Set<Gene>> geneMap = DefaultTreeMap
+        .create(new TreeSetCreator<Gene>());
 
     GenesView view = mProperties.getView();
 
@@ -163,6 +166,14 @@ public class GenesPlotSubFigure extends FixedSubFigure {
 
     mGenesLayer.update(geneMap, displayRegion);
 
-    super.update(displayRegion, resolution, genes.size(), width, height, margin, lineColor, fillColor, style);
+    super.update(displayRegion,
+        resolution,
+        genes.size(),
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
   }
 }

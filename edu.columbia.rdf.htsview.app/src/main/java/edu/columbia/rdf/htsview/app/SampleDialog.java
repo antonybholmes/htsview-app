@@ -48,7 +48,8 @@ import edu.columbia.rdf.htsview.app.tracks.peaks.PeakSet;
 /**
  * The class BRTDialog.
  */
-public class SampleDialog extends ModernDialogTaskWindow implements ModernClickListener {
+public class SampleDialog extends ModernDialogTaskWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -80,16 +81,13 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
   /**
    * Instantiates a new BRT dialog.
    *
-   * @param parent
-   *          The parent.
-   * @param sample
-   *          The sample.
-   * @param isBrt
-   *          Contains both read and signal data.
-   * @param peakAssembly
-   *          the peak assembly
+   * @param parent The parent.
+   * @param sample The sample.
+   * @param isBrt Contains both read and signal data.
+   * @param peakAssembly the peak assembly
    */
-  public SampleDialog(ModernWindow parent, final Sample sample, boolean isBrt, PeakAssembly peakAssembly) {
+  public SampleDialog(ModernWindow parent, final Sample sample, boolean isBrt,
+      PeakAssembly peakAssembly) {
     super(parent);
 
     mSample = sample;
@@ -104,8 +102,10 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
       e.printStackTrace();
     }
 
-    mCheckSample.setSelected(SettingsService.getInstance().getAsBool("edb.reads.tracks.sample-plot.brt.show-sample"));
-    mCheckReads.setSelected(SettingsService.getInstance().getAsBool("edb.reads.tracks.sample-plot.brt.show-reads"));
+    mCheckSample.setSelected(SettingsService.getInstance()
+        .getAsBool("edb.reads.tracks.sample-plot.brt.show-sample"));
+    mCheckReads.setSelected(SettingsService.getInstance()
+        .getAsBool("edb.reads.tracks.sample-plot.brt.show-reads"));
 
     UI.centerWindowToScreen(this);
   }
@@ -113,8 +113,7 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
   /**
    * Creates the ui.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public final void createUi() throws IOException {
 
@@ -142,13 +141,15 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
 
         ModernComponent c2 = new ModernComponent();
 
-        c2.setHeader(new ModernDialogHeadingLabel("Peaks", BorderService.getInstance().createBottomBorder(5)));
+        c2.setHeader(new ModernDialogHeadingLabel("Peaks",
+            BorderService.getInstance().createBottomBorder(5)));
 
         Box box = Box.createVerticalBox();
 
         // List all of the available peaks
         for (PeakSet peaks : samplePeaks) {
-          ModernTwoStateWidget checkPeaks = new ModernCheckSwitch(peaks.getName());
+          ModernTwoStateWidget checkPeaks = new ModernCheckSwitch(
+              peaks.getName());
 
           mPeaksMap.put(peaks.getName(), checkPeaks);
 
@@ -156,7 +157,8 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
           box.add(UI.createVGap(5));
         }
 
-        c2.setBody(new ModernScrollPane(box).setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER));
+        c2.setBody(new ModernScrollPane(box)
+            .setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER));
 
         content.setBody(c2);
 
@@ -171,15 +173,19 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
 
-      SettingsService.getInstance().update("edb.reads.tracks.sample-plot.brt.show-sample", mCheckSample.isSelected());
-      SettingsService.getInstance().update("edb.reads.tracks.sample-plot.brt.show-reads", mCheckReads.isSelected());
+      SettingsService.getInstance().update(
+          "edb.reads.tracks.sample-plot.brt.show-sample",
+          mCheckSample.isSelected());
+      SettingsService.getInstance().update(
+          "edb.reads.tracks.sample-plot.brt.show-reads",
+          mCheckReads.isSelected());
 
       setStatus(ModernDialogStatus.OK);
     }
@@ -209,8 +215,7 @@ public class SampleDialog extends ModernDialogTaskWindow implements ModernClickL
    * Return the list of selected peaks.
    *
    * @return the show peaks
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<PeakSet> getShowPeaks() throws IOException {
     List<PeakSet> ret = new ArrayList<PeakSet>();

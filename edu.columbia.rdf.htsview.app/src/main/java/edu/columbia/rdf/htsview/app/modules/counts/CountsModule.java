@@ -61,7 +61,8 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
    * The member convert button.
    */
   private ModernButton mCountsButton = new RibbonLargeButton("Counts",
-      UIService.getInstance().loadIcon("read_dist", 32), UIService.getInstance().loadIcon("read_dist", 24));
+      UIService.getInstance().loadIcon("read_dist", 32),
+      UIService.getInstance().loadIcon("read_dist", 24));
 
   /**
    * The member window.
@@ -81,7 +82,8 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
+   * @see
+   * edu.columbia.rdf.apps.matcalc.modules.Module#init(edu.columbia.rdf.apps.
    * matcalc.MainMatCalcWindow)
    */
   @Override
@@ -89,10 +91,12 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
     mWindow = window;
 
     // home
-    mCountsButton.setToolTip(new ModernToolTip("Fill Gaps", "Fill gaps using reference."),
+    mCountsButton.setToolTip(
+        new ModernToolTip("Fill Gaps", "Fill gaps using reference."),
         mWindow.getRibbon().getToolTipModel());
     mCountsButton.setClickMessage("Fill Gaps");
-    mWindow.getRibbon().getToolbar("Tools").getSection("Fill Gaps").add(mCountsButton);
+    mWindow.getRibbon().getToolbar("Tools").getSection("Fill Gaps")
+        .add(mCountsButton);
 
     mCountsButton.addClickListener(this);
   }
@@ -112,7 +116,8 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
     }
 
     if (sampleTracks.size() == 0) {
-      ModernMessageDialog.createWarningDialog(mWindow, "You must select a sample.");
+      ModernMessageDialog.createWarningDialog(mWindow,
+          "You must select a sample.");
       return;
     }
 
@@ -124,14 +129,16 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
       return;
     }
 
-    ModernDialogStatus status = ModernMessageDialog.createOkCancelInfoDialog(mWindow,
+    ModernDialogStatus status = ModernMessageDialog.createOkCancelInfoDialog(
+        mWindow,
         "Generating distribution plots can take several minutes.");
 
     if (status == ModernDialogStatus.CANCEL) {
       return;
     }
 
-    CountTask task = new CountTask(sampleTracks, dialog.getRegions(), dialog.getNorm());
+    CountTask task = new CountTask(sampleTracks, dialog.getRegions(),
+        dialog.getNorm());
 
     task.doInBackground();
   }

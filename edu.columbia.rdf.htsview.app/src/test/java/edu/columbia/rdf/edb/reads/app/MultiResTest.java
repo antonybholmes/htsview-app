@@ -15,38 +15,32 @@
  */
 package edu.columbia.rdf.edb.reads.app;
 
-import java.io.IOException;
-
-import edu.columbia.rdf.htsview.ngs.CountAssembly;
-import edu.columbia.rdf.htsview.ngs.ReadCountsFile32Bit;
-import edu.columbia.rdf.htsview.ngs.ReadCountsFileBRT;
-import org.jebtk.core.io.PathUtils;
-import org.junit.Test;
-
 public class MultiResTest {
   /*
    * @Test public void testEncode() { try { //
    * /home/antony/Desktop/cb_40_res_test/CB4_BCL6_RK040_hg19.sorted.rmdup.sam
    * /home/antony/Desktop/cb_40_res_test/test.sam
    * ImportMultiRes.encode(PathUtils.getPath(
-   * "/home/antony/Desktop/cb_40_res_test/CB4_BCL6_RK040_hg19.sorted.rmdup.sam"),
-   * PathUtils.getPath("/home/antony/Desktop/cb_40_res_test/"), "Test",
+   * "/home/antony/Desktop/cb_40_res_test/CB4_BCL6_RK040_hg19.sorted.rmdup.sam")
+   * , PathUtils.getPath("/home/antony/Desktop/cb_40_res_test/"), "Test",
    * "Homo Sapiens", "hg19", 101, 1000); } catch (IOException e) {
    * e.printStackTrace(); } catch (ParseException e) { e.printStackTrace(); } }
    * 
    * @Test public void testDecode() { CountAssembly test = new
-   * ReadCountsFileBRT(PathUtils.getPath("/home/antony/Desktop/cb_40_res_test/"));
+   * ReadCountsFileBRT(PathUtils.getPath("/home/antony/Desktop/cb_40_res_test/")
+   * );
    * 
    * try { System.err.println("starts " +
    * test.getCounts("chr3:187463056-187463436", 1)); } catch (IOException e) {
    * e.printStackTrace(); } }
    * 
    * @Test public void testDecodeStrands() { CountAssembly test = new
-   * ReadCountsFileBRT(PathUtils.getPath("/home/antony/Desktop/cb_40_res_test/"));
+   * ReadCountsFileBRT(PathUtils.getPath("/home/antony/Desktop/cb_40_res_test/")
+   * );
    * 
    * try { System.err.println("strands " +
-   * test.getStrands("chr3:187463056-187463436", 100)); } catch (IOException e) {
-   * e.printStackTrace(); } }
+   * test.getStrands("chr3:187463056-187463436", 100)); } catch (IOException e)
+   * { e.printStackTrace(); } }
    * 
    * @Test public void testDecode16bit() { CountAssembly test = new
    * ReadCountsFile16Bit(PathUtils.getPath(

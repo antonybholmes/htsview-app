@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.conservation;
 import java.awt.Color;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
+
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
 
 // TODO: Auto-generated Javadoc
@@ -35,12 +36,11 @@ public abstract class ConservationPlotTrack extends AnnotationPlotTrack {
   /**
    * Instantiates a new conservation plot track.
    *
-   * @param name
-   *          the name
-   * @param conservationAssembly
-   *          the conservation assembly
+   * @param name the name
+   * @param conservationAssembly the conservation assembly
    */
-  public ConservationPlotTrack(String name, ConservationAssembly conservationAssembly) {
+  public ConservationPlotTrack(String name,
+      ConservationAssembly conservationAssembly) {
     super(name);
 
     mConservationAssembly = conservationAssembly;

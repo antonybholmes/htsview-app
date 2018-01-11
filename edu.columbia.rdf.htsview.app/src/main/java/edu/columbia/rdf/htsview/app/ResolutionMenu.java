@@ -51,8 +51,7 @@ public class ResolutionMenu extends ModernScrollPopupMenu {
     /**
      * Instantiates a new resolution menu item.
      *
-     * @param text
-     *          the text
+     * @param text the text
      */
     public ResolutionMenuItem(String text) {
       super(text);
@@ -63,10 +62,8 @@ public class ResolutionMenu extends ModernScrollPopupMenu {
     /**
      * Instantiates a new resolution menu item.
      *
-     * @param text
-     *          the text
-     * @param icon
-     *          the icon
+     * @param text the text
+     * @param icon the icon
      */
     public ResolutionMenuItem(String text, ModernIcon icon) {
       super(text, icon);

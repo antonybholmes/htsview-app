@@ -26,8 +26,7 @@ public class EnsemblGenesPlotTrack extends GenesPlotTrack {
   /**
    * Instantiates a new ensembl genes plot track.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public EnsemblGenesPlotTrack() throws IOException {
     super("Ensembl genes", "ensembl");

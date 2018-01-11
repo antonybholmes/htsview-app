@@ -37,8 +37,7 @@ public class DnaBasesPlotTrack extends DnaPlotTrack {
   /**
    * Instantiates a new dna bases plot track.
    *
-   * @param genomeAssembly
-   *          the genome assembly
+   * @param genomeAssembly the genome assembly
    */
   public DnaBasesPlotTrack(GenomeAssembly genomeAssembly) {
     super("DNA Bases", genomeAssembly);
@@ -59,13 +58,15 @@ public class DnaBasesPlotTrack extends DnaPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
 
     //
     // Display some genes
     //
 
-    mSubFigure = DnaBasesPlotSubFigure.create(genome, mGenomeAssembly, titlePosition, mColorMode);
+    mSubFigure = DnaBasesPlotSubFigure
+        .create(genome, mGenomeAssembly, titlePosition, mColorMode);
 
     setMargins(getName(), titlePosition, mSubFigure);
 
@@ -82,8 +83,11 @@ public class DnaBasesPlotTrack extends DnaPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
     mSubFigure.update(displayRegion, resolution, width, height, margin);
 
     return mSubFigure;

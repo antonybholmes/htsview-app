@@ -18,10 +18,6 @@ package edu.columbia.rdf.htsview.app.tracks.loaders;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
-import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyBVT;
-import edu.columbia.rdf.htsview.tracks.sample.SampleTracks;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
@@ -29,6 +25,10 @@ import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.edb.Sample;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
+import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyBVT;
+import edu.columbia.rdf.htsview.tracks.sample.SampleTracks;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,12 +39,15 @@ public class SampleLoaderBVT extends SampleLoaderFS {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * @see
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
    * common.ui.window.ModernWindow, java.nio.file.Path,
    * org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track openSample(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+  public Track openSample(ModernWindow parent,
+      Path metaFile,
+      TreeNode<Track> root) throws IOException {
     if (!FileUtils.exists(metaFile)) {
       return null;
     }
@@ -53,7 +56,10 @@ public class SampleLoaderBVT extends SampleLoaderFS {
 
     Sample sample = SampleTracks.getSampleFromTrack(json);
 
-    return openSampleFs(sample, new SampleAssemblyBVT(metaFile), metaFile, root);
+    return openSampleFs(sample,
+        new SampleAssemblyBVT(metaFile),
+        metaFile,
+        root);
   }
 
   /*

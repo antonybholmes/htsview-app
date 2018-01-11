@@ -18,8 +18,6 @@ package edu.columbia.rdf.htsview.app.tracks.loaders;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyBam;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.json.Json;
@@ -29,6 +27,8 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.app.SampleDialog;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyBam;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -64,7 +64,8 @@ public class SampleLoaderBAM extends SampleLoaderBin {
    * ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track open(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track open(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     if (!FileUtils.exists(file)) {
       return null;
     }
@@ -93,7 +94,8 @@ public class SampleLoaderBAM extends SampleLoaderBin {
   }
 
   @Override
-  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     if (!FileUtils.exists(file)) {
       return null;
     }
@@ -104,15 +106,19 @@ public class SampleLoaderBAM extends SampleLoaderBin {
   }
 
   @Override
-  public Track openSample(ModernWindow parent, Sample sample, Path file, Json json, TreeNode<Track> root)
-      throws IOException {
+  public Track openSample(ModernWindow parent,
+      Sample sample,
+      Path file,
+      Json json,
+      TreeNode<Track> root) throws IOException {
     // Sample sample = new Sample(PathUtils.namePrefix(file));
 
     return openSampleFs(sample, new SampleAssemblyBam(file), file, root);
   }
 
   @Override
-  public Track openReads(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openReads(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     if (!FileUtils.exists(file)) {
       return null;
     }
@@ -126,13 +132,16 @@ public class SampleLoaderBAM extends SampleLoaderBin {
    * (non-Javadoc)
    * 
    * @see
-   * org.htsview.tracks.loaders.SampleLoaderBin#openReads(org.abh.common.ui.window
-   * .ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path,
+   * org.htsview.tracks.loaders.SampleLoaderBin#openReads(org.abh.common.ui.
+   * window .ModernWindow, edu.columbia.rdf.edb.Sample, java.nio.file.Path,
    * org.abh.common.json.Json, org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track openReads(ModernWindow parent, Sample sample, Path file, Json json, TreeNode<Track> root)
-      throws IOException {
+  public Track openReads(ModernWindow parent,
+      Sample sample,
+      Path file,
+      Json json,
+      TreeNode<Track> root) throws IOException {
     return openReadsFs(sample, new SampleAssemblyBam(file), file, root);
   }
 }

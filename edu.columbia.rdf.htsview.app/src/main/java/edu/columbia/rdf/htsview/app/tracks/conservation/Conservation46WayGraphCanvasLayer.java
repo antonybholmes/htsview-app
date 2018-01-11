@@ -49,8 +49,7 @@ public class Conservation46WayGraphCanvasLayer extends AxesClippedLayer {
   /**
    * Instantiates a new conservation 46 way graph canvas layer.
    *
-   * @param assembly
-   *          the assembly
+   * @param assembly the assembly
    */
   public Conservation46WayGraphCanvasLayer(ConservationAssembly assembly) {
     mAssembly = assembly;
@@ -59,8 +58,7 @@ public class Conservation46WayGraphCanvasLayer extends AxesClippedLayer {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
+   * @param displayRegion the display region
    */
   public void update(GenomicRegion displayRegion) {
     mDisplayRegion = displayRegion;
@@ -74,7 +72,11 @@ public class Conservation46WayGraphCanvasLayer extends AxesClippedLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     // So that we don't attempt to pull a whole chromosome
     if (mDisplayRegion.getLength() > DnaPlotTrack.MAX_DISPLAY_BASES) {

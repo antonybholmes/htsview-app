@@ -28,8 +28,7 @@ public class UcscGenesPlotTrack extends GenesPlotTrack {
   /**
    * Instantiates a new ucsc genes plot track.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public UcscGenesPlotTrack() throws IOException {
     super("UCSC genes", "ucsc");

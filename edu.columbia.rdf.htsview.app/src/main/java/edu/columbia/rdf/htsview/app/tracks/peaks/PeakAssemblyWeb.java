@@ -36,7 +36,8 @@ import edu.columbia.rdf.edb.EDBWLogin;
 public class PeakAssemblyWeb extends PeakAssembly {
 
   /** The Constant LOG. */
-  private static final Logger LOG = LoggerFactory.getLogger(PeakAssemblyWeb.class);
+  private static final Logger LOG = LoggerFactory
+      .getLogger(PeakAssemblyWeb.class);
 
   /** The m auth V 1. */
   private UrlBuilder mAuthV1;
@@ -44,10 +45,8 @@ public class PeakAssemblyWeb extends PeakAssembly {
   /**
    * Instantiates a new track assembly web.
    *
-   * @param login
-   *          the login
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param login the login
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public PeakAssemblyWeb(EDBWLogin login) throws IOException {
     mAuthV1 = login.getOTKAuthUrl();
@@ -62,14 +61,16 @@ public class PeakAssemblyWeb extends PeakAssembly {
   public List<PeakSet> getJsonPeaks(int sampleId) throws IOException {
     List<PeakSet> ret = new ArrayList<PeakSet>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("samples").resolve(sampleId).resolve("chipseq").resolve("peaks");
+    UrlBuilder peaksUrl = mAuthV1.resolve("samples").resolve(sampleId)
+        .resolve("chipseq").resolve("peaks");
 
     LOG.info("peaks url: {}", peaksUrl);
 
     Json json = new JsonParser().parse(peaksUrl.toUrl());
 
     for (int i = 0; i < json.size(); ++i) {
-      ret.add(PeakSet.createPeaks(json.get(i).getAsInt(EDB.HEADING_ID), json.get(i).getAsString(EDB.HEADING_NAME)));
+      ret.add(PeakSet.createPeaks(json.get(i).getAsInt(EDB.HEADING_ID),
+          json.get(i).getAsString(EDB.HEADING_NAME)));
     }
 
     return ret;
@@ -81,13 +82,15 @@ public class PeakAssemblyWeb extends PeakAssembly {
    * @see org.htsview.tracks.peaks.PeakAssembly#downloadJsonPeaks(int, int)
    */
   @Override
-  public List<GenomicRegion> downloadJsonPeaks(int sampleId, int peaksId) throws IOException {
+  public List<GenomicRegion> downloadJsonPeaks(int sampleId, int peaksId)
+      throws IOException {
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
 
     UrlBuilder peaksUrl = mAuthV1
         // .resolve("samples")
         // .resolve(sampleId)
-        .resolve("chipseq").resolve("peaks").resolve("download").resolve(peaksId);
+        .resolve("chipseq").resolve("peaks").resolve("download")
+        .resolve(peaksId);
     // .param("id", peaksId);
 
     LOG.info("peaks url: {}", peaksUrl);

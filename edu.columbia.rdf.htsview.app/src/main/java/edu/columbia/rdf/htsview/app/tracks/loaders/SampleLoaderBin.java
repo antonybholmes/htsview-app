@@ -18,9 +18,6 @@ package edu.columbia.rdf.htsview.app.tracks.loaders;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
-import edu.columbia.rdf.htsview.tracks.sample.SampleTracks;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
@@ -30,6 +27,9 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.app.SampleDialog;
+import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
+import edu.columbia.rdf.htsview.tracks.sample.SampleTracks;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -43,11 +43,12 @@ public abstract class SampleLoaderBin extends SampleLoaderFS {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#open(org.abh.common.ui.
-   * window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#open(org.abh.common.
+   * ui. window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track open(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+  public Track open(ModernWindow parent, Path metaFile, TreeNode<Track> root)
+      throws IOException {
     if (!FileUtils.exists(metaFile)) {
       return null;
     }
@@ -80,12 +81,15 @@ public abstract class SampleLoaderBin extends SampleLoaderFS {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * @see
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
    * common.ui.window.ModernWindow, java.nio.file.Path,
    * org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track openSample(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+  public Track openSample(ModernWindow parent,
+      Path metaFile,
+      TreeNode<Track> root) throws IOException {
     if (!FileUtils.exists(metaFile)) {
       return null;
     }
@@ -101,11 +105,14 @@ public abstract class SampleLoaderBin extends SampleLoaderFS {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openReads(org.abh.common
-   * .ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openReads(org.abh.
+   * common .ui.window.ModernWindow, java.nio.file.Path,
+   * org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track openReads(ModernWindow parent, Path metaFile, TreeNode<Track> root) throws IOException {
+  public Track openReads(ModernWindow parent,
+      Path metaFile,
+      TreeNode<Track> root) throws IOException {
     if (!FileUtils.exists(metaFile)) {
       return null;
     }
@@ -120,44 +127,38 @@ public abstract class SampleLoaderBin extends SampleLoaderFS {
   /**
    * Open sample.
    *
-   * @param parent
-   *          the parent
-   * @param sample
-   *          the sample
-   * @param metaFile
-   *          the meta file
-   * @param json
-   *          the json
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param sample the sample
+   * @param metaFile the meta file
+   * @param json the json
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openSample(ModernWindow parent, Sample sample, Path metaFile, Json json, TreeNode<Track> root)
-      throws IOException {
+  public Track openSample(ModernWindow parent,
+      Sample sample,
+      Path metaFile,
+      Json json,
+      TreeNode<Track> root) throws IOException {
     return null;
   }
 
   /**
    * Open reads.
    *
-   * @param parent
-   *          the parent
-   * @param sample
-   *          the sample
-   * @param metaFile
-   *          the meta file
-   * @param json
-   *          the json
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param sample the sample
+   * @param metaFile the meta file
+   * @param json the json
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openReads(ModernWindow parent, Sample sample, Path metaFile, Json json, TreeNode<Track> root)
-      throws IOException {
+  public Track openReads(ModernWindow parent,
+      Sample sample,
+      Path metaFile,
+      Json json,
+      TreeNode<Track> root) throws IOException {
     return null;
   }
 }

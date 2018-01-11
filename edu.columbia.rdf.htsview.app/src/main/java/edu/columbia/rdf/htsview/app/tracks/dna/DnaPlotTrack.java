@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 import java.awt.Color;
 
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
 
 // TODO: Auto-generated Javadoc
@@ -39,10 +40,8 @@ public abstract class DnaPlotTrack extends AnnotationPlotTrack {
   /**
    * Instantiates a new dna plot track.
    *
-   * @param name
-   *          the name
-   * @param genomeAssembly
-   *          the genome assembly
+   * @param name the name
+   * @param genomeAssembly the genome assembly
    */
   public DnaPlotTrack(String name, GenomeAssembly genomeAssembly) {
     super(name);
