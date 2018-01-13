@@ -92,8 +92,7 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
 
     // home
     mCountsButton.setToolTip(
-        new ModernToolTip("Fill Gaps", "Fill gaps using reference."),
-        mWindow.getRibbon().getToolTipModel());
+        new ModernToolTip("Fill Gaps", "Fill gaps using reference."));
     mCountsButton.setClickMessage("Fill Gaps");
     mWindow.getRibbon().getToolbar("Tools").getSection("Fill Gaps")
         .add(mCountsButton);

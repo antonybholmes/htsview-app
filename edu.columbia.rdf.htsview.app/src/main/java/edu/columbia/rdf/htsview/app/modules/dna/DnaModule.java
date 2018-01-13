@@ -84,8 +84,7 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
 
     // home
     mDnaButton.setToolTip(
-        new ModernToolTip("DNA", "Get DNA sequence for region."),
-        mWindow.getRibbon().getToolTipModel());
+        new ModernToolTip("DNA", "Get DNA sequence for region."));
     mDnaButton.setClickMessage("DNA");
     mWindow.getRibbon().getToolbar("Tools").getSection("DNA").add(mDnaButton);
 

@@ -648,7 +648,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    */
   private void init(Collection<Sample> samples)
       throws SAXException, IOException, ParserConfigurationException {
-    JComponent content = (JComponent) getContentPane();
+    JComponent content = (JComponent) getWindowContentPanel();
 
     content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
         KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK),
