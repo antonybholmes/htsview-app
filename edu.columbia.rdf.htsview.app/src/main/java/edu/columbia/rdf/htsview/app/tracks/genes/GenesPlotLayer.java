@@ -448,6 +448,11 @@ public class GenesPlotLayer extends AxesLayer {
       Color color) {
     Graphics2D g2Temp = ImageUtils.clone(g2);
 
+    // Stop arrows being drawn at the gene starts or ends since this looks
+    // visually messy.
+    x1 += ARROW_GAP;
+    x2 -= ARROW_GAP;
+    
     int x;
     int y = y1 - ARROW_HEIGHT;
 
@@ -455,7 +460,7 @@ public class GenesPlotLayer extends AxesLayer {
       g2Temp.setColor(color);
 
       if (Strand.isSense(strand)) {
-        x = x1 + ARROW_GAP;
+        x = x1; // + ARROW_GAP;
 
         g2Temp.translate(x, y);
 
@@ -467,7 +472,7 @@ public class GenesPlotLayer extends AxesLayer {
           x += ARROW_GAP;
         }
       } else {
-        x = x2 - ARROW_HEIGHT - ARROW_GAP;
+        x = x2; // - ARROW_HEIGHT - ARROW_GAP;
 
         g2Temp.translate(x, y);
 
