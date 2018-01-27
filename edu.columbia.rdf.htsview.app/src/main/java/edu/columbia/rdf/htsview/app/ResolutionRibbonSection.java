@@ -20,7 +20,7 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.Ribbon;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 import org.jebtk.modern.ribbon.RibbonSection;
 
 import edu.columbia.rdf.htsview.tracks.ResolutionModel;
@@ -53,7 +53,7 @@ public class ResolutionRibbonSection extends RibbonSection
    */
   private ResolutionModel mModel;
 
-  private RibbonLargeDropDownButton mButton = new ResolutionRibbonButton();
+  private RibbonLargeDropDownButton2 mButton = new ResolutionRibbonButton();
 
   /**
    * The class ModelEvents.

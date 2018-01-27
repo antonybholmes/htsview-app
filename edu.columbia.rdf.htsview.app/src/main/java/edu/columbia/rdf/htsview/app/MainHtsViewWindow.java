@@ -93,12 +93,10 @@ import org.jebtk.modern.io.SaveAsRibbonPanel;
 import org.jebtk.modern.io.SvgGuiFileFilter;
 import org.jebtk.modern.panel.CardPanel;
 import org.jebtk.modern.ribbon.QuickAccessButton;
-import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarLocation;
-import org.jebtk.modern.tooltip.ModernToolTip;
 import org.jebtk.modern.widget.ModernClickWidget;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
@@ -791,16 +789,16 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
     button = new QuickAccessButton(UIService.getInstance()
-        .loadIcon(QuickOpenVectorIcon.class, Ribbon.BAR_BACKGROUND, 16));
+        .loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_OPEN);
-    button.setToolTip(new ModernToolTip("Open", "Open peak files."));
+    button.setToolTip("Open", "Open peak files.");
     button.addClickListener(this);
     addQuickAccessButton(button);
 
     button = new QuickAccessButton(
         UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
-    button.setToolTip(new ModernToolTip("Save", "Save the current image."));
+    button.setToolTip("Save", "Save the current image.");
     button.addClickListener(this);
     addQuickAccessButton(button);
 

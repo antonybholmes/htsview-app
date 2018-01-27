@@ -20,13 +20,13 @@ import java.awt.Dimension;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.menu.ModernIconMenuItem;
-import org.jebtk.modern.menu.ModernScrollPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 
 // TODO: Auto-generated Javadoc
 /**
  * The class ResolutionMenu.
  */
-public class ResolutionMenu extends ModernScrollPopupMenu {
+public class ResolutionMenu extends ModernPopupMenu2 {
 
   /**
    * The constant serialVersionUID.
@@ -77,12 +77,12 @@ public class ResolutionMenu extends ModernScrollPopupMenu {
    * Instantiates a new resolution menu.
    */
   public ResolutionMenu() {
-    addScrollMenuItem(new ResolutionMenuItem("1 bp"));
-    addScrollMenuItem(new ResolutionMenuItem("10 bp"));
-    addScrollMenuItem(new ResolutionMenuItem("100 bp"));
-    addScrollMenuItem(new ResolutionMenuItem("1 kb"));
-    addScrollMenuItem(new ResolutionMenuItem("10 kb"));
-    addScrollMenuItem(new ResolutionMenuItem("100 kb"));
-    addScrollMenuItem(new ResolutionMenuItem("1 Mb"));
+    addMenuItem(new ResolutionMenuItem("1 bp"));
+    addMenuItem(new ResolutionMenuItem("10 bp"));
+    addMenuItem(new ResolutionMenuItem("100 bp"));
+    addMenuItem(new ResolutionMenuItem("1 kb"));
+    addMenuItem(new ResolutionMenuItem("10 kb"));
+    addMenuItem(new ResolutionMenuItem("100 kb"));
+    addMenuItem(new ResolutionMenuItem("1 Mb"));
   }
 }

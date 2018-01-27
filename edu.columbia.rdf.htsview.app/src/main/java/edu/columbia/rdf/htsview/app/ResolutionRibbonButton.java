@@ -20,13 +20,13 @@ import java.awt.Graphics2D;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.ribbon.Ribbon;
-import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
 // TODO: Auto-generated Javadoc
 /**
  * The class ResolutionRibbonButton.
  */
-public class ResolutionRibbonButton extends RibbonLargeDropDownButton {
+public class ResolutionRibbonButton extends RibbonLargeDropDownButton2 {
 
   /**
    * The constant serialVersionUID.
@@ -50,7 +50,7 @@ public class ResolutionRibbonButton extends RibbonLargeDropDownButton {
    * Instantiates a new resolution ribbon button.
    */
   public ResolutionRibbonButton() {
-    super(TextUtils.EMPTY_STRING, new ResolutionMenu());
+    super(new ResolutionMenu());
 
     // addClickListener(new ClickEvents());
 
