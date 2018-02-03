@@ -25,6 +25,7 @@ import javax.swing.Box;
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.BioInfDialog;
+import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.tree.TreeNode;
@@ -95,6 +96,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /** The m search model. */
   private SearchModel mSearchModel = new SearchModel();
 
+  private GenomeModel mGenomeModel;
+
   // private Map<String, ChromosomeSizes> mChrMap;
 
   /**
@@ -104,10 +107,13 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
    * @param tree the tree
    * @param trackList the track list
    */
-  public HTSTracksPanel(ModernRibbonWindow parent, ModernTree<Track> tree,
+  public HTSTracksPanel(ModernRibbonWindow parent, GenomeModel genomeModel,
+      ModernTree<Track> tree,
       TrackTree trackList) {
     super(parent, tree, trackList);
 
+    mGenomeModel = genomeModel;
+    
     setup();
 
     createUi();
@@ -296,7 +302,7 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
             for (PeakSet peaks : dialog.getShowPeaks()) {
 
               List<GenomicRegion> locations = peakAssembly
-                  .downloadJsonPeaks(sample, peaks);
+                  .downloadJsonPeaks(mGenomeModel.get(), sample, peaks);
 
               Bed bed = Bed.create(peaks.getName(), locations);
 

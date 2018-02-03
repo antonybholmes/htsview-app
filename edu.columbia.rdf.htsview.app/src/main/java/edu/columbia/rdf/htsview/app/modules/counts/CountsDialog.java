@@ -26,9 +26,10 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.ChromosomeService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
+import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphTableModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
@@ -39,9 +40,7 @@ import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
-import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
-import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dataview.ModernDataModel;
 import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
@@ -93,7 +92,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
   private ModernList<String> mSamplesList = new ModernList<String>();
 
   /** The m check plot. */
-  private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
+  //private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
 
   /** The m regions panel. */
   private GenomicRegionsPanel mRegionsPanel;
@@ -109,6 +108,8 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
   private NormCombo mNormCombo = new NormCombo();
 
+  private GenomeModel mGenomeModel;
+
   /**
    * Instantiates a new read dist dialog.
    *
@@ -116,9 +117,12 @@ public class CountsDialog extends ModernDialogHelpWindow {
    * @param genomeModel the genome model
    * @param samples the samples
    */
-  public CountsDialog(ModernWindow parent, List<SamplePlotTrack> samples) {
+  public CountsDialog(ModernWindow parent, GenomeModel genomeModel,
+      List<SamplePlotTrack> samples) {
     super(parent, "htsview.modules.read-dist.help.url");
 
+    mGenomeModel = genomeModel;
+    
     mRegionsPanel = new GenomicRegionsPanel();
 
     setTitle("Read Distribution");
@@ -140,7 +144,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
     mFileButton.addClickListener(this);
     mSamplesButton.addClickListener(this);
 
-    setSize(720, 680);
+    setSize(720, 640);
 
     UI.centerWindowToScreen(this);
   }
@@ -191,9 +195,9 @@ public class CountsDialog extends ModernDialogHelpWindow {
     box2.add(mNormCombo);
     box.add(box2);
 
-    box.add(UI.createVGap(20));
+    //box.add(UI.createVGap(20));
 
-    box.add(mCheckPlot);
+    //box.add(mCheckPlot);
 
     setDialogCardContent(box);
   }
@@ -208,7 +212,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
   @Override
   public void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
-      if (mRegionsPanel.getRegions().size() > 0) {
+      if (mRegionsPanel.getRegions(mGenomeModel.get()).size() > 0) {
         super.clicked(e);
       } else {
         ModernMessageDialog.createWarningDialog(mParent,
@@ -320,7 +324,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
     for (int i = 0; i < model.getRowCount(); ++i) {
       if (GenomicRegion.isGenomicRegion(model.getValueAsString(i, 0))) {
-        region = GenomicRegion.parse(model.getValueAsString(i, 0));
+        region = GenomicRegion.parse(mGenomeModel.get(), model.getValueAsString(i, 0));
 
         GenomicRegion mid = GenomicRegion.midRegion(region);
 
@@ -329,7 +333,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
-            ChromosomeService.getInstance().guess(file,
+            GenomeService.getInstance().guessChr(file,
                 model.getValueAsString(i, 0)),
             model.getValueAsInt(i, 1), model.getValueAsInt(i, 2));
 
@@ -355,7 +359,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
    * @throws ParseException the parse exception
    */
   public List<GenomicRegion> getRegions() {
-    return mRegionsPanel.getRegions();
+    return mRegionsPanel.getRegions(mGenomeModel.get());
   }
 
   /**
@@ -363,9 +367,9 @@ public class CountsDialog extends ModernDialogHelpWindow {
    *
    * @return the should plot
    */
-  public boolean getShouldPlot() {
-    return mCheckPlot.isSelected();
-  }
+  //public boolean getShouldPlot() {
+  //  return mCheckPlot.isSelected();
+  //}
 
   /**
    * Gets the plot name.

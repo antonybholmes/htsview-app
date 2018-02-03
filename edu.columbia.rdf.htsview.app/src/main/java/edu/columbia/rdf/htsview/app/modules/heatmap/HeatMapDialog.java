@@ -30,7 +30,7 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.ChromosomeService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -187,7 +187,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
     mSampleButton.addClickListener(this);
     mInputButton.addClickListener(this);
 
-    setSize(720, 680);
+    setSize(720, 700);
 
     UI.centerWindowToScreen(this);
   }
@@ -456,7 +456,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 
     for (int i = 0; i < model.getRowCount(); ++i) {
       if (GenomicRegion.isGenomicRegion(model.getValueAsString(i, 0))) {
-        region = GenomicRegion.parse(model.getValueAsString(i, 0));
+        region = GenomicRegion.parse(mGenomeModel.get(), model.getValueAsString(i, 0));
 
         GenomicRegion mid = GenomicRegion.midRegion(region);
 
@@ -465,7 +465,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
-            ChromosomeService.getInstance().guess(file,
+            GenomeService.getInstance().guessChr(file,
                 model.getValueAsString(i, 0)),
             Integer.parseInt(model.getValueAsString(i, 1)),
             Integer.parseInt(model.getValueAsString(i, 2)));

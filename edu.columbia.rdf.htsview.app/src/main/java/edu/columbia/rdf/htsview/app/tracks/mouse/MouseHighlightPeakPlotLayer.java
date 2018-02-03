@@ -32,7 +32,7 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
 import org.jebtk.modern.graphics.DrawingContext;
-import org.jebtk.modern.graphics.ModernCanvasMouseListener;
+import org.jebtk.modern.graphics.CanvasMouseListener;
 import org.jebtk.modern.status.StatusService;
 import org.jebtk.modern.theme.ModernTheme;
 
@@ -55,7 +55,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
   /**
    * The Class CanvasEvents.
    */
-  private class CanvasEvents implements ModernCanvasMouseListener {
+  private class CanvasEvents implements CanvasMouseListener {
 
     /*
      * (non-Javadoc)

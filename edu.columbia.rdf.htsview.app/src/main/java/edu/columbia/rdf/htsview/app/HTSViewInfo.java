@@ -33,7 +33,7 @@ public class HTSViewInfo extends GuiAppInfo {
    * Instantiates a new reads info.
    */
   public HTSViewInfo() {
-    super("HTS View", new AppVersion(6),
+    super("HTS View", new AppVersion(7),
         "Copyright (C) 2014-${year} Antony Holmes",
         UIService.getInstance().loadIcon(HTSViewIcon.class, 32),
         UIService.getInstance().loadIcon(HTSViewIcon.class, 128),

@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.modules.dna;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
+import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
@@ -40,14 +41,19 @@ public class DnaTask extends SwingWorker<Void, Void> {
 
   private GenomicRegionModel mGenomicModel;
 
+  private GenomeModel mGenomeModel;
+
   /**
    * Instantiates a new DNA task.
    *
    * @param parent the parent
    * @param genomicModel the genome model
    */
-  public DnaTask(ModernRibbonWindow parent, GenomicRegionModel genomicModel) {
+  public DnaTask(ModernRibbonWindow parent,
+      GenomeModel model,
+      GenomicRegionModel genomicModel) {
     mParent = parent;
+    mGenomeModel = model;
     mGenomicModel = genomicModel;
   }
 
@@ -87,7 +93,7 @@ public class DnaTask extends SwingWorker<Void, Void> {
 
       window.openMatrix(mMatrice);
 
-      window.runModule("DNA");
+      window.runModule("DNA", mGenomeModel.get());
     } catch (Exception e) {
       e.printStackTrace();
     }

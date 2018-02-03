@@ -240,9 +240,9 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
     //
     // Display some genes
     //
-
+    
     mSubFigure = GenesPlotSubFigure
-        .create(getName(), mGenesProperties, genome, mGenesId, titlePosition);
+        .create(getName(), mGenesProperties, mGenesId, titlePosition);
 
     setMargins(getName(), titlePosition, mSubFigure);
 

@@ -30,7 +30,7 @@ import java.util.Map;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
-import org.jebtk.bioinformatics.genomic.ChromosomeService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.IterMap;
@@ -412,7 +412,7 @@ public class ImportMultiRes {
       while ((line = reader.readLine()) != null) {
         tokens = TextUtils.tabSplit(line);
 
-        c = ChromosomeService.getInstance().guess(samFile, tokens.get(2));
+        c = GenomeService.getInstance().guessChr(samFile, tokens.get(2));
 
         if (c != null) {
           if (chr != null && !c.equals(chr)) {

@@ -40,8 +40,8 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -327,11 +327,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
      */
     @Override
     public void changed(ChangeEvent e) {
-      try {
-        recreatePlots(); // updatePlots();
-      } catch (Exception e1) {
-        e1.printStackTrace();
-      }
+      changeGenome();
     }
   }
 
@@ -659,16 +655,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     content.getActionMap().put("save", new SaveAction());
 
     // mTracksFigure = new TracksFigure(mGenomicModel,
-    // ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.HG19));
+    // GenomeService.getInstance().getSizes(GenomeAssembly.HG19));
 
     mTracksFigure = new TracksFigure();
 
-    mTracksFigurePanel = new TracksFigurePanel(mTracksFigure, mGenomicModel,
-        ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.HG19));
+    mTracksFigurePanel = new TracksFigurePanel(mTracksFigure, mGenomicModel);
 
     mLocationsPanel = new LocationsPanel(this, mGenomeModel, mGenomicModel);
 
-    mTracksPanel = new HTSTracksPanel(this, mAnnotationTree, mTrackList);
+    mTracksPanel = new HTSTracksPanel(this, mGenomeModel, mAnnotationTree, mTrackList);
 
     /*
      * mFormatPanel = new FormatPanel(this, mTracksFigure.getcu,
@@ -684,7 +679,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     // GenomicRegion region =
     // mGeneMap.get(mGenomeModel.get()).findMainVariant("BCL6");
 
-    GenomicRegion region = GenomicRegion.parse(SettingsService.getInstance()
+    GenomicRegion region = GenomicRegion.parse(mGenomeModel.get(),
+        SettingsService.getInstance()
         .getAsString("edb.reads.default-location"));
 
     mGenomicModel.set(region);
@@ -1286,6 +1282,29 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     mResolutionModel.set(mResolutionModel.getPrevious());
   }
+  
+  /**
+   * Change the genome by updating the genomic position with the new
+   * chromosome on a different genome.
+   */
+  private void changeGenome() {
+    String genome = mGenomeModel.get();
+    
+    GenomicRegion region = mGenomicModel.get();
+    
+    // Get the same chromosome on a different assembly
+    Chromosome chr = GenomeService.getInstance().genome(genome).chr(region.getChr());
+    
+    // Change the genomic reference to reflect the new genome
+    mGenomicModel.set(chr, region.getStart(), region.getEnd());
+    
+    //try {
+      // Force plot recreation
+    //  recreatePlots();
+    //} catch (Exception e) {
+    //  e.printStackTrace();
+    //}
+  }
 
   /**
    * Update resolution.
@@ -1654,6 +1673,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         mAnnotationTree,
         mWidthModel,
         mMarginModel,
+        mGenomeModel,
         mGenomicModel,
         mTitlePositionModel);
 
@@ -2069,5 +2089,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
   public GenomicRegionModel getGenomicModel() {
     return mGenomicModel;
+  }
+
+  public GenomeModel getGenomeModel() {
+    return mGenomeModel;
   }
 }

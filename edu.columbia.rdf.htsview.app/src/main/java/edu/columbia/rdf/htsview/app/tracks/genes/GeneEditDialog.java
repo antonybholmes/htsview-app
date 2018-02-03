@@ -25,6 +25,7 @@ import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.button.ModernRadioButton;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.graphics.color.ColorSwatchButton;
+import org.jebtk.modern.graphics.color.ColorSwatchButton2;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.MatrixPanel;
 import org.jebtk.modern.panel.ModernPanel;
@@ -47,15 +48,15 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
   private static final long serialVersionUID = 1L;
 
   /** The m color button. */
-  private ColorSwatchButton mColorButton;
+  private ColorSwatchButton2 mColorButton;
 
   /** The m other color button. */
-  private ColorSwatchButton mOtherColorButton;
+  private ColorSwatchButton2 mOtherColorButton;
 
   /** The m UTR color button. */
-  private ColorSwatchButton mUTRColorButton;
+  private ColorSwatchButton2 mUTRColorButton;
 
-  private ColorSwatchButton mExonColorButton;
+  private ColorSwatchButton2 mExonColorButton;
 
   /** The m name field. */
   private ModernTextField mNameField = new ModernClipboardTextField("Name");
@@ -84,7 +85,7 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
   /** The m check compact. */
   private ModernRadioButton mCheckCompact = new ModernRadioButton("Compact");
 
-  private ColorSwatchButton mArrowColorButton;
+  private ColorSwatchButton2 mArrowColorButton;
 
   /**
    * Instantiates a new gene edit dialog.
@@ -129,7 +130,7 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
       break;
     }
 
-    setSize(520, 480);
+    setSize(520, 520);
 
     UI.centerWindowToScreen(this);
   }
@@ -155,7 +156,7 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
     MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
         ModernWidget.PADDING);
 
-    mColorButton = new ColorSwatchButton(mParent, mTrack.getFillColor());
+    mColorButton = new ColorSwatchButton2(mParent, mTrack.getFillColor());
 
     matrixPanel.add(new ModernAutoSizeLabel("Name"));
     matrixPanel.add(new ModernTextBorderPanel(mNameField));
@@ -168,13 +169,13 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 
     // matrixPanel.add(new ModernAutoSizeLabel("Other Color"));
     // box = HBox.create();
-    mOtherColorButton = new ColorSwatchButton(mParent, mTrack.getOtherColor());
+    mOtherColorButton = new ColorSwatchButton2(mParent, mTrack.getOtherColor());
     // box.add(mOtherColorButton);
     // matrixPanel.add(box);
 
     matrixPanel.add(new ModernAutoSizeLabel("Exon Color"));
     box = HBox.create();
-    mExonColorButton = new ColorSwatchButton(mParent,
+    mExonColorButton = new ColorSwatchButton2(mParent,
         mTrack.getExonFillColor());
     box.add(mExonColorButton);
     matrixPanel.add(box);
@@ -183,11 +184,11 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
 
     // box = HBox.create();
 
-    mUTRColorButton = new ColorSwatchButton(mParent, mTrack.getUTRFillColor());
+    mUTRColorButton = new ColorSwatchButton2(mParent, mTrack.getUTRFillColor());
 
     matrixPanel.add(new ModernAutoSizeLabel("Arrow Color"));
     box = HBox.create();
-    mArrowColorButton = new ColorSwatchButton(mParent, mTrack.getArrowColor());
+    mArrowColorButton = new ColorSwatchButton2(mParent, mTrack.getArrowColor());
     box.add(mArrowColorButton);
     matrixPanel.add(box);
 

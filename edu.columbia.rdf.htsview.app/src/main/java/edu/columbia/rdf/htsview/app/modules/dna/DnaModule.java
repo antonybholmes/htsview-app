@@ -97,7 +97,7 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
   }
 
   private void dna() {
-    DnaTask task = new DnaTask(mWindow, mWindow.getGenomicModel());
+    DnaTask task = new DnaTask(mWindow, mWindow.getGenomeModel(), mWindow.getGenomicModel());
 
     task.doInBackground();
     task.done();

@@ -61,7 +61,7 @@ public class GenomicRegionsPanel extends ModernWidget {
    * @return the regions
    * @throws ParseException the parse exception
    */
-  public List<GenomicRegion> getRegions() {
+  public List<GenomicRegion> getRegions(String genome) {
     List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(),
         TextUtils.NEW_LINE_DELIMITER);
 
@@ -73,7 +73,7 @@ public class GenomicRegionsPanel extends ModernWidget {
 
       if (line.length() > 0) {
         for (String id : TextUtils.scSplit(line)) {
-          GenomicRegion loc = GenomicRegion.parse(id);
+          GenomicRegion loc = GenomicRegion.parse(genome, id);
 
           if (loc != null) {
             ret.add(loc);

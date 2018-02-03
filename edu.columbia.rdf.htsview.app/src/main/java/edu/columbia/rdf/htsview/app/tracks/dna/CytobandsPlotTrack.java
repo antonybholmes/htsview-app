@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 
@@ -32,6 +32,8 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The Class CytobandsPlotTrack.
  */
 public class CytobandsPlotTrack extends AnnotationPlotTrack {
+
+  private static final long serialVersionUID = 1L;
 
   /**
    * Instantiates a new cytobands plot track.
@@ -65,7 +67,6 @@ public class CytobandsPlotTrack extends AnnotationPlotTrack {
     //
 
     mSubFigure = CytobandsSubFigure.create("Cytobands " + genome,
-        ChromosomeSizesService.getInstance().getSizes(genome),
         CytobandsService.getInstance().getCytobands(genome),
         titlePosition);
 

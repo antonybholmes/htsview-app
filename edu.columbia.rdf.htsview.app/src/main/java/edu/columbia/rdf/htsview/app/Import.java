@@ -25,8 +25,8 @@ import java.util.List;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
-import org.jebtk.bioinformatics.genomic.ChromosomeService;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.Human;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.io.FileUtils;
@@ -243,8 +243,7 @@ public class Import {
       String genome,
       int readLength) throws IOException, ParseException {
 
-    int size = (ChromosomeSizesService.getInstance().getSizes(genome)
-        .getSize(chr) / window) + 1;
+    int size = (chr.getSize() / window) + 1;
 
     LOG.info("Reading {} {} {}...", dir, samFile, size);
 
@@ -261,7 +260,7 @@ public class Import {
       while ((line = reader.readLine()) != null) {
         tokens = TextUtils.tabSplit(line);
 
-        Chromosome c = ChromosomeService.getInstance().guess(samFile,
+        Chromosome c = GenomeService.getInstance().guessChr(samFile,
             tokens.get(2));
 
         if (c == null || (currentChr != null && !c.equals(currentChr))) {

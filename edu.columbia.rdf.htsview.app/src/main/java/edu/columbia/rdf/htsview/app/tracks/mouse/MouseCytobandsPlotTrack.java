@@ -19,7 +19,6 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
@@ -33,6 +32,11 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The Class MouseCytobandsPlotTrack.
  */
 public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
    * Instantiates a new mouse cytobands plot track.
@@ -66,7 +70,6 @@ public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
     //
 
     mSubFigure = CytobandsSubFigure.create("Cytobands mm10",
-        ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.MM10),
         CytobandsService.getInstance().getCytobands(GenomeAssembly.MM10),
         titlePosition);
 

@@ -51,6 +51,7 @@ public class PeaksJsonParser extends TrackJsonParser {
   public boolean parse(ModernWindow window,
       final String name,
       int id,
+      String genome,
       ModernTree<Track> annotationTree,
       final Json trackJson,
       TreeNode<Track> rootNode) throws IOException {
@@ -67,7 +68,7 @@ public class PeaksJsonParser extends TrackJsonParser {
     PeakSet peaks = PeakSet.createPeaks(peaksId, name);
 
     List<GenomicRegion> locations = WebAssemblyService.getInstance()
-        .getPeakAssembly().downloadJsonPeaks(id, peaks);
+        .getPeakAssembly().downloadJsonPeaks(genome, id, peaks);
 
     Bed bed = Bed.create(peaks.getName(), locations);
     bed.setColor(color);

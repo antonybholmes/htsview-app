@@ -47,9 +47,6 @@ public class GenesPlotSubFigure extends FixedSubFigure {
   /** The m properties. */
   private GenesProperties mProperties;
 
-  /** The m genome. */
-  private String mGenome;
-
   /** The m genes id. */
   private String mGenesId;
 
@@ -62,11 +59,10 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    * @param id the id
    * @param titlePosition the title position
    */
-  public GenesPlotSubFigure(String name, GenesProperties properties,
-      String genome, String id, TitleProperties titlePosition) {
+  public GenesPlotSubFigure(String name, GenesProperties properties, 
+      String id, TitleProperties titlePosition) {
     mProperties = properties;
 
-    mGenome = genome;
     mGenesId = id;
 
     mGenesLayer = new GenesPlotLayer(properties);
@@ -88,13 +84,12 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    */
   public static GenesPlotSubFigure create(String name,
       GenesProperties genesProperties,
-      String genome,
       String genesId,
       TitleProperties titlePosition) {
 
     // Now lets create a plot
     GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, genesProperties,
-        genome, genesId, titlePosition);
+        genesId, titlePosition);
 
     return canvas;
   }
@@ -116,9 +111,12 @@ public class GenesPlotSubFigure extends FixedSubFigure {
       Color lineColor,
       Color fillColor,
       PlotStyle style) {
+    
+    String genome = displayRegion.getChr().getGenome();
+    
     Collection<Gene> genes = GenesService.getInstance()
-        .getGenes(mGenome, mGenesId).findGenes(displayRegion);
-
+        .getGenes(genome, mGenesId).findGenes(displayRegion);
+    
     IterMap<String, Set<Gene>> geneMap = DefaultTreeMap
         .create(new TreeSetCreator<Gene>());
 

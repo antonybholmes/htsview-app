@@ -28,7 +28,7 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.ChromosomeService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -383,7 +383,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
 
     for (int i = 0; i < model.getRowCount(); ++i) {
       if (GenomicRegion.isGenomicRegion(model.getValueAsString(i, 0))) {
-        region = GenomicRegion.parse(model.getValueAsString(i, 0));
+        region = GenomicRegion.parse(mGenomeModel.get(), model.getValueAsString(i, 0));
 
         GenomicRegion mid = GenomicRegion.midRegion(region);
 
@@ -392,7 +392,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
-            ChromosomeService.getInstance().guess(file,
+            GenomeService.getInstance().guessChr(file,
                 model.getValueAsString(i, 0)),
             model.getValueAsInt(i, 1), model.getValueAsInt(i, 2));
 

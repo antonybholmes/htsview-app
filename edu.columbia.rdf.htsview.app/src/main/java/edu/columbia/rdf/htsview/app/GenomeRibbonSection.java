@@ -15,17 +15,18 @@
  */
 package edu.columbia.rdf.htsview.app;
 
-import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.GenomeModel;
-import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.menu.ModernPopupMenu;
+import org.jebtk.modern.menu.ModernPopupMenu2;
 import org.jebtk.modern.menu.ModernTwoLineMenuItem;
 import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton;
+import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.ribbon.RibbonSize;
 
@@ -67,7 +68,7 @@ public class GenomeRibbonSection extends RibbonSection
   private GenomeModel mModel;
 
   /** The m button. */
-  private RibbonLargeDropDownButton mButton;
+  private RibbonLargeDropDownButton2 mButton;
 
   /**
    * Instantiates a new genome ribbon section.
@@ -82,15 +83,16 @@ public class GenomeRibbonSection extends RibbonSection
 
     // ModernButtonGroup group = new ModernButtonGroup();
 
-    ModernPopupMenu popup = new ModernPopupMenu();
+    ModernPopupMenu2 popup = new ModernPopupMenu2();
 
-    for (String genome : CollectionUtils
-        .sort(GenesService.getInstance().getGenomes())) {
+    //for (String genome : CollectionUtils
+    //    .sort(GenesService.getInstance().getGenomes())) {
+    for (String genome : GenomeService.getInstance()) {  
       popup.addMenuItem(new ModernTwoLineMenuItem(genome,
           "Switch to the " + genome + " genome.", ICON));
     }
 
-    mButton = new RibbonLargeDropDownButton("Genome", popup)
+    mButton = new RibbonLargeDropDownButton2("Genome", popup)
         .setMinWidth(RibbonSize.COMPACT, 72);
     mButton.setToolTip("Genome", "Change the genome reference.");
     add(mButton);

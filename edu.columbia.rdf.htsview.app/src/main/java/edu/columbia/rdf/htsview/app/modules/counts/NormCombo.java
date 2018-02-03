@@ -1,8 +1,8 @@
 package edu.columbia.rdf.htsview.app.modules.counts;
 
-import org.jebtk.modern.combobox.ModernComboBox;
+import org.jebtk.modern.combobox.ModernComboBox2;
 
-public class NormCombo extends ModernComboBox {
+public class NormCombo extends ModernComboBox2 {
 
   private static final long serialVersionUID = 1L;
 

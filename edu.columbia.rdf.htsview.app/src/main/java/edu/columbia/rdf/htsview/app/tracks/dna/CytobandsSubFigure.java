@@ -18,7 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 import java.awt.Color;
 
 import org.jebtk.bioinformatics.ext.ucsc.Cytobands;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizes;
+import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.external.ucsc.CytobandsRegionLayer;
 import org.jebtk.graphplot.figure.PlotStyle;
@@ -36,14 +36,8 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
 
-  /** The m sizes. */
-  private static ChromosomeSizes mSizes;
-
   /** The m layer. */
   private CytobandsRegionLayer mLayer = null;
-
-  /** The m name. */
-  private String mName;
 
   /**
    * Instantiates a new cytobands sub figure.
@@ -52,14 +46,13 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
    * @param cytobands the cytobands
    * @param titlePosition the title position
    */
-  public CytobandsSubFigure(String name, Cytobands cytobands,
+  public CytobandsSubFigure(Cytobands cytobands,
       TitleProperties titlePosition) {
-    mName = name;
     mLayer = new CytobandsRegionLayer(cytobands);
 
     currentAxes().addChild(mLayer);
 
-    Track.setTitle(name, titlePosition, currentAxes());
+    Track.setTitle("Cytobands", titlePosition, currentAxes());
   }
 
   /**
@@ -72,13 +65,10 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
    * @return the cytobands sub figure
    */
   public static CytobandsSubFigure create(String name,
-      ChromosomeSizes sizes,
       Cytobands cytobands,
       TitleProperties titlePosition) {
 
-    mSizes = sizes;
-
-    CytobandsSubFigure canvas = new CytobandsSubFigure(name, cytobands,
+    CytobandsSubFigure canvas = new CytobandsSubFigure(cytobands,
         titlePosition);
 
     canvas.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
@@ -119,10 +109,10 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
 
     // Update the title to reflect changes
     currentAxes().getTitle()
-        .setText(mName + " - " + displayRegion.getChr().toString());
+        .setText("Cytobands (" + displayRegion.getChr().getGenome() + ") - " + displayRegion.getChr().toString());
 
     // set the graph limits
     currentAxes().getX1Axis().setLimits(1,
-        mSizes.getSize(displayRegion.getChr()));
+        displayRegion.getChr().getSize());
   }
 }

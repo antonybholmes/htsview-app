@@ -22,7 +22,7 @@ import java.util.List;
 
 import javax.swing.Box;
 
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.external.samtools.SamGuiFileFilter;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.UI;
@@ -70,7 +70,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
      */
     public GenomeChrCombo() {
       for (String genome : CollectionUtils
-          .sort(ChromosomeSizesService.getInstance())) {
+          .sort(GenomeService.getInstance())) {
         addScrollMenuItem(genome);
       }
     }

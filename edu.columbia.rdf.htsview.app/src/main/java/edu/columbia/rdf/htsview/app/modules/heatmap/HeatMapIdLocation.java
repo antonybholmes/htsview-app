@@ -74,7 +74,7 @@ public class HeatMapIdLocation {
    * @throws ParseException the parse exception
    */
   public static HeatMapIdLocation parse(String id, GenomeModel model) {
-    GenomicRegion region = GenomicRegion.parse(id);
+    GenomicRegion region = GenomicRegion.parse(model.get(), id);
 
     if (region != null) {
       // It's a region, so add as is

@@ -120,7 +120,7 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
       return;
     }
 
-    CountsDialog dialog = new CountsDialog(mWindow, sampleTracks);
+    CountsDialog dialog = new CountsDialog(mWindow, mWindow.getGenomeModel(), sampleTracks);
 
     dialog.setVisible(true);
 
@@ -130,7 +130,7 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
 
     ModernDialogStatus status = ModernMessageDialog.createOkCancelInfoDialog(
         mWindow,
-        "Generating distribution plots can take several minutes.");
+        "Generating counts may take several minutes.");
 
     if (status == ModernDialogStatus.CANCEL) {
       return;

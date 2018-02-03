@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.htsview.app;
 
-import org.jebtk.modern.combobox.ModernComboBox;
+import org.jebtk.modern.combobox.ModernComboBox2;
 
 import edu.columbia.rdf.htsview.tracks.ResolutionService;
 
@@ -23,7 +23,7 @@ import edu.columbia.rdf.htsview.tracks.ResolutionService;
 /**
  * The class ResolutionComboBox.
  */
-public class ResolutionComboBox extends ModernComboBox {
+public class ResolutionComboBox extends ModernComboBox2 {
 
   /**
    * The constant serialVersionUID.

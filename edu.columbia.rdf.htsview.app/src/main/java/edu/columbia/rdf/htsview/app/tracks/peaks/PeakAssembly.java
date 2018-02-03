@@ -36,9 +36,9 @@ public abstract class PeakAssembly {
    * @return the list
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<GenomicRegion> downloadJsonPeaks(Sample sample, int peaksId)
+  public List<GenomicRegion> downloadJsonPeaks(String genome, Sample sample, int peaksId)
       throws IOException {
-    return downloadJsonPeaks(sample.getId(), peaksId);
+    return downloadJsonPeaks(genome, sample.getId(), peaksId);
   }
 
   /**
@@ -49,9 +49,9 @@ public abstract class PeakAssembly {
    * @return the list
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<GenomicRegion> downloadJsonPeaks(int sampleId, PeakSet peaks)
+  public List<GenomicRegion> downloadJsonPeaks(String genome, int sampleId, PeakSet peaks)
       throws IOException {
-    return downloadJsonPeaks(sampleId, peaks.getId());
+    return downloadJsonPeaks(genome, sampleId, peaks.getId());
   }
 
   /**
@@ -62,9 +62,9 @@ public abstract class PeakAssembly {
    * @return the list
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<GenomicRegion> downloadJsonPeaks(Sample sample, PeakSet peaks)
+  public List<GenomicRegion> downloadJsonPeaks(String genome, Sample sample, PeakSet peaks)
       throws IOException {
-    return downloadJsonPeaks(sample.getId(), peaks.getId());
+    return downloadJsonPeaks(genome, sample.getId(), peaks.getId());
   }
 
   /**
@@ -75,7 +75,7 @@ public abstract class PeakAssembly {
    * @return the list
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract List<GenomicRegion> downloadJsonPeaks(int sampleId,
+  public abstract List<GenomicRegion> downloadJsonPeaks(String genome, int sampleId,
       int peaksId) throws IOException;
 
   /**

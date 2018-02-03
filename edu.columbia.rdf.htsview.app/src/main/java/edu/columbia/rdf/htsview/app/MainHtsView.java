@@ -32,7 +32,6 @@ import org.jebtk.bioinformatics.conservation.ConservationAssemblyWeb;
 import org.jebtk.bioinformatics.dna.GenomeAssemblyWeb;
 import org.jebtk.bioinformatics.dna.GenomeAssemblyZip;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
 import org.jebtk.bioinformatics.genomic.Dna;
 import org.jebtk.bioinformatics.genomic.GTBZGenes;
 import org.jebtk.bioinformatics.genomic.GTBZParser;
@@ -41,6 +40,7 @@ import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.LazyGenes;
 import org.jebtk.core.AppService;
 import org.jebtk.core.PluginService;
@@ -235,9 +235,11 @@ public class MainHtsView {
           FileUtils
               .newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
 
-      ChromosomeSizesService.getInstance().load(g,
-          FileUtils.newBufferedReader(
-              dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
+      //GenomeService.getInstance().load(g,
+      //    FileUtils.newBufferedReader(
+      //        dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
+      
+      //GenomeService.getInstance().load(dir.resolve(g + ".genome.txt.gz"));
 
       List<Path> files = FileUtils.ls(dir.resolve("genes"));
 
@@ -301,12 +303,12 @@ public class MainHtsView {
      * 
      * path = SettingsService.getInstance().getAsFile(
      * "htsview.annotation.ucsc.hg19.chr-sizes");
-     * ChromosomeSizesService.getInstance().load(GenomeAssembly.HG19,
+     * GenomeService.getInstance().load(GenomeAssembly.HG19,
      * Resources.getGzipReader(path));
      * 
      * path = SettingsService.getInstance().getAsFile(
      * "htsview.annotation.ucsc.mm10.chr-sizes");
-     * ChromosomeSizesService.getInstance().load(GenomeAssembly.MM10,
+     * GenomeService.getInstance().load(GenomeAssembly.MM10,
      * Resources.getGzipReader(path));
      */
 

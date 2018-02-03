@@ -49,6 +49,7 @@ public class ReadsFSJsonParser extends TrackJsonParser {
   public boolean parse(ModernWindow window,
       final String name,
       int id,
+      String genome,
       ModernTree<Track> annotationTree,
       final Json trackJson,
       TreeNode<Track> rootNode) throws IOException {

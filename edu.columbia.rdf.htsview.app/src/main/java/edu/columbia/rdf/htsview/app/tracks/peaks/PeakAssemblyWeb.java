@@ -82,7 +82,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
    * @see org.htsview.tracks.peaks.PeakAssembly#downloadJsonPeaks(int, int)
    */
   @Override
-  public List<GenomicRegion> downloadJsonPeaks(int sampleId, int peaksId)
+  public List<GenomicRegion> downloadJsonPeaks(String genome, int sampleId, int peaksId)
       throws IOException {
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
 
@@ -100,7 +100,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
     // Json locationsJson = json.get(0).get("l");
 
     for (int i = 0; i < json.size(); ++i) {
-      GenomicRegion region = GenomicRegion.parse(json.get(i).getAsString());
+      GenomicRegion region = GenomicRegion.parse(genome, json.get(i).getAsString());
 
       if (region != null) {
         ret.add(region);
