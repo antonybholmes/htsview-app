@@ -24,7 +24,7 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.matcalc.MainMatCalc;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.ModuleLoader;
+import edu.columbia.rdf.matcalc.BasicModuleLoader;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
 
 // TODO: Auto-generated Javadoc
@@ -84,7 +84,7 @@ public class DnaTask extends SwingWorker<Void, Void> {
 
     try {
 
-      ModuleLoader ml = new BioModuleLoader()
+      BasicModuleLoader ml = new BioModuleLoader()
           .addModule(edu.columbia.rdf.matcalc.toolbox.dna.DnaModule.class)
           .addModule(
               edu.columbia.rdf.matcalc.toolbox.motifs.MotifsModule.class);
