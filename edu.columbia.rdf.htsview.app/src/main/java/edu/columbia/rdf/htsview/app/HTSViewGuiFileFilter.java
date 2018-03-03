@@ -21,13 +21,13 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 /**
  * The class ReadsXmlViewGuiFileFilter.
  */
-public class ReadsViewGuiFileFilter extends GuiFileExtFilter {
+public class HTSViewGuiFileFilter extends GuiFileExtFilter {
 
   /**
    * Instantiates a new reads xml view gui file filter.
    */
-  public ReadsViewGuiFileFilter() {
-    super(ReadsXmlViewGuiFileFilter.EXT, ReadsJsonViewGuiFileFilter.EXT);
+  public HTSViewGuiFileFilter() {
+    super(HtsJsonViewGuiFileFilter.EXT, ReadsXmlViewGuiFileFilter.EXT, ReadsJsonViewGuiFileFilter.EXT);
   }
 
   /*
@@ -37,7 +37,7 @@ public class ReadsViewGuiFileFilter extends GuiFileExtFilter {
    */
   @Override
   public String getDescription() {
-    return "Reads View (*.readsx; *.readsj)";
+    return "HTS View (*.htsj;*.readsj;*.readsx)";
   }
 
 }

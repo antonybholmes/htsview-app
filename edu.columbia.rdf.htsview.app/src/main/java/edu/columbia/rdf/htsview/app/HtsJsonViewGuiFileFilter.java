@@ -13,24 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.htsview.app.tracks.genes;
+package edu.columbia.rdf.htsview.app;
 
-import java.io.IOException;
+import org.jebtk.modern.io.GuiFileExtFilter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class EnsemblGenesPlotTrack.
+ * The class ReadsJsonViewGuiFileFilter.
  */
-public class EnsemblGenesPlotTrack extends GenesPlotTrack {
-
-  private static final long serialVersionUID = 1L;
+public class HtsJsonViewGuiFileFilter extends GuiFileExtFilter {
 
   /**
-   * Instantiates a new ensembl genes plot track.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * The constant EXT.
    */
-  public EnsemblGenesPlotTrack() throws IOException {
-    super("Ensembl genes", "ensembl");
+  public static final String EXT = "htsj";
+
+  /**
+   * Instantiates a new reads json view gui file filter.
+   */
+  public HtsJsonViewGuiFileFilter() {
+    super(EXT);
   }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  @Override
+  public String getDescription() {
+    return "HTS Track View (*." + EXT + ")";
+  }
+
 }

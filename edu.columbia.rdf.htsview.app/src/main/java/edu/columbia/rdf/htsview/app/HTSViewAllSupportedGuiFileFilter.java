@@ -21,14 +21,14 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 /**
  * The class ReadsAllSupportedGuiFileFilter.
  */
-public class ReadsAllSupportedGuiFileFilter extends GuiFileExtFilter {
+public class HTSViewAllSupportedGuiFileFilter extends GuiFileExtFilter {
 
   /**
    * Instantiates a new reads all supported gui file filter.
    */
-  public ReadsAllSupportedGuiFileFilter() {
+  public HTSViewAllSupportedGuiFileFilter() {
     super("bam", "bct.json", "brt2j", "bvtj", "bed", "bedgraph", "gff",
-        "readsj", "readsx");
+        HtsJsonViewGuiFileFilter.EXT, "readsj", "readsx");
   }
 
   /*
@@ -38,7 +38,7 @@ public class ReadsAllSupportedGuiFileFilter extends GuiFileExtFilter {
    */
   @Override
   public String getDescription() {
-    return "All Reads Files (*.bam;*.bct.json;*.brt2j;*.bvtj;*.bed;*.bedgraph;*.gff;*.readsj;*.readsx)";
+    return "All Reads Files (*.bam;*.bct.json;*.brt2j;*.bvtj;*.bed;*.bedgraph;*.gff;*.htsj;*.readsj;*.readsx)";
   }
 
 }

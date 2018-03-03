@@ -1573,7 +1573,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
   public void browseForFiles(Path pwd) throws IOException, ParseException,
       SAXException, ParserConfigurationException {
     openFiles(FileDialog.open(this)
-        .filter(new ReadsAllSupportedGuiFileFilter(),
+        .filter(new HTSViewAllSupportedGuiFileFilter(),
             new BamGuiFileFilter(),
             new BctGuiFileFilter(),
             new Brt2GuiFileFilter(),
@@ -1584,7 +1584,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
             new GFFGuiFileFilter(),
             new SegGuiFileFilter(),
             new ABIGuiFileFilter(),
-            new ReadsViewGuiFileFilter())
+            new HTSViewGuiFileFilter())
         .getFiles(pwd));
   }
 
@@ -1616,8 +1616,10 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     List<Path> otherFiles = new ArrayList<Path>();
 
     for (Path file : files) {
-      if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT).test(file)) {
+      if (PathUtils.ext().type(HtsJsonViewGuiFileFilter.EXT).test(file)) {
         loadJsonView(file);
+      } else if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT).test(file)) {
+          loadJsonView(file);
       } else if (PathUtils.ext().type(ReadsXmlViewGuiFileFilter.EXT)
           .test(file)) {
         // loadXmlView(file);
@@ -1751,7 +1753,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
             new PdfGuiFileFilter(),
             new JpgGuiFileFilter(),
             new BedGraphGuiFileFilter(),
-            new ReadsJsonViewGuiFileFilter())
+            new HtsJsonViewGuiFileFilter())
         .getFile(pwd);
 
     save(pwd, file);
@@ -1790,7 +1792,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
   public void saveView(Path pwd) throws IOException, TranscoderException,
       TransformerException, ParserConfigurationException, ParseException {
-    Path file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter())
+    Path file = FileDialog.save(this).filter(new HtsJsonViewGuiFileFilter())
         .getFile(pwd);
 
     save(pwd, file);
@@ -1861,6 +1863,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     if (PathUtils.ext().type(ReadsXmlViewGuiFileFilter.EXT).test(file)) {
       saveXmlView(file);
+    } else if (PathUtils.ext().type(HtsJsonViewGuiFileFilter.EXT)
+        .test(file)) {
+      saveJsonView(file);
     } else if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT)
         .test(file)) {
       saveJsonView(file);
@@ -2014,10 +2019,10 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     Path file;
 
     if (suggested != null) {
-      file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter())
+      file = FileDialog.save(this).filter(new HtsJsonViewGuiFileFilter())
           .suggested(suggested).getFile(pwd);
     } else {
-      file = FileDialog.save(this).filter(new ReadsJsonViewGuiFileFilter())
+      file = FileDialog.save(this).filter(new HtsJsonViewGuiFileFilter())
           .getFile(pwd);
     }
 

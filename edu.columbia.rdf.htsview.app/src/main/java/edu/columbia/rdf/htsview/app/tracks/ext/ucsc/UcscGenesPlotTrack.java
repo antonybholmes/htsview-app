@@ -25,6 +25,8 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GenesPlotTrack;
  */
 public class UcscGenesPlotTrack extends GenesPlotTrack {
 
+  private static final long serialVersionUID = 1L;
+
   /**
    * Instantiates a new ucsc genes plot track.
    *
