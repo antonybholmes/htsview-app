@@ -392,7 +392,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
-            GenomeService.getInstance().guessChr(file,
+            GenomeService.instance().guessChr(file,
                 model.getValueAsString(i, 0)),
             model.getValueAsInt(i, 1), model.getValueAsInt(i, 2));
 

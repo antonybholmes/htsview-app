@@ -20,8 +20,8 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.io.IOException;
 
-import org.jebtk.bioinformatics.genomic.Dna;
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.DNA;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.RepeatMaskType;
 import org.jebtk.bioinformatics.genomic.SequenceRegion;
@@ -48,7 +48,7 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
   private GenomicRegion mDisplayRegion;
 
   /** The m assembly. */
-  private GenomeAssembly mAssembly;
+  private SequenceReader mAssembly;
 
   /** The m genome. */
   private String mGenome;
@@ -61,7 +61,7 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
    * @param genome the genome
    * @param assembly the assembly
    */
-  public DnaBasesCanvasLayer(String genome, GenomeAssembly assembly,
+  public DnaBasesCanvasLayer(String genome, SequenceReader assembly,
       boolean colorMode) {
     mGenome = genome;
     mAssembly = assembly;
@@ -130,25 +130,25 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
           case 'a':
             // fullHeight = false;
           case 'A':
-            g2.setColor(Dna.BASE_A_COLOR);
+            g2.setColor(DNA.BASE_A_COLOR);
             break;
           case 'c':
             // fullHeight = false;
           case 'C':
-            g2.setColor(Dna.BASE_C_COLOR);
+            g2.setColor(DNA.BASE_C_COLOR);
             break;
           case 'g':
             // fullHeight = false;
           case 'G':
-            g2.setColor(Dna.BASE_G_COLOR);
+            g2.setColor(DNA.BASE_G_COLOR);
             break;
           case 't':
             // fullHeight = false;
           case 'T':
-            g2.setColor(Dna.BASE_T_COLOR);
+            g2.setColor(DNA.BASE_T_COLOR);
             break;
           default:
-            g2.setColor(Dna.BASE_N_COLOR);
+            g2.setColor(DNA.BASE_N_COLOR);
           }
         }
 
@@ -198,25 +198,25 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
         case 'a':
           // fullHeight = false;
         case 'A':
-          g2.setColor(Dna.BASE_A_COLOR);
+          g2.setColor(DNA.BASE_A_COLOR);
           break;
         case 'c':
           // fullHeight = false;
         case 'C':
-          g2.setColor(Dna.BASE_C_COLOR);
+          g2.setColor(DNA.BASE_C_COLOR);
           break;
         case 'g':
           // fullHeight = false;
         case 'G':
-          g2.setColor(Dna.BASE_G_COLOR);
+          g2.setColor(DNA.BASE_G_COLOR);
           break;
         case 't':
           // fullHeight = false;
         case 'T':
-          g2.setColor(Dna.BASE_T_COLOR);
+          g2.setColor(DNA.BASE_T_COLOR);
           break;
         default:
-          g2.setColor(Dna.BASE_N_COLOR);
+          g2.setColor(DNA.BASE_N_COLOR);
           break;
         }
 

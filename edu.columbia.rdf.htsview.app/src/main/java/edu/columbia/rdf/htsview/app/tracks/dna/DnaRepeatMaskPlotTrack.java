@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.io.IOException;
 
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 
@@ -38,7 +38,7 @@ public class DnaRepeatMaskPlotTrack extends DnaPlotTrack {
    *
    * @param genomeAssembly the genome assembly
    */
-  public DnaRepeatMaskPlotTrack(GenomeAssembly genomeAssembly) {
+  public DnaRepeatMaskPlotTrack(SequenceReader genomeAssembly) {
     super(TITLE, genomeAssembly);
   }
 

@@ -412,7 +412,7 @@ public class ImportMultiRes {
       while ((line = reader.readLine()) != null) {
         tokens = TextUtils.tabSplit(line);
 
-        c = GenomeService.getInstance().guessChr(samFile, tokens.get(2));
+        c = GenomeService.instance().guessChr(samFile, tokens.get(2));
 
         if (c != null) {
           if (chr != null && !c.equals(chr)) {

@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
 
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
 
@@ -30,7 +30,7 @@ public abstract class DnaPlotTrack extends AnnotationPlotTrack {
   private static final long serialVersionUID = 1L;
 
   /** The m genome assembly. */
-  protected GenomeAssembly mGenomeAssembly;
+  protected SequenceReader mGenomeAssembly;
 
   /** The Constant MAX_DISPLAY_BASES. */
   public static final int MAX_DISPLAY_BASES = 100;
@@ -43,7 +43,7 @@ public abstract class DnaPlotTrack extends AnnotationPlotTrack {
    * @param name the name
    * @param genomeAssembly the genome assembly
    */
-  public DnaPlotTrack(String name, GenomeAssembly genomeAssembly) {
+  public DnaPlotTrack(String name, SequenceReader genomeAssembly) {
     super(name);
 
     mGenomeAssembly = genomeAssembly;

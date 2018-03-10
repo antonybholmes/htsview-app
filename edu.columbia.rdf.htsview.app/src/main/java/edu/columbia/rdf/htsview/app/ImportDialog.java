@@ -70,7 +70,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
      */
     public GenomeChrCombo() {
       for (String genome : CollectionUtils
-          .sort(GenomeService.getInstance())) {
+          .sort(GenomeService.instance())) {
         addScrollMenuItem(genome);
       }
     }

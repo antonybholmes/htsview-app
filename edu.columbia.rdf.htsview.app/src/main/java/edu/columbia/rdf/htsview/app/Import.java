@@ -260,7 +260,7 @@ public class Import {
       while ((line = reader.readLine()) != null) {
         tokens = TextUtils.tabSplit(line);
 
-        Chromosome c = GenomeService.getInstance().guessChr(samFile,
+        Chromosome c = GenomeService.instance().guessChr(samFile,
             tokens.get(2));
 
         if (c == null || (currentChr != null && !c.equals(currentChr))) {

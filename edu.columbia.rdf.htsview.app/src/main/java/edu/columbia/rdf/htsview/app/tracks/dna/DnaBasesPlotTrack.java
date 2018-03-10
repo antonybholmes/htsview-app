@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.io.IOException;
 
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 
@@ -39,7 +39,7 @@ public class DnaBasesPlotTrack extends DnaPlotTrack {
    *
    * @param genomeAssembly the genome assembly
    */
-  public DnaBasesPlotTrack(GenomeAssembly genomeAssembly) {
+  public DnaBasesPlotTrack(SequenceReader genomeAssembly) {
     super("DNA Bases", genomeAssembly);
   }
 

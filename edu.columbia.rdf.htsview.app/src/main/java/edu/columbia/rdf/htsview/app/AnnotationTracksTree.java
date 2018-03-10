@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.core.tree.TreeRootNode;
@@ -57,7 +57,7 @@ public class AnnotationTracksTree extends ModernTree<Track> {
    * @param mouseConservationAssembly the mouse conservation assembly
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public AnnotationTracksTree(GenomeAssembly dnaAssembly,
+  public AnnotationTracksTree(SequenceReader dnaAssembly,
       ConservationAssembly conservationAssembly,
       ConservationAssembly mouseConservationAssembly) throws IOException {
     Track track;

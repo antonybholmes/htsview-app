@@ -87,7 +87,7 @@ public class GenomeRibbonSection extends RibbonSection
 
     //for (String genome : CollectionUtils
     //    .sort(GenesService.getInstance().getGenomes())) {
-    for (String genome : GenomeService.getInstance()) {  
+    for (String genome : GenomeService.instance()) {  
       popup.addMenuItem(new ModernTwoLineMenuItem(genome,
           "Switch to the " + genome + " genome.", ICON));
     }

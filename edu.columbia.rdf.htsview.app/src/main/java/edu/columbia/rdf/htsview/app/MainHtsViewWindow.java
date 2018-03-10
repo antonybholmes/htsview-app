@@ -1293,7 +1293,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     GenomicRegion region = mGenomicModel.get();
     
     // Get the same chromosome on a different assembly
-    Chromosome chr = GenomeService.getInstance().genome(genome).chr(region.getChr());
+    Chromosome chr = GenomeService.instance().genome(genome).chr(region.getChr());
     
     // Change the genomic reference to reflect the new genome
     mGenomicModel.set(chr, region.getStart(), region.getEnd());

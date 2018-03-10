@@ -29,17 +29,17 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.conservation.ConservationAssemblyWeb;
-import org.jebtk.bioinformatics.dna.GenomeAssemblyWeb;
-import org.jebtk.bioinformatics.dna.GenomeAssemblyZip;
+import org.jebtk.bioinformatics.dna.URLSequenceReader;
+import org.jebtk.bioinformatics.dna.ZipSequenceReader;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
-import org.jebtk.bioinformatics.genomic.Dna;
+import org.jebtk.bioinformatics.genomic.DNA;
 import org.jebtk.bioinformatics.genomic.GTBZGenes;
 import org.jebtk.bioinformatics.genomic.GTBZParser;
 import org.jebtk.bioinformatics.genomic.GeneType;
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.LazyGenes;
 import org.jebtk.core.AppService;
@@ -312,7 +312,7 @@ public class MainHtsView {
      * Resources.getGzipReader(path));
      */
 
-    GenomeAssembly genomeAssembly = new GenomeAssemblyWeb(new URL(
+    SequenceReader genomeAssembly = new URLSequenceReader(new URL(
         SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
 
     ConservationAssembly conservationAssembly = new ConservationAssemblyWeb(
@@ -339,13 +339,13 @@ public class MainHtsView {
           .setPeakAssembly(new PeakAssemblyWeb(login));
     }
 
-    GenomeAssembly dnaAssembly;
+    SequenceReader dnaAssembly;
 
     if (SettingsService.getInstance().getAsBool("htsview.dna.web-mode")) {
-      dnaAssembly = new GenomeAssemblyWeb(new URL(SettingsService.getInstance()
+      dnaAssembly = new URLSequenceReader(new URL(SettingsService.getInstance()
           .getAsString("edb.reads.dna.remote-url")));
     } else {
-      dnaAssembly = new GenomeAssemblyZip(Dna.RES_DIR);
+      dnaAssembly = new ZipSequenceReader(DNA.DNA_HOME);
     }
 
     AnnotationTracksTree tree = new AnnotationTracksTree(dnaAssembly,

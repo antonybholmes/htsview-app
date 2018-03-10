@@ -465,7 +465,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
-            GenomeService.getInstance().guessChr(file,
+            GenomeService.instance().guessChr(file,
                 model.getValueAsString(i, 0)),
             Integer.parseInt(model.getValueAsString(i, 1)),
             Integer.parseInt(model.getValueAsString(i, 2)));

@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
 
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.PlotStyle;
 
@@ -43,7 +43,7 @@ public class DnaColorPlotCanvas extends DnaSubFigure {
    * @param genomeAssembly the genome assembly
    * @param titlePosition the title position
    */
-  public DnaColorPlotCanvas(String genome, GenomeAssembly genomeAssembly,
+  public DnaColorPlotCanvas(String genome, SequenceReader genomeAssembly,
       TitleProperties titlePosition) {
     mLayer = new DnaColorCanvasLayer(genome, genomeAssembly);
 
@@ -61,7 +61,7 @@ public class DnaColorPlotCanvas extends DnaSubFigure {
    * @return the dna color plot canvas
    */
   public static DnaColorPlotCanvas create(String genome,
-      GenomeAssembly genomeAssembly,
+      SequenceReader genomeAssembly,
       TitleProperties titlePosition) {
 
     DnaColorPlotCanvas canvas = new DnaColorPlotCanvas(genome, genomeAssembly,
