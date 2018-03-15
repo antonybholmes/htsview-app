@@ -199,7 +199,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
     //box.add(mCheckPlot);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /*

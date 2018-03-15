@@ -287,7 +287,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
     box.add(UI.createVGap(10));
     box.add(mCheckPlot);
 
-    setDialogCardContent(box);
+    setCard(box);
 
     ModernButtonGroup buttonGroup = new ModernButtonGroup();
 

@@ -229,7 +229,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
     // box.add(UI.createVGap(5));
     box.add(mCheckPlot);
 
-    setDialogCardContent(box);
+    setCard(box);
 
     mTextBin.setSelectedIndex(2);
   }

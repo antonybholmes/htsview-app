@@ -166,7 +166,7 @@ public class SampleDialog extends ModernDialogTaskWindow
       }
     }
 
-    setDialogCardContent(content);
+    setCard(content);
   }
 
   /*

@@ -209,7 +209,7 @@ public class GeneEditDialog extends ModernDialogTaskWindow {
     content.add(mCheckDense);
     content.add(mCheckCompact);
 
-    setDialogCardContent(content);
+    setCard(content);
   }
 
   /*
