@@ -71,7 +71,6 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.contentpane.ModernHContentPane;
-import org.jebtk.modern.contentpane.SizableContentPane;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
 import org.jebtk.modern.dialog.MessageDialogType;
@@ -97,6 +96,7 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarLocation;
+import org.jebtk.modern.tabs.SizableTab;
 import org.jebtk.modern.widget.ModernClickWidget;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
@@ -941,7 +941,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // panel.setBorder(ModernPanel.BORDER);
 
-    mContentPane.getModel()
+    mContentPane.tabs()
         .setCenterTab(new ModernComponent(
             new CardPanel(new ModernComponent(scrollPane, ModernWidget.BORDER)),
             ModernWidget.DOUBLE_BORDER));
@@ -1031,25 +1031,25 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    */
 
   private void addTracksPane() {
-    if (mContentPane.getModel().getLeftTabs().containsTab("Tracks")) {
+    if (mContentPane.tabs().left().contains("Tracks")) {
       return;
     }
 
-    SizableContentPane sizePane = new SizableContentPane("Tracks", mTracksPanel,
+    SizableTab sizePane = new SizableTab("Tracks", mTracksPanel,
         250, 100, 500);
 
     // CollapseHTab htab = new CollapseHTab(sizePane, mTracksPanel);
 
     // sizePane.setComponent(htab);
 
-    mContentPane.getModel().addLeftTab(sizePane);
+    mContentPane.tabs().addLeftTab(sizePane);
   }
 
   /**
    * Adds the locations pane.
    */
   private void addLocationsPane() {
-    if (mContentPane.getModel().getRightTabs().containsTab("Locations")) {
+    if (mContentPane.tabs().right().contains("Locations")) {
       return;
     }
 
@@ -1057,8 +1057,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // sizePane.setComponent(htab);
 
-    mContentPane.getModel().getRightTabs()
-        .addTab(new SizableContentPane("Locations",
+    mContentPane.tabs().right()
+        .add(new SizableTab("Locations",
             new CloseableHTab("Locations", mLocationsPanel, mContentPane), 250,
             100, 500));
   }
