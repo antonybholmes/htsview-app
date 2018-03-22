@@ -19,7 +19,6 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
-import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 

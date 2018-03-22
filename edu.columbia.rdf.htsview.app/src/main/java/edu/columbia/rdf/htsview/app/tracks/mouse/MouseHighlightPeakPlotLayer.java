@@ -31,8 +31,8 @@ import org.jebtk.graphplot.figure.UniqueXY;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
-import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.CanvasMouseListener;
+import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.status.StatusService;
 import org.jebtk.modern.theme.ModernTheme;
 

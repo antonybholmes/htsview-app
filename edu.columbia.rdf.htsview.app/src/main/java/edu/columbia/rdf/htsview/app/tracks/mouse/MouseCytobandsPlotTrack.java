@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
-import org.jebtk.bioinformatics.genomic.SequenceReader;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
 import edu.columbia.rdf.htsview.app.tracks.dna.CytobandsSubFigure;
@@ -70,7 +70,7 @@ public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
     //
 
     mSubFigure = CytobandsSubFigure.create("Cytobands mm10",
-        CytobandsService.getInstance().getCytobands(SequenceReader.MM10),
+        CytobandsService.getInstance().getCytobands(Genome.MM10),
         titlePosition);
 
     switch (titlePosition.getPosition()) {

@@ -19,9 +19,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.IOException;
 
-import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.RepeatMaskType;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.SequenceRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
@@ -91,7 +91,7 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
 
     try {
       SequenceRegion sequence = mAssembly
-          .getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
+          .getSequence(mDisplayRegion, RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
       int x1 = 0;

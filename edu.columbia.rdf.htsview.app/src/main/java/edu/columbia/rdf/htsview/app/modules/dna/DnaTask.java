@@ -19,6 +19,7 @@ import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.ui.GenomeModel;
+import org.jebtk.core.cli.CommandLineArgs;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
@@ -93,7 +94,10 @@ public class DnaTask extends SwingWorker<Void, Void> {
 
       window.openMatrix(mMatrice);
 
-      window.runModule("DNA", mGenomeModel.get());
+      window.runModule("DNA", 
+          CommandLineArgs.longArg("genome", mGenomeModel.get()),
+          CommandLineArgs.longArg("mode", "seq"),
+          CommandLineArgs.longArg("ui"));
     } catch (Exception e) {
       e.printStackTrace();
     }

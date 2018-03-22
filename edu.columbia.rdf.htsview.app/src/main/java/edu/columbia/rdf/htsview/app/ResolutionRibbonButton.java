@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.app;
 
 import java.awt.Graphics2D;
 
-import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;

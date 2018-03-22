@@ -17,8 +17,8 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.io.IOException;
 
-import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.graphplot.figure.Axes;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;

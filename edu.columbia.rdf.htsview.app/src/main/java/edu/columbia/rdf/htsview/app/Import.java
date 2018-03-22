@@ -26,7 +26,6 @@ import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
-import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.Human;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.io.FileUtils;

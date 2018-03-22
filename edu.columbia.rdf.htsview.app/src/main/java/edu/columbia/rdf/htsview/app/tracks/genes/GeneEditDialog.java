@@ -24,7 +24,6 @@ import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.button.ModernRadioButton;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
-import org.jebtk.modern.graphics.color.ColorSwatchButton;
 import org.jebtk.modern.graphics.color.ColorSwatchButton2;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.MatrixPanel;

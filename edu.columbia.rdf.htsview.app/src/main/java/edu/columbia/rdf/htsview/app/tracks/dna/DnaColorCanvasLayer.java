@@ -19,9 +19,9 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.DNA;
-import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.RepeatMaskType;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.SequenceRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
@@ -44,17 +44,13 @@ public class DnaColorCanvasLayer extends AxesClippedLayer {
   /** The m assembly. */
   private SequenceReader mAssembly;
 
-  /** The m genome. */
-  private String mGenome;
-
   /**
    * Instantiates a new dna color canvas layer.
    *
    * @param genome the genome
    * @param assembly the assembly
    */
-  public DnaColorCanvasLayer(String genome, SequenceReader assembly) {
-    mGenome = genome;
+  public DnaColorCanvasLayer(SequenceReader assembly) {
     mAssembly = assembly;
   }
 
@@ -94,7 +90,7 @@ public class DnaColorCanvasLayer extends AxesClippedLayer {
 
     try {
       SequenceRegion sequence = mAssembly
-          .getSequence(mGenome, mDisplayRegion, RepeatMaskType.N);
+          .getSequence(mDisplayRegion, RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
       int w;

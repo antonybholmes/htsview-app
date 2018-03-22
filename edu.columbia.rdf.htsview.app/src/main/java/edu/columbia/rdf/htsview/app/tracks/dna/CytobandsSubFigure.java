@@ -18,7 +18,6 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 import java.awt.Color;
 
 import org.jebtk.bioinformatics.ext.ucsc.Cytobands;
-import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.external.ucsc.CytobandsRegionLayer;
 import org.jebtk.graphplot.figure.PlotStyle;

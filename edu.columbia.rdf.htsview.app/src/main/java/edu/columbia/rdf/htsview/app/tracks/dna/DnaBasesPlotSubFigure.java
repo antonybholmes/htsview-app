@@ -17,8 +17,8 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
 
-import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.graphplot.figure.PlotStyle;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
@@ -43,9 +43,9 @@ public class DnaBasesPlotSubFigure extends DnaSubFigure {
    * @param genomeAssembly the genome assembly
    * @param titlePosition the title position
    */
-  public DnaBasesPlotSubFigure(String genome, SequenceReader genomeAssembly,
+  public DnaBasesPlotSubFigure(SequenceReader genomeAssembly,
       TitleProperties titlePosition, boolean colorMode) {
-    mLayer = new DnaBasesCanvasLayer(genome, genomeAssembly, colorMode);
+    mLayer = new DnaBasesCanvasLayer(genomeAssembly, colorMode);
 
     currentAxes().addChild(mLayer);
 
@@ -65,8 +65,8 @@ public class DnaBasesPlotSubFigure extends DnaSubFigure {
       TitleProperties titlePosition,
       boolean colorMode) {
 
-    DnaBasesPlotSubFigure canvas = new DnaBasesPlotSubFigure(genome,
-        genomeAssembly, titlePosition, colorMode);
+    DnaBasesPlotSubFigure canvas = 
+        new DnaBasesPlotSubFigure(genomeAssembly, titlePosition, colorMode);
 
     // set the graph limits
     canvas.currentAxes().getX1Axis().getTitle().setText(null);

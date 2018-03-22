@@ -17,8 +17,8 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
 
-import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.graphplot.figure.PlotStyle;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;

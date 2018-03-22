@@ -32,16 +32,14 @@ import org.jebtk.bioinformatics.conservation.ConservationAssemblyWeb;
 import org.jebtk.bioinformatics.dna.URLSequenceReader;
 import org.jebtk.bioinformatics.dna.ZipSequenceReader;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
-import org.jebtk.bioinformatics.genomic.DNA;
 import org.jebtk.bioinformatics.genomic.GTBZGenes;
 import org.jebtk.bioinformatics.genomic.GTBZParser;
 import org.jebtk.bioinformatics.genomic.GeneType;
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.bioinformatics.genomic.SequenceReader;
-import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.LazyGenes;
+import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.core.AppService;
 import org.jebtk.core.PluginService;
 import org.jebtk.core.io.FileUtils;
@@ -345,7 +343,7 @@ public class MainHtsView {
       dnaAssembly = new URLSequenceReader(new URL(SettingsService.getInstance()
           .getAsString("edb.reads.dna.remote-url")));
     } else {
-      dnaAssembly = new ZipSequenceReader(DNA.DNA_HOME);
+      dnaAssembly = new ZipSequenceReader();
     }
 
     AnnotationTracksTree tree = new AnnotationTracksTree(dnaAssembly,

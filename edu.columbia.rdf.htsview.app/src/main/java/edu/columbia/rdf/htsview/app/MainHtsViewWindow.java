@@ -70,7 +70,6 @@ import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.contentpane.CloseableHTab;
-import org.jebtk.modern.contentpane.ModernHContentPane;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
 import org.jebtk.modern.dialog.MessageDialogType;
@@ -90,12 +89,12 @@ import org.jebtk.modern.io.PngGuiFileFilter;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.io.SaveAsRibbonPanel;
 import org.jebtk.modern.io.SvgGuiFileFilter;
-import org.jebtk.modern.panel.CardPanel;
 import org.jebtk.modern.ribbon.QuickAccessButton;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarLocation;
+import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.tabs.SizableTab;
 import org.jebtk.modern.widget.ModernClickWidget;
 import org.jebtk.modern.widget.ModernWidget;
@@ -188,11 +187,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * The m zoom model.
    */
   private ZoomModel mZoomModel = new ReadsZoomModel();
-
-  /**
-   * The m content pane.
-   */
-  private ModernHContentPane mContentPane = new ModernHContentPane();
 
   /**
    * The m genomic model.
@@ -932,8 +926,10 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-    ModernScrollPane scrollPane = new ModernScrollPane(mTracksFigurePanel);
-    scrollPane.setScrollBarLocation(ScrollBarLocation.FLOATING);
+    ModernScrollPane scrollPane = new ModernScrollPane(mTracksFigurePanel)
+        .setScrollBarLocation(ScrollBarLocation.FLOATING)
+        .setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
+    
     // scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
     // ModernPanel panel = new ModernPanel(scrollPane);
 
@@ -941,10 +937,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // panel.setBorder(ModernPanel.BORDER);
 
-    mContentPane.tabs()
-        .setCenterTab(new ModernComponent(
-            new CardPanel(new ModernComponent(scrollPane, ModernWidget.BORDER)),
-            ModernWidget.DOUBLE_BORDER));
+    setCard(new ModernComponent(scrollPane, ModernWidget.BORDER));
 
     // mPanel = new Graph2dPanel(this,
     // mCanvas,
@@ -953,8 +946,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     // mContentPane.getModel());
 
     // setFormatPane(mPanel);
-
-    setBody(mContentPane);
 
     getStatusBar().addRight(new ModernStatusZoomSlider(mZoomModel));
 
@@ -1031,7 +1022,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    */
 
   private void addTracksPane() {
-    if (mContentPane.tabs().left().contains("Tracks")) {
+    if (tabsPane().tabs().left().contains("Tracks")) {
       return;
     }
 
@@ -1042,14 +1033,14 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // sizePane.setComponent(htab);
 
-    mContentPane.tabs().addLeftTab(sizePane);
+    tabsPane().tabs().left().add(sizePane);
   }
 
   /**
    * Adds the locations pane.
    */
   private void addLocationsPane() {
-    if (mContentPane.tabs().right().contains("Locations")) {
+    if (tabsPane().tabs().right().contains("Locations")) {
       return;
     }
 
@@ -1057,9 +1048,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // sizePane.setComponent(htab);
 
-    mContentPane.tabs().right()
+    tabsPane().tabs().right()
         .add(new SizableTab("Locations",
-            new CloseableHTab("Locations", mLocationsPanel, mContentPane), 250,
+            new CloseableHTab("Locations", mLocationsPanel, tabsPane()), 250,
             100, 500));
   }
 
