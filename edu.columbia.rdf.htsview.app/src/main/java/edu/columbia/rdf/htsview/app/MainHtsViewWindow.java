@@ -1776,17 +1776,17 @@ public class MainHtsViewWindow extends ModernRibbonWindow
      */
   }
 
-  private void saveView() throws IOException, TranscoderException,
+  private boolean saveView() throws IOException, TranscoderException,
       TransformerException, ParserConfigurationException, ParseException {
-    saveView(RecentFilesService.getInstance().getPwd());
+    return saveView(RecentFilesService.getInstance().getPwd());
   }
 
-  public void saveView(Path pwd) throws IOException, TranscoderException,
+  public boolean saveView(Path pwd) throws IOException, TranscoderException,
       TransformerException, ParserConfigurationException, ParseException {
     Path file = FileDialog.save(this).filter(new HtsJsonViewGuiFileFilter())
         .getFile(pwd);
 
-    save(pwd, file);
+    return save(pwd, file);
   }
 
   /**
@@ -1794,16 +1794,17 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    *
    * @param pwd the pwd
    * @param file the file
+   * @return 
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws TranscoderException the transcoder exception
    * @throws TransformerException the transformer exception
    * @throws ParserConfigurationException the parser configuration exception
    * @throws ParseException the parse exception
    */
-  private void save(Path pwd, Path file)
+  private boolean save(Path pwd, Path file)
       throws IOException, TranscoderException, TransformerException,
       ParserConfigurationException, ParseException {
-    save(pwd, file, new ExportCallBack(pwd, file));
+    return save(pwd, file, new ExportCallBack(pwd, file));
   }
 
   /**
@@ -1827,9 +1828,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     }
 
     if (FileUtils.exists(file)) {
-      ModernMessageDialog.createFileReplaceDialog(this, file, l);
-
-      return false;
+      return ModernMessageDialog.createFileReplaceDialog(this, file, l) == ModernDialogStatus.OK;
     } else {
       return save(file);
     }
@@ -1934,10 +1933,12 @@ public class MainHtsViewWindow extends ModernRibbonWindow
           "Would you like to save it?");
 
       if (status == ModernDialogStatus.OK) {
+        boolean saved = false;
+        
         if (mViewFile != null) {
           // If the view exists, save it.
           try {
-            save(mViewFile);
+            saved = save(mViewFile);
           } catch (IOException | TranscoderException | TransformerException
               | ParserConfigurationException e) {
             e.printStackTrace();
@@ -1945,11 +1946,16 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         } else {
           // If the view does not exist, prompt user for location.
           try {
-            saveView();
+            saved = saveView();
           } catch (IOException | TranscoderException | TransformerException
               | ParserConfigurationException | ParseException e) {
             e.printStackTrace();
           }
+        }
+        
+        if (!saved) {
+          // If not saved assume user pressed cancel so given another chance.
+          return;
         }
       } else {
         // If the user chooses not to save, prompt one last time that
@@ -1963,6 +1969,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         // if (status == ModernDialogStatus.CANCEL) {
         // return;
         // }
+        
+        // If user clicks save and then cancel, to be safe just return with
       }
     }
 

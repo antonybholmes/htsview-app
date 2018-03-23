@@ -61,16 +61,18 @@ public class PeakAssemblyWeb extends PeakAssembly {
   public List<PeakSet> getJsonPeaks(int sampleId) throws IOException {
     List<PeakSet> ret = new ArrayList<PeakSet>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("samples").resolve(sampleId)
-        .resolve("chipseq").resolve("peaks");
+    UrlBuilder peaksUrl = mAuthV1.resolve("chipseq").resolve("peaks")
+        .resolve("sample").resolve(sampleId);
 
     LOG.info("peaks url: {}", peaksUrl);
 
     Json json = new JsonParser().parse(peaksUrl.toUrl());
 
     for (int i = 0; i < json.size(); ++i) {
-      ret.add(PeakSet.createPeaks(json.get(i).getAsInt(EDB.HEADING_ID),
-          json.get(i).getAsString(EDB.HEADING_NAME)));
+      Json j = json.get(i);
+      
+      ret.add(PeakSet.createPeaks(j.getAsInt(EDB.HEADING_ID),
+          j.getAsString(EDB.HEADING_NAME)));
     }
 
     return ret;
@@ -82,25 +84,23 @@ public class PeakAssemblyWeb extends PeakAssembly {
    * @see org.htsview.tracks.peaks.PeakAssembly#downloadJsonPeaks(int, int)
    */
   @Override
-  public List<GenomicRegion> downloadJsonPeaks(String genome, int sampleId, int peaksId)
-      throws IOException {
+  public List<GenomicRegion> downloadJsonPeaks(String genome,
+      int sampleId,
+      int peaksId) throws IOException {
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1
-        // .resolve("samples")
-        // .resolve(sampleId)
-        .resolve("chipseq").resolve("peaks").resolve("download")
+    UrlBuilder peaksUrl = mAuthV1.resolve("chipseq").resolve("peaks")
         .resolve(peaksId);
-    // .param("id", peaksId);
 
     LOG.info("peaks url: {}", peaksUrl);
 
     Json json = new JsonParser().parse(peaksUrl.toUrl());
 
-    // Json locationsJson = json.get(0).get("l");
+    Json locationsJson = json.get("locations");
 
-    for (int i = 0; i < json.size(); ++i) {
-      GenomicRegion region = GenomicRegion.parse(genome, json.get(i).getAsString());
+    for (int i = 0; i < locationsJson.size(); ++i) {
+      GenomicRegion region = GenomicRegion.parse(genome,
+          locationsJson.getAsString(i));
 
       if (region != null) {
         ret.add(region);
