@@ -310,8 +310,8 @@ public class MainHtsView {
      * Resources.getGzipReader(path));
      */
 
-    SequenceReader genomeAssembly = new URLSequenceReader(new URL(
-        SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
+    //SequenceReader genomeAssembly = new URLSequenceReader(new URL(
+     //   SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
 
     ConservationAssembly conservationAssembly = new ConservationAssemblyWeb(
         new URL(SettingsService.getInstance()
@@ -328,13 +328,17 @@ public class MainHtsView {
 
       RepositoryService.getInstance().setRepository("chipseq", repository);
 
-      UrlBuilder url = SettingsService.getInstance()
-          .getSetting("edb.reads.chip-seq.remote-url").getAsUrlBuilder();
+      //UrlBuilder url = SettingsService.getInstance()
+      //    .getSetting("edb.reads.chip-seq.remote-url").getAsUrlBuilder();
 
+      
+      UrlBuilder seqUrl = login.getURL().resolve("seq");
+      
       WebAssemblyService.getInstance()
-          .setSampleAssembly(new SampleAssemblyWeb(login, url));
+          .setSampleAssembly(new SampleAssemblyWeb(seqUrl));
+      
       WebAssemblyService.getInstance()
-          .setPeakAssembly(new PeakAssemblyWeb(login));
+          .setPeakAssembly(new PeakAssemblyWeb(seqUrl.resolve("chipseq")));
     }
 
     SequenceReader dnaAssembly;

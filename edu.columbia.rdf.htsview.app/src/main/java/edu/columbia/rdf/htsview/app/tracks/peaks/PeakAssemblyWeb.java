@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.columbia.rdf.edb.EDB;
-import edu.columbia.rdf.edb.EDBWLogin;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -45,11 +44,11 @@ public class PeakAssemblyWeb extends PeakAssembly {
   /**
    * Instantiates a new track assembly web.
    *
-   * @param login the login
+   * @param url the login
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public PeakAssemblyWeb(EDBWLogin login) throws IOException {
-    mAuthV1 = login.getOTKAuthUrl();
+  public PeakAssemblyWeb(UrlBuilder url) throws IOException {
+    mAuthV1 = url;
   }
 
   /*
@@ -61,12 +60,12 @@ public class PeakAssemblyWeb extends PeakAssembly {
   public List<PeakSet> getJsonPeaks(int sampleId) throws IOException {
     List<PeakSet> ret = new ArrayList<PeakSet>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("chipseq").resolve("peaks")
+    UrlBuilder peaksUrl = mAuthV1.resolve("peaks")
         .resolve("sample").resolve(sampleId);
 
     LOG.info("peaks url: {}", peaksUrl);
 
-    Json json = new JsonParser().parse(peaksUrl.toUrl());
+    Json json = new JsonParser().parse(peaksUrl.toURL());
 
     for (int i = 0; i < json.size(); ++i) {
       Json j = json.get(i);
@@ -89,12 +88,12 @@ public class PeakAssemblyWeb extends PeakAssembly {
       int peaksId) throws IOException {
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("chipseq").resolve("peaks")
+    UrlBuilder peaksUrl = mAuthV1.resolve("peaks")
         .resolve(peaksId);
 
     LOG.info("peaks url: {}", peaksUrl);
 
-    Json json = new JsonParser().parse(peaksUrl.toUrl());
+    Json json = new JsonParser().parse(peaksUrl.toURL());
 
     Json locationsJson = json.get("locations");
 
