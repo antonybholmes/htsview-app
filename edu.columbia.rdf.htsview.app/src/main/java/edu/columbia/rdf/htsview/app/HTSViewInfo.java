@@ -21,7 +21,6 @@ import org.jebtk.modern.help.GuiAppInfo;
 
 import edu.columbia.rdf.htsview.app.icons.HTSViewIcon;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ReadsInfo.
  */

@@ -145,7 +145,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleRibbonSection;
 
-// TODO: Auto-generated Javadoc
 /**
  * Display BedGraph and other track data.
  * 

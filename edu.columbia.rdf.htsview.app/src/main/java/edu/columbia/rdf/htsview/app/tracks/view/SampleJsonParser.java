@@ -33,7 +33,6 @@ import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleJsonParser.
  */

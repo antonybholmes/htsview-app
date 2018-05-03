@@ -19,7 +19,6 @@ import org.jebtk.modern.combobox.ModernComboBox2;
 
 import edu.columbia.rdf.htsview.tracks.ResolutionService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ResolutionComboBox.
  */

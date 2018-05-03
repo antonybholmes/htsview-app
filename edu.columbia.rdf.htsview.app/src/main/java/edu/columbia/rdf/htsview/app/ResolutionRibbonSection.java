@@ -25,7 +25,6 @@ import org.jebtk.modern.ribbon.RibbonSection;
 
 import edu.columbia.rdf.htsview.tracks.ResolutionModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select the resolution to view sequences.
  *

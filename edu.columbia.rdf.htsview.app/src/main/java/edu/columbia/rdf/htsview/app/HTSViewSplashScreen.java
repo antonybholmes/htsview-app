@@ -26,7 +26,6 @@ import org.xml.sax.SAXException;
 
 import edu.columbia.rdf.edb.ui.network.ServerException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MatCalcSplashScreen.
  */

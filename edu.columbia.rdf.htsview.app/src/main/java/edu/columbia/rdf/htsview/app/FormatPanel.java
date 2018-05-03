@@ -33,7 +33,6 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GenePlotElement;
 import edu.columbia.rdf.htsview.app.tracks.genes.GenesProperties;
 import edu.columbia.rdf.matcalc.figure.AxisControl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class FormatPanel.
  */

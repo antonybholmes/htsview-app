@@ -21,7 +21,6 @@ import org.jebtk.modern.UI;
 import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ResolutionRibbonButton.
  */

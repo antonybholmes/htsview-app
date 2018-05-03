@@ -25,7 +25,6 @@ import edu.columbia.rdf.htsview.app.tracks.igv.seg.SegPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderSeg.
  */

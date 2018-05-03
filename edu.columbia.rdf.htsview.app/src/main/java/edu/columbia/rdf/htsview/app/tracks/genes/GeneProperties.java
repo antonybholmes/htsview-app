@@ -21,7 +21,6 @@ import org.jebtk.core.event.ChangeListeners;
 import org.jebtk.graphplot.figure.properties.FontProperties;
 import org.jebtk.graphplot.figure.properties.LineProperties;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GeneProperties.
  */

@@ -25,7 +25,6 @@ import edu.columbia.rdf.htsview.app.tracks.dna.DnaSubFigure;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Conservation46WayGraphPlotCanvas.
  */

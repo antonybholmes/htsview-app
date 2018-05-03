@@ -29,7 +29,6 @@ import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
 import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleFSJsonParser.
  */
@@ -59,7 +58,7 @@ public class SampleFSJsonParser extends TrackJsonParser {
     if (FileUtils.exists(metaFile)) {
 
       Track track = SampleLoaderService.getInstance()
-          .openSample(window, metaFile, rootNode);
+          .openFile(window, metaFile, rootNode);
 
       Color lineColor = null;
 

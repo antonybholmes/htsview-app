@@ -20,7 +20,6 @@ import org.jebtk.modern.help.GuiAppInfo;
 
 import edu.columbia.rdf.htsview.app.MainHtsViewWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The module interface dictates the function of a MatCalc module that can
  * extend the functionality of the base MatCalc application. Modules can access

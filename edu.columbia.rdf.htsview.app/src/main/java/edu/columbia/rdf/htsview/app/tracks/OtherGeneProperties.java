@@ -21,7 +21,6 @@ import org.jebtk.core.settings.SettingsService;
 
 import edu.columbia.rdf.htsview.app.tracks.genes.GeneProperties;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class OtherGeneProperties.
  */

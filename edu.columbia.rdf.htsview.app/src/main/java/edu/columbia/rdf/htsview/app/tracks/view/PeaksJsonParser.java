@@ -32,7 +32,6 @@ import edu.columbia.rdf.htsview.app.tracks.peaks.PeaksPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PeaksJsonParser.
  */

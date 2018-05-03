@@ -80,7 +80,6 @@ import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.chipseq.ChipSeqSamplesDialog;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HeatMapDialog.
  */

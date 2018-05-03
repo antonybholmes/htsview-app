@@ -28,7 +28,6 @@ import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernTextArea;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RegionsPanel.
  */
@@ -76,7 +75,7 @@ public class RegionsPanel extends ModernWidget {
    * @return the regions
    * @throws ParseException the parse exception
    */
-  public List<HeatMapIdLocation> getRegions() throws ParseException {
+  public List<HeatMapIdLocation> getRegions() {
     List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(),
         TextUtils.NEW_LINE_DELIMITER);
 

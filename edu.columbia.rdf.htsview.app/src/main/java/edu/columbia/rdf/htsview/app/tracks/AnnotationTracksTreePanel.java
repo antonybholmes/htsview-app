@@ -29,7 +29,6 @@ import org.jebtk.modern.widget.ModernWidget;
 import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
 import edu.columbia.rdf.htsview.tracks.Track;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AnnotationTracksTreePanel.
  */

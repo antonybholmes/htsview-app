@@ -60,7 +60,6 @@ import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
 import edu.columbia.rdf.htsview.tracks.sample.ReadsPlotTrack;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HTSTracksPanel.
  */

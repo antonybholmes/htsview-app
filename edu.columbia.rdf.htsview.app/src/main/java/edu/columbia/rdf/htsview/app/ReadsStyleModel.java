@@ -19,7 +19,6 @@ import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.figure.Graph2dStyleModel;
 import org.jebtk.graphplot.figure.PlotStyle;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ReadsStyleModel.
  */

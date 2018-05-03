@@ -68,7 +68,6 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 import edu.columbia.rdf.htsview.app.modules.heatmap.GenomicRegionsPanel;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ReadDistDialog.
  */

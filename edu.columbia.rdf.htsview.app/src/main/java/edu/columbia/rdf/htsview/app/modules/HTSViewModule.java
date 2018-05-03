@@ -19,7 +19,6 @@ import org.jebtk.modern.help.GuiAppInfo;
 
 import edu.columbia.rdf.htsview.app.HTSViewInfo;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class CalcModule.
  */

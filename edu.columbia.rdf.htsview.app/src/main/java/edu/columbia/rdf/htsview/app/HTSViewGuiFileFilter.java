@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.app;
 
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ReadsXmlViewGuiFileFilter.
  */

@@ -40,7 +40,6 @@ import edu.columbia.rdf.htsview.tracks.measurement.RangePlotTrack;
 import edu.columbia.rdf.htsview.tracks.measurement.RulerPlotTrack;
 import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AnnotationTracksTree.
  */

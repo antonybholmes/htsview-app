@@ -26,7 +26,6 @@ import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyBRT2;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderBRT2.
  */

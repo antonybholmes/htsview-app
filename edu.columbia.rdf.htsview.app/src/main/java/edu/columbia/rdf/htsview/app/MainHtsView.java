@@ -29,8 +29,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.conservation.ConservationAssemblyWeb;
-import org.jebtk.bioinformatics.dna.URLSequenceReader;
-import org.jebtk.bioinformatics.dna.ZipSequenceReader;
+import org.jebtk.bioinformatics.dna.HttpSequenceReader;
+import org.jebtk.bioinformatics.dna.DirZipSequenceReader;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
 import org.jebtk.bioinformatics.genomic.GTBZGenes;
 import org.jebtk.bioinformatics.genomic.GTBZParser;
@@ -84,7 +84,6 @@ import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyWeb;
 import edu.columbia.rdf.htsview.tracks.view.ABIJsonParser;
 import edu.columbia.rdf.htsview.tracks.view.TrackParserService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class MainReads.
  */
@@ -344,10 +343,10 @@ public class MainHtsView {
     SequenceReader dnaAssembly;
 
     if (SettingsService.getInstance().getAsBool("htsview.dna.web-mode")) {
-      dnaAssembly = new URLSequenceReader(new URL(SettingsService.getInstance()
+      dnaAssembly = new HttpSequenceReader(new URL(SettingsService.getInstance()
           .getAsString("edb.reads.dna.remote-url")));
     } else {
-      dnaAssembly = new ZipSequenceReader();
+      dnaAssembly = new DirZipSequenceReader();
     }
 
     AnnotationTracksTree tree = new AnnotationTracksTree(dnaAssembly,

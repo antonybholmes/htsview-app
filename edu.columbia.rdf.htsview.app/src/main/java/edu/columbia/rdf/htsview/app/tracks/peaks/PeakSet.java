@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.app.tracks.peaks;
 
 import org.jebtk.bioinformatics.annotation.Type;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PeakSet represents a set of peaks associated to a sample.
  */

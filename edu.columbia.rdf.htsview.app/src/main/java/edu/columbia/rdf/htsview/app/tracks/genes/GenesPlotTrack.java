@@ -36,7 +36,6 @@ import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GenesPlotTrack.
  */

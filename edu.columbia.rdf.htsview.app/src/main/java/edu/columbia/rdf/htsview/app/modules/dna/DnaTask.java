@@ -28,7 +28,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.ModuleLoader;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HeatMapTask.
  */

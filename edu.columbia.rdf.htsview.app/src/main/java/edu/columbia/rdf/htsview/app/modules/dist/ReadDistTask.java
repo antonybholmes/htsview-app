@@ -44,11 +44,12 @@ import edu.columbia.rdf.matcalc.OpenFile;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ReadDistTask.
  */
 public class ReadDistTask extends SwingWorker<Void, Void> {
+
+  private static final int SCALE_LOCATION_COUNT = 1000;
 
   /** The m locations. */
   private List<HeatMapIdLocation> mLocations;
@@ -126,7 +127,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
       axes.getLegend().setVisible(true);
       axes.getX1Axis().setLimits(-mPadding, mPadding);
       axes.getX1Axis().getTitle().setText("Distance to " + mName);
-      axes.getY1Axis().getTitle().setText("Normalized ChIP-Seq reads");
+      axes.getY1Axis().getTitle().setText("Average RPM");
       axes.setMargins(100);
 
       // Update all of the tracks
@@ -193,9 +194,13 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
     for (SamplePlotTrack track : mTracks) {
       Sample sample = track.getSample();
-
+     
+      System.err.println("Processing " + sample.getName() + "...");
+      
       samples.add(sample);
 
+      int c = 0;
+      
       for (HeatMapIdLocation location : mLocations) {
         if (location.getRegion() == null) {
           continue;
@@ -217,10 +222,16 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
           mBinCountMap.get(sample).put(i,
               mBinCountMap.get(sample).get(i) + counts.get(i));
         }
+        
+        if (++c % 1000 == 0) {
+          System.err.println("Processed " + c + " regions");
+        }
       }
     }
 
     if (mAverage) {
+      // Average the counts rather than using the sum.
+      
       System.err.println("Averaging " + mFile);
 
       for (SamplePlotTrack track : mTracks) {
@@ -228,7 +239,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
         for (int i : mBinCountMap.get(sample).keySet()) {
           mBinCountMap.get(sample).put(i,
-              mBinCountMap.get(sample).get(i) / mLocations.size());
+              mBinCountMap.get(sample).get(i) / mLocations.size()); // * SCALE_LOCATION_COUNT);
         }
       }
     }

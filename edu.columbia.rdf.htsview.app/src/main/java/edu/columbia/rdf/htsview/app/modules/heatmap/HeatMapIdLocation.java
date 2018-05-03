@@ -22,7 +22,6 @@ import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HeatMapIdLocation.
  */

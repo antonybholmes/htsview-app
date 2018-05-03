@@ -26,7 +26,6 @@ import org.jebtk.graphplot.figure.properties.LineProperties;
 import edu.columbia.rdf.htsview.app.tracks.OtherGeneProperties;
 import edu.columbia.rdf.htsview.app.tracks.VariantGeneProperties;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GenesProperties.
  */

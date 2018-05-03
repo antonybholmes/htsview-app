@@ -25,7 +25,6 @@ import edu.columbia.rdf.edb.EDBWLogin;
 import edu.columbia.rdf.edb.ui.LoginDialog;
 import edu.columbia.rdf.edb.ui.network.ServerException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class LoginDialog.
  */

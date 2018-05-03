@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.app.tracks.conservation;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Conservation46WayCanvasLayer.
  */

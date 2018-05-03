@@ -30,7 +30,6 @@ import edu.columbia.rdf.htsview.app.SampleDialog;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyBam;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderBAM.
  */

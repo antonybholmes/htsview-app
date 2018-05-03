@@ -29,7 +29,6 @@ import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.TrackTreeNode;
 import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SegJsonParser.
  */

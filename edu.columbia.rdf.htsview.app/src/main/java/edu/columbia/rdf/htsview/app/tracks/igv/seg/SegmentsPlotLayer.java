@@ -33,7 +33,6 @@ import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SegmentsPlotLayer.
  */

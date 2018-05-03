@@ -18,7 +18,6 @@ package edu.columbia.rdf.htsview.app.tracks;
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeakAssembly;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 
-// TODO: Auto-generated Javadoc
 /**
  * Stores references to assembly services connecting to databases. This is so
  * only one connection object need be in existence.

@@ -78,7 +78,6 @@ import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapIdLocation;
 import edu.columbia.rdf.htsview.app.modules.heatmap.RegionsPanel;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ReadDistDialog.
  */
@@ -114,7 +113,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
 
   /** The m check average. */
-  private CheckBox mCheckAverage = new ModernCheckSwitch("Average count", true);
+  private CheckBox mCheckAverage = new ModernCheckSwitch("Scale count", true);
 
   /** The m regions panel. */
   private RegionsPanel mRegionsPanel;
@@ -243,17 +242,13 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
    */
   public final void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
-      try {
-        if (mRegionsPanel.getRegions().size() > 0) {
-          setStatus(ModernDialogStatus.OK);
+      if (mRegionsPanel.getRegions().size() > 0) {
+        setStatus(ModernDialogStatus.OK);
 
-          close();
-        } else {
-          ModernMessageDialog.createWarningDialog(mParent,
-              "You must enter at least one gene or region to plot.");
-        }
-      } catch (ParseException e1) {
-        e1.printStackTrace();
+        close();
+      } else {
+        ModernMessageDialog.createWarningDialog(mParent,
+            "You must enter at least one gene or region to plot.");
       }
     } else if (e.getSource().equals(mGenesButton)) {
       loadTss();
@@ -402,7 +397,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
       } else {
         // assume its a gene id/symbol etc.
         buffer.append(model.getValueAsString(i, 0))
-            .append(TextUtils.NEW_LINE_DELIMITER);
+        .append(TextUtils.NEW_LINE_DELIMITER);
       }
     }
 

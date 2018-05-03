@@ -19,7 +19,6 @@ import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 
 import edu.columbia.rdf.htsview.app.tracks.conservation.ConservationCanvasLayer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MouseConservationCanvasLayer.
  */

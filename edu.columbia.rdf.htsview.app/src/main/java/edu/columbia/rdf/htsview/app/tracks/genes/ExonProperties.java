@@ -19,7 +19,6 @@ import java.awt.Color;
 
 import org.jebtk.graphplot.figure.properties.LineFillProperties;
 
-// TODO: Auto-generated Javadoc
 /**
  * Set the color and stroke of a line on a plot element.
  * 

@@ -31,7 +31,6 @@ import org.jebtk.modern.graphics.DrawingContext;
 
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Conservation46WayGraphCanvasLayer.
  */

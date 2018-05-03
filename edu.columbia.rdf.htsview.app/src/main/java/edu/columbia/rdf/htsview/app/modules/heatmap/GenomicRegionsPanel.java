@@ -28,7 +28,6 @@ import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernTextArea;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RegionsPanel.
  */

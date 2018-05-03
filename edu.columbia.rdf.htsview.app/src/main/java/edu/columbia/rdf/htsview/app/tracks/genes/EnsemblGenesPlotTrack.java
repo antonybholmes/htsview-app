@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
 
 import java.io.IOException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EnsemblGenesPlotTrack.
  */

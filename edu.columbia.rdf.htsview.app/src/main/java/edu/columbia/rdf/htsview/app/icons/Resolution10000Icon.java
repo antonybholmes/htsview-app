@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.app.icons;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Resolution10000Icon.
  */

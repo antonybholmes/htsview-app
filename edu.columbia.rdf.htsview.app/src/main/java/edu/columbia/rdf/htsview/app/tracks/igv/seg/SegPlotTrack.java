@@ -32,7 +32,6 @@ import edu.columbia.rdf.htsview.tracks.GraphPlotTrack;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SegPlotTrack.
  */

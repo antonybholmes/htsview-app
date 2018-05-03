@@ -28,7 +28,6 @@ import org.jebtk.modern.ribbon.RibbonLargeDropDownButton2;
 import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.ribbon.RibbonSize;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select the resolution to view sequences.
  *

@@ -26,7 +26,6 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GenesPlotTrack;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GFFPlotTrack.
  */

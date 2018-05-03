@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.app.modules.heatmap;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum HeatMapSort.
  */

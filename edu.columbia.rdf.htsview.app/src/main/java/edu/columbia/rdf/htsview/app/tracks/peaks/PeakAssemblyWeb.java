@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import edu.columbia.rdf.edb.EDB;
 
-// TODO: Auto-generated Javadoc
 /**
  * Maintains a connection to a caArray server.
  */

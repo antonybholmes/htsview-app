@@ -28,7 +28,6 @@ import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderBed.
  */

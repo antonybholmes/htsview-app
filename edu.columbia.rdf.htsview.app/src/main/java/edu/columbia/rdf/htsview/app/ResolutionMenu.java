@@ -22,7 +22,6 @@ import org.jebtk.modern.graphics.icons.ModernIcon;
 import org.jebtk.modern.menu.ModernIconMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu2;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ResolutionMenu.
  */

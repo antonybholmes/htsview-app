@@ -32,7 +32,6 @@ import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.font.FontService;
 import org.jebtk.modern.graphics.DrawingContext;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DnaBasesCanvasLayer.
  */

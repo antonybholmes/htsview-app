@@ -30,7 +30,6 @@ import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
 import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyBRT3;
 import edu.columbia.rdf.htsview.tracks.sample.SampleTracks;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderBRT3.
  */

@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import edu.columbia.rdf.htsview.app.tracks.genes.GenesPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class VegaGenesPlotTrack.
  */

@@ -36,7 +36,6 @@ import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.status.StatusService;
 import org.jebtk.modern.theme.ModernTheme;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MouseHighlightPeakPlotLayer.
  */

@@ -18,7 +18,6 @@ package edu.columbia.rdf.htsview.app.tracks.igv.seg;
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Segment.
  */

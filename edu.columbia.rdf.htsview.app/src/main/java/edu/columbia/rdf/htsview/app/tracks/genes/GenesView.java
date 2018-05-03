@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.app.tracks.genes;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum GenesView.
  */

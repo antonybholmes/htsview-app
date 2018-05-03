@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.app;
 
 import org.jebtk.modern.zoom.SettingsZoomModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Zoom model that responds to settings.
  * 

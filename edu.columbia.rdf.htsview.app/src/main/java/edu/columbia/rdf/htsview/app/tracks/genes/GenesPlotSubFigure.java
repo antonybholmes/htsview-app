@@ -32,7 +32,6 @@ import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GenesPlotSubFigure.
  */

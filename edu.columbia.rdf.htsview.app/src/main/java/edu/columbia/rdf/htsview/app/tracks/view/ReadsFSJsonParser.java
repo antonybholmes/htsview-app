@@ -30,7 +30,6 @@ import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
 import edu.columbia.rdf.htsview.tracks.sample.ReadsFsPlotTrack;
 import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ReadsFSJsonParser.
  */

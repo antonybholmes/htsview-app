@@ -32,7 +32,6 @@ import org.jebtk.modern.graphics.colormap.ColorMap;
 
 import edu.columbia.rdf.htsview.app.tracks.dna.DnaPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ConservationCanvasLayer.
  */

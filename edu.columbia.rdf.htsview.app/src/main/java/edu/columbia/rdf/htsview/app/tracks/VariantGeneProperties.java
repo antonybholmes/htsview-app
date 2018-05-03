@@ -22,7 +22,6 @@ import org.jebtk.graphplot.ModernPlotCanvas;
 
 import edu.columbia.rdf.htsview.app.tracks.genes.GeneProperties;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class VariantGeneProperties.
  */

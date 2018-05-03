@@ -22,7 +22,6 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
 import edu.columbia.rdf.edb.Sample;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PeakAssembly.
  */

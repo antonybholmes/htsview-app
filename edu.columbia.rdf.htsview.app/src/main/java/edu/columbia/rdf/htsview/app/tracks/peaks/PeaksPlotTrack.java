@@ -24,7 +24,6 @@ import org.w3c.dom.Element;
 
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class PeaksPlotTrack.
  */

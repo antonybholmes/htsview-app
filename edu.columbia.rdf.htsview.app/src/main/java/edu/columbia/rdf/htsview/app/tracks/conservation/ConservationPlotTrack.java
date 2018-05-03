@@ -21,7 +21,6 @@ import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ConservationPlotTrack.
  */

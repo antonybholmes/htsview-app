@@ -33,7 +33,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.matcalc.colormap.ColorMapButton;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SegEditDialog.
  */

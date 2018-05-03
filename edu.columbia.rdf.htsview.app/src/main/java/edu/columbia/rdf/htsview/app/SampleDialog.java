@@ -44,7 +44,6 @@ import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeakAssembly;
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeakSet;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class BRTDialog.
  */

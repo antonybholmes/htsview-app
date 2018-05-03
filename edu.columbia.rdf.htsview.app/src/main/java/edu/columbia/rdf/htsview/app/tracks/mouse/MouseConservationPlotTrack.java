@@ -24,7 +24,6 @@ import edu.columbia.rdf.htsview.app.tracks.conservation.ConservationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MouseConservationPlotTrack.
  */

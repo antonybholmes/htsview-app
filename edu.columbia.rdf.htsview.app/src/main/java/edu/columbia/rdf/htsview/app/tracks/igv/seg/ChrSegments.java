@@ -22,7 +22,6 @@ import java.util.TreeMap;
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.core.NameProperty;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ChrSegments.
  */

@@ -21,7 +21,6 @@ import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.bioinformatics.ui.GenomicRegionRibbonSection;
 import org.jebtk.modern.ribbon.Ribbon;
 
-// TODO: Auto-generated Javadoc
 /**
  * Functions the same as {@code GenomicRegionRibbonSection}, but restricts users
  * to entering coordinates with a minimum size.

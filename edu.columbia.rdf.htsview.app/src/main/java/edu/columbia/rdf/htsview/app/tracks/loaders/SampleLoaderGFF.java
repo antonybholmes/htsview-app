@@ -26,7 +26,6 @@ import edu.columbia.rdf.htsview.app.tracks.GFFPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderGFF.
  */

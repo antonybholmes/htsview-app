@@ -54,7 +54,6 @@ import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HeatMapTask.
  */
