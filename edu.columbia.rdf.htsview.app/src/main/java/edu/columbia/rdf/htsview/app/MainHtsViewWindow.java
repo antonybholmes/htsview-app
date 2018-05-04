@@ -339,7 +339,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     public void changed(ChangeEvent e) {
       try {
         updateResolution();
-      } catch (IOException | ParseException | TransformerException
+      } catch (IOException | TransformerException
           | ParserConfigurationException e1) {
         e1.printStackTrace();
       }
@@ -570,8 +570,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
       } catch (TransformerException e1) {
         e1.printStackTrace();
       } catch (ParserConfigurationException e1) {
-        e1.printStackTrace();
-      } catch (ParseException e1) {
         e1.printStackTrace();
       }
     }
@@ -1112,8 +1110,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         e1.printStackTrace();
       } catch (ParserConfigurationException e1) {
         e1.printStackTrace();
-      } catch (ParseException e1) {
-        e1.printStackTrace();
       }
     } else if (e.getMessage().equals(SaveAsRibbonPanel.DIRECTORY_SELECTED)) {
       try {
@@ -1126,8 +1122,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         e1.printStackTrace();
       } catch (ParserConfigurationException e1) {
         e1.printStackTrace();
-      } catch (ParseException e1) {
-        e1.printStackTrace();
       }
     } else if (e.getMessage().equals("Import")) {
       try {
@@ -1138,11 +1132,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     } else if (e.getMessage().equals("Locations")) {
       addLocationsPane();
     } else if (e.getMessage().equals("Read Distribution")) {
-      try {
-        readDist();
-      } catch (ParseException e1) {
-        e1.printStackTrace();
-      }
+      readDist();
     } else if (e.getMessage().equals("Heat Map")) {
       try {
         heatMap();
@@ -1151,8 +1141,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
       } catch (SAXException e1) {
         e1.printStackTrace();
       } catch (ParserConfigurationException e1) {
-        e1.printStackTrace();
-      } catch (ParseException e1) {
         e1.printStackTrace();
       }
     } else if (e.getMessage().equals("Reads")) {
@@ -1250,7 +1238,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
   private void setResolution() {
     try {
       updateResolution();
-    } catch (IOException | ParseException | TransformerException
+    } catch (IOException | TransformerException
         | ParserConfigurationException e) {
       createResolutionErrorDialog();
 
@@ -1304,7 +1292,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws TransformerException the transformer exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  private void updateResolution() throws IOException, ParseException,
+  private void updateResolution() throws IOException,
       TransformerException, ParserConfigurationException {
 
     GenomicRegion displayRegion = mGenomicModel.get();
@@ -1338,7 +1326,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws TransformerException the transformer exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  private void axis() throws IOException, ParseException, TransformerException,
+  private void axis() throws IOException, TransformerException,
       ParserConfigurationException {
     for (TreeNode<Track> node : mTracksPanel.getTree()) {
       Track track = node.getValue();
@@ -1380,7 +1368,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws ParseException the parse exception
    */
   private void heatMap() throws IOException, SAXException,
-      ParserConfigurationException, ParseException {
+      ParserConfigurationException {
     List<SamplePlotTrack> tracks = new ArrayList<SamplePlotTrack>();
 
     for (Track track : mTracksPanel.getSelectedTracks()) {
@@ -1417,7 +1405,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    *
    * @throws ParseException the parse exception
    */
-  private void readDist() throws ParseException {
+  private void readDist() {
 
     List<SamplePlotTrack> sampleTracks = new ArrayList<SamplePlotTrack>();
 
@@ -1546,7 +1534,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void browseForFiles() throws IOException, ParseException, SAXException,
+  public void browseForFiles() throws IOException, SAXException,
       ParserConfigurationException {
     browseForFiles(RecentFilesService.getInstance().getPwd());
   }
@@ -1560,7 +1548,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void browseForFiles(Path pwd) throws IOException, ParseException,
+  public void browseForFiles(Path pwd) throws IOException,
       SAXException, ParserConfigurationException {
     openFiles(FileDialog.open(this)
         .filter(new HTSViewAllSupportedGuiFileFilter(),
@@ -1587,7 +1575,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void openFiles(Path file) throws IOException, ParseException,
+  public void openFiles(Path file) throws IOException,
       SAXException, ParserConfigurationException {
     openFiles(CollectionUtils.asList(file));
   }
@@ -1601,7 +1589,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void openFiles(List<Path> files) throws ParseException, IOException,
+  public void openFiles(List<Path> files) throws IOException,
       SAXException, ParserConfigurationException {
     List<Path> otherFiles = new ArrayList<Path>();
 
@@ -1658,7 +1646,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public void loadJsonView(Path jsonFile) throws ParseException, IOException {
+  public void loadJsonView(Path jsonFile) throws IOException {
     TrackView.loadJsonView(this,
         jsonFile,
         mTracksPanel,
@@ -1721,7 +1709,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws ParseException the parse exception
    */
   private void export() throws IOException, TranscoderException,
-      TransformerException, ParserConfigurationException, ParseException {
+      TransformerException, ParserConfigurationException {
     export(RecentFilesService.getInstance().getPwd());
   }
 
@@ -1736,7 +1724,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws ParseException the parse exception
    */
   private void export(Path pwd) throws IOException, TranscoderException,
-      TransformerException, ParserConfigurationException, ParseException {
+      TransformerException, ParserConfigurationException {
     Path file = FileDialog.save(this)
         .filter(new SvgGuiFileFilter(),
             new PngGuiFileFilter(),
@@ -1776,12 +1764,12 @@ public class MainHtsViewWindow extends ModernRibbonWindow
   }
 
   private boolean saveView() throws IOException, TranscoderException,
-      TransformerException, ParserConfigurationException, ParseException {
+      TransformerException, ParserConfigurationException {
     return saveView(RecentFilesService.getInstance().getPwd());
   }
 
   public boolean saveView(Path pwd) throws IOException, TranscoderException,
-      TransformerException, ParserConfigurationException, ParseException {
+      TransformerException, ParserConfigurationException {
     Path file = FileDialog.save(this).filter(new HtsJsonViewGuiFileFilter())
         .getFile(pwd);
 
@@ -1802,7 +1790,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    */
   private boolean save(Path pwd, Path file)
       throws IOException, TranscoderException, TransformerException,
-      ParserConfigurationException, ParseException {
+      ParserConfigurationException {
     return save(pwd, file, new ExportCallBack(pwd, file));
   }
 
@@ -1821,7 +1809,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    */
   private boolean save(Path pwd, Path file, DialogEventListener l)
       throws IOException, TranscoderException, TransformerException,
-      ParserConfigurationException, ParseException {
+      ParserConfigurationException {
     if (file == null) {
       return false;
     }
@@ -1947,7 +1935,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
           try {
             saved = saveView();
           } catch (IOException | TranscoderException | TransformerException
-              | ParserConfigurationException | ParseException e) {
+              | ParserConfigurationException e) {
             e.printStackTrace();
           }
         }

@@ -490,7 +490,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
    * @return the regions
    * @throws ParseException the parse exception
    */
-  public List<HeatMapIdLocation> getRegions() throws ParseException {
+  public List<HeatMapIdLocation> getRegions() {
     return mRegionsPanel.getRegions();
   }
 

@@ -112,7 +112,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
     try {
       mFile = Temp.generateTempFile("txt");
 
-      createCountsFile();
+      boolean relative = createCountsFile();
 
       window = MainMatCalc.main(mParent.getAppInfo(), new BioModuleLoader());
 
@@ -136,9 +136,9 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
       for (Plot plot : axes.getPlots()) {
         plot.getCurrentSeries().getStyle().getLineStyle()
-            .setColor(mTracks.get(i).getLineColor());
+        .setColor(mTracks.get(i).getLineColor());
         plot.getCurrentSeries().getStyle().getFillStyle()
-            .setColor(mTracks.get(i).getFillColor());
+        .setColor(mTracks.get(i).getFillColor());
         plot.getCurrentSeries().getMarker().setVisible(false);
 
         ++i;
@@ -174,19 +174,39 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
   /**
    * Creates the counts file.
+   * @return 
    *
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void createCountsFile() throws IOException {
+  private boolean createCountsFile() throws IOException {
 
     // There are always an odd number of bins centered about zero
     int bins = 2 * (mPadding / mWindow) + 1;
 
     Map<Sample, IterMap<Integer, Double>> mBinCountMap = DefaultTreeMap
         .create(new DefaultTreeMapCreator<Integer, Double>(0.0)); // new
-                                                                  // TreeMap<Sample,
-                                                                  // Map<Integer,
-                                                                  // Double>>();
+    // TreeMap<Sample,
+    // Map<Integer,
+    // Double>>();
+
+    // Lets find out if one of the samples is an input
+
+    SamplePlotTrack inputSample = null;
+
+    for (SamplePlotTrack track : mTracks) {
+      Sample sample = track.getSample();
+
+      if (sample.getName().toLowerCase().contains("input")) {
+        inputSample = track;
+        break;
+      }
+    }
+    
+    boolean relative = inputSample != null;
+
+    if (relative) {
+      System.err.println("Using input/ip ratio");
+    }
 
     // int c = 1;
 
@@ -194,13 +214,13 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
     for (SamplePlotTrack track : mTracks) {
       Sample sample = track.getSample();
-     
+
       System.err.println("Processing " + sample.getName() + "...");
-      
+
       samples.add(sample);
 
       int c = 0;
-      
+
       for (HeatMapIdLocation location : mLocations) {
         if (location.getRegion() == null) {
           continue;
@@ -214,15 +234,27 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         GenomicRegion ext = GenomicRegion.extend(GenomicRegion
             .midRegion(location.getRegion()), mPadding, mPadding);
 
-        // +- 2kb
-
         List<Double> counts = getCounts(track, ext, mWindow);
-
-        for (int i = 0; i < bins; ++i) {
-          mBinCountMap.get(sample).put(i,
-              mBinCountMap.get(sample).get(i) + counts.get(i));
-        }
         
+        if (relative) {
+          // Take the ratio of sample to input
+          
+          List<Double> inputCounts = getCounts(inputSample, ext, mWindow);
+          
+          for (int i = 0; i < bins; ++i) {
+            //if (inputCounts.get(i) > 0) {
+              double ratio = (counts.get(i) + 1) / (inputCounts.get(i) + 1);
+            
+              mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) + ratio);
+            //}
+          }
+        } else {
+          for (int i = 0; i < bins; ++i) {
+            mBinCountMap.get(sample).put(i,
+                mBinCountMap.get(sample).get(i) + counts.get(i));
+          }
+        }
+
         if (++c % 1000 == 0) {
           System.err.println("Processed " + c + " regions");
         }
@@ -231,7 +263,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
     if (mAverage) {
       // Average the counts rather than using the sum.
-      
+
       System.err.println("Averaging " + mFile);
 
       for (SamplePlotTrack track : mTracks) {
@@ -270,7 +302,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
           writer.write(bin);
           writer.sep();
           writer
-              .write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
+          .write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
 
           if (j < mTracks.size() - 1) {
             writer.sep();
@@ -282,6 +314,8 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
     } finally {
       writer.close();
     }
+    
+    return relative;
   }
 
   /**
