@@ -137,15 +137,15 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   public void done() {
     Properties properties = new HeatMapProperties();
 
-    properties.setProperty("plot.colormap", ColorMap.createWhiteRedMap());
-    properties.setProperty("plot.aspect-ratio", new AspectRatio(0.1));
-    properties.setProperty("plot.show-grid-color", false);
-    properties.setProperty("plot.show-outline-color", false);
-    properties.setProperty("plot.show-row-labels", false);
-    properties.setProperty("plot.color.standardization",
+    properties.set("plot.colormap", ColorMap.createWhiteRedMap());
+    properties.set("plot.aspect-ratio", new AspectRatio(0.1));
+    properties.set("plot.show-grid-color", false);
+    properties.set("plot.show-outline-color", false);
+    properties.set("plot.show-row-labels", false);
+    properties.set("plot.color.standardization",
         ColorNormalizationType.ZSCORE_MATRIX);
 
-    properties.setProperty("plot.color.intensity", 2);
+    properties.set("plot.color.intensity", 2);
 
     try {
       MainMatCalcWindow window = MainMatCalc.main(mParent.getAppInfo(),
