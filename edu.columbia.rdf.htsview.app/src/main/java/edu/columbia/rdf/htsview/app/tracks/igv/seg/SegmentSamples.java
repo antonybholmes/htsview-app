@@ -126,7 +126,7 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
         tokens = TextUtils.tabSplit(line);
 
         String name = tokens.get(0);
-        Chromosome chr = GenomeService.instance().guessChr(file,
+        Chromosome chr = GenomeService.getInstance().guessChr(file,
             tokens.get(1));
         int start = Integer.parseInt(tokens.get(2));
         int end = Integer.parseInt(tokens.get(3));

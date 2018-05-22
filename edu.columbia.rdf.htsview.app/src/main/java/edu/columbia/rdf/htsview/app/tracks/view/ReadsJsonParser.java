@@ -77,14 +77,14 @@ public class ReadsJsonParser extends TrackJsonParser {
     boolean validTrack = false;
 
     if (sample != null) {
-      boolean visible = trackJson.getAsBool("visible");
+      boolean visible = trackJson.getBool("visible");
 
       Color lineColor = null;
 
       if (trackJson.containsKey("line-color")) {
-        lineColor = trackJson.getAsColor("line-color");
+        lineColor = trackJson.getColor("line-color");
       } else if (trackJson.containsKey("color")) {
-        lineColor = trackJson.getAsColor("color");
+        lineColor = trackJson.getColor("color");
       } else {
         lineColor = Color.GRAY;
       }
@@ -92,19 +92,19 @@ public class ReadsJsonParser extends TrackJsonParser {
       Color fillColor = null;
 
       if (trackJson.containsKey("fill-color")) {
-        fillColor = trackJson.getAsColor("fill-color");
+        fillColor = trackJson.getColor("fill-color");
       } else {
         fillColor = Color.LIGHT_GRAY;
       }
 
-      boolean negVisible = trackJson.getAsBool("neg-strand-visible");
+      boolean negVisible = trackJson.getBool("neg-strand-visible");
 
-      Color negLineColor = trackJson.getAsColor("neg-strand-color");
+      Color negLineColor = trackJson.getColor("neg-strand-color");
 
-      Color negFillColor = trackJson.getAsColor("neg-strand-fill-color");
+      Color negFillColor = trackJson.getColor("neg-strand-fill-color");
 
-      int readHeight = trackJson.getAsInt("read-height");
-      int gap = trackJson.getAsInt("gap");
+      int readHeight = trackJson.getInt("read-height");
+      int gap = trackJson.getInt("gap");
 
       SampleAssembly assembly = WebAssemblyService.getInstance()
           .getSampleAssembly();

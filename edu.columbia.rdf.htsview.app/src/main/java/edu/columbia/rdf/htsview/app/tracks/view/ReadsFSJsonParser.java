@@ -57,14 +57,14 @@ public class ReadsFSJsonParser extends TrackJsonParser {
     ReadsFsPlotTrack track = (ReadsFsPlotTrack) SampleLoaderService
         .getInstance().openReads(window, metaFile, rootNode); // tracksPanel.loadReadTrack(metaFile);
 
-    boolean visible = trackJson.getAsBool("visible");
+    boolean visible = trackJson.getBool("visible");
 
     Color lineColor = null;
 
     if (trackJson.containsKey("line-color")) {
-      lineColor = trackJson.getAsColor("line-color");
+      lineColor = trackJson.getColor("line-color");
     } else if (trackJson.containsKey("color")) {
-      lineColor = trackJson.getAsColor("color");
+      lineColor = trackJson.getColor("color");
     } else {
       lineColor = Color.GRAY;
     }
@@ -72,19 +72,19 @@ public class ReadsFSJsonParser extends TrackJsonParser {
     Color fillColor = null;
 
     if (trackJson.containsKey("fill-color")) {
-      fillColor = trackJson.getAsColor("fill-color");
+      fillColor = trackJson.getColor("fill-color");
     } else {
       fillColor = Color.LIGHT_GRAY;
     }
 
-    boolean antiSenseVisible = trackJson.getAsBool("anti-sense-visible");
+    boolean antiSenseVisible = trackJson.getBool("anti-sense-visible");
 
-    Color antiSenseLineColor = trackJson.getAsColor("anti-sense-color");
+    Color antiSenseLineColor = trackJson.getColor("anti-sense-color");
 
-    Color antiSenseFillColor = trackJson.getAsColor("anti-sense-fill-color");
+    Color antiSenseFillColor = trackJson.getColor("anti-sense-fill-color");
 
-    int readHeight = trackJson.getAsInt("read-height");
-    int gap = trackJson.getAsInt("gap");
+    int readHeight = trackJson.getInt("read-height");
+    int gap = trackJson.getInt("gap");
 
     track.setForwardVisible(visible);
     track.setAntiSenseVisible(antiSenseVisible);

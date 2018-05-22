@@ -63,9 +63,9 @@ public class SampleFSJsonParser extends TrackJsonParser {
       Color lineColor = null;
 
       if (trackJson.containsKey("line-color")) {
-        lineColor = trackJson.getAsColor("line-color");
+        lineColor = trackJson.getColor("line-color");
       } else if (trackJson.containsKey("color")) {
-        lineColor = trackJson.getAsColor("color");
+        lineColor = trackJson.getColor("color");
       } else {
         lineColor = Color.GRAY;
       }
@@ -75,7 +75,7 @@ public class SampleFSJsonParser extends TrackJsonParser {
       Color fillColor = null;
 
       if (trackJson.containsKey("fill-color")) {
-        fillColor = trackJson.getAsColor("fill-color");
+        fillColor = trackJson.getColor("fill-color");
       } else {
         fillColor = Color.LIGHT_GRAY;
       }
@@ -83,19 +83,19 @@ public class SampleFSJsonParser extends TrackJsonParser {
       track.setFillColor(fillColor);
 
       if (trackJson.containsKey("auto-y")) {
-        track.setAutoY(trackJson.getAsBool("auto-y"));
+        track.setAutoY(trackJson.getBool("auto-y"));
       }
 
       if (trackJson.containsKey("common-y")) {
-        track.setCommonY(trackJson.getAsBool("common-y"));
+        track.setCommonY(trackJson.getBool("common-y"));
       }
 
       if (trackJson.containsKey("normalize-y")) {
-        track.setNormalizeY(trackJson.getAsBool("normalize-y"));
+        track.setNormalizeY(trackJson.getBool("normalize-y"));
       }
 
       if (trackJson.containsKey("y-max")) {
-        track.setYMax(trackJson.getAsInt("y-max"));
+        track.setYMax(trackJson.getInt("y-max"));
       }
 
       // TrackTreeNode child = new TrackTreeNode(track);

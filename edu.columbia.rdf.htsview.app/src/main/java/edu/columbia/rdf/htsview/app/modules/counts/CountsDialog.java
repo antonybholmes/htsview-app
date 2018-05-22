@@ -39,7 +39,7 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dataview.ModernDataModel;
 import org.jebtk.modern.dialog.ModernDialogFlatButton;
@@ -82,7 +82,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
   /** The m file button. */
   private ModernButton mFileButton = new ModernButton(UI.MENU_LOAD,
-      UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /** The m genes button. */
   private ModernButton mGenesButton = new ModernButton("All Genes");
@@ -332,7 +332,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
-            GenomeService.instance().guessChr(file,
+            GenomeService.getInstance().guessChr(file,
                 model.getValueAsString(i, 0)),
             model.getValueAsInt(i, 1), model.getValueAsInt(i, 2));
 

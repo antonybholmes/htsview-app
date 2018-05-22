@@ -46,7 +46,7 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernButtonGroup;
@@ -93,15 +93,15 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 
   /** The m sample button. */
   private ModernButton mSampleButton = new ModernButton(
-      UIService.getInstance().loadIcon("database", 16));
+      AssetService.getInstance().loadIcon("database", 16));
 
   /** The m input button. */
   private ModernButton mInputButton = new ModernButton(
-      UIService.getInstance().loadIcon("database", 16));
+      AssetService.getInstance().loadIcon("database", 16));
 
   /** The m file button. */
   private ModernButton mFileButton = new ModernButton(UI.MENU_LOAD,
-      UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /** The m genes button. */
   private ModernButton mGenesButton = new ModernButton("All Genes");
@@ -464,7 +464,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
-            GenomeService.instance().guessChr(file,
+            GenomeService.getInstance().guessChr(file,
                 model.getValueAsString(i, 0)),
             Integer.parseInt(model.getValueAsString(i, 1)),
             Integer.parseInt(model.getValueAsString(i, 2)));

@@ -30,7 +30,7 @@ package edu.columbia.rdf.htsview.app.modules.counts;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -61,8 +61,8 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
    * The member convert button.
    */
   private ModernButton mCountsButton = new RibbonLargeButton("Counts",
-      UIService.getInstance().loadIcon("read_dist", 32),
-      UIService.getInstance().loadIcon("read_dist", 24));
+      AssetService.getInstance().loadIcon("read_dist", 32),
+      AssetService.getInstance().loadIcon("read_dist", 24));
 
   /**
    * The member window.

@@ -69,7 +69,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
      */
     public GenomeChrCombo() {
       for (String genome : CollectionUtils
-          .sort(GenomeService.instance())) {
+          .sort(GenomeService.getInstance())) {
         addScrollMenuItem(genome);
       }
     }
@@ -250,7 +250,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
    * @throws ParseException the parse exception
    */
   public int getReadLength() throws ParseException {
-    return mFieldReadLength.getAsInt();
+    return mFieldReadLength.getInt();
   }
 
   /**

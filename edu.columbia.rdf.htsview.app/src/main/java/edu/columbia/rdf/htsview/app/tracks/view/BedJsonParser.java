@@ -58,7 +58,7 @@ public class BedJsonParser extends TrackJsonParser {
     Color color = null;
 
     if (trackJson.containsKey("color")) {
-      color = trackJson.getAsColor("color");
+      color = trackJson.getColor("color");
     } else {
       color = Color.LIGHT_GRAY;
     }

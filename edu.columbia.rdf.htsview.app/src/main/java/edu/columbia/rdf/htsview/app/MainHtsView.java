@@ -120,17 +120,17 @@ public class MainHtsView {
      * Cytobands(Resources.getResGzipReader("res/ucsc_cytobands_hg19.txt.gz"));
      * 
      * GenomeAssembly genomeAssembly = new GenomeAssemblyWeb(new
-     * URL(SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")
+     * URL(SettingsService.getInstance().getString("edb.reads.dna.remote-url")
      * ));
      * 
      * ConservationAssembly conservationAssembly = new
      * ConservationAssemblyWeb(new
-     * URL(SettingsService.getInstance().getAsString(
+     * URL(SettingsService.getInstance().getString(
      * "edb.reads.conservation.remote-url")));
      * 
      * ConservationAssembly mouseConservationAssembly = new
      * ConservationAssemblyWeb(new
-     * URL(SettingsService.getInstance().getAsString(
+     * URL(SettingsService.getInstance().getString(
      * "edb.reads.mouse.conservation.remote-url")));
      * 
      * 
@@ -139,7 +139,7 @@ public class MainHtsView {
      * getValue ()));
      * 
      * ChipSeqAssembly readAssembly = new ChipSeqAssemblyWeb(new
-     * URL(SettingsService.getInstance().getAsString(
+     * URL(SettingsService.getInstance().getString(
      * "edb.reads.chip-seq.remote-url" )));
      * 
      * 
@@ -163,15 +163,15 @@ public class MainHtsView {
 
     EDBWLogin login = null;
 
-    if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
+    if (SettingsService.getInstance().getBool("edb.modules.edbw.enabled")) {
       try {
         /*
-         * login = new EDBWLogin(SettingsService.getInstance().getAsString(
+         * login = new EDBWLogin(SettingsService.getInstance().getString(
          * "edb.modules.edbw.server" ),
-         * SettingsService.getInstance().getAsString("edb.modules.edbw.user"),
-         * SettingsService.getInstance().getAsString("edb.modules.edbw.key"),
-         * SettingsService.getInstance().getAsInt("edb.modules.edbw.topt.epoch")
-         * , SettingsService.getInstance().getAsInt(
+         * SettingsService.getInstance().getString("edb.modules.edbw.user"),
+         * SettingsService.getInstance().getString("edb.modules.edbw.key"),
+         * SettingsService.getInstance().getInt("edb.modules.edbw.topt.epoch")
+         * , SettingsService.getInstance().getInt(
          * "edb.modules.edbw.topt.step-size"));
          */
 
@@ -278,49 +278,49 @@ public class MainHtsView {
     }
 
     /*
-     * Path path = SettingsService.getInstance().getAsFile(
+     * Path path = SettingsService.getInstance().getFile(
      * "htsview.annotation.ucsc.hg19.refseq.genes.gff");
      * geneMap.put(GenomeAssembly.HG19,
      * Genes.fromGFF3(Resources.getGzipReader(path)));
      * 
-     * path = SettingsService.getInstance().getAsFile(
+     * path = SettingsService.getInstance().getFile(
      * "htsview.annotation.ucsc.mm10.refseq.genes.gff");
      * geneMap.put(GenomeAssembly.MM10,
      * Genes.fromGFF3(Resources.getGzipReader(path)));
      * 
-     * path = SettingsService.getInstance().getAsFile(
+     * path = SettingsService.getInstance().getFile(
      * "htsview.annotation.ucsc.hg19.cytobands");
      * CytobandsService.getInstance().load(GenomeAssembly.HG19,
      * Resources.getGzipReader(path));
      * 
-     * path = SettingsService.getInstance().getAsFile(
+     * path = SettingsService.getInstance().getFile(
      * "htsview.annotation.ucsc.mm10.cytobands");
      * CytobandsService.getInstance().load(GenomeAssembly.MM10,
      * Resources.getGzipReader(path));
      * 
-     * path = SettingsService.getInstance().getAsFile(
+     * path = SettingsService.getInstance().getFile(
      * "htsview.annotation.ucsc.hg19.chr-sizes");
      * GenomeService.getInstance().load(GenomeAssembly.HG19,
      * Resources.getGzipReader(path));
      * 
-     * path = SettingsService.getInstance().getAsFile(
+     * path = SettingsService.getInstance().getFile(
      * "htsview.annotation.ucsc.mm10.chr-sizes");
      * GenomeService.getInstance().load(GenomeAssembly.MM10,
      * Resources.getGzipReader(path));
      */
 
     //SequenceReader genomeAssembly = new URLSequenceReader(new URL(
-     //   SettingsService.getInstance().getAsString("edb.reads.dna.remote-url")));
+     //   SettingsService.getInstance().getString("edb.reads.dna.remote-url")));
 
     ConservationAssembly conservationAssembly = new ConservationAssemblyWeb(
         new URL(SettingsService.getInstance()
-            .getAsString("edb.reads.conservation.remote-url")));
+            .getString("edb.reads.conservation.remote-url")));
 
     ConservationAssembly mouseConservationAssembly = new ConservationAssemblyWeb(
         new URL(SettingsService.getInstance()
-            .getAsString("edb.reads.mouse.conservation.remote-url")));
+            .getString("edb.reads.mouse.conservation.remote-url")));
 
-    if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
+    if (SettingsService.getInstance().getBool("edb.modules.edbw.enabled")) {
       ChipSeqRepositoryCache session = new ChipSeqRepositoryCache(login);
 
       Repository repository = session.restore();
@@ -328,7 +328,7 @@ public class MainHtsView {
       RepositoryService.getInstance().setRepository("chipseq", repository);
 
       //UrlBuilder url = SettingsService.getInstance()
-      //    .getSetting("edb.reads.chip-seq.remote-url").getAsUrlBuilder();
+      //    .getSetting("edb.reads.chip-seq.remote-url").getUrlBuilder();
 
       
       UrlBuilder seqUrl = login.getURL().resolve("seq");
@@ -342,9 +342,9 @@ public class MainHtsView {
 
     SequenceReader dnaAssembly;
 
-    if (SettingsService.getInstance().getAsBool("htsview.dna.web-mode")) {
+    if (SettingsService.getInstance().getBool("htsview.dna.web-mode")) {
       dnaAssembly = new HttpSequenceReader(new URL(SettingsService.getInstance()
-          .getAsString("edb.reads.dna.remote-url")));
+          .getString("edb.reads.dna.remote-url")));
     } else {
       dnaAssembly = new DirZipSequenceReader();
     }

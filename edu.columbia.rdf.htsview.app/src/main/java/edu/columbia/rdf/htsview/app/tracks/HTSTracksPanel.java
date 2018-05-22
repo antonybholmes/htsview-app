@@ -29,7 +29,7 @@ import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.tree.TreeNode;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -70,27 +70,27 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
 
   /** The m open button. */
   private ModernButton mOpenButton = new ModernButton(
-      UIService.getInstance().loadIcon(OpenTrack16VectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(OpenTrack16VectorIcon.class, 16));
 
   /** The m delete button. */
   private ModernButton mDeleteButton = new RibbonButton(
-      UIService.getInstance().loadIcon("trash_bw", 16));
+      AssetService.getInstance().loadIcon("trash_bw", 16));
 
   /** The m tracks button. */
   private ModernButton mTracksButton = new RibbonButton(
-      UIService.getInstance().loadIcon("tracks", 16));
+      AssetService.getInstance().loadIcon("tracks", 16));
 
   /** The m edit button. */
   private ModernButton mEditButton = new RibbonButton(
-      UIService.getInstance().loadIcon("edit_bw", 16));
+      AssetService.getInstance().loadIcon("edit_bw", 16));
 
   /** The m clear button. */
   private ModernButton mClearButton = new RibbonButton(
-      UIService.getInstance().loadIcon(CrossVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(CrossVectorIcon.class, 16));
 
   /** The m samples button. */
   private ModernButton mSamplesButton = new RibbonButton("Samples",
-      UIService.getInstance().loadIcon("samples", 16));
+      AssetService.getInstance().loadIcon("samples", 16));
 
   /** The m search model. */
   private SearchModel mSearchModel = new SearchModel();
@@ -130,7 +130,7 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
 
     Box box2 = HBox.create();
 
-    if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
+    if (SettingsService.getInstance().getBool("edb.modules.edbw.enabled")) {
       mSamplesButton.setToolTip("Samples Database",
           "Load ChIP-seq samples from database.");
 
@@ -408,7 +408,7 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
    * Sample sample = SampleTracks.getSampleFromTrack(json);
    * 
    * openSampleFs(sample, new SampleAssembly16bit(metaFile,
-   * json.getAsInt("Mapped Reads")), metaFile); }
+   * json.getInt("Mapped Reads")), metaFile); }
    */
 
 }

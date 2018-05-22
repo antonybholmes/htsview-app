@@ -27,7 +27,7 @@
  */
 package edu.columbia.rdf.htsview.app.modules.dna;
 
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -54,7 +54,7 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
    * The member convert button.
    */
   private ModernButton mDnaButton = new RibbonLargeButton("DNA",
-      UIService.getInstance().loadIcon("dna", 24));
+      AssetService.getInstance().loadIcon("dna", 24));
 
   /**
    * The member window.

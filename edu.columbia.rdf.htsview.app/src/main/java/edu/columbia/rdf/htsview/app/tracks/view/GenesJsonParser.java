@@ -58,7 +58,7 @@ public class GenesJsonParser extends TrackJsonParser {
     Color color = null;
 
     if (trackJson.containsKey("color")) {
-      color = trackJson.getAsColor("color");
+      color = trackJson.getColor("color");
     } else {
       color = Color.LIGHT_GRAY;
     }
@@ -66,7 +66,7 @@ public class GenesJsonParser extends TrackJsonParser {
     track.setFillColor(color);
 
     if (trackJson.containsKey("color")) {
-      color = trackJson.getAsColor("other-color");
+      color = trackJson.getColor("other-color");
     } else {
       color = Color.LIGHT_GRAY;
     }
@@ -74,16 +74,16 @@ public class GenesJsonParser extends TrackJsonParser {
     track.setOtherColor(color);
 
     if (trackJson.containsKey("color")) {
-      color = trackJson.getAsColor("utr-fill-color");
+      color = trackJson.getColor("utr-fill-color");
     } else {
       color = Color.LIGHT_GRAY;
     }
 
     track.setUTRFillColor(color);
 
-    track.setShowTssArrows(trackJson.getAsBool("show-tss-arrows"));
-    track.setShowExonArrows(trackJson.getAsBool("show-exon-arrows"));
-    track.setView(GenesView.parse(trackJson.getAsString("view")));
+    track.setShowTssArrows(trackJson.getBool("show-tss-arrows"));
+    track.setShowExonArrows(trackJson.getBool("show-exon-arrows"));
+    track.setView(GenesView.parse(trackJson.getString("view")));
 
     TrackTreeNode child = new TrackTreeNode(track);
 

@@ -102,9 +102,9 @@ public class SampleDialog extends ModernDialogTaskWindow
     }
 
     mCheckSample.setSelected(SettingsService.getInstance()
-        .getAsBool("edb.reads.tracks.sample-plot.brt.show-sample"));
+        .getBool("edb.reads.tracks.sample-plot.brt.show-sample"));
     mCheckReads.setSelected(SettingsService.getInstance()
-        .getAsBool("edb.reads.tracks.sample-plot.brt.show-reads"));
+        .getBool("edb.reads.tracks.sample-plot.brt.show-reads"));
 
     UI.centerWindowToScreen(this);
   }

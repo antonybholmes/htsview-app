@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.app;
 
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.GenomeModel;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.ModernIcon;
@@ -42,7 +42,7 @@ public class GenomeRibbonSection extends RibbonSection
   private static final long serialVersionUID = 1L;
 
   /** The Constant ICON. */
-  private static final ModernIcon ICON = UIService.getInstance()
+  private static final ModernIcon ICON = AssetService.getInstance()
       .loadIcon("genome", 24);
 
   /**
@@ -84,7 +84,7 @@ public class GenomeRibbonSection extends RibbonSection
 
     //for (String genome : CollectionUtils
     //    .sort(GenesService.getInstance().getGenomes())) {
-    for (String genome : GenomeService.instance()) {  
+    for (String genome : GenomeService.getInstance()) {  
       popup.addMenuItem(new ModernTwoLineMenuItem(genome,
           "Switch to the " + genome + " genome.", ICON));
     }

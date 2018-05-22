@@ -69,8 +69,8 @@ public class PeakAssemblyWeb extends PeakAssembly {
     for (int i = 0; i < json.size(); ++i) {
       Json j = json.get(i);
       
-      ret.add(PeakSet.createPeaks(j.getAsInt(EDB.HEADING_ID),
-          j.getAsString(EDB.HEADING_NAME)));
+      ret.add(PeakSet.createPeaks(j.getInt(EDB.HEADING_ID),
+          j.getString(EDB.HEADING_NAME)));
     }
 
     return ret;
@@ -98,7 +98,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
 
     for (int i = 0; i < locationsJson.size(); ++i) {
       GenomicRegion region = GenomicRegion.parse(genome,
-          locationsJson.getAsString(i));
+          locationsJson.getString(i));
 
       if (region != null) {
         ret.add(region);

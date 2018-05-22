@@ -68,7 +68,7 @@ import org.jebtk.graphplot.figure.Graph2dStyleModel;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
@@ -299,7 +299,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     @Override
     public void changed(ChangeEvent e) {
       try {
-        style();
+        getStyle();
       } catch (IOException | TransformerException
           | ParserConfigurationException e1) {
         e1.printStackTrace();
@@ -672,7 +672,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     GenomicRegion region = GenomicRegion.parse(mGenomeModel.get(),
         SettingsService.getInstance()
-        .getAsString("edb.reads.default-location"));
+        .getString("edb.reads.default-location"));
 
     mGenomicModel.set(region);
 
@@ -711,7 +711,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // load what the user was last looking at
     // if (FileUtils.exists(PREVIOUS_XML_VIEW_FILE) &&
-    // SettingsService.getInstance().getAsBool("edb.reads.auto-load-previous-view"))
+    // SettingsService.getInstance().getBool("edb.reads.auto-load-previous-view"))
     // {
     // loadXmlView(PREVIOUS_XML_VIEW_FILE);
     // }
@@ -775,7 +775,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     // Ribbon2 ribbon = new Ribbon2();
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
-    button = new QuickAccessButton(UIService.getInstance()
+    button = new QuickAccessButton(AssetService.getInstance()
         .loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_OPEN);
     button.setToolTip("Open", "Open peak files.");
@@ -783,7 +783,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     addQuickAccessButton(button);
 
     button = new QuickAccessButton(
-        UIService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
+        AssetService.getInstance().loadIcon(QuickSaveVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_SAVE);
     button.setToolTip("Save", "Save the current image.");
     button.addClickListener(this);
@@ -825,7 +825,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     //
 
     button = new RibbonLargeButton("Locations",
-        UIService.getInstance().loadIcon("locations", 24), "Locations List",
+        AssetService.getInstance().loadIcon("locations", 24), "Locations List",
         "Show a list of locations");
     button.addClickListener(this);
     getRibbon().getToolbar("View").getSection("Locations").add(button);
@@ -846,20 +846,20 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     //
 
     button = new RibbonLargeButton("Read Distribution",
-        UIService.getInstance().loadIcon("read_dist", 32),
-        UIService.getInstance().loadIcon("read_dist", 24), "Read Distribution",
+        AssetService.getInstance().loadIcon("read_dist", 32),
+        AssetService.getInstance().loadIcon("read_dist", 24), "Read Distribution",
         "Read distribution plot");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
 
     button = new RibbonLargeButton("Heat Map",
-        UIService.getInstance().loadIcon("tss_heatmap", 32), "TSS Heat Map",
+        AssetService.getInstance().loadIcon("tss_heatmap", 32), "TSS Heat Map",
         "Create TSS Heat Map");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
 
     button = new RibbonLargeButton("Reads",
-        UIService.getInstance().loadIcon("reads", 24), "Reads",
+        AssetService.getInstance().loadIcon("reads", 24), "Reads",
         "Create table of reads from selected samples");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
@@ -1271,7 +1271,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     GenomicRegion region = mGenomicModel.get();
     
     // Get the same chromosome on a different assembly
-    Chromosome chr = GenomeService.instance().genome(genome).chr(region.getChr());
+    Chromosome chr = GenomeService.getInstance().genome(genome).chr(region.getChr());
     
     // Change the genomic reference to reflect the new genome
     mGenomicModel.set(chr, region.getStart(), region.getEnd());
@@ -1346,7 +1346,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws TransformerException the transformer exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  private void style()
+  private void getStyle()
       throws IOException, TransformerException, ParserConfigurationException {
     for (TreeNode<Track> node : mTracksPanel.getTree()) {
       Track track = node.getValue();
@@ -1483,10 +1483,10 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     for (SamplePlotTrack track : sampleTracks) {
       try {
         starts.addAll(
-            track.getAssembly().getStarts(track.getSample(), region, -1));
+            track.getsembly().getStarts(track.getSample(), region, -1));
 
-        if (track.getAssembly().getReadLength(track.getSample()) > 0) {
-          l = track.getAssembly().getReadLength(track.getSample());
+        if (track.getsembly().getReadLength(track.getSample()) > 0) {
+          l = track.getsembly().getReadLength(track.getSample());
         }
       } catch (IOException e) {
         e.printStackTrace();
@@ -2059,13 +2059,13 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @return the file
    */
   private static Path getFile(Json json) {
-    String path = json.getAsString("file");
+    String path = json.getString("file");
 
     if (path != null) {
       return PathUtils.getPath(path);
     }
 
-    path = json.getAsString("meta-file");
+    path = json.getString("meta-file");
 
     if (path != null) {
       return PathUtils.getPath(path);

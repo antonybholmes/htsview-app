@@ -57,12 +57,12 @@ public class PeaksJsonParser extends TrackJsonParser {
     Color color = null;
 
     if (trackJson.containsKey("color")) {
-      color = trackJson.getAsColor("color");
+      color = trackJson.getColor("color");
     } else {
       color = Color.BLUE;
     }
 
-    int peaksId = trackJson.getAsInt("peak-id");
+    int peaksId = trackJson.getInt("peak-id");
 
     PeakSet peaks = PeakSet.createPeaks(peaksId, name);
 

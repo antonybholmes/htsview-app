@@ -48,7 +48,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
 
   /** The m max genes. */
   private int mMaxGenes = SettingsService.getInstance()
-      .getAsInt("edb.reads.max-display-genes");
+      .getInt("edb.reads.max-display-genes");
 
   /** The m draw tss arrows. */
   private boolean mDrawTssArrows = false;

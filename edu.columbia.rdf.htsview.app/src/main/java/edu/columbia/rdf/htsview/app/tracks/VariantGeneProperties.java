@@ -32,7 +32,7 @@ public class VariantGeneProperties extends GeneProperties {
 
   /** The Constant COLOR. */
   private static final Color COLOR = SettingsService.getInstance()
-      .getAsColor("htsview.genes.main-variant-color");
+      .getColor("htsview.genes.main-variant-color");
 
   /**
    * Instantiates a new variant gene properties.

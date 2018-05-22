@@ -34,7 +34,7 @@ public class ReadsStyleModel extends Graph2dStyleModel {
    */
   public ReadsStyleModel() {
     set(PlotStyle.parse(
-        SettingsService.getInstance().getAsString("edb.reads.peak-style")));
+        SettingsService.getInstance().getString("edb.reads.peak-style")));
   }
 
   /*

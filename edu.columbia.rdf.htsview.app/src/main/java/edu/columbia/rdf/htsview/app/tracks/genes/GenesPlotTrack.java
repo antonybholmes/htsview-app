@@ -326,30 +326,30 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
 
     GenesPlotTrack track = (GenesPlotTrack) node.getValue();
 
-    Color color = ColorUtils.decodeHtmlColor(trackJson.getAsString("color"));
+    Color color = ColorUtils.decodeHtmlColor(trackJson.getString("color"));
 
     if (color != null) {
       track.setFillColor(color);
     }
 
     Color otherColor = ColorUtils
-        .decodeHtmlColor(trackJson.getAsString("other-color"));
+        .decodeHtmlColor(trackJson.getString("other-color"));
 
     if (otherColor != null) {
       track.setOtherColor(otherColor);
     }
 
     Color utrColor = ColorUtils
-        .decodeHtmlColor(trackJson.getAsString("utr-color"));
+        .decodeHtmlColor(trackJson.getString("utr-color"));
 
     if (utrColor != null) {
       track.setUTRFillColor(utrColor);
     }
 
-    track.setShowTssArrows(trackJson.getAsBool("show-tss-arrows"));
-    track.setShowExonArrows(trackJson.getAsBool("show-exon-arrows"));
-    track.setShowArrows(trackJson.getAsBool("show-arrows"));
-    track.setView(GenesView.parse(trackJson.getAsString("compact")));
+    track.setShowTssArrows(trackJson.getBool("show-tss-arrows"));
+    track.setShowExonArrows(trackJson.getBool("show-exon-arrows"));
+    track.setShowArrows(trackJson.getBool("show-arrows"));
+    track.setView(GenesView.parse(trackJson.getString("compact")));
 
     TrackTreeNode child = new TrackTreeNode(track);
 

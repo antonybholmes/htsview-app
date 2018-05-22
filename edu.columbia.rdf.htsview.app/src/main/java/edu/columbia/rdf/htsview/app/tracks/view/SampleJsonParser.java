@@ -81,9 +81,9 @@ public class SampleJsonParser extends TrackJsonParser {
       Color lineColor = null;
 
       if (trackJson.containsKey("line-color")) {
-        lineColor = trackJson.getAsColor("line-color");
+        lineColor = trackJson.getColor("line-color");
       } else if (trackJson.containsKey("color")) {
-        lineColor = trackJson.getAsColor("color");
+        lineColor = trackJson.getColor("color");
       } else {
         lineColor = Color.GRAY;
       }
@@ -91,7 +91,7 @@ public class SampleJsonParser extends TrackJsonParser {
       Color fillColor = null;
 
       if (trackJson.containsKey("fill-color")) {
-        fillColor = trackJson.getAsColor("fill-color");
+        fillColor = trackJson.getColor("fill-color");
       } else {
         fillColor = Color.LIGHT_GRAY;
       }
@@ -99,9 +99,9 @@ public class SampleJsonParser extends TrackJsonParser {
       int height = -1;
 
       if (trackJson.containsKey("height-px")) {
-        height = trackJson.getAsInt("height-px");
+        height = trackJson.getInt("height-px");
       } else if (trackJson.containsKey("height")) {
-        height = trackJson.getAsInt("height");
+        height = trackJson.getInt("height");
       } else {
         height = GraphPlotTrack.PLOT_SIZE.height;
       }
@@ -113,19 +113,19 @@ public class SampleJsonParser extends TrackJsonParser {
           fillColor, height);
 
       if (trackJson.containsKey("auto-y")) {
-        track.setAutoY(trackJson.getAsBool("auto-y"));
+        track.setAutoY(trackJson.getBool("auto-y"));
       }
 
       if (trackJson.containsKey("common-y")) {
-        track.setCommonY(trackJson.getAsBool("common-y"));
+        track.setCommonY(trackJson.getBool("common-y"));
       }
 
       if (trackJson.containsKey("normalize-y")) {
-        track.setNormalizeY(trackJson.getAsBool("normalize-y"));
+        track.setNormalizeY(trackJson.getBool("normalize-y"));
       }
 
       if (trackJson.containsKey("y-max")) {
-        track.setYMax(trackJson.getAsDouble("y-max"));
+        track.setYMax(trackJson.getDouble("y-max"));
       }
 
       TrackTreeNode child = new TrackTreeNode(track);
