@@ -197,7 +197,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
       Plot plot,
       DataFrame m,
       XYSeries series) {
-    if (context == DrawingContext.PRINT) {
+    if (context == DrawingContext.OUTPUT) {
       return;
     }
 

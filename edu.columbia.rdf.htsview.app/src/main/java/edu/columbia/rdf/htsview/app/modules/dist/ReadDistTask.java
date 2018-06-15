@@ -330,7 +330,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
   private List<Double> getCounts(SamplePlotTrack track,
       GenomicRegion ext,
       int mWindow) throws IOException {
-    List<Double> counts = track.getsembly()
+    List<Double> counts = track.getAssembly()
         .getRPM(track.getSample(), ext, mWindow);
 
     /*

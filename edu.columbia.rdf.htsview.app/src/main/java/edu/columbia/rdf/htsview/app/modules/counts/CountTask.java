@@ -143,7 +143,7 @@ public class CountTask extends SwingWorker<Void, Void> {
     for (int i = 0; i < mTracks.size(); ++i) {
       SamplePlotTrack track = mTracks.get(i);
 
-      int total = track.getsembly().getMappedReads(track.getSample());
+      int total = track.getAssembly().getMappedReads(track.getSample());
 
       matrix.setColumnAnnotation("total-reads", i, total);
     }
@@ -208,6 +208,6 @@ public class CountTask extends SwingWorker<Void, Void> {
    */
   private int getCounts(SamplePlotTrack track, GenomicRegion r)
       throws IOException {
-    return track.getsembly().getStarts(track.getSample(), r, -1).size();
+    return track.getAssembly().getStarts(track.getSample(), r, -1).size();
   }
 }

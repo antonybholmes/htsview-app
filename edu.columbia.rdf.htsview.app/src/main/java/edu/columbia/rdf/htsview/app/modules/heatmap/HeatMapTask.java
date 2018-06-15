@@ -428,7 +428,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   private List<Double> getCounts(SamplePlotTrack sample,
       GenomicRegion ext,
       int mWindow) throws IOException, ParseException {
-    SampleAssembly assembly = sample.getsembly();
+    SampleAssembly assembly = sample.getAssembly();
 
     List<Double> counts = assembly.getRPM(sample.getSample(), ext, mWindow);
 

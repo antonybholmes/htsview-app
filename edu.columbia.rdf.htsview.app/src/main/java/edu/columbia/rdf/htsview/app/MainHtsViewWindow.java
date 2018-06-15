@@ -1483,10 +1483,10 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     for (SamplePlotTrack track : sampleTracks) {
       try {
         starts.addAll(
-            track.getsembly().getStarts(track.getSample(), region, -1));
+            track.getAssembly().getStarts(track.getSample(), region, -1));
 
-        if (track.getsembly().getReadLength(track.getSample()) > 0) {
-          l = track.getsembly().getReadLength(track.getSample());
+        if (track.getAssembly().getReadLength(track.getSample()) > 0) {
+          l = track.getAssembly().getReadLength(track.getSample());
         }
       } catch (IOException e) {
         e.printStackTrace();
