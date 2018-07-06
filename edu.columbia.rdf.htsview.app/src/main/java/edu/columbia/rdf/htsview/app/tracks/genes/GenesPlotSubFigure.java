@@ -19,8 +19,8 @@ import java.awt.Color;
 import java.util.Collection;
 import java.util.Set;
 
-import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.IterMap;
@@ -113,25 +113,25 @@ public class GenesPlotSubFigure extends FixedSubFigure {
     
     String genome = displayRegion.getChr().getGenome();
     
-    Collection<Gene> genes = GenesService.getInstance()
+    Collection<GenomicEntity> genes = GenesService.getInstance()
         .getGenes(genome, mGenesId).findGenes(displayRegion);
     
-    IterMap<String, Set<Gene>> geneMap = DefaultTreeMap
-        .create(new TreeSetCreator<Gene>());
+    IterMap<String, Set<GenomicEntity>> geneMap = DefaultTreeMap
+        .create(new TreeSetCreator<GenomicEntity>());
 
     GenesView view = mProperties.getView();
 
     switch (view) {
     case COMPACT:
     case DENSE:
-      for (Gene g : genes) {
+      for (GenomicEntity g : genes) {
         geneMap.get(g.getSymbol()).add(g);
       }
 
       break;
     default:
       // full
-      for (Gene g : genes) {
+      for (GenomicEntity g : genes) {
         String id = g.getSymbol();
 
         if (!g.getRefSeq().equals(TextUtils.NA)) {

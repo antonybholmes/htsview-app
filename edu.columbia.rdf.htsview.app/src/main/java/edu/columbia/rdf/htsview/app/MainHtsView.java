@@ -34,7 +34,7 @@ import org.jebtk.bioinformatics.dna.DirZipSequenceReader;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
 import org.jebtk.bioinformatics.genomic.GTBZGenes;
 import org.jebtk.bioinformatics.genomic.GTBZParser;
-import org.jebtk.bioinformatics.genomic.GeneType;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
@@ -249,27 +249,27 @@ public class MainHtsView {
           GenesService.getInstance().put(g,
               db,
               new LazyGenes(file, Genes.gff3Parser().setKeepExons(true)
-                  .setLevels(GeneType.GENE, GeneType.TRANSCRIPT)));
+                  .setLevels(GenomicType.GENE, GenomicType.TRANSCRIPT)));
         } else if (filename.contains("gtf")) {
           GenesService.getInstance().put(g,
               db,
               new LazyGenes(file, Genes.gff3Parser().setKeepExons(true)
-                  .setLevels(GeneType.TRANSCRIPT)));
+                  .setLevels(GenomicType.TRANSCRIPT)));
         } else if (filename.contains("gtbz")) {
           GenesService.getInstance().put(g,
               db,
               new GTBZGenes(file, new GTBZParser().setKeepExons(true)
-                  .setLevels(GeneType.TRANSCRIPT)));
+                  .setLevels(GenomicType.TRANSCRIPT)));
         } else if (filename.contains("gtb2")) {
           GenesService.getInstance().put(g,
               db,
               new LazyGenes(file, Genes.gtb2Parser().setKeepExons(true)
-                  .setLevels(GeneType.TRANSCRIPT)));
+                  .setLevels(GenomicType.TRANSCRIPT)));
         } else if (filename.contains("gtb")) {
           GenesService.getInstance().put(g,
               db,
               new LazyGenes(file, Genes.gtbParser().setKeepExons(true)
-                  .setLevels(GeneType.TRANSCRIPT)));
+                  .setLevels(GenomicType.TRANSCRIPT)));
         } else {
           // Do nothing
         }

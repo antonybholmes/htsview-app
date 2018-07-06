@@ -21,7 +21,9 @@ import java.awt.geom.GeneralPath;
 import java.util.Set;
 
 import org.jebtk.bioinformatics.genomic.Gene;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.IterMap;
@@ -75,7 +77,7 @@ public class GenesPlotLayer extends AxesLayer {
   private GenesProperties mGeneProperties;
 
   /** The m gene cache. */
-  private IterMap<String, Set<Gene>> mGeneCache;
+  private IterMap<String, Set<GenomicEntity>> mGeneCache;
 
   /** The Constant FORWARD_TSS_ARROW. */
   private static final GeneralPath FORWARD_TSS_ARROW = new GeneralPath();
@@ -126,7 +128,7 @@ public class GenesPlotLayer extends AxesLayer {
    * @param genes the genes
    * @param displayRegion the display region
    */
-  public void update(IterMap<String, Set<Gene>> genes,
+  public void update(IterMap<String, Set<GenomicEntity>> genes,
       GenomicRegion displayRegion) {
     mGeneCache = genes;
   }
@@ -228,7 +230,7 @@ public class GenesPlotLayer extends AxesLayer {
       int lx1 = Integer.MAX_VALUE;
       int lx2 = Integer.MIN_VALUE;
 
-      for (Gene g : mGeneCache.get(symbol)) {
+      for (GenomicEntity g : mGeneCache.get(symbol)) {
         lx1 = Math.min(lx1, g.mStart);
         lx2 = Math.max(lx2, g.mEnd);
       }
@@ -249,12 +251,12 @@ public class GenesPlotLayer extends AxesLayer {
       // The gene line
       g2.drawLine(lx1, y, lx2, y);
 
-      for (Gene g : mGeneCache.get(symbol)) {
+      for (GenomicEntity g : mGeneCache.get(symbol)) {
         //
         // Draw the utr
         //
 
-        for (Gene exon : g.get5pUtrs()) {
+        for (GenomicEntity exon : ((Gene)g).get5pUtrs()) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 
@@ -280,7 +282,7 @@ public class GenesPlotLayer extends AxesLayer {
           g2.drawRect(x1, y1, x2 - x1, HALF_BAR_HEIGHT);
         }
 
-        for (Gene exon : g.get3pUtrs()) {
+        for (GenomicEntity exon : g.getEntities(GenomicType.UTR_3P)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 
@@ -312,7 +314,7 @@ public class GenesPlotLayer extends AxesLayer {
 
         ExonProperties p = mGeneProperties.getVariantGene().getExons();
 
-        for (Gene exon : g.getExons()) {
+        for (GenomicEntity exon : g.getEntities(GenomicType.EXON)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 
