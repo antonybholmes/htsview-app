@@ -23,6 +23,11 @@ import java.io.IOException;
 public class GencodeGenesPlotTrack extends GenesPlotTrack {
 
   /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
    * Instantiates a new gencode genes plot track.
    *
    * @throws IOException Signals that an I/O exception has occurred.

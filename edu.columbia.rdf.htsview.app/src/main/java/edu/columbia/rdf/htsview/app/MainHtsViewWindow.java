@@ -66,9 +66,9 @@ import org.jebtk.graphplot.Image;
 import org.jebtk.graphplot.ModernPlotCanvas;
 import org.jebtk.graphplot.figure.Graph2dStyleModel;
 import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.AssetService;
 import org.jebtk.modern.contentpane.CloseableHTab;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
@@ -601,16 +601,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     }
   }
 
-  /**
-   * Instantiates a new main reads window.
-   *
-   * @param genome the genome
-   * @param tree the tree
-   * @param samples the samples
-   * @throws SAXException the SAX exception
-   * @throws IOException Signals that an I/O exception has occurred.
-   * @throws ParserConfigurationException the parser configuration exception
-   */
   public MainHtsViewWindow(String genome, AnnotationTracksTree tree,
       Collection<Sample> samples)
       throws SAXException, IOException, ParserConfigurationException {

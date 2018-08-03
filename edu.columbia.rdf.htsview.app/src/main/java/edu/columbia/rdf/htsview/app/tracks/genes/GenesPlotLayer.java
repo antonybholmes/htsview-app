@@ -18,9 +18,9 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
+import java.util.Map.Entry;
 import java.util.Set;
 
-import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicType;
@@ -193,10 +193,12 @@ public class GenesPlotLayer extends AxesLayer {
 
     g2.setStroke(mGeneProperties.getStyle().getStroke());
 
-    for (String symbol : mGeneCache) {
+    for (Entry<String, Set<GenomicEntity>> e : mGeneCache) {
       if (c == maxGenes) {
         break;
       }
+      
+      String symbol = e.getKey();
 
       // isMainVariant = mGeneCache.size() == 1 ||
       // (mGenes.findMainVariant(g.getSymbol()) != null &&
@@ -256,7 +258,7 @@ public class GenesPlotLayer extends AxesLayer {
         // Draw the utr
         //
 
-        for (GenomicEntity exon : ((Gene)g).get5pUtrs()) {
+        for (GenomicEntity exon : g.getChildren(GenomicType.UTR_5P)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 
@@ -282,7 +284,7 @@ public class GenesPlotLayer extends AxesLayer {
           g2.drawRect(x1, y1, x2 - x1, HALF_BAR_HEIGHT);
         }
 
-        for (GenomicEntity exon : g.getEntities(GenomicType.UTR_3P)) {
+        for (GenomicEntity exon : g.getChildren(GenomicType.UTR_3P)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 
@@ -314,7 +316,7 @@ public class GenesPlotLayer extends AxesLayer {
 
         ExonProperties p = mGeneProperties.getVariantGene().getExons();
 
-        for (GenomicEntity exon : g.getEntities(GenomicType.EXON)) {
+        for (GenomicEntity exon : g.getChildren(GenomicType.EXON)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 

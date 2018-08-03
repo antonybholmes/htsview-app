@@ -20,6 +20,7 @@ import java.io.IOException;
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.bioinformatics.genomic.SequenceReader;
+import org.jebtk.bioinformatics.genomic.SequenceService;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.core.tree.TreeRootNode;
@@ -56,8 +57,7 @@ public class AnnotationTracksTree extends ModernTree<Track> {
    * @param mouseConservationAssembly the mouse conservation assembly
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public AnnotationTracksTree(SequenceReader dnaAssembly,
-      ConservationAssembly conservationAssembly,
+  public AnnotationTracksTree(ConservationAssembly conservationAssembly,
       ConservationAssembly mouseConservationAssembly) throws IOException {
     Track track;
     TreeNode<Track> node;
@@ -96,15 +96,15 @@ public class AnnotationTracksTree extends ModernTree<Track> {
 
     TreeNode<Track> dnaNode = new TreeNode<Track>("DNA Annotation");
 
-    track = new DnaBasesPlotTrack(dnaAssembly);
+    track = new DnaBasesPlotTrack(SequenceService.getInstance().getCurrent());
     node = new TreeNode<Track>(track.getName(), track);
     dnaNode.addChild(node);
 
-    track = new DnaColorPlotTrack(dnaAssembly);
+    track = new DnaColorPlotTrack(SequenceService.getInstance().getCurrent());
     node = new TreeNode<Track>(track.getName(), track);
     dnaNode.addChild(node);
 
-    track = new DnaRepeatMaskPlotTrack(dnaAssembly);
+    track = new DnaRepeatMaskPlotTrack(SequenceService.getInstance().getCurrent());
     node = new TreeNode<Track>(track.getName(), track);
     dnaNode.addChild(node);
 

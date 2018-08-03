@@ -31,7 +31,9 @@ import java.util.TreeSet;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Gene;
+import org.jebtk.bioinformatics.genomic.GeneDb;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.Properties;
@@ -266,11 +268,15 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
    * @throws ParseException the parse exception
    */
   private void sortTssDist(SamplePlotTrack sample, int bins, DataFrame m)
-      throws IOException, ParseException {
+      throws IOException {
+    String genome = mGenomeModel.get();
+    
     Map<Integer, Set<String>> tssMap = new TreeMap<Integer, Set<String>>();
 
     Set<String> used = new HashSet<String>();
 
+    GeneDb g = GenesService.getInstance().getFirstGeneDb(genome);
+    
     for (int i = 0; i < mRegions.size(); ++i) {
       HeatMapIdLocation region = mRegions.get(i);
 
@@ -278,9 +284,9 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
         continue;
       }
 
-      Iterable<Gene> closestGenes = GenesService.getInstance()
-          .getGenes(mGenomeModel.get(), "refseq")
-          .findClosestGenesByTss(region.getRegion());
+      Iterable<GenomicEntity> closestGenes = GenesService.getInstance()
+          .getGenes(g)
+          .findClosestGenesByTss(g, region.getRegion());
 
       // System.err.println("sym " + closestGenes.get(0).getSymbol());
 
@@ -295,7 +301,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
         tssMap.put(tssDistance, new TreeSet<String>());
       }
 
-      for (Gene gene : closestGenes) {
+      for (GenomicEntity gene : closestGenes) {
         if (used.contains(gene.getSymbol())) {
           continue;
         }
@@ -306,11 +312,11 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
     }
 
     int i = 0;
-
+    
     for (int tssDist : tssMap.keySet()) {
       for (String refseq : tssMap.get(tssDist)) {
-        Gene gene = GenesService.getInstance()
-            .getGenes(mGenomeModel.get(), "refseq").getGene(refseq);
+        GenomicEntity gene = GenesService.getInstance()
+            .getGenes(g).getGene(g, refseq);
 
         GenomicRegion tssRegion = Gene.tssRegion(gene);
 
@@ -427,7 +433,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
    */
   private List<Double> getCounts(SamplePlotTrack sample,
       GenomicRegion ext,
-      int mWindow) throws IOException, ParseException {
+      int mWindow) throws IOException {
     SampleAssembly assembly = sample.getAssembly();
 
     List<Double> counts = assembly.getRPM(sample.getSample(), ext, mWindow);

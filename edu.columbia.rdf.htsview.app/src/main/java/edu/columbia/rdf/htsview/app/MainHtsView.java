@@ -29,17 +29,18 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.conservation.ConservationAssemblyWeb;
-import org.jebtk.bioinformatics.dna.HttpSequenceReader;
 import org.jebtk.bioinformatics.dna.DirZipSequenceReader;
+import org.jebtk.bioinformatics.dna.WebSequenceReader;
 import org.jebtk.bioinformatics.ext.ucsc.CytobandsService;
 import org.jebtk.bioinformatics.genomic.GTBZGenes;
 import org.jebtk.bioinformatics.genomic.GTBZParser;
-import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.genomic.LazyGenes;
-import org.jebtk.bioinformatics.genomic.SequenceReader;
+import org.jebtk.bioinformatics.genomic.SequenceService;
+import org.jebtk.bioinformatics.genomic.WebGenes;
 import org.jebtk.core.AppService;
 import org.jebtk.core.PluginService;
 import org.jebtk.core.io.FileUtils;
@@ -105,9 +106,9 @@ public class MainHtsView {
    * @throws ParseException the parse exception
    */
   public static final void main(String[] args) throws FontFormatException,
-      IOException, SAXException, ParserConfigurationException,
-      ClassNotFoundException, InstantiationException, IllegalAccessException,
-      UnsupportedLookAndFeelException, ServerException, ParseException {
+  IOException, SAXException, ParserConfigurationException,
+  ClassNotFoundException, InstantiationException, IllegalAccessException,
+  UnsupportedLookAndFeelException, ServerException, ParseException {
     AppService.getInstance().setAppInfo("htsview");
 
     ThemeService.getInstance().setTheme(); // ColorTheme.GREEN);
@@ -199,7 +200,7 @@ public class MainHtsView {
    * @throws ParserConfigurationException the parser configuration exception
    */
   public static void main(EDBWLogin login) throws ServerException, IOException,
-      ClassNotFoundException, SAXException, ParserConfigurationException {
+  ClassNotFoundException, SAXException, ParserConfigurationException {
     main(login, Genome.HG19, null);
   }
 
@@ -218,7 +219,7 @@ public class MainHtsView {
   public static void main(EDBWLogin login,
       String genome,
       Collection<Sample> samples) throws ServerException, IOException,
-      ClassNotFoundException, SAXException, ParserConfigurationException {
+  ClassNotFoundException, SAXException, ParserConfigurationException {
     // Map<String, Genes> geneMap = new HashMap<String, Genes>();
 
     List<Path> dirs = FileUtils.lsdir(PathUtils.getPath("res", "genomes"));
@@ -230,51 +231,57 @@ public class MainHtsView {
 
       CytobandsService.getInstance().load(g,
           FileUtils
-              .newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
+          .newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
 
       //GenomeService.getInstance().load(g,
       //    FileUtils.newBufferedReader(
       //        dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
-      
+
       //GenomeService.getInstance().load(dir.resolve(g + ".genome.txt.gz"));
 
-      List<Path> files = FileUtils.ls(dir.resolve("genes"));
+      if (SettingsService.getInstance().getBool("htsview.genes.web-mode")) {
+        WebGenes genes = new WebGenes(SettingsService.getInstance().getUrl("htsview.genes.url"));
 
-      for (Path file : files) {
-        String filename = PathUtils.getName(file);
+        GenesService.getInstance().put(genes);
+      } else {
+        // Look for files locally
+        List<Path> files = FileUtils.ls(dir.resolve("genes"));
 
-        String db = PathUtils.namePrefix(file, namePrefix);
+        for (Path file : files) {
+          String filename = PathUtils.getName(file);
 
-        if (filename.contains("gff3")) {
-          GenesService.getInstance().put(g,
-              db,
-              new LazyGenes(file, Genes.gff3Parser().setKeepExons(true)
-                  .setLevels(GenomicType.GENE, GenomicType.TRANSCRIPT)));
-        } else if (filename.contains("gtf")) {
-          GenesService.getInstance().put(g,
-              db,
-              new LazyGenes(file, Genes.gff3Parser().setKeepExons(true)
-                  .setLevels(GenomicType.TRANSCRIPT)));
-        } else if (filename.contains("gtbz")) {
-          GenesService.getInstance().put(g,
-              db,
-              new GTBZGenes(file, new GTBZParser().setKeepExons(true)
-                  .setLevels(GenomicType.TRANSCRIPT)));
-        } else if (filename.contains("gtb2")) {
-          GenesService.getInstance().put(g,
-              db,
-              new LazyGenes(file, Genes.gtb2Parser().setKeepExons(true)
-                  .setLevels(GenomicType.TRANSCRIPT)));
-        } else if (filename.contains("gtb")) {
-          GenesService.getInstance().put(g,
-              db,
-              new LazyGenes(file, Genes.gtbParser().setKeepExons(true)
-                  .setLevels(GenomicType.TRANSCRIPT)));
-        } else {
-          // Do nothing
+          String db = PathUtils.namePrefix(file, namePrefix);
+
+          if (filename.contains("gff3")) {
+            GenesService.getInstance().put(db,
+                g,
+                new LazyGenes(file, db, g, Genes.gff3Parser().setKeepExons(true)
+                    .setLevels(GenomicType.GENE, GenomicType.TRANSCRIPT)));
+          } else if (filename.contains("gtf")) {
+            GenesService.getInstance().put(g,
+                db,
+                new LazyGenes(file, db, g, Genes.gff3Parser().setKeepExons(true)
+                    .setLevels(GenomicType.TRANSCRIPT)));
+          } else if (filename.contains("gtbz")) {
+            GenesService.getInstance().put(db,
+                g,
+                new GTBZGenes(file, db, g, new GTBZParser().setKeepExons(true)
+                    .setLevels(GenomicType.TRANSCRIPT)));
+          } else if (filename.contains("gtb2")) {
+            GenesService.getInstance().put(db,
+                g,
+                new LazyGenes(file, db, g, Genes.gtb2Parser().setKeepExons(true)
+                    .setLevels(GenomicType.TRANSCRIPT)));
+          } else if (filename.contains("gtb")) {
+            GenesService.getInstance().put(db,
+                g,
+                new LazyGenes(file, db, g, Genes.gtbParser().setKeepExons(true)
+                    .setLevels(GenomicType.TRANSCRIPT)));
+          } else {
+            // Do nothing
+          }
         }
       }
-
     }
 
     /*
@@ -310,7 +317,7 @@ public class MainHtsView {
      */
 
     //SequenceReader genomeAssembly = new URLSequenceReader(new URL(
-     //   SettingsService.getInstance().getString("edb.reads.dna.remote-url")));
+    //   SettingsService.getInstance().getString("edb.reads.dna.remote-url")));
 
     ConservationAssembly conservationAssembly = new ConservationAssemblyWeb(
         new URL(SettingsService.getInstance()
@@ -330,27 +337,24 @@ public class MainHtsView {
       //UrlBuilder url = SettingsService.getInstance()
       //    .getSetting("edb.reads.chip-seq.remote-url").getUrlBuilder();
 
-      
-      UrlBuilder seqUrl = login.getURL().resolve("seq");
-      
-      WebAssemblyService.getInstance()
-          .setSampleAssembly(new SampleAssemblyWeb(seqUrl));
-      
-      WebAssemblyService.getInstance()
-          .setPeakAssembly(new PeakAssemblyWeb(seqUrl.resolve("chipseq")));
-    }
 
-    SequenceReader dnaAssembly;
+      UrlBuilder seqUrl = login.getURL().resolve("seq");
+
+      WebAssemblyService.getInstance()
+      .setSampleAssembly(new SampleAssemblyWeb(seqUrl));
+
+      WebAssemblyService.getInstance()
+      .setPeakAssembly(new PeakAssemblyWeb(seqUrl.resolve("chipseq")));
+    }
 
     if (SettingsService.getInstance().getBool("htsview.dna.web-mode")) {
-      dnaAssembly = new HttpSequenceReader(new URL(SettingsService.getInstance()
-          .getString("edb.reads.dna.remote-url")));
+      SequenceService.getInstance().add(new WebSequenceReader(new URL(SettingsService.getInstance()
+          .getString("edb.reads.dna.remote-url"))));
     } else {
-      dnaAssembly = new DirZipSequenceReader();
+      SequenceService.getInstance().add(new DirZipSequenceReader());
     }
 
-    AnnotationTracksTree tree = new AnnotationTracksTree(dnaAssembly,
-        conservationAssembly, mouseConservationAssembly);
+    AnnotationTracksTree tree = new AnnotationTracksTree(conservationAssembly, mouseConservationAssembly);
 
     // Register some functions to parse various files
     TrackParserService.getInstance().register(new SampleJsonParser());

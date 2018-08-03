@@ -15,10 +15,13 @@
  */
 package edu.columbia.rdf.htsview.app.modules.heatmap;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.GeneDb;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 
@@ -73,7 +76,9 @@ public class HeatMapIdLocation {
    * @throws ParseException the parse exception
    */
   public static HeatMapIdLocation parse(String id, GenomeModel model) {
-    GenomicRegion region = GenomicRegion.parse(model.get(), id);
+    String genome = model.get();
+    
+    GenomicRegion region = GenomicRegion.parse(genome, id);
 
     if (region != null) {
       // It's a region, so add as is
@@ -83,8 +88,16 @@ public class HeatMapIdLocation {
     } else {
       // might be a gene symbol, in which case report the tss
 
-      Gene gene = GenesService.getInstance().getGenes(model.get(), "refseq")
-          .lookup(id);
+      GenomicEntity gene = null;
+      
+      GeneDb g = GenesService.getInstance().getFirstGeneDb(genome);
+      
+      try {
+        gene = GenesService.getInstance().getGenes(g)
+            .getGene(g, id);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
 
       if (gene != null) {
         GenomicRegion tss = Gene.tssRegion(gene);

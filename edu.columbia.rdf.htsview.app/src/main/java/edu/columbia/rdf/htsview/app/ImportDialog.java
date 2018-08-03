@@ -19,9 +19,11 @@ import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.Box;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.external.samtools.SamGuiFileFilter;
 import org.jebtk.core.collections.CollectionUtils;
@@ -68,9 +70,8 @@ public class ImportDialog extends ModernDialogTaskWindow {
      * Instantiates a new genome chr combo.
      */
     public GenomeChrCombo() {
-      for (String genome : CollectionUtils
-          .sort(GenomeService.getInstance())) {
-        addScrollMenuItem(genome);
+      for (Entry<String, Genome> e : GenomeService.getInstance()) {
+        addScrollMenuItem(e.getKey());
       }
     }
   }

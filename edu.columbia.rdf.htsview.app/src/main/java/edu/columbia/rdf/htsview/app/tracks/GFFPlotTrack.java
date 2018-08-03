@@ -31,6 +31,9 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class GFFPlotTrack extends GenesPlotTrack {
 
+  private static final long serialVersionUID = 1L;
+  
+  
   /** The m file. */
   private Path mFile;
 
@@ -56,9 +59,9 @@ public class GFFPlotTrack extends GenesPlotTrack {
   public TrackSubFigure createGraph(String genome,
       TitleProperties titlePosition) throws IOException {
 
-    if (GenesService.getInstance().getGenes(genome, mGenesId) == null) {
+    if (GenesService.getInstance().getGenes(genome, mDb) == null) {
       GenesService.getInstance()
-          .put(genome, mGenesId, Genes.gff3Parser().parse(mFile));
+          .put(genome, mDb, Genes.gff3Parser().parse(mFile, mDb, genome));
     }
 
     return super.createGraph(genome, titlePosition);

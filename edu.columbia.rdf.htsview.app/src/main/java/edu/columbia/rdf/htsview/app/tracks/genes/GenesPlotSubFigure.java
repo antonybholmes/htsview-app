@@ -16,7 +16,9 @@
 package edu.columbia.rdf.htsview.app.tracks.genes;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 import org.jebtk.bioinformatics.genomic.GenesService;
@@ -47,7 +49,7 @@ public class GenesPlotSubFigure extends FixedSubFigure {
   private GenesProperties mProperties;
 
   /** The m genes id. */
-  private String mGenesId;
+  private String mDb;
 
   /**
    * Instantiates a new genes plot sub figure.
@@ -55,14 +57,14 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    * @param name the name
    * @param properties the properties
    * @param genome the genome
-   * @param id the id
+   * @param db the id
    * @param titlePosition the title position
    */
   public GenesPlotSubFigure(String name, GenesProperties properties, 
-      String id, TitleProperties titlePosition) {
+      String db, TitleProperties titlePosition) {
     mProperties = properties;
 
-    mGenesId = id;
+    mDb = db;
 
     mGenesLayer = new GenesPlotLayer(properties);
 
@@ -83,12 +85,12 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    */
   public static GenesPlotSubFigure create(String name,
       GenesProperties genesProperties,
-      String genesId,
+      String db,
       TitleProperties titlePosition) {
 
     // Now lets create a plot
     GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, genesProperties,
-        genesId, titlePosition);
+        db, titlePosition);
 
     return canvas;
   }
@@ -113,8 +115,16 @@ public class GenesPlotSubFigure extends FixedSubFigure {
     
     String genome = displayRegion.getChr().getGenome();
     
-    Collection<GenomicEntity> genes = GenesService.getInstance()
-        .getGenes(genome, mGenesId).findGenes(displayRegion);
+    Collection<GenomicEntity> genes = Collections.emptyList();
+    
+    //System.err.println("block " + mDb + " " + genome);
+    
+    try {
+      genes = GenesService.getInstance()
+          .getGenes(mDb, genome).findGenes(mDb, displayRegion);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     
     IterMap<String, Set<GenomicEntity>> geneMap = DefaultTreeMap
         .create(new TreeSetCreator<GenomicEntity>());
@@ -133,7 +143,7 @@ public class GenesPlotSubFigure extends FixedSubFigure {
       // full
       for (GenomicEntity g : genes) {
         String id = g.getSymbol();
-
+        
         if (!g.getRefSeq().equals(TextUtils.NA)) {
           id += " (" + g.getRefSeq() + ")";
         }

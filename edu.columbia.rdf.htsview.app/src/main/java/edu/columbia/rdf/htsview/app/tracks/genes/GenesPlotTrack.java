@@ -50,7 +50,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   private TrackSubFigure mSubFigure;
 
   /** The m genes id. */
-  protected String mGenesId;
+  protected String mDb;
 
   /**
    * Instantiates a new genes plot track.
@@ -61,7 +61,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   public GenesPlotTrack(String name, String id) {
     super(name);
 
-    mGenesId = id;
+    mDb = id;
   }
 
   /*
@@ -241,7 +241,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
     //
     
     mSubFigure = GenesPlotSubFigure
-        .create(getName(), mGenesProperties, mGenesId, titlePosition);
+        .create(getName(), mGenesProperties, mDb, titlePosition);
 
     setMargins(getName(), titlePosition, mSubFigure);
 

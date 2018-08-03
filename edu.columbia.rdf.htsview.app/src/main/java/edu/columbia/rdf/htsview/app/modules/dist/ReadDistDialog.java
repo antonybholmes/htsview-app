@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.app.modules.dist;
 
 import java.awt.Dimension;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.HashSet;
@@ -28,9 +29,10 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.Gene;
+import org.jebtk.bioinformatics.genomic.GeneDb;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomeService;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -43,8 +45,8 @@ import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
-import org.jebtk.modern.UI;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -295,16 +297,28 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
    * Load tss.
    */
   private void loadTss() {
+    String genome = mGenomeModel.get();
+    
     Set<String> genes = new HashSet<String>();
 
+    GeneDb g = new GeneDb("refseq", genome);
+    
     for (String refseq : GenesService.getInstance()
-        .getGenes(mGenomeModel.get(), "refseq").getRefSeqIds()) {
-      Gene gene = GenesService.getInstance()
-          .getGenes(mGenomeModel.get(), "refseq").getGene(refseq);
+        .getGenes(g).getRefSeqIds()) {
+      GenomicEntity gene = null;
+      
+      try {
+        gene = GenesService.getInstance()
+            .getGenes(g).getGene(g, refseq);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
 
       // GenomicRegion tss = Gene.tssRegion(gene);
 
-      genes.add(gene.getSymbol());
+      if (gene != null) {
+        genes.add(gene.getSymbol());
+      }
     }
 
     mRegionsPanel.setText(TextUtils.join(CollectionUtils.sort(genes),

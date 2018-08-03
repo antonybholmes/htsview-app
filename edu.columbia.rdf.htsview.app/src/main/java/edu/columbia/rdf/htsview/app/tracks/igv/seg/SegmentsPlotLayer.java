@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.igv.seg;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.jebtk.bioinformatics.ext.ucsc.BedGraphGroupModel;
 import org.jebtk.core.Mathematics;
@@ -117,8 +118,9 @@ public class SegmentsPlotLayer extends AxesLayer {
         axes.toPlotX1(axes.getX1Axis().getMax()),
         BedPlotTrack.BAR_HEIGHT * mRegions.size());
 
-    for (String name : mRegions) {
-
+    for (Entry<String, List<Segment>> e : mRegions) {
+      String name = e.getKey();
+      
       g2.setColor(Color.BLACK);
       textY = y + ModernWidget.getTextYPosCenter(g2, BedPlotTrack.BAR_HEIGHT);
       g2.drawString(name, textX - g2.getFontMetrics().stringWidth(name), textY);

@@ -30,9 +30,10 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.GeneDb;
 import org.jebtk.bioinformatics.genomic.GenomeService;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -45,8 +46,8 @@ import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
-import org.jebtk.modern.UI;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernButtonGroup;
@@ -373,15 +374,28 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
     Set<String> genes = new HashSet<String>();
 
     String genome = mGenomeModel.get();
+    
+    GeneDb g = GenesService.getInstance().getFirstGeneDb(genome);
+    
+    
 
-    for (String refseq : GenesService.getInstance().getGenes(genome, "refseq")
+    for (String refseq : GenesService.getInstance().getGenes(g)
         .getRefSeqIds()) {
-      Gene gene = GenesService.getInstance().getGenes(genome, "refseq")
-          .getGene(refseq);
+      
+      GenomicEntity gene = null;
+      
+      try {
+        gene = GenesService.getInstance().getGenes(g)
+            .getGene(g, refseq);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
 
       // GenomicRegion tss = Gene.tssRegion(gene);
 
-      genes.add(gene.getSymbol());
+      if (gene != null) {
+        genes.add(gene.getSymbol());
+      }
     }
 
     mRegionsPanel.setText(TextUtils.join(CollectionUtils.sort(genes),
@@ -453,9 +467,12 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
     StringBuilder buffer = new StringBuilder();
     GenomicRegion region = null;
 
+    String genome = mGenomeModel.get();
+    
+
     for (int i = 0; i < model.getRowCount(); ++i) {
       if (GenomicRegion.isGenomicRegion(model.getValueAsString(i, 0))) {
-        region = GenomicRegion.parse(mGenomeModel.get(), model.getValueAsString(i, 0));
+        region = GenomicRegion.parse(genome, model.getValueAsString(i, 0));
 
         GenomicRegion mid = GenomicRegion.midRegion(region);
 

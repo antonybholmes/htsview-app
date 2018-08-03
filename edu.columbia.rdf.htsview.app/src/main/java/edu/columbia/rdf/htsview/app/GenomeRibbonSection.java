@@ -15,6 +15,10 @@
  */
 package edu.columbia.rdf.htsview.app;
 
+import java.util.Map.Entry;
+
+import org.jebtk.bioinformatics.genomic.GeneDb;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.modern.AssetService;
@@ -84,9 +88,9 @@ public class GenomeRibbonSection extends RibbonSection
 
     //for (String genome : CollectionUtils
     //    .sort(GenesService.getInstance().getGenomes())) {
-    for (String genome : GenomeService.getInstance()) {  
-      popup.addMenuItem(new ModernTwoLineMenuItem(genome,
-          "Switch to the " + genome + " genome.", ICON));
+    for (Entry<String, Genome> g : GenomeService.getInstance()) {  
+      popup.addMenuItem(new ModernTwoLineMenuItem(g.getKey(),
+          "Switch to the " + g.getKey() + " genome.", ICON));
     }
 
     mButton = new RibbonLargeDropDownButton2("Genome", popup)
