@@ -458,7 +458,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
       model = new BedGraphTableModel(bed);
     } else {
       model = Bioinformatics.getModel(file,
-          true,
+          1,
           TextUtils.emptyList(),
           0,
           TextUtils.TAB_DELIMITER);

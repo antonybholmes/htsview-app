@@ -59,8 +59,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
   public List<PeakSet> getJsonPeaks(int sampleId) throws IOException {
     List<PeakSet> ret = new ArrayList<PeakSet>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("peaks")
-        .resolve("sample").resolve(sampleId);
+    UrlBuilder peaksUrl = mAuthV1.resolve("peaks").param("id", sampleId);
 
     LOG.info("peaks url: {}", peaksUrl);
 
