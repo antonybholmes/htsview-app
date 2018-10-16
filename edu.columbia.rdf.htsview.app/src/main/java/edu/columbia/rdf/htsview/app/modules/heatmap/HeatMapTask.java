@@ -234,7 +234,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
       // +- 2kb
 
-      List<Double> counts = getCounts(sample, ext, mWindow);
+      double[] counts = getCounts(sample, ext, mWindow);
 
       // writer.write(gene.getRefSeq());
       // writer.write(TextUtils.TAB_DELIMITER);
@@ -245,11 +245,11 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
       m.setRowAnnotation("Id", i, region.getId());
       m.setRowAnnotation("Location", i, region.getRegion().toString());
 
-      for (int j = 0; j < counts.size(); ++j) {
+      for (int j = 0; j < counts.length; ++j) {
         // System.err.println("heat " + i + " " + j + " " + counts.get(j) + " "
         // +
         // region.getRegion().toString());
-        m.set(i, j, counts.get(j));
+        m.set(i, j, counts[j]);
       }
 
       if (i % 1000 == 0) {
@@ -324,13 +324,13 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
         // +- 2kb
 
-        List<Double> counts = getCounts(sample, ext, mWindow);
+        double[] counts = getCounts(sample, ext, mWindow);
 
         m.setRowAnnotation("Id", i, refseq);
         m.setRowAnnotation("Location", i, ext.getLocation());
 
-        for (int j = 0; j < counts.size(); ++j) {
-          m.set(i, j, counts.get(j));
+        for (int j = 0; j < counts.length; ++j) {
+          m.set(i, j, counts[j]);
         }
 
         ++i;
@@ -354,7 +354,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
                                                       // TreeMap<Double,
                                                       // Set<GenomicRegion>>();
 
-    Map<GenomicRegion, List<Double>> countMap = new HashMap<GenomicRegion, List<Double>>();
+    Map<GenomicRegion, double[]> countMap = new HashMap<GenomicRegion, double[]>();
 
     Map<GenomicRegion, GenomicRegion> extMap = new HashMap<GenomicRegion, GenomicRegion>();
 
@@ -381,7 +381,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
       // mPadding,
       // mPadding);
 
-      List<Double> counts = getCounts(sample, ext, mWindow);
+      double[] counts = getCounts(sample, ext, mWindow);
 
       double sum = 0;
 
@@ -407,13 +407,13 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
         // +- 2kb
 
-        List<Double> counts = countMap.get(region); // getCounts(ext, mWindow);
+        double[] counts = countMap.get(region); // getCounts(ext, mWindow);
 
         m.setRowAnnotation("Id", i, region.getLocation());
         m.setRowAnnotation("Location", i, ext.getLocation());
 
-        for (int j = 0; j < counts.size(); ++j) {
-          m.set(i, j, counts.get(j));
+        for (int j = 0; j < counts.length; ++j) {
+          m.set(i, j, counts[j]);
         }
 
         ++i;
@@ -431,18 +431,18 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws ParseException the parse exception
    */
-  private List<Double> getCounts(SamplePlotTrack sample,
+  private double[] getCounts(SamplePlotTrack sample,
       GenomicRegion ext,
       int mWindow) throws IOException {
     SampleAssembly assembly = sample.getAssembly();
 
-    List<Double> counts = assembly.getRPM(sample.getSample(), ext, mWindow);
+    double[] counts = assembly.getRPM(sample.getSample(), ext, mWindow);
 
     if (mInput != null) {
-      List<Double> inputCounts = assembly.getRPM(mInput, ext, mWindow);
+      double[] inputCounts = assembly.getRPM(mInput, ext, mWindow);
 
-      for (int i = 0; i < counts.size(); ++i) {
-        counts.set(i, Math.max(0, counts.get(i) - inputCounts.get(i)));
+      for (int i = 0; i < counts.length; ++i) {
+        counts[i] = Math.max(0, counts[i] - inputCounts[i]);
       }
     }
 

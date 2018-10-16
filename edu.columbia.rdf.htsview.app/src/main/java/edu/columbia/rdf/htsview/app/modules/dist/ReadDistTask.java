@@ -234,16 +234,16 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         GenomicRegion ext = GenomicRegion.extend(GenomicRegion
             .midRegion(location.getRegion()), mPadding, mPadding);
 
-        List<Double> counts = getCounts(track, ext, mWindow);
+        double[] counts = getCounts(track, ext, mWindow);
         
         if (relative) {
           // Take the ratio of sample to input
           
-          List<Double> inputCounts = getCounts(inputSample, ext, mWindow);
+          double[] inputCounts = getCounts(inputSample, ext, mWindow);
           
           for (int i = 0; i < bins; ++i) {
             //if (inputCounts.get(i) > 0) {
-              double ratio = (counts.get(i) + 1) / (inputCounts.get(i) + 1);
+              double ratio = (counts[i] + 1) / (inputCounts[i] + 1);
             
               mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) + ratio);
             //}
@@ -251,7 +251,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         } else {
           for (int i = 0; i < bins; ++i) {
             mBinCountMap.get(sample).put(i,
-                mBinCountMap.get(sample).get(i) + counts.get(i));
+                mBinCountMap.get(sample).get(i) + counts[i]);
           }
         }
 
@@ -327,10 +327,10 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private List<Double> getCounts(SamplePlotTrack track,
+  private double[] getCounts(SamplePlotTrack track,
       GenomicRegion ext,
       int mWindow) throws IOException {
-    List<Double> counts = track.getAssembly()
+    double[] counts = track.getAssembly()
         .getRPM(track.getSample(), ext, mWindow);
 
     /*

@@ -48,6 +48,8 @@ public class CountTask extends SwingWorker<Void, Void> {
 
   private NormalizationMethod mNorm = NormalizationMethod.TPM;
 
+  private String mGenome;
+
   /**
    * Instantiates a new read dist task.
    *
@@ -59,10 +61,12 @@ public class CountTask extends SwingWorker<Void, Void> {
    * @param window the window
    * @param average the average
    */
-  public CountTask(List<SamplePlotTrack> tracks, List<GenomicRegion> regions,
+  public CountTask(List<SamplePlotTrack> tracks,
+      List<GenomicRegion> regions,
       NormalizationMethod norm) {
     mTracks = tracks;
     mLocations = regions;
+    mGenome = regions.get(0).getGenome();
     mNorm = norm;
   }
 
@@ -143,7 +147,7 @@ public class CountTask extends SwingWorker<Void, Void> {
     for (int i = 0; i < mTracks.size(); ++i) {
       SamplePlotTrack track = mTracks.get(i);
 
-      int total = track.getAssembly().getMappedReads(track.getSample());
+      int total = track.getAssembly().getMappedReads(track.getSample(), mGenome, 100);
 
       matrix.setColumnAnnotation("total-reads", i, total);
     }
@@ -208,6 +212,6 @@ public class CountTask extends SwingWorker<Void, Void> {
    */
   private int getCounts(SamplePlotTrack track, GenomicRegion r)
       throws IOException {
-    return track.getAssembly().getStarts(track.getSample(), r, -1).size();
+    return track.getAssembly().getStarts(track.getSample(), r, -1).length;
   }
 }

@@ -32,7 +32,7 @@ public class HTSViewInfo extends GuiAppInfo {
    * Instantiates a new reads info.
    */
   public HTSViewInfo() {
-    super("HTS View", new AppVersion(9),
+    super("HTS View", new AppVersion(10),
         "Copyright (C) 2014-${year} Antony Holmes",
         AssetService.getInstance().loadIcon(HTSViewIcon.class, 32),
         AssetService.getInstance().loadIcon(HTSViewIcon.class, 128),

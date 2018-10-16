@@ -59,9 +59,8 @@ import edu.columbia.rdf.htsview.app.modules.counts.CountsModule;
 import edu.columbia.rdf.htsview.app.modules.dna.DnaModule;
 import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBAM;
-import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBCT;
+import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBC;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBRT2;
-import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBRT3;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBVT;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBed;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderGFF;
@@ -369,10 +368,11 @@ public class MainHtsView {
     TrackParserService.getInstance().register(new SegJsonParser());
     TrackParserService.getInstance().register(new ABIJsonParser());
 
-    SampleLoaderService.getInstance().register(new SampleLoaderBCT());
+    //SampleLoaderService.getInstance().register(new SampleLoaderBCT());
     SampleLoaderService.getInstance().register(new SampleLoaderBAM());
+    SampleLoaderService.getInstance().register(new SampleLoaderBC());
     SampleLoaderService.getInstance().register(new SampleLoaderBRT2());
-    SampleLoaderService.getInstance().register(new SampleLoaderBRT3());
+    //SampleLoaderService.getInstance().register(new SampleLoaderBRT3());
     SampleLoaderService.getInstance().register(new SampleLoaderBVT());
     SampleLoaderService.getInstance().register(new SampleLoaderBedGraph());
     SampleLoaderService.getInstance().register(new SampleLoaderBed());

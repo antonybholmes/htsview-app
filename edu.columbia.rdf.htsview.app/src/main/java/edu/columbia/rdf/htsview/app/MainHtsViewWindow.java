@@ -48,11 +48,13 @@ import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.bioinformatics.ui.external.samtools.BamGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
+import org.jebtk.bioinformatics.ui.filters.BCGuiFileFilter;
 import org.jebtk.bioinformatics.ui.filters.GFFGuiFileFilter;
 import org.jebtk.bioinformatics.ui.filters.SegGuiFileFilter;
 import org.jebtk.core.Plugin;
 import org.jebtk.core.PluginService;
 import org.jebtk.core.collections.CollectionUtils;
+import org.jebtk.core.collections.IntArrayListView;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.io.FileUtils;
@@ -1473,7 +1475,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     for (SamplePlotTrack track : sampleTracks) {
       try {
         starts.addAll(
-            track.getAssembly().getStarts(track.getSample(), region, -1));
+            new IntArrayListView(track.getAssembly().getStarts(track.getSample(), region, -1)));
 
         if (track.getAssembly().getReadLength(track.getSample()) > 0) {
           l = track.getAssembly().getReadLength(track.getSample());
@@ -1543,6 +1545,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     openFiles(FileDialog.open(this)
         .filter(new HTSViewAllSupportedGuiFileFilter(),
             new BamGuiFileFilter(),
+            new BCGuiFileFilter(),
             new BctGuiFileFilter(),
             new Brt2GuiFileFilter(),
             new Brt3GuiFileFilter(),
