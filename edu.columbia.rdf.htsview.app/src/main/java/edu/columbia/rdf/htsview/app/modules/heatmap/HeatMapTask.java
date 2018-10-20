@@ -41,7 +41,7 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.io.FileUtils;
-import org.jebtk.core.io.Temp;
+import org.jebtk.core.io.TmpService;
 import org.jebtk.graphplot.AspectRatio;
 import org.jebtk.graphplot.figure.heatmap.ColorNormalizationType;
 import org.jebtk.math.matrix.DataFrame;
@@ -184,7 +184,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
         m.setColumnName(i, Integer.toString((i - bins / 2) * mWindow));
       }
 
-      Path temp = Temp.generateTempFile("txt");
+      Path temp = TmpService.getInstance().newTmpFile("txt");
 
       BufferedWriter writer = FileUtils.newBufferedWriter(temp);
 

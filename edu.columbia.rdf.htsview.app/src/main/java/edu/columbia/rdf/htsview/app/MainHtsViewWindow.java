@@ -59,7 +59,7 @@ import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
-import org.jebtk.core.io.Temp;
+import org.jebtk.core.io.TmpService;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.tree.TreeNode;
@@ -1661,7 +1661,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws ParseException the parse exception
    */
   private void exportToBedGraph() throws IOException {
-    Path tmp = Temp.createTempFile("bedgraph");
+    Path tmp = TmpService.getInstance().newTmpFile("bedgraph");
 
     BedGraph.write(getBedGraphs(), tmp);
 
@@ -1961,7 +1961,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
      * (TranscoderException e) { e.printStackTrace(); } }
      */
 
-    Temp.deleteTempFiles();
+    TmpService.getInstance().deleteTempFiles();
 
     super.close();
   }

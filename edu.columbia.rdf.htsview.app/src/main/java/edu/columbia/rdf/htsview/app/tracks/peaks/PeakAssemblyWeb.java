@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.core.http.UrlBuilder;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
-import org.jebtk.core.network.UrlBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

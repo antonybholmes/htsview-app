@@ -29,7 +29,7 @@ import org.jebtk.core.collections.DefaultTreeMapCreator;
 import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.io.BufferedTableWriter;
 import org.jebtk.core.io.FileUtils;
-import org.jebtk.core.io.Temp;
+import org.jebtk.core.io.TmpService;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.modern.status.StatusService;
@@ -110,7 +110,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
     MainMatCalcWindow window;
 
     try {
-      mFile = Temp.generateTempFile("txt");
+      mFile = TmpService.getInstance().newTmpFile("txt");
 
       boolean relative = createCountsFile();
 

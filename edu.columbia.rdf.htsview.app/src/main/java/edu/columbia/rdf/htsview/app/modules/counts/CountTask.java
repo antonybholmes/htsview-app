@@ -25,7 +25,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.MatrixNormalization;
-import org.jebtk.core.io.Temp;
+import org.jebtk.core.io.TmpService;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.status.StatusService;
@@ -82,8 +82,8 @@ public class CountTask extends SwingWorker<Void, Void> {
     MainMatCalcWindow window;
 
     try {
-      Path countFile = Temp.generateTempFile("txt");
-      // Path normFile = Temp.generateTempFile("txt");
+      Path countFile = TmpService.getInstance().newTmpFile("txt");
+      // Path normFile = TmpService.getInstance().newTmpFile("txt");
 
       DataFrame normMatrix = createCountsFile(countFile);
 
