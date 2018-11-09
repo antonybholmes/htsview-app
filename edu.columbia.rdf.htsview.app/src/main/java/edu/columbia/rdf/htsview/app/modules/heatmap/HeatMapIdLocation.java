@@ -20,7 +20,7 @@ import java.text.ParseException;
 
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
-import org.jebtk.bioinformatics.genomic.GeneDb;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -76,7 +76,7 @@ public class HeatMapIdLocation {
    * @throws ParseException the parse exception
    */
   public static HeatMapIdLocation parse(String id, GenomeModel model) {
-    String genome = model.get();
+    Genome genome = model.get();
     
     GenomicRegion region = GenomicRegion.parse(genome, id);
 
@@ -90,7 +90,7 @@ public class HeatMapIdLocation {
 
       GenomicEntity gene = null;
       
-      GeneDb g = GenesService.getInstance().getFirstGeneDb(genome);
+      Genome g = GenesService.getInstance().getFirstGeneDb(genome.getAssembly());
       
       try {
         gene = GenesService.getInstance().getGenes(g)

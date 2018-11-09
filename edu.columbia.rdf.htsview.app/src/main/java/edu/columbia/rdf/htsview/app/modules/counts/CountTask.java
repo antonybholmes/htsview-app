@@ -23,6 +23,7 @@ import java.util.List;
 import javax.swing.SwingWorker;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.MatrixNormalization;
 import org.jebtk.core.io.TmpService;
@@ -48,7 +49,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 
   private NormalizationMethod mNorm = NormalizationMethod.TPM;
 
-  private String mGenome;
+  private Genome mGenome;
 
   /**
    * Instantiates a new read dist task.

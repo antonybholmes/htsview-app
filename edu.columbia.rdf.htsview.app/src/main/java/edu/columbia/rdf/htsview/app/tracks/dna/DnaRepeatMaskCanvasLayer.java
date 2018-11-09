@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.RepeatMaskType;
 import org.jebtk.bioinformatics.genomic.SequenceReader;
@@ -44,7 +45,7 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
   private SequenceReader mAssembly;
 
   /** The m genome. */
-  private String mGenome;
+  private Genome mGenome;
 
   /**
    * Instantiates a new dna repeat mask canvas layer.
@@ -52,7 +53,7 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
    * @param genome the genome
    * @param assembly the assembly
    */
-  public DnaRepeatMaskCanvasLayer(String genome, SequenceReader assembly) {
+  public DnaRepeatMaskCanvasLayer(Genome genome, SequenceReader assembly) {
     mGenome = genome;
     mAssembly = assembly;
   }

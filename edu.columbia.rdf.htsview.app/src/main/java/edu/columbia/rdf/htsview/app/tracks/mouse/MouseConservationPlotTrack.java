@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.mouse;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
 import edu.columbia.rdf.htsview.app.tracks.conservation.ConservationPlotTrack;
@@ -29,6 +30,11 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class MouseConservationPlotTrack extends ConservationPlotTrack {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  
   /** The title. */
   public static String TITLE = "Mouse Conservation";
 
@@ -48,7 +54,7 @@ public class MouseConservationPlotTrack extends ConservationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
 
     //

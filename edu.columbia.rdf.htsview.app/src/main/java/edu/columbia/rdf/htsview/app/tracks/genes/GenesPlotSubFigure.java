@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultTreeMap;
@@ -48,9 +49,6 @@ public class GenesPlotSubFigure extends FixedSubFigure {
   /** The m properties. */
   private GenesProperties mProperties;
 
-  /** The m genes id. */
-  private String mDb;
-
   /**
    * Instantiates a new genes plot sub figure.
    *
@@ -60,11 +58,11 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    * @param db the id
    * @param titlePosition the title position
    */
-  public GenesPlotSubFigure(String name, GenesProperties properties, 
-      String db, TitleProperties titlePosition) {
+  public GenesPlotSubFigure(String name,
+      String track,
+      GenesProperties properties, 
+      TitleProperties titlePosition) {
     mProperties = properties;
-
-    mDb = db;
 
     mGenesLayer = new GenesPlotLayer(properties);
 
@@ -84,13 +82,14 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    * @return the genes plot sub figure
    */
   public static GenesPlotSubFigure create(String name,
+      String track,
       GenesProperties genesProperties,
-      String db,
       TitleProperties titlePosition) {
 
     // Now lets create a plot
-    GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, genesProperties,
-        db, titlePosition);
+    GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, track,
+        genesProperties,
+        titlePosition);
 
     return canvas;
   }
@@ -113,17 +112,21 @@ public class GenesPlotSubFigure extends FixedSubFigure {
       Color fillColor,
       PlotStyle style) {
     
-    String genome = displayRegion.getChr().getGenome();
+    Genome genome = displayRegion.getChr().getGenome();
     
-    Collection<GenomicEntity> genes = Collections.emptyList();
+    Collection<GenomicEntity> genes = null;
     
     //System.err.println("block " + mDb + " " + genome);
     
     try {
       genes = GenesService.getInstance()
-          .getGenes(mDb, genome).findGenes(mDb, displayRegion);
+          .getGenes(genome).findGenes(genome, displayRegion);
     } catch (IOException e) {
       e.printStackTrace();
+    }
+    
+    if (genes == null) {
+       genes = Collections.emptyList();
     }
     
     IterMap<String, Set<GenomicEntity>> geneMap = DefaultTreeMap

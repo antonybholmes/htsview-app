@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.tree.ModernTree;
@@ -48,7 +49,7 @@ public class ReadsFSJsonParser extends TrackJsonParser {
   public boolean parse(ModernWindow window,
       final String name,
       int id,
-      String genome,
+      Genome genome,
       ModernTree<Track> annotationTree,
       final Json trackJson,
       TreeNode<Track> rootNode) throws IOException {

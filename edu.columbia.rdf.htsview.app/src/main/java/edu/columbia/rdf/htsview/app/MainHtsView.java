@@ -51,12 +51,14 @@ import org.jebtk.modern.theme.ThemeService;
 import org.xml.sax.SAXException;
 
 import edu.columbia.rdf.edb.EDBWLogin;
+import edu.columbia.rdf.edb.EDBWLoginService;
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.edb.ui.Repository;
 import edu.columbia.rdf.edb.ui.RepositoryService;
 import edu.columbia.rdf.edb.ui.network.ServerException;
 import edu.columbia.rdf.htsview.app.modules.counts.CountsModule;
 import edu.columbia.rdf.htsview.app.modules.dna.DnaModule;
+import edu.columbia.rdf.htsview.app.modules.ucsc.UCSCModule;
 import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBAM;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBC;
@@ -160,6 +162,7 @@ public class MainHtsView {
 
     PluginService.getInstance().addPlugin("htsview", CountsModule.class);
     PluginService.getInstance().addPlugin("htsview", DnaModule.class);
+    PluginService.getInstance().addPlugin("htsview", UCSCModule.class);
 
     EDBWLogin login = null;
 
@@ -216,68 +219,74 @@ public class MainHtsView {
    * @throws ParserConfigurationException the parser configuration exception
    */
   public static void main(EDBWLogin login,
-      String genome,
+      Genome defaultGenome,
       Collection<Sample> samples) throws ServerException, IOException,
   ClassNotFoundException, SAXException, ParserConfigurationException {
     // Map<String, Genes> geneMap = new HashMap<String, Genes>();
 
     List<Path> dirs = FileUtils.lsdir(PathUtils.getPath("res", "genomes"));
 
+    if (SettingsService.getInstance().getBool("htsview.genes.web-mode")) {
+      WebGenes genes = new WebGenes(SettingsService.getInstance().getUrl("htsview.genes.url"));
+
+      GenesService.getInstance().put(genes);
+    }
+    
+    
     for (Path dir : dirs) {
       String g = PathUtils.namePrefix(dir);
 
-      String namePrefix = "_" + g;
+      for (Path dir2 : FileUtils.lsdir(dir)) {
+        String db = PathUtils.namePrefix(dir2);
 
-      CytobandsService.getInstance().load(g,
-          FileUtils
-          .newBufferedReader(dir.resolve("cytobands_" + g + ".txt.gz")));
+        String namePrefix = "_" + db;
 
-      //GenomeService.getInstance().load(g,
-      //    FileUtils.newBufferedReader(
-      //        dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
+        Genome genome = new Genome(g, db);
 
-      //GenomeService.getInstance().load(dir.resolve(g + ".genome.txt.gz"));
+        CytobandsService.getInstance().load(genome,
+            FileUtils
+            .newBufferedReader(dir2.resolve("cytobands_" + db + ".txt.gz")));
 
-      if (SettingsService.getInstance().getBool("htsview.genes.web-mode")) {
-        WebGenes genes = new WebGenes(SettingsService.getInstance().getUrl("htsview.genes.url"));
+        //GenomeService.getInstance().load(g,
+        //    FileUtils.newBufferedReader(
+        //        dir.resolve("chromosome_sizes_" + g + ".txt.gz")));
 
-        GenesService.getInstance().put(genes);
-      } else {
-        // Look for files locally
-        List<Path> files = FileUtils.ls(dir.resolve("genes"));
+        //GenomeService.getInstance().load(dir.resolve(g + ".genome.txt.gz"));
 
-        for (Path file : files) {
-          String filename = PathUtils.getName(file);
+        if (!SettingsService.getInstance().getBool("htsview.genes.web-mode")) {
+          // Look for files locally
+          List<Path> files = FileUtils.ls(dir2.resolve("genes"));
 
-          String db = PathUtils.namePrefix(file, namePrefix);
+          for (Path file : files) {
 
-          if (filename.contains("gff3")) {
-            GenesService.getInstance().put(db,
-                g,
-                new LazyGenes(file, db, g, Genes.gff3Parser().setKeepExons(true)
-                    .setLevels(GenomicType.GENE, GenomicType.TRANSCRIPT)));
-          } else if (filename.contains("gtf")) {
-            GenesService.getInstance().put(g,
-                db,
-                new LazyGenes(file, db, g, Genes.gff3Parser().setKeepExons(true)
-                    .setLevels(GenomicType.TRANSCRIPT)));
-          } else if (filename.contains("gtbz")) {
-            GenesService.getInstance().put(db,
-                g,
-                new GTBZGenes(file, db, g, new GTBZParser().setKeepExons(true)
-                    .setLevels(GenomicType.TRANSCRIPT)));
-          } else if (filename.contains("gtb2")) {
-            GenesService.getInstance().put(db,
-                g,
-                new LazyGenes(file, db, g, Genes.gtb2Parser().setKeepExons(true)
-                    .setLevels(GenomicType.TRANSCRIPT)));
-          } else if (filename.contains("gtb")) {
-            GenesService.getInstance().put(db,
-                g,
-                new LazyGenes(file, db, g, Genes.gtbParser().setKeepExons(true)
-                    .setLevels(GenomicType.TRANSCRIPT)));
-          } else {
-            // Do nothing
+            String filename = PathUtils.getName(file);
+
+            db = PathUtils.namePrefix(file, namePrefix);
+
+            if (filename.contains("gff3")) {
+              GenesService.getInstance().put(genome,
+                  new LazyGenes(file, genome, Genes.gff3Parser().setKeepExons(true)
+                      .setLevels(GenomicType.GENE, GenomicType.TRANSCRIPT)));
+            } else if (filename.contains("gtf")) {
+              GenesService.getInstance().put(genome,
+                  new LazyGenes(file, genome, Genes.gff3Parser().setKeepExons(true)
+                      .setLevels(GenomicType.TRANSCRIPT)));
+            } else if (filename.contains("gtbz")) {
+              GenesService.getInstance().put(genome,
+                  new GTBZGenes(file, genome, new GTBZParser().setKeepExons(true)
+                      .setLevels(GenomicType.TRANSCRIPT)));
+            } else if (filename.contains("gtb2")) {
+              GenesService.getInstance().put(genome,
+                  new LazyGenes(file, genome, Genes.gtb2Parser().setKeepExons(true)
+                      .setLevels(GenomicType.TRANSCRIPT)));
+            } else if (filename.contains("gtb")) {
+              GenesService.getInstance().put(genome,
+                  new LazyGenes(file, genome, Genes.gtbParser().setKeepExons(true)
+                      .setLevels(GenomicType.TRANSCRIPT)));
+            } else {
+              // Do nothing
+            }
+
           }
         }
       }
@@ -380,7 +389,12 @@ public class MainHtsView {
     SampleLoaderService.getInstance().register(new SampleLoaderSeg());
     SampleLoaderService.getInstance().register(new SampleLoaderABI());
 
-    MainHtsViewWindow window = new MainHtsViewWindow(genome, tree, samples);
+
+    EDBWLoginService.getInstance().setLogin(login);
+
+    //UCSCTrackService.getInstance().setTracks(new WebUCSCTracks(login));
+
+    MainHtsViewWindow window = new MainHtsViewWindow(defaultGenome, tree, samples);
 
     window.setVisible(true);
 

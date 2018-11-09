@@ -30,6 +30,7 @@ import java.util.Map;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
@@ -89,7 +90,7 @@ public class ImportMultiRes {
     /**
      * The m genome.
      */
-    private String mGenome;
+    private Genome mGenome;
 
     /**
      * The m dir.
@@ -140,7 +141,7 @@ public class ImportMultiRes {
      * @param minRes the min res
      */
     public EncodeWorker(ModernWindow parent, Path samFile, Path dir,
-        String name, String organism, String genome, int readLength,
+        String name, String organism, Genome genome, int readLength,
         int minRes) {
       mParent = parent;
       mSamFile = samFile;
@@ -264,7 +265,7 @@ public class ImportMultiRes {
   public static void createMetaFile(Path dir,
       String name,
       String organism,
-      String genome,
+      Genome genome,
       int readLength,
       int reads) throws IOException {
     Json json = new JsonObject();
@@ -296,7 +297,7 @@ public class ImportMultiRes {
       Path dir,
       String name,
       String organism,
-      String genome,
+      Genome genome,
       int readLength,
       int minRes) throws IOException, ParseException {
 
@@ -339,7 +340,7 @@ public class ImportMultiRes {
 
   /*
    * public static void encodeMultiResFile(Path samFile, Path dir, Chromosome
-   * chr, int minRes, String genome, int readLength, int readCount) throws
+   * chr, int minRes, Genome genome, int readLength, int readCount) throws
    * IOException, ParseException {
    * 
    * LOG.info("Finding read starts {}...", samFile);
@@ -388,7 +389,7 @@ public class ImportMultiRes {
   public static int encodeMultiResFileOrdered(Path samFile,
       Path dir,
       int minRes,
-      String genome,
+      Genome genome,
       int readLength) throws IOException, ParseException {
 
     LOG.info("Finding read starts {}...", samFile);

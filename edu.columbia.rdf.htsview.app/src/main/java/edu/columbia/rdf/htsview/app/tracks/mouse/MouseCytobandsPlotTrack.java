@@ -61,7 +61,7 @@ public class MouseCytobandsPlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
 
     //

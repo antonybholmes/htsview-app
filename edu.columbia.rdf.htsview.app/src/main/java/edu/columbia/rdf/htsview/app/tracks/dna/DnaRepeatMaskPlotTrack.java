@@ -17,6 +17,7 @@ package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.graphplot.figure.Axes;
@@ -54,7 +55,7 @@ public class DnaRepeatMaskPlotTrack extends DnaPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
 
     //

@@ -31,7 +31,7 @@ import java.util.TreeSet;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Gene;
-import org.jebtk.bioinformatics.genomic.GeneDb;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -269,13 +269,13 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
    */
   private void sortTssDist(SamplePlotTrack sample, int bins, DataFrame m)
       throws IOException {
-    String genome = mGenomeModel.get();
+    Genome genome = mGenomeModel.get();
     
     Map<Integer, Set<String>> tssMap = new TreeMap<Integer, Set<String>>();
 
     Set<String> used = new HashSet<String>();
 
-    GeneDb g = GenesService.getInstance().getFirstGeneDb(genome);
+    Genome g = GenesService.getInstance().getFirstGeneDb(genome.getAssembly());
     
     for (int i = 0; i < mRegions.size(); ++i) {
       HeatMapIdLocation region = mRegions.get(i);

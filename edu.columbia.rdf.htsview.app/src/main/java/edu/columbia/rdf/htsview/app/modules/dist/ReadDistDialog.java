@@ -29,7 +29,7 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.GeneDb;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
@@ -297,11 +297,11 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
    * Load tss.
    */
   private void loadTss() {
-    String genome = mGenomeModel.get();
+    Genome g = mGenomeModel.get();
     
     Set<String> genes = new HashSet<String>();
 
-    GeneDb g = new GeneDb("refseq", genome);
+    //Genome g = new Genome("refseq", genome);
     
     for (String refseq : GenesService.getInstance()
         .getGenes(g).getRefSeqIds()) {

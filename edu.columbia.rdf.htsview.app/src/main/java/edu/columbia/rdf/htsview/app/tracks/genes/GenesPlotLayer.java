@@ -21,9 +21,9 @@ import java.awt.geom.GeneralPath;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.IterMap;
@@ -258,7 +258,7 @@ public class GenesPlotLayer extends AxesLayer {
         // Draw the utr
         //
 
-        for (GenomicEntity exon : g.getChildren(GenomicType.UTR_5P)) {
+        for (GenomicElement exon : g.getChildren(GenomicEntity.UTR_5P)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 
@@ -284,7 +284,7 @@ public class GenesPlotLayer extends AxesLayer {
           g2.drawRect(x1, y1, x2 - x1, HALF_BAR_HEIGHT);
         }
 
-        for (GenomicEntity exon : g.getChildren(GenomicType.UTR_3P)) {
+        for (GenomicElement exon : g.getChildren(GenomicEntity.UTR_3P)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 
@@ -316,7 +316,7 @@ public class GenesPlotLayer extends AxesLayer {
 
         ExonProperties p = mGeneProperties.getVariantGene().getExons();
 
-        for (GenomicEntity exon : g.getChildren(GenomicType.EXON)) {
+        for (GenomicElement exon : g.getChildren(GenomicEntity.EXON)) {
           x1 = axes.toPlotX1(exon.mStart);
           x2 = axes.toPlotX1(exon.mEnd);
 

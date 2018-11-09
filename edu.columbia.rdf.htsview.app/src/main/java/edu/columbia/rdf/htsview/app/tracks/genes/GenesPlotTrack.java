@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.Json;
@@ -49,8 +50,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
   /** The m sub figure. */
   private TrackSubFigure mSubFigure;
 
-  /** The m genes id. */
-  protected String mDb;
+  private String mTrack;
 
   /**
    * Instantiates a new genes plot track.
@@ -58,10 +58,19 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
    * @param name the name
    * @param id the id
    */
-  public GenesPlotTrack(String name, String id) {
+  public GenesPlotTrack(String name, String track) {
     super(name);
-
-    mDb = id;
+    
+    mTrack = track;
+  }
+  
+  /**
+   * Returns the genomic track (e.g. gencode or refseq) being used.
+   * 
+   * @return
+   */
+  public String getTrack() {
+    return mTrack;
   }
 
   /*
@@ -234,14 +243,14 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
     //
     // Display some genes
     //
     
     mSubFigure = GenesPlotSubFigure
-        .create(getName(), mGenesProperties, mDb, titlePosition);
+        .create(getName(), getTrack(), mGenesProperties, titlePosition);
 
     setMargins(getName(), titlePosition, mSubFigure);
 

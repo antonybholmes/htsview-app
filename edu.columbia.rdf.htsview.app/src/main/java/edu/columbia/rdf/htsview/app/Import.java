@@ -25,6 +25,7 @@ import java.util.List;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.Human;
 import org.jebtk.core.Mathematics;
@@ -66,7 +67,7 @@ public class Import {
     /**
      * The m genome.
      */
-    private String mGenome;
+    private Genome mGenome;
 
     /**
      * The m dir.
@@ -100,11 +101,6 @@ public class Import {
     private String mName;
 
     /**
-     * The m organism.
-     */
-    private String mOrganism;
-
-    /**
      * Instantiates a new encode worker.
      *
      * @param parent the parent
@@ -117,13 +113,12 @@ public class Import {
      * @param windows the windows
      */
     public EncodeWorker(ModernWindow parent, Path samFile, Path dir,
-        String name, String organism, String genome, int readLength,
+        String name, Genome genome, int readLength,
         List<Integer> windows) {
       mParent = parent;
       mSamFile = samFile;
       mDir = dir;
       mName = name;
-      mOrganism = organism;
       mWindows = windows;
       mGenome = genome;
       mReadLength = readLength;
@@ -141,7 +136,7 @@ public class Import {
 
       int reads = readCount(mSamFile);
 
-      createMetaFile(mDir, mName, mOrganism, mGenome, mReadLength, reads);
+      createMetaFile(mDir, mName, mGenome, mReadLength, reads);
 
       for (int window : mWindows) {
         for (Chromosome chr : Human.CHROMOSOMES) {
@@ -178,8 +173,7 @@ public class Import {
    */
   public static void createMetaFile(Path dir,
       String name,
-      String organism,
-      String genome,
+      Genome genome,
       int readLength,
       int reads) throws IOException {
 
@@ -190,8 +184,8 @@ public class Import {
     Json json = new JsonObject();
 
     json.add("Name", name);
-    json.add("Organism", organism);
-    json.add("Genome", genome);
+    json.add("Organism", genome.getName());
+    json.add("Genome", genome.getAssembly());
     json.add("Read Length", readLength);
     json.add("Mapped Reads", reads);
 
@@ -238,7 +232,7 @@ public class Import {
       Path dir,
       Chromosome chr,
       int window,
-      String genome,
+      Genome genome,
       int readLength) throws IOException, ParseException {
 
     int size = (chr.getSize() / window) + 1;

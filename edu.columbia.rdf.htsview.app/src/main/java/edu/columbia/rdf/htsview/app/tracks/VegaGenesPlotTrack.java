@@ -34,7 +34,7 @@ public class VegaGenesPlotTrack extends GenesPlotTrack {
   }
 
   /*
-   * @Override public TrackSubFigure getGraph(String genome, TitleProperties
+   * @Override public TrackSubFigure getGraph(Genome genome, TitleProperties
    * titlePosition) throws IOException {
    * 
    * if (mGenes == null) { mGenes = new

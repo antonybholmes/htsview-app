@@ -20,6 +20,7 @@ import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.genomic.Genes;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.core.io.PathUtils;
 
 import edu.columbia.rdf.htsview.app.tracks.genes.GenesPlotTrack;
@@ -56,12 +57,12 @@ public class GFFPlotTrack extends GenesPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
 
-    if (GenesService.getInstance().getGenes(genome, mDb) == null) {
+    if (GenesService.getInstance().getGenes(genome) == null) {
       GenesService.getInstance()
-          .put(genome, mDb, Genes.gff3Parser().parse(mFile, mDb, genome));
+          .put(genome, Genes.gff3Parser().parse(mFile, genome));
     }
 
     return super.createGraph(genome, titlePosition);

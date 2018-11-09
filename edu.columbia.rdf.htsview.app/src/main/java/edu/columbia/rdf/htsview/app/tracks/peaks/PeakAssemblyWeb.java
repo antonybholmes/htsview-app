@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.http.UrlBuilder;
 import org.jebtk.core.json.Json;
@@ -81,7 +82,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
    * @see org.htsview.tracks.peaks.PeakAssembly#downloadJsonPeaks(int, int)
    */
   @Override
-  public List<GenomicRegion> downloadJsonPeaks(String genome,
+  public List<GenomicRegion> downloadJsonPeaks(Genome genome,
       int sampleId,
       int peaksId) throws IOException {
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);

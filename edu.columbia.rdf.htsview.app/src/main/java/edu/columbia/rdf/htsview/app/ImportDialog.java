@@ -19,14 +19,12 @@ import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.swing.Box;
 
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.external.samtools.SamGuiFileFilter;
-import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.combobox.ModernComboBox;
@@ -70,8 +68,8 @@ public class ImportDialog extends ModernDialogTaskWindow {
      * Instantiates a new genome chr combo.
      */
     public GenomeChrCombo() {
-      for (Entry<String, Genome> e : GenomeService.getInstance()) {
-        addScrollMenuItem(e.getKey());
+      for (Genome g : GenomeService.getInstance()) {
+        addScrollMenuItem(g.getAssembly());
       }
     }
   }
@@ -250,7 +248,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
    * @return the read length
    * @throws ParseException the parse exception
    */
-  public int getReadLength() throws ParseException {
+  public int getReadLength() {
     return mFieldReadLength.getInt();
   }
 
@@ -298,8 +296,8 @@ public class ImportDialog extends ModernDialogTaskWindow {
    *
    * @return the genome
    */
-  public String getGenome() {
-    return mGenomeChrCombo.getText();
+  public Genome getGenome() {
+    return GenomeService.getInstance().guessGenome(mGenomeChrCombo.getText());
   }
 
   /**

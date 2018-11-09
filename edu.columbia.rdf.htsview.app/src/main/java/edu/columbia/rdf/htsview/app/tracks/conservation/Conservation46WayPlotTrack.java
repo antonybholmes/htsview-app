@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.conservation;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 
@@ -29,6 +30,12 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class Conservation46WayPlotTrack extends ConservationPlotTrack {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  
+  
   /** The Constant TITLE. */
   public static final String TITLE = "46-way Conservation";
 
@@ -48,7 +55,7 @@ public class Conservation46WayPlotTrack extends ConservationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
 
     //

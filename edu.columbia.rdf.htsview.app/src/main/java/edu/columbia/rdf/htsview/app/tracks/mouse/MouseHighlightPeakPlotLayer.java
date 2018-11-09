@@ -46,7 +46,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
 
   /** The Constant COLOR. */
   private static final Color COLOR = ColorUtils
-      .getTransparentColor50(Color.BLACK);
+      .tint(Color.BLACK, 0.5);
 
   /** The Constant SNAP_SIZE. */
   private static final int SNAP_SIZE = 5;

@@ -15,9 +15,6 @@
  */
 package edu.columbia.rdf.htsview.app;
 
-import java.util.Map.Entry;
-
-import org.jebtk.bioinformatics.genomic.GeneDb;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -86,11 +83,11 @@ public class GenomeRibbonSection extends RibbonSection
 
     ModernPopupMenu2 popup = new ModernPopupMenu2();
 
-    //for (String genome : CollectionUtils
+    //for (Genome genome : CollectionUtils
     //    .sort(GenesService.getInstance().getGenomes())) {
-    for (Entry<String, Genome> g : GenomeService.getInstance()) {  
-      popup.addMenuItem(new ModernTwoLineMenuItem(g.getKey(),
-          "Switch to the " + g.getKey() + " genome.", ICON));
+    for (Genome g : GenomeService.getInstance()) {  
+      popup.addMenuItem(new ModernTwoLineMenuItem(g.getAssembly(),
+          "Switch to the " + g.getAssembly() + " genome.", ICON));
     }
 
     mButton = new RibbonLargeDropDownButton2("Genome", popup)
@@ -100,7 +97,7 @@ public class GenomeRibbonSection extends RibbonSection
 
     mButton.addClickListener(this);
 
-    mButton.setText(mModel.get());
+    mButton.setText(mModel.get().getAssembly());
 
     // mHumanButton.setToolTip("Human", "Human Genome Mode.");
     // mHumanButton.setShowText(false);

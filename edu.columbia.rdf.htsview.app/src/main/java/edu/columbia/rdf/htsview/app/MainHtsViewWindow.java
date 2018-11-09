@@ -41,6 +41,7 @@ import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
@@ -603,7 +604,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     }
   }
 
-  public MainHtsViewWindow(String genome, AnnotationTracksTree tree,
+  public MainHtsViewWindow(Genome genome, AnnotationTracksTree tree,
       Collection<Sample> samples)
       throws SAXException, IOException, ParserConfigurationException {
     super(new HTSViewInfo());
@@ -666,6 +667,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         SettingsService.getInstance()
         .getString("edb.reads.default-location"));
 
+    System.err.println("Default region " + region + " " + region.getGenome());
     mGenomicModel.set(region);
 
     createRibbon();
@@ -1116,11 +1118,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         e1.printStackTrace();
       }
     } else if (e.getMessage().equals("Import")) {
-      try {
-        importSam();
-      } catch (ParseException e1) {
-        e1.printStackTrace();
-      }
+      importSam();
     } else if (e.getMessage().equals("Locations")) {
       addLocationsPane();
     } else if (e.getMessage().equals("Read Distribution")) {
@@ -1151,7 +1149,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    *
    * @throws ParseException the parse exception
    */
-  private void importSam() throws ParseException {
+  private void importSam() {
     ImportDialog dialog = new ImportDialog(this);
 
     dialog.setVisible(true);
@@ -1174,7 +1172,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     }
 
     EncodeWorker task = new Import.EncodeWorker(this, dialog.getSamFile(),
-        dialog.getDir(), dialog.getName(), dialog.getOrganism(),
+        dialog.getDir(), dialog.getName(),
         dialog.getGenome(), dialog.getReadLength(), dialog.getResolutions());
 
     try {
@@ -1210,7 +1208,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    */
   private void updatePlots()
       throws TransformerException, ParserConfigurationException, IOException {
-    mTracksFigure.refresh(mGenomicModel.get(),
+    mTracksFigure.refresh(mGenomeModel.get(),
+        mGenomicModel.get(),
         mResolutionModel.get(),
         mWidthModel.get(),
         mHeightModel.get(),
@@ -1258,12 +1257,14 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * chromosome on a different genome.
    */
   private void changeGenome() {
-    String genome = mGenomeModel.get();
+    Genome genome = mGenomeModel.get();
     
     GenomicRegion region = mGenomicModel.get();
     
+    System.err.println("change");
+    
     // Get the same chromosome on a different assembly
-    Chromosome chr = GenomeService.getInstance().genome(genome).chr(region.getChr());
+    Chromosome chr = GenomeService.getInstance().chr(genome, region.getChr());
     
     // Change the genomic reference to reflect the new genome
     mGenomicModel.set(chr, region.getStart(), region.getEnd());

@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks.view;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.tree.ModernTree;
@@ -47,7 +48,7 @@ public class GenesJsonParser extends TrackJsonParser {
   public boolean parse(ModernWindow window,
       final String name,
       int id,
-      String genome,
+      Genome genome,
       ModernTree<Track> annotationTree,
       final Json trackJson,
       TreeNode<Track> rootNode) throws IOException {

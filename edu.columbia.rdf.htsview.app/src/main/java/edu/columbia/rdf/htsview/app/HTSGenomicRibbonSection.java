@@ -15,6 +15,7 @@
  */
 package edu.columbia.rdf.htsview.app;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -56,7 +57,7 @@ public class HTSGenomicRibbonSection extends GenomicRegionRibbonSection {
    * @see org.jebtk.bioinformatics.ui.GenomicRegionRibbonSection#parse()
    */
   @Override
-  protected GenomicRegion parse(String genome) {
+  protected GenomicRegion parse(Genome genome) {
     GenomicRegion region = super.parse(genome);
 
     if (region != null) {

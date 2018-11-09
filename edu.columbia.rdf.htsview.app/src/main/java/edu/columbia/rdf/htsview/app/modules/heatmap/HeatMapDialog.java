@@ -31,7 +31,7 @@ import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.bioinformatics.genomic.GenesService;
-import org.jebtk.bioinformatics.genomic.GeneDb;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -373,9 +373,9 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
   private void loadTss() {
     Set<String> genes = new HashSet<String>();
 
-    String genome = mGenomeModel.get();
+    Genome genome = mGenomeModel.get();
     
-    GeneDb g = GenesService.getInstance().getFirstGeneDb(genome);
+    Genome g = GenesService.getInstance().getFirstGeneDb(genome.getAssembly());
     
     
 
@@ -467,7 +467,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
     StringBuilder buffer = new StringBuilder();
     GenomicRegion region = null;
 
-    String genome = mGenomeModel.get();
+    Genome genome = mGenomeModel.get();
     
 
     for (int i = 0; i < model.getRowCount(); ++i) {

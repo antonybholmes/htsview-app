@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
@@ -50,7 +51,7 @@ public class PeaksJsonParser extends TrackJsonParser {
   public boolean parse(ModernWindow window,
       final String name,
       int id,
-      String genome,
+      Genome genome,
       ModernTree<Track> annotationTree,
       final Json trackJson,
       TreeNode<Track> rootNode) throws IOException {

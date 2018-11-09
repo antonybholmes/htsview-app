@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
@@ -51,7 +52,7 @@ public class BedJsonParser extends TrackJsonParser {
   public boolean parse(ModernWindow window,
       final String name,
       int id,
-      String genome,
+      Genome genome,
       ModernTree<Track> annotationTree,
       final Json trackJson,
       TreeNode<Track> rootNode) throws IOException {

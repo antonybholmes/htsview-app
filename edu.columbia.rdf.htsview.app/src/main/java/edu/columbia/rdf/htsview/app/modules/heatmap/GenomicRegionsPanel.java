@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.modern.panel.ModernLineBorderPanel;
@@ -60,7 +61,7 @@ public class GenomicRegionsPanel extends ModernWidget {
    * @return the regions
    * @throws ParseException the parse exception
    */
-  public List<GenomicRegion> getRegions(String genome) {
+  public List<GenomicRegion> getRegions(Genome genome) {
     List<String> lines = TextUtils.fastSplit(mGenesField.getText().trim(),
         TextUtils.NEW_LINE_DELIMITER);
 

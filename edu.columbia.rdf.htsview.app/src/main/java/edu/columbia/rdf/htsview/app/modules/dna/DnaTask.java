@@ -94,7 +94,7 @@ public class DnaTask extends SwingWorker<Void, Void> {
       window.openMatrix(mMatrice);
 
       window.runModule("DNA", 
-          CommandLineArgs.longArg("genome", mGenomeModel.get()),
+          CommandLineArgs.longArg("genome", mGenomeModel.get().getAssembly()),
           CommandLineArgs.longArg("mode", "seq"),
           CommandLineArgs.longArg("ui"));
     } catch (Exception e) {
