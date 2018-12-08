@@ -77,7 +77,7 @@ public class GenesPlotLayer extends AxesLayer {
   private GenesProperties mGeneProperties;
 
   /** The m gene cache. */
-  private IterMap<String, Set<GenomicEntity>> mGeneCache;
+  private IterMap<String, Set<GenomicElement>> mGeneCache;
 
   /** The Constant FORWARD_TSS_ARROW. */
   private static final GeneralPath FORWARD_TSS_ARROW = new GeneralPath();
@@ -128,7 +128,7 @@ public class GenesPlotLayer extends AxesLayer {
    * @param genes the genes
    * @param displayRegion the display region
    */
-  public void update(IterMap<String, Set<GenomicEntity>> genes,
+  public void update(IterMap<String, Set<GenomicElement>> genes,
       GenomicRegion displayRegion) {
     mGeneCache = genes;
   }
@@ -193,11 +193,11 @@ public class GenesPlotLayer extends AxesLayer {
 
     g2.setStroke(mGeneProperties.getStyle().getStroke());
 
-    for (Entry<String, Set<GenomicEntity>> e : mGeneCache) {
+    for (Entry<String, Set<GenomicElement>> e : mGeneCache) {
       if (c == maxGenes) {
         break;
       }
-      
+
       String symbol = e.getKey();
 
       // isMainVariant = mGeneCache.size() == 1 ||
@@ -232,7 +232,7 @@ public class GenesPlotLayer extends AxesLayer {
       int lx1 = Integer.MAX_VALUE;
       int lx2 = Integer.MIN_VALUE;
 
-      for (GenomicEntity g : mGeneCache.get(symbol)) {
+      for (GenomicElement g : mGeneCache.get(symbol)) {
         lx1 = Math.min(lx1, g.mStart);
         lx2 = Math.max(lx2, g.mEnd);
       }
@@ -253,7 +253,7 @@ public class GenesPlotLayer extends AxesLayer {
       // The gene line
       g2.drawLine(lx1, y, lx2, y);
 
-      for (GenomicEntity g : mGeneCache.get(symbol)) {
+      for (GenomicElement g : mGeneCache.get(symbol)) {
         //
         // Draw the utr
         //
@@ -455,7 +455,7 @@ public class GenesPlotLayer extends AxesLayer {
     // visually messy.
     x1 += ARROW_GAP;
     x2 -= ARROW_GAP;
-    
+
     int x;
     int y = y1 - ARROW_HEIGHT;
 

@@ -136,9 +136,9 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
       for (Plot plot : axes.getPlots()) {
         plot.getCurrentSeries().getStyle().getLineStyle()
-        .setColor(mTracks.get(i).getLineColor());
+            .setColor(mTracks.get(i).getLineColor());
         plot.getCurrentSeries().getStyle().getFillStyle()
-        .setColor(mTracks.get(i).getFillColor());
+            .setColor(mTracks.get(i).getFillColor());
         plot.getCurrentSeries().getMarker().setVisible(false);
 
         ++i;
@@ -174,7 +174,8 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
   /**
    * Creates the counts file.
-   * @return 
+   * 
+   * @return
    *
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -201,7 +202,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         break;
       }
     }
-    
+
     boolean relative = inputSample != null;
 
     if (relative) {
@@ -235,18 +236,19 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
             .midRegion(location.getRegion()), mPadding, mPadding);
 
         double[] counts = getCounts(track, ext, mWindow);
-        
+
         if (relative) {
           // Take the ratio of sample to input
-          
+
           double[] inputCounts = getCounts(inputSample, ext, mWindow);
-          
+
           for (int i = 0; i < bins; ++i) {
-            //if (inputCounts.get(i) > 0) {
-              double ratio = (counts[i] + 1) / (inputCounts[i] + 1);
-            
-              mBinCountMap.get(sample).put(i, mBinCountMap.get(sample).get(i) + ratio);
-            //}
+            // if (inputCounts.get(i) > 0) {
+            double ratio = (counts[i] + 1) / (inputCounts[i] + 1);
+
+            mBinCountMap.get(sample).put(i,
+                mBinCountMap.get(sample).get(i) + ratio);
+            // }
           }
         } else {
           for (int i = 0; i < bins; ++i) {
@@ -271,7 +273,8 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
         for (int i : mBinCountMap.get(sample).keySet()) {
           mBinCountMap.get(sample).put(i,
-              mBinCountMap.get(sample).get(i) / mLocations.size()); // * SCALE_LOCATION_COUNT);
+              mBinCountMap.get(sample).get(i) / mLocations.size()); // *
+                                                                    // SCALE_LOCATION_COUNT);
         }
       }
     }
@@ -302,7 +305,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
           writer.write(bin);
           writer.sep();
           writer
-          .write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
+              .write(Double.toString(mBinCountMap.get(samples.get(j)).get(i)));
 
           if (j < mTracks.size() - 1) {
             writer.sep();
@@ -314,7 +317,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
     } finally {
       writer.close();
     }
-    
+
     return relative;
   }
 

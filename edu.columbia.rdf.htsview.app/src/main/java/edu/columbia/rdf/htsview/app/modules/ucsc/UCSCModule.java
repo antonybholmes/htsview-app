@@ -69,9 +69,9 @@ public class UCSCModule extends HTSViewModule implements ModernClickListener {
    */
   private ModernButton mTracksButton = new RibbonLargeButton("UCSC",
       AssetService.getInstance().loadIcon(GBIcon.class, 24));
-  
-  private static final UrlBuilder BASE_URL =
-      new UrlBuilder(SettingsService.getInstance().getUrl("htsview.ucsc.tracks.base-url"));
+
+  private static final UrlBuilder BASE_URL = new UrlBuilder(
+      SettingsService.getInstance().getUrl("htsview.ucsc.tracks.base-url"));
 
   /**
    * The member window.
@@ -102,11 +102,13 @@ public class UCSCModule extends HTSViewModule implements ModernClickListener {
     mWindow = window;
 
     // home
-    mTracksButton.setToolTip("Tracks", "Look at tracks in UCSC Genome Browser.");
-    mWindow.getRibbon().getToolbar("Tools").getSection("UCSC").add(mTracksButton);
+    mTracksButton.setToolTip("Tracks",
+        "Look at tracks in UCSC Genome Browser.");
+    mWindow.getRibbon().getToolbar("Tools").getSection("UCSC")
+        .add(mTracksButton);
 
     mTracksButton.addClickListener(this);
-    
+
     mUrl = new TracksURL(EDBWLoginService.getInstance().getLogin());
   }
 
@@ -121,56 +123,50 @@ public class UCSCModule extends HTSViewModule implements ModernClickListener {
 
   private void tracks() throws URISyntaxException, IOException {
     UrlBuilder url = mUrl;
-    
+
     Join join = Join.onColon();
-    
+
     for (Track track : mWindow.getTracksPanel().getSelectedTracks()) {
       if (track instanceof SamplePlotTrack) {
         Sample sample = ((SamplePlotTrack) track).getSample();
-        
-        url = url.param("id", join.values(sample.getId(), 
-            colorToUCSCColor(track.getFillColor())).toString());
+
+        url = url.param("id",
+            join.values(sample.getId(), colorToUCSCColor(track.getFillColor()))
+                .toString());
       }
     }
-    
 
-    
     System.err.println(url);
-    
+
     Genome genome = mWindow.getGenomeModel().get();
-    
-    UrlBuilder dispUrl = BASE_URL
-        .param("org", genome.getName())
+
+    UrlBuilder dispUrl = BASE_URL.param("org", genome.getName())
         .param("db", genome.getAssembly())
-        .param("position", mWindow.getGenomicModel().get().getLocation()) //=chr3:187439165-187454285")
+        .param("position", mWindow.getGenomicModel().get().getLocation()) // =chr3:187439165-187454285")
         .param("hgt.customText", url.toString());
-    
+
     System.err.println(dispUrl);
-    
+
     URLUtils.launch(dispUrl);
-    
+
     /*
-    List<URL> urls = UCSCTrackService.getInstance().getURLs(samples);
-    
-    if (urls.size() == 0) {
-      ModernMessageDialog.createWarningDialog(mWindow, "There are no samples available.");
-      
-      return;
-    }
-    
-    for (URL url : urls) {
-      UrlBuilder dispUrl = BASE_URL
-          .param("org=human")
-          .param("db=hg19")
-          .param("position=chr1:1-10000")
-          .param("hgt.customText", url);
-          
-      URLUtils.launch(dispUrl);
-    }
-    */
+     * List<URL> urls = UCSCTrackService.getInstance().getURLs(samples);
+     * 
+     * if (urls.size() == 0) { ModernMessageDialog.createWarningDialog(mWindow,
+     * "There are no samples available.");
+     * 
+     * return; }
+     * 
+     * for (URL url : urls) { UrlBuilder dispUrl = BASE_URL .param("org=human")
+     * .param("db=hg19") .param("position=chr1:1-10000")
+     * .param("hgt.customText", url);
+     * 
+     * URLUtils.launch(dispUrl); }
+     */
   }
 
   private String colorToUCSCColor(Color c) {
-    return Join.onComma().values(c.getRed(), c.getGreen(), c.getBlue()).toString();
+    return Join.onComma().values(c.getRed(), c.getGreen(), c.getBlue())
+        .toString();
   }
 }

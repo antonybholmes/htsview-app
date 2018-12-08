@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -97,7 +98,7 @@ public class DnaRepeatMaskPlotCanvas extends DnaSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
     super.update(displayRegion,
         resolution,
         yMax,

@@ -26,7 +26,8 @@ public class HTSViewGuiFileFilter extends GuiFileExtFilter {
    * Instantiates a new reads xml view gui file filter.
    */
   public HTSViewGuiFileFilter() {
-    super(HtsJsonViewGuiFileFilter.EXT, ReadsXmlViewGuiFileFilter.EXT, ReadsJsonViewGuiFileFilter.EXT);
+    super(HtsJsonViewGuiFileFilter.EXT, ReadsXmlViewGuiFileFilter.EXT,
+        ReadsJsonViewGuiFileFilter.EXT);
   }
 
   /*

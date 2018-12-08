@@ -120,7 +120,8 @@ public class CountsModule extends HTSViewModule implements ModernClickListener {
       return;
     }
 
-    CountsDialog dialog = new CountsDialog(mWindow, mWindow.getGenomeModel(), sampleTracks);
+    CountsDialog dialog = new CountsDialog(mWindow, mWindow.getGenomeModel(),
+        sampleTracks);
 
     dialog.setVisible(true);
 

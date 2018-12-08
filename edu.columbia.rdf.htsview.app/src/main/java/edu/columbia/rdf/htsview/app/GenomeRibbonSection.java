@@ -83,9 +83,9 @@ public class GenomeRibbonSection extends RibbonSection
 
     ModernPopupMenu2 popup = new ModernPopupMenu2();
 
-    //for (Genome genome : CollectionUtils
-    //    .sort(GenesService.getInstance().getGenomes())) {
-    for (Genome g : GenomeService.getInstance()) {  
+    // for (Genome genome : CollectionUtils
+    // .sort(GenesService.getInstance().getGenomes())) {
+    for (Genome g : GenomeService.getInstance()) {
       popup.addMenuItem(new ModernTwoLineMenuItem(g.getAssembly(),
           "Switch to the " + g.getAssembly() + " genome.", ICON));
     }

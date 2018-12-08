@@ -62,8 +62,7 @@ public class CountTask extends SwingWorker<Void, Void> {
    * @param window the window
    * @param average the average
    */
-  public CountTask(List<SamplePlotTrack> tracks,
-      List<GenomicRegion> regions,
+  public CountTask(List<SamplePlotTrack> tracks, List<GenomicRegion> regions,
       NormalizationMethod norm) {
     mTracks = tracks;
     mLocations = regions;
@@ -148,7 +147,8 @@ public class CountTask extends SwingWorker<Void, Void> {
     for (int i = 0; i < mTracks.size(); ++i) {
       SamplePlotTrack track = mTracks.get(i);
 
-      int total = track.getAssembly().getMappedReads(track.getSample(), mGenome, 100);
+      int total = track.getAssembly()
+          .getMappedReads(track.getSample(), mGenome, 100);
 
       matrix.setColumnAnnotation("total-reads", i, total);
     }

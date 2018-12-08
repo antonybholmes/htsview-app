@@ -113,8 +113,7 @@ public class Import {
      * @param windows the windows
      */
     public EncodeWorker(ModernWindow parent, Path samFile, Path dir,
-        String name, Genome genome, int readLength,
-        List<Integer> windows) {
+        String name, Genome genome, int readLength, List<Integer> windows) {
       mParent = parent;
       mSamFile = samFile;
       mDir = dir;

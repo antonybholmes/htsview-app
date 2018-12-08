@@ -15,23 +15,23 @@
  */
 package edu.columbia.rdf.htsview.app.tracks.loaders;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 
-import org.jebtk.bioinformatics.ext.ucsc.Bed;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.geb.GEBReader;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
+import edu.columbia.rdf.htsview.tracks.TrackDisplayMode;
+import edu.columbia.rdf.htsview.tracks.genomic.GenomicElementsTrack;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderFS;
 
 /**
  * The Class SampleLoaderBed.
  */
-public class SampleLoaderBed extends SampleLoaderFS {
+public class SampleLoaderGEB extends SampleLoaderFS {
 
   /*
    * (non-Javadoc)
@@ -44,13 +44,13 @@ public class SampleLoaderBed extends SampleLoaderFS {
   @Override
   public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
       throws IOException {
-    List<UCSCTrack> beds = Bed.parseTracks("bed", file);
 
-    Track ret = null;
+    GEBReader reader = GEBReader.loadGEI(file);
 
-    for (UCSCTrack bed : beds) {
-      ret = load(new BedPlotTrack(bed, file), root);
-    }
+    Track ret = load(
+        new GenomicElementsTrack(reader.getName(), reader, Color.RED,
+            TrackDisplayMode.COMPACT),
+        root);
 
     return ret;
   }
@@ -62,7 +62,7 @@ public class SampleLoaderBed extends SampleLoaderFS {
    */
   @Override
   public String getName() {
-    return "BED";
+    return "GEB";
   }
 
   /*
@@ -72,6 +72,6 @@ public class SampleLoaderBed extends SampleLoaderFS {
    */
   @Override
   public String getExt() {
-    return "bed";
+    return "gei";
   }
 }

@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.app.tracks.mouse;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -100,7 +101,7 @@ public class MouseConservationPlotCanvas extends DnaSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
     super.update(displayRegion,
         resolution,
         yMax,

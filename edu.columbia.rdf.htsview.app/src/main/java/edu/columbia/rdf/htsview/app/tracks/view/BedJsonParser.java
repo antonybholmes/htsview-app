@@ -67,7 +67,7 @@ public class BedJsonParser extends TrackJsonParser {
     Path file = getFile(trackJson);
 
     if (FileUtils.exists(file)) {
-      List<UCSCTrack> beds = Bed.parseTracks(file);
+      List<UCSCTrack> beds = Bed.parseTracks("bed", file);
 
       for (UCSCTrack bed : beds) {
         bed.setName(name);

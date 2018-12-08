@@ -60,10 +60,10 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
    */
   public GenesPlotTrack(String name, String track) {
     super(name);
-    
+
     mTrack = track;
   }
-  
+
   /**
    * Returns the genomic track (e.g. gencode or refseq) being used.
    * 
@@ -248,7 +248,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
     //
     // Display some genes
     //
-    
+
     mSubFigure = GenesPlotSubFigure
         .create(getName(), getTrack(), mGenesProperties, titlePosition);
 

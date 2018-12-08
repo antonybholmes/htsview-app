@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -65,8 +66,8 @@ public class DnaBasesPlotSubFigure extends DnaSubFigure {
       TitleProperties titlePosition,
       boolean colorMode) {
 
-    DnaBasesPlotSubFigure canvas = 
-        new DnaBasesPlotSubFigure(genomeAssembly, titlePosition, colorMode);
+    DnaBasesPlotSubFigure canvas = new DnaBasesPlotSubFigure(genomeAssembly,
+        titlePosition, colorMode);
 
     // set the graph limits
     canvas.currentAxes().getX1Axis().getTitle().setText(null);
@@ -98,7 +99,7 @@ public class DnaBasesPlotSubFigure extends DnaSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
     super.update(displayRegion,
         resolution,
         yMax,

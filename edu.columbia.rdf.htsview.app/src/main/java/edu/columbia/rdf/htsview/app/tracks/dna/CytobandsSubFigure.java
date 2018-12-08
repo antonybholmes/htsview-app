@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.ext.ucsc.Cytobands;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -91,7 +92,7 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
 
     super.update(displayRegion,
         resolution,
@@ -107,10 +108,10 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
 
     // Update the title to reflect changes
     currentAxes().getTitle()
-        .setText("Cytobands (" + displayRegion.getChr().getGenome() + ") - " + displayRegion.getChr().toString());
+        .setText("Cytobands (" + displayRegion.getChr().getGenome() + ") - "
+            + displayRegion.getChr().toString());
 
     // set the graph limits
-    currentAxes().getX1Axis().setLimits(1,
-        displayRegion.getChr().getSize());
+    currentAxes().getX1Axis().setLimits(1, displayRegion.getChr().getSize());
   }
 }

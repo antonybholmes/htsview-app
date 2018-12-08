@@ -18,7 +18,7 @@ package edu.columbia.rdf.htsview.app.tracks;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import org.jebtk.bioinformatics.genomic.Genes;
+import org.jebtk.bioinformatics.genomic.GenesDB;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.core.io.PathUtils;
@@ -33,8 +33,7 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 public class GFFPlotTrack extends GenesPlotTrack {
 
   private static final long serialVersionUID = 1L;
-  
-  
+
   /** The m file. */
   private Path mFile;
 
@@ -61,8 +60,8 @@ public class GFFPlotTrack extends GenesPlotTrack {
       TitleProperties titlePosition) throws IOException {
 
     if (GenesService.getInstance().getGenes(genome) == null) {
-      GenesService.getInstance()
-          .put(genome, Genes.gff3Parser().parse(mFile, genome));
+      GenesService.getInstance().put(genome,
+          GenesDB.gff3Parser().parse(mFile, genome));
     }
 
     return super.createGraph(genome, titlePosition);

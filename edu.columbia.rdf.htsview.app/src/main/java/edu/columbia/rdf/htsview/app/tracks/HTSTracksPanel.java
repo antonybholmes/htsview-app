@@ -42,6 +42,8 @@ import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.ribbon.RibbonSubSectionSeparator;
 import org.jebtk.modern.search.SearchModel;
 import org.jebtk.modern.tree.ModernTree;
+import org.jebtk.modern.widget.ButtonStyle;
+import org.jebtk.modern.widget.ModernClickWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.edb.Sample;
@@ -73,23 +75,27 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
       AssetService.getInstance().loadIcon(OpenTrack16VectorIcon.class, 16));
 
   /** The m delete button. */
-  private ModernButton mDeleteButton = new RibbonButton(
-      AssetService.getInstance().loadIcon("trash_bw", 16));
+  private ModernClickWidget mDeleteButton = new RibbonButton(
+      AssetService.getInstance().loadIcon("trash_bw", 16))
+          .setButtonStyle(ButtonStyle.ROUND);
 
   /** The m tracks button. */
-  private ModernButton mTracksButton = new RibbonButton(
-      AssetService.getInstance().loadIcon("tracks", 16));
+  private ModernClickWidget mTracksButton = new RibbonButton(
+      AssetService.getInstance().loadIcon("tracks", 16))
+          .setButtonStyle(ButtonStyle.ROUND);
 
   /** The m edit button. */
-  private ModernButton mEditButton = new RibbonButton(
-      AssetService.getInstance().loadIcon("edit_bw", 16));
+  private ModernClickWidget mEditButton = new RibbonButton(
+      AssetService.getInstance().loadIcon("edit_bw", 16))
+          .setButtonStyle(ButtonStyle.ROUND);
 
   /** The m clear button. */
-  private ModernButton mClearButton = new RibbonButton(
-      AssetService.getInstance().loadIcon(CrossVectorIcon.class, 16));
+  private ModernClickWidget mClearButton = new RibbonButton(
+      AssetService.getInstance().loadIcon(CrossVectorIcon.class, 16))
+          .setButtonStyle(ButtonStyle.ROUND);
 
   /** The m samples button. */
-  private ModernButton mSamplesButton = new RibbonButton("Samples",
+  private ModernClickWidget mSamplesButton = new RibbonButton("Samples",
       AssetService.getInstance().loadIcon("samples", 16));
 
   /** The m search model. */
@@ -107,12 +113,11 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
    * @param trackList the track list
    */
   public HTSTracksPanel(ModernRibbonWindow parent, GenomeModel genomeModel,
-      ModernTree<Track> tree,
-      TrackTree trackList) {
+      ModernTree<Track> tree, TrackTree trackList) {
     super(parent, tree, trackList);
 
     mGenomeModel = genomeModel;
-    
+
     setup();
 
     createUi();
@@ -303,7 +308,7 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
               List<GenomicRegion> locations = peakAssembly
                   .downloadJsonPeaks(mGenomeModel.get(), sample, peaks);
 
-              Bed bed = Bed.create(peaks.getName(), locations);
+              Bed bed = Bed.create("bed", peaks.getName(), locations);
 
               mTrackList.getRoot().addChild(new TreeNode<Track>(peaks.getName(),
                   new PeaksPlotTrack(sample.getId(), peaks, bed)));
@@ -407,8 +412,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
    * 
    * Sample sample = SampleTracks.getSampleFromTrack(json);
    * 
-   * openSampleFs(sample, new SampleAssembly16bit(metaFile,
-   * json.getInt("Mapped Reads")), metaFile); }
+   * openSampleFs(sample, new SampleAssembly16bit(metaFile, json.getInt("Mapped
+   * Reads")), metaFile); }
    */
 
 }

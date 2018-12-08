@@ -10,7 +10,7 @@ public class TracksURL extends UrlBuilder {
 
   public TracksURL(EDBWLogin login) {
     super(login.getURL());
-    
+
     _resolve("ucsc");
     _resolve("tracks");
   }

@@ -120,7 +120,7 @@ public class SegmentsPlotLayer extends AxesLayer {
 
     for (Entry<String, List<Segment>> e : mRegions) {
       String name = e.getKey();
-      
+
       g2.setColor(Color.BLACK);
       textY = y + ModernWidget.getTextYPosCenter(g2, BedPlotTrack.BAR_HEIGHT);
       g2.drawString(name, textX - g2.getFontMetrics().stringWidth(name), textY);

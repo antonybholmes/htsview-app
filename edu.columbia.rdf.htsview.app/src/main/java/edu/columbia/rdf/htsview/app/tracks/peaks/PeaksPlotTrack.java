@@ -16,18 +16,23 @@
 package edu.columbia.rdf.htsview.app.tracks.peaks;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
-import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.JsonBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack;
+import edu.columbia.rdf.htsview.tracks.TrackDisplayMode;
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 
 /**
  * The Class PeaksPlotTrack.
  */
-public class PeaksPlotTrack extends UcscPlotTrack {
+public class PeaksPlotTrack extends BedPlotTrack {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /** The Constant BAR_HEIGHT. */
   public static final int BAR_HEIGHT = 20;
@@ -68,7 +73,7 @@ public class PeaksPlotTrack extends UcscPlotTrack {
    */
   public PeaksPlotTrack(int sampleId, PeakSet peaks, Bed bed,
       TrackDisplayMode mode) {
-    super(bed, mode);
+    super(null, bed, mode);
 
     mSampleId = sampleId;
     mPeaks = peaks;

@@ -34,7 +34,7 @@ public class MouseConservationPlotTrack extends ConservationPlotTrack {
    * 
    */
   private static final long serialVersionUID = 1L;
-  
+
   /** The title. */
   public static String TITLE = "Mouse Conservation";
 

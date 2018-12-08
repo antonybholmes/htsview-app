@@ -16,17 +16,18 @@
 package edu.columbia.rdf.htsview.app.tracks.dna;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.PlotStyle;
 
-import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
+import edu.columbia.rdf.htsview.tracks.FixedYSubFigure;
 import edu.columbia.rdf.htsview.tracks.Track;
 
 /**
  * The Class DnaSubFigure.
  */
-public abstract class DnaSubFigure extends FixedSubFigure {
+public abstract class DnaSubFigure extends FixedYSubFigure {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -47,7 +48,7 @@ public abstract class DnaSubFigure extends FixedSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
 
     super.update(displayRegion,
         resolution,

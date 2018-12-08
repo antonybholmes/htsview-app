@@ -88,8 +88,8 @@ public class DnaColorCanvasLayer extends AxesClippedLayer {
     int hbw = bw / 2;
 
     try {
-      SequenceRegion sequence = mAssembly
-          .getSequence(mDisplayRegion, RepeatMaskType.N);
+      SequenceRegion sequence = mAssembly.getSequence(mDisplayRegion,
+          RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
       int w;

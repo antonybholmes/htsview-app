@@ -56,7 +56,7 @@ public class SampleJsonParser extends TrackJsonParser {
       ModernTree<Track> annotationTree,
       final Json trackJson,
       TreeNode<Track> rootNode) throws IOException {
-    Repository store = RepositoryService.getInstance().getCurrentRepository();
+    Repository store = RepositoryService.getInstance().getRepository();
 
     Sample sample = null;
 

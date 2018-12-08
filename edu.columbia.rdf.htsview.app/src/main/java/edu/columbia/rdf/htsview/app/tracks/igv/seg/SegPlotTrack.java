@@ -38,9 +38,6 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class SegPlotTrack extends GraphPlotTrack {
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = 1L;
 
   /** The m file. */
@@ -143,7 +140,7 @@ public class SegPlotTrack extends GraphPlotTrack {
       int resolution,
       int width,
       int height,
-      int margin) {
+      int margin) throws IOException {
 
     mSubFigure.setColorMap(mColorMap);
     // mPlot.setForwardCanvasEventsEnabled(false);

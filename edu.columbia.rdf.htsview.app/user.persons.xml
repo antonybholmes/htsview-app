@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+  <person name="F B" selected="false"/>
+  <person name="Elodie Bal" selected="true"/>
+  <person name="Katia Basso" selected="false"/>
+  <person name="Bradley Bernstein" selected="false"/>
+  <person name="James Bradner" selected="false"/>
+  <person name="Nicolo Compagno" selected="false"/>
+  <person name="David Dominguez-Sola" selected="false"/>
+  <person name="Giulia Fabbri" selected="false"/>
+  <person name="Kai Ge" selected="false"/>
+  <person name="Antony Holmes" selected="false"/>
+  <person name="Ulf Klein" selected="false"/>
+  <person name="Roy Maute" selected="false"/>
+  <person name="Ari Melnick" selected="false"/>
+  <person name="Laura Pasqualucci" selected="false"/>
+  <person name="Lab RDF" selected="false"/>
+  <person name="Christof Schneider" selected="false"/>
+  <person name="Louis Staudt" selected="false"/>
+  <person name="Test Test" selected="false"/>
+  <person name="Jiyuan Zhang" selected="false"/>
+  <person name="James Zou" selected="false"/>
+</persons>

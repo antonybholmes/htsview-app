@@ -32,6 +32,7 @@ import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -270,13 +271,13 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
   private void sortTssDist(SamplePlotTrack sample, int bins, DataFrame m)
       throws IOException {
     Genome genome = mGenomeModel.get();
-    
+
     Map<Integer, Set<String>> tssMap = new TreeMap<Integer, Set<String>>();
 
     Set<String> used = new HashSet<String>();
 
     Genome g = GenesService.getInstance().getFirstGeneDb(genome.getAssembly());
-    
+
     for (int i = 0; i < mRegions.size(); ++i) {
       HeatMapIdLocation region = mRegions.get(i);
 
@@ -284,9 +285,9 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
         continue;
       }
 
-      Iterable<GenomicEntity> closestGenes = GenesService.getInstance()
+      Iterable<GenomicElement> closestGenes = GenesService.getInstance()
           .getGenes(g)
-          .findClosestGenesByTss(g, region.getRegion());
+          .closestByTss(g, region.getRegion(), GenomicEntity.TRANSCRIPT);
 
       // System.err.println("sym " + closestGenes.get(0).getSymbol());
 
@@ -301,22 +302,24 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
         tssMap.put(tssDistance, new TreeSet<String>());
       }
 
-      for (GenomicEntity gene : closestGenes) {
-        if (used.contains(gene.getSymbol())) {
+      for (GenomicElement gene : closestGenes) {
+        String symbol = gene.getProp(GenomicEntity.GENE_NAME_TYPE);
+
+        if (used.contains(symbol)) {
           continue;
         }
 
-        tssMap.get(tssDistance).add(gene.getRefSeq());
-        used.add(gene.getSymbol());
+        tssMap.get(tssDistance).add(gene.getProp(GenomicEntity.REFSEQ_TYPE));
+        used.add(symbol);
       }
     }
 
     int i = 0;
-    
+
     for (int tssDist : tssMap.keySet()) {
       for (String refseq : tssMap.get(tssDist)) {
-        GenomicEntity gene = GenesService.getInstance()
-            .getGenes(g).getGene(g, refseq);
+        GenomicElement gene = GenesService.getInstance().getGenes(g)
+            .getElement(g, refseq, GenomicEntity.TRANSCRIPT);
 
         GenomicRegion tssRegion = Gene.tssRegion(gene);
 

@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.app.tracks.igv.seg;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -26,14 +27,14 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.modern.graphics.colormap.ColorMap;
 
-import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
+import edu.columbia.rdf.htsview.tracks.FixedYSubFigure;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
 
 /**
  * The Class SegmentsSubFigure.
  */
-public class SegmentsSubFigure extends FixedSubFigure {
+public class SegmentsSubFigure extends FixedYSubFigure {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -120,7 +121,7 @@ public class SegmentsSubFigure extends FixedSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
 
     IterMap<String, List<Segment>> regions = DefaultTreeMap
         .create(new ArrayListCreator<Segment>());

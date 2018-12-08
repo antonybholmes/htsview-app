@@ -18,7 +18,6 @@ package edu.columbia.rdf.htsview.app;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
-import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.SequenceService;
 import org.jebtk.core.io.PathUtils;
@@ -36,6 +35,7 @@ import edu.columbia.rdf.htsview.app.tracks.genes.GencodeGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.genes.RefSeqGenesPlotTrack;
 import edu.columbia.rdf.htsview.app.tracks.mouse.MouseConservationPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
+import edu.columbia.rdf.htsview.tracks.TrackDisplayMode;
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 import edu.columbia.rdf.htsview.tracks.measurement.RangePlotTrack;
 import edu.columbia.rdf.htsview.tracks.measurement.RulerPlotTrack;
@@ -104,7 +104,8 @@ public class AnnotationTracksTree extends ModernTree<Track> {
     node = new TreeNode<Track>(track.getName(), track);
     dnaNode.addChild(node);
 
-    track = new DnaRepeatMaskPlotTrack(SequenceService.getInstance().getCurrent());
+    track = new DnaRepeatMaskPlotTrack(
+        SequenceService.getInstance().getCurrent());
     node = new TreeNode<Track>(track.getName(), track);
     dnaNode.addChild(node);
 

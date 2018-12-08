@@ -34,8 +34,7 @@ public class Conservation46WayPlotTrack extends ConservationPlotTrack {
    * 
    */
   private static final long serialVersionUID = 1L;
-  
-  
+
   /** The Constant TITLE. */
   public static final String TITLE = "46-way Conservation";
 

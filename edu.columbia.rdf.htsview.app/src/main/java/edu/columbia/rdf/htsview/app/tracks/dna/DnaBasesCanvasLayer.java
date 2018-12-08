@@ -109,8 +109,8 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
     int hbw = bw / 2;
 
     try {
-      SequenceRegion sequence = mAssembly
-          .getSequence(mDisplayRegion, RepeatMaskType.N);
+      SequenceRegion sequence = mAssembly.getSequence(mDisplayRegion,
+          RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
 
@@ -177,8 +177,8 @@ public class DnaBasesCanvasLayer extends AxesClippedLayer {
     int h = axes.getInternalSize().getH();
 
     try {
-      SequenceRegion sequence = mAssembly
-          .getSequence(mDisplayRegion, RepeatMaskType.N);
+      SequenceRegion sequence = mAssembly.getSequence(mDisplayRegion,
+          RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();
       int w;

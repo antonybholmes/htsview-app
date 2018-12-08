@@ -83,8 +83,8 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
     mWindow = window;
 
     // home
-    mDnaButton.setToolTip(
-        new ModernToolTip("DNA", "Get DNA sequence for region."));
+    mDnaButton
+        .setToolTip(new ModernToolTip("DNA", "Get DNA sequence for region."));
     mDnaButton.setClickMessage("DNA");
     mWindow.getRibbon().getToolbar("Tools").getSection("DNA").add(mDnaButton);
 
@@ -97,7 +97,8 @@ public class DnaModule extends HTSViewModule implements ModernClickListener {
   }
 
   private void dna() {
-    DnaTask task = new DnaTask(mWindow, mWindow.getGenomeModel(), mWindow.getGenomicModel());
+    DnaTask task = new DnaTask(mWindow, mWindow.getGenomeModel(),
+        mWindow.getGenomicModel());
 
     task.doInBackground();
     task.done();

@@ -50,6 +50,7 @@ import org.jebtk.bioinformatics.ui.external.samtools.BamGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGuiFileFilter;
 import org.jebtk.bioinformatics.ui.filters.BCGuiFileFilter;
+import org.jebtk.bioinformatics.ui.filters.GEIGuiFileFilter;
 import org.jebtk.bioinformatics.ui.filters.GFFGuiFileFilter;
 import org.jebtk.bioinformatics.ui.filters.SegGuiFileFilter;
 import org.jebtk.core.Plugin;
@@ -122,7 +123,6 @@ import edu.columbia.rdf.htsview.app.tracks.HTSTracksPanel;
 import edu.columbia.rdf.htsview.ngs.BctGuiFileFilter;
 import edu.columbia.rdf.htsview.ngs.Brt2GuiFileFilter;
 import edu.columbia.rdf.htsview.ngs.Brt3GuiFileFilter;
-import edu.columbia.rdf.htsview.ngs.BvtGuiFileFilter;
 import edu.columbia.rdf.htsview.tracks.AxisLimitsModel;
 import edu.columbia.rdf.htsview.tracks.HeightModel;
 import edu.columbia.rdf.htsview.tracks.LayoutRibbonSection;
@@ -647,7 +647,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     mLocationsPanel = new LocationsPanel(this, mGenomeModel, mGenomicModel);
 
-    mTracksPanel = new HTSTracksPanel(this, mGenomeModel, mAnnotationTree, mTrackList);
+    mTracksPanel = new HTSTracksPanel(this, mGenomeModel, mAnnotationTree,
+        mTrackList);
 
     /*
      * mFormatPanel = new FormatPanel(this, mTracksFigure.getcu,
@@ -664,8 +665,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     // mGeneMap.get(mGenomeModel.get()).findMainVariant("BCL6");
 
     GenomicRegion region = GenomicRegion.parse(mGenomeModel.get(),
-        SettingsService.getInstance()
-        .getString("edb.reads.default-location"));
+        SettingsService.getInstance().getString("edb.reads.default-location"));
 
     System.err.println("Default region " + region + " " + region.getGenome());
     mGenomicModel.set(region);
@@ -769,8 +769,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     // Ribbon2 ribbon = new Ribbon2();
     getRibbon().setHelpButtonEnabled(getAppInfo());
 
-    button = new QuickAccessButton(AssetService.getInstance()
-        .loadIcon(QuickOpenVectorIcon.class, 16));
+    button = new QuickAccessButton(
+        AssetService.getInstance().loadIcon(QuickOpenVectorIcon.class, 16));
     button.setClickMessage(UI.MENU_OPEN);
     button.setToolTip("Open", "Open peak files.");
     button.addClickListener(this);
@@ -841,8 +841,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     button = new RibbonLargeButton("Read Distribution",
         AssetService.getInstance().loadIcon("read_dist", 32),
-        AssetService.getInstance().loadIcon("read_dist", 24), "Read Distribution",
-        "Read distribution plot");
+        AssetService.getInstance().loadIcon("read_dist", 24),
+        "Read Distribution", "Read distribution plot");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
 
@@ -920,7 +920,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     ModernScrollPane scrollPane = new ModernScrollPane(mTracksFigurePanel)
         .setScrollBarLocation(ScrollBarLocation.FLOATING)
         .setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
-    
+
     // scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
     // ModernPanel panel = new ModernPanel(scrollPane);
 
@@ -1017,8 +1017,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
       return;
     }
 
-    SizableTab sizePane = new SizableTab("Tracks", mTracksPanel,
-        250, 100, 500);
+    SizableTab sizePane = new SizableTab("Tracks", mTracksPanel, 250, 100, 500);
 
     // CollapseHTab htab = new CollapseHTab(sizePane, mTracksPanel);
 
@@ -1172,8 +1171,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     }
 
     EncodeWorker task = new Import.EncodeWorker(this, dialog.getSamFile(),
-        dialog.getDir(), dialog.getName(),
-        dialog.getGenome(), dialog.getReadLength(), dialog.getResolutions());
+        dialog.getDir(), dialog.getName(), dialog.getGenome(),
+        dialog.getReadLength(), dialog.getResolutions());
 
     try {
       task.doInBackground();
@@ -1251,30 +1250,30 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     mResolutionModel.set(mResolutionModel.getPrevious());
   }
-  
+
   /**
-   * Change the genome by updating the genomic position with the new
-   * chromosome on a different genome.
+   * Change the genome by updating the genomic position with the new chromosome
+   * on a different genome.
    */
   private void changeGenome() {
     Genome genome = mGenomeModel.get();
-    
+
     GenomicRegion region = mGenomicModel.get();
-    
+
     System.err.println("change");
-    
+
     // Get the same chromosome on a different assembly
     Chromosome chr = GenomeService.getInstance().chr(genome, region.getChr());
-    
+
     // Change the genomic reference to reflect the new genome
     mGenomicModel.set(chr, region.getStart(), region.getEnd());
-    
-    //try {
-      // Force plot recreation
-    //  recreatePlots();
-    //} catch (Exception e) {
-    //  e.printStackTrace();
-    //}
+
+    // try {
+    // Force plot recreation
+    // recreatePlots();
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
   }
 
   /**
@@ -1285,8 +1284,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws TransformerException the transformer exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  private void updateResolution() throws IOException,
-      TransformerException, ParserConfigurationException {
+  private void updateResolution()
+      throws IOException, TransformerException, ParserConfigurationException {
 
     GenomicRegion displayRegion = mGenomicModel.get();
 
@@ -1319,8 +1318,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws TransformerException the transformer exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  private void axis() throws IOException, TransformerException,
-      ParserConfigurationException {
+  private void axis()
+      throws IOException, TransformerException, ParserConfigurationException {
     for (TreeNode<Track> node : mTracksPanel.getTree()) {
       Track track = node.getValue();
 
@@ -1360,8 +1359,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws ParserConfigurationException the parser configuration exception
    * @throws ParseException the parse exception
    */
-  private void heatMap() throws IOException, SAXException,
-      ParserConfigurationException {
+  private void heatMap()
+      throws IOException, SAXException, ParserConfigurationException {
     List<SamplePlotTrack> tracks = new ArrayList<SamplePlotTrack>();
 
     for (Track track : mTracksPanel.getSelectedTracks()) {
@@ -1475,8 +1474,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     for (SamplePlotTrack track : sampleTracks) {
       try {
-        starts.addAll(
-            new IntArrayListView(track.getAssembly().getStarts(track.getSample(), region, -1)));
+        starts.addAll(new IntArrayListView(
+            track.getAssembly().getStarts(track.getSample(), region, -1)));
 
         if (track.getAssembly().getReadLength(track.getSample()) > 0) {
           l = track.getAssembly().getReadLength(track.getSample());
@@ -1527,8 +1526,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void browseForFiles() throws IOException, SAXException,
-      ParserConfigurationException {
+  public void browseForFiles()
+      throws IOException, SAXException, ParserConfigurationException {
     browseForFiles(RecentFilesService.getInstance().getPwd());
   }
 
@@ -1541,16 +1540,17 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void browseForFiles(Path pwd) throws IOException,
-      SAXException, ParserConfigurationException {
+  public void browseForFiles(Path pwd)
+      throws IOException, SAXException, ParserConfigurationException {
     openFiles(FileDialog.open(this)
         .filter(new HTSViewAllSupportedGuiFileFilter(),
             new BamGuiFileFilter(),
             new BCGuiFileFilter(),
             new BctGuiFileFilter(),
-            new Brt2GuiFileFilter(),
-            new Brt3GuiFileFilter(),
-            new BvtGuiFileFilter(),
+            // new Brt2GuiFileFilter(),
+            // new Brt3GuiFileFilter(),
+            // new BvtGuiFileFilter(),
+            new GEIGuiFileFilter(),
             new BedGuiFileFilter(),
             new BedGraphGuiFileFilter(),
             new GFFGuiFileFilter(),
@@ -1569,8 +1569,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void openFiles(Path file) throws IOException,
-      SAXException, ParserConfigurationException {
+  public void openFiles(Path file)
+      throws IOException, SAXException, ParserConfigurationException {
     openFiles(CollectionUtils.asList(file));
   }
 
@@ -1583,15 +1583,16 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    * @throws SAXException the SAX exception
    * @throws ParserConfigurationException the parser configuration exception
    */
-  public void openFiles(List<Path> files) throws IOException,
-      SAXException, ParserConfigurationException {
+  public void openFiles(List<Path> files)
+      throws IOException, SAXException, ParserConfigurationException {
     List<Path> otherFiles = new ArrayList<Path>();
 
     for (Path file : files) {
       if (PathUtils.ext().type(HtsJsonViewGuiFileFilter.EXT).test(file)) {
         loadJsonView(file);
-      } else if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT).test(file)) {
-          loadJsonView(file);
+      } else if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT)
+          .test(file)) {
+        loadJsonView(file);
       } else if (PathUtils.ext().type(ReadsXmlViewGuiFileFilter.EXT)
           .test(file)) {
         // loadXmlView(file);
@@ -1775,16 +1776,15 @@ public class MainHtsViewWindow extends ModernRibbonWindow
    *
    * @param pwd the pwd
    * @param file the file
-   * @return 
+   * @return
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws TranscoderException the transcoder exception
    * @throws TransformerException the transformer exception
    * @throws ParserConfigurationException the parser configuration exception
    * @throws ParseException the parse exception
    */
-  private boolean save(Path pwd, Path file)
-      throws IOException, TranscoderException, TransformerException,
-      ParserConfigurationException {
+  private boolean save(Path pwd, Path file) throws IOException,
+      TranscoderException, TransformerException, ParserConfigurationException {
     return save(pwd, file, new ExportCallBack(pwd, file));
   }
 
@@ -1809,7 +1809,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     }
 
     if (FileUtils.exists(file)) {
-      return ModernMessageDialog.createFileReplaceDialog(this, file, l) == ModernDialogStatus.OK;
+      return ModernMessageDialog
+          .createFileReplaceDialog(this, file, l) == ModernDialogStatus.OK;
     } else {
       return save(file);
     }
@@ -1834,8 +1835,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     if (PathUtils.ext().type(ReadsXmlViewGuiFileFilter.EXT).test(file)) {
       saveXmlView(file);
-    } else if (PathUtils.ext().type(HtsJsonViewGuiFileFilter.EXT)
-        .test(file)) {
+    } else if (PathUtils.ext().type(HtsJsonViewGuiFileFilter.EXT).test(file)) {
       saveJsonView(file);
     } else if (PathUtils.ext().type(ReadsJsonViewGuiFileFilter.EXT)
         .test(file)) {
@@ -1915,7 +1915,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
       if (status == ModernDialogStatus.OK) {
         boolean saved = false;
-        
+
         if (mViewFile != null) {
           // If the view exists, save it.
           try {
@@ -1933,7 +1933,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
             e.printStackTrace();
           }
         }
-        
+
         if (!saved) {
           // If not saved assume user pressed cancel so given another chance.
           return;
@@ -1950,7 +1950,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
         // if (status == ModernDialogStatus.CANCEL) {
         // return;
         // }
-        
+
         // If user clicks save and then cancel, to be safe just return with
       }
     }

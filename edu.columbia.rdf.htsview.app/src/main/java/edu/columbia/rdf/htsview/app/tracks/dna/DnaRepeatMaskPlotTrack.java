@@ -34,8 +34,7 @@ public class DnaRepeatMaskPlotTrack extends DnaPlotTrack {
    * 
    */
   private static final long serialVersionUID = 1L;
-  
-  
+
   /** The title. */
   public static String TITLE = "DNA Repeat Mask";
 

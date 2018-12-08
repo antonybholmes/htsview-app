@@ -68,7 +68,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
 
     for (int i = 0; i < json.size(); ++i) {
       Json j = json.get(i);
-      
+
       ret.add(PeakSet.createPeaks(j.getInt(EDB.HEADING_ID),
           j.getString(EDB.HEADING_NAME)));
     }
@@ -87,8 +87,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
       int peaksId) throws IOException {
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("peaks")
-        .resolve(peaksId);
+    UrlBuilder peaksUrl = mAuthV1.resolve("peaks").resolve(peaksId);
 
     LOG.info("peaks url: {}", peaksUrl);
 

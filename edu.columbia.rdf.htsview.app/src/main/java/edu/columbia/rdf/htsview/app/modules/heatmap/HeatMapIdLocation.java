@@ -21,6 +21,7 @@ import java.text.ParseException;
 import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -77,7 +78,7 @@ public class HeatMapIdLocation {
    */
   public static HeatMapIdLocation parse(String id, GenomeModel model) {
     Genome genome = model.get();
-    
+
     GenomicRegion region = GenomicRegion.parse(genome, id);
 
     if (region != null) {
@@ -88,13 +89,14 @@ public class HeatMapIdLocation {
     } else {
       // might be a gene symbol, in which case report the tss
 
-      GenomicEntity gene = null;
-      
-      Genome g = GenesService.getInstance().getFirstGeneDb(genome.getAssembly());
-      
+      GenomicElement gene = null;
+
+      Genome g = GenesService.getInstance()
+          .getFirstGeneDb(genome.getAssembly());
+
       try {
         gene = GenesService.getInstance().getGenes(g)
-            .getGene(g, id);
+            .getElement(g, id, GenomicEntity.TRANSCRIPT);
       } catch (IOException e) {
         e.printStackTrace();
       }

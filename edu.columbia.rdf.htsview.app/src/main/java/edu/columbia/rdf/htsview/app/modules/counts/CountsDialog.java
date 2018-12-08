@@ -91,7 +91,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
   private ModernList<String> mSamplesList = new ModernList<String>();
 
   /** The m check plot. */
-  //private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
+  // private CheckBox mCheckPlot = new ModernCheckSwitch("Create plot", true);
 
   /** The m regions panel. */
   private GenomicRegionsPanel mRegionsPanel;
@@ -121,7 +121,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
     super(parent, "htsview.modules.read-dist.help.url");
 
     mGenomeModel = genomeModel;
-    
+
     mRegionsPanel = new GenomicRegionsPanel();
 
     setTitle("Read Distribution");
@@ -194,9 +194,9 @@ public class CountsDialog extends ModernDialogHelpWindow {
     box2.add(mNormCombo);
     box.add(box2);
 
-    //box.add(UI.createVGap(20));
+    // box.add(UI.createVGap(20));
 
-    //box.add(mCheckPlot);
+    // box.add(mCheckPlot);
 
     setCard(box);
   }
@@ -303,7 +303,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
     ModernDataModel model;
 
     if (BioPathUtils.ext().bed().test(file)) {
-      UCSCTrack bed = Bed.parseTracks(file).get(0);
+      UCSCTrack bed = Bed.parseTracks("bed", file).get(0);
 
       model = new BedTableModel(bed);
     } else if (BioPathUtils.ext().bedgraph().test(file)) {
@@ -311,11 +311,8 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
       model = new BedGraphTableModel(bed);
     } else {
-      model = Bioinformatics.getModel(file,
-          1,
-          TextUtils.emptyList(),
-          0,
-          TextUtils.TAB_DELIMITER);
+      model = Bioinformatics
+          .getModel(file, 1, TextUtils.emptyList(), 0, TextUtils.TAB_DELIMITER);
     }
 
     StringBuilder buffer = new StringBuilder();
@@ -323,7 +320,8 @@ public class CountsDialog extends ModernDialogHelpWindow {
 
     for (int i = 0; i < model.getRowCount(); ++i) {
       if (GenomicRegion.isGenomicRegion(model.getValueAsString(i, 0))) {
-        region = GenomicRegion.parse(mGenomeModel.get(), model.getValueAsString(i, 0));
+        region = GenomicRegion.parse(mGenomeModel.get(),
+            model.getValueAsString(i, 0));
 
         GenomicRegion mid = GenomicRegion.midRegion(region);
 
@@ -366,9 +364,9 @@ public class CountsDialog extends ModernDialogHelpWindow {
    *
    * @return the should plot
    */
-  //public boolean getShouldPlot() {
-  //  return mCheckPlot.isSelected();
-  //}
+  // public boolean getShouldPlot() {
+  // return mCheckPlot.isSelected();
+  // }
 
   /**
    * Gets the plot name.

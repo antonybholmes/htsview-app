@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.htsview.app.tracks.view;
+package edu.columbia.rdf.htsview.app.tracks.peaks;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -28,8 +28,6 @@ import org.jebtk.modern.tree.ModernTree;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
-import edu.columbia.rdf.htsview.app.tracks.peaks.PeakSet;
-import edu.columbia.rdf.htsview.app.tracks.peaks.PeaksPlotTrack;
 import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.view.TrackJsonParser;
 
@@ -70,7 +68,7 @@ public class PeaksJsonParser extends TrackJsonParser {
     List<GenomicRegion> locations = WebAssemblyService.getInstance()
         .getPeakAssembly().downloadJsonPeaks(genome, id, peaks);
 
-    Bed bed = Bed.create(peaks.getName(), locations);
+    Bed bed = Bed.create("bed", peaks.getName(), locations);
     bed.setColor(color);
 
     rootNode.addChild(new TreeNode<Track>(peaks.getName(),

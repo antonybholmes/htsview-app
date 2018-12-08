@@ -31,7 +31,7 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 public class DnaColorPlotTrack extends DnaPlotTrack {
 
   private static final long serialVersionUID = 1L;
-  
+
   /** The m sub figure. */
   private DnaColorPlotCanvas mSubFigure;
 

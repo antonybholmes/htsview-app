@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultTreeMap;
@@ -31,14 +32,14 @@ import org.jebtk.core.collections.TreeSetCreator;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.graphplot.figure.PlotStyle;
 
-import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
+import edu.columbia.rdf.htsview.tracks.FixedYSubFigure;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
 
 /**
  * The Class GenesPlotSubFigure.
  */
-public class GenesPlotSubFigure extends FixedSubFigure {
+public class GenesPlotSubFigure extends FixedYSubFigure {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -49,6 +50,10 @@ public class GenesPlotSubFigure extends FixedSubFigure {
   /** The m properties. */
   private GenesProperties mProperties;
 
+  private String mTrack;
+
+  private Genome mGenome;
+
   /**
    * Instantiates a new genes plot sub figure.
    *
@@ -58,10 +63,10 @@ public class GenesPlotSubFigure extends FixedSubFigure {
    * @param db the id
    * @param titlePosition the title position
    */
-  public GenesPlotSubFigure(String name,
-      String track,
-      GenesProperties properties, 
-      TitleProperties titlePosition) {
+  public GenesPlotSubFigure(String name, String track,
+      GenesProperties properties, TitleProperties titlePosition) {
+    mTrack = track;
+
     mProperties = properties;
 
     mGenesLayer = new GenesPlotLayer(properties);
@@ -88,8 +93,7 @@ public class GenesPlotSubFigure extends FixedSubFigure {
 
     // Now lets create a plot
     GenesPlotSubFigure canvas = new GenesPlotSubFigure(name, track,
-        genesProperties,
-        titlePosition);
+        genesProperties, titlePosition);
 
     return canvas;
   }
@@ -110,49 +114,57 @@ public class GenesPlotSubFigure extends FixedSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
-    
+      PlotStyle style) throws IOException {
+
     Genome genome = displayRegion.getChr().getGenome();
-    
-    Collection<GenomicEntity> genes = null;
-    
-    //System.err.println("block " + mDb + " " + genome);
-    
+
+    if (mGenome == null
+        || !genome.getAssembly().equals(mGenome.getAssembly())) {
+      // Cache the genome unless the assembly name ch
+      mGenome = Genome.changeTrack(genome, mTrack);
+    }
+
+    Collection<GenomicElement> genes = null;
+
     try {
-      genes = GenesService.getInstance()
-          .getGenes(genome).findGenes(genome, displayRegion);
+      genes = GenesService.getInstance().getGenes(mGenome)
+          .find(mGenome, displayRegion, GenomicEntity.TRANSCRIPT);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    
+
     if (genes == null) {
-       genes = Collections.emptyList();
+      genes = Collections.emptyList();
     }
-    
-    IterMap<String, Set<GenomicEntity>> geneMap = DefaultTreeMap
-        .create(new TreeSetCreator<GenomicEntity>());
+
+    IterMap<String, Set<GenomicElement>> geneMap = DefaultTreeMap
+        .create(new TreeSetCreator<GenomicElement>());
 
     GenesView view = mProperties.getView();
 
     switch (view) {
     case COMPACT:
     case DENSE:
-      for (GenomicEntity g : genes) {
-        geneMap.get(g.getSymbol()).add(g);
+      for (GenomicElement g : genes) {
+        geneMap.get(g.getProp(GenomicEntity.GENE_NAME_TYPE)).add(g);
       }
 
       break;
     default:
       // full
-      for (GenomicEntity g : genes) {
-        String id = g.getSymbol();
-        
-        if (!g.getRefSeq().equals(TextUtils.NA)) {
-          id += " (" + g.getRefSeq() + ")";
+      for (GenomicElement g : genes) {
+        String id = g.getProp(GenomicEntity.GENE_NAME_TYPE);
+
+        String v = g.getProp(GenomicEntity.REFSEQ_TYPE);
+
+        if (!v.equals(TextUtils.NA)) {
+          id += " (" + v + ")";
         }
 
-        if (!g.getTranscriptId().equals(TextUtils.NA)) {
-          id += " (" + g.getTranscriptId() + ")";
+        v = g.getProp(GenomicEntity.TRANSCRIPT_ID_TYPE);
+
+        if (!v.equals(TextUtils.NA)) {
+          id += " (" + v + ")";
         }
 
         geneMap.get(id).add(g);
