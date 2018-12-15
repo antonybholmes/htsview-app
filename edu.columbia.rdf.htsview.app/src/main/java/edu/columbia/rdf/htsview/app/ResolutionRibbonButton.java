@@ -62,7 +62,7 @@ public class ResolutionRibbonButton extends RibbonLargeDropDownButton2 {
    * drawForegroundAA( java.awt.Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int iconX = PADDING;
     int iconY = getTextYPosCenter(g2, getHeight());
 

@@ -154,7 +154,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
       MainMatCalcWindow window = MainMatCalc.main(mParent.getAppInfo(),
           new BioModuleLoader());
 
-      window.openMatrices(mMatrices);
+      window.openMatrices().open(mMatrices);
 
       window.runModule("Heat Map", "--plot");
     } catch (Exception e) {

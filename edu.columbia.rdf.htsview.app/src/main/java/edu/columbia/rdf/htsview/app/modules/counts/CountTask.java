@@ -89,7 +89,7 @@ public class CountTask extends SwingWorker<Void, Void> {
 
       window = MainMatCalc.main(new BioModuleLoader());
 
-      window.openMatrix(normMatrix); // .openFile(normFile).rowAnnotations(1).autoOpen();
+      window.openMatrices().open(normMatrix); // .openFile(normFile).rowAnnotations(1).autoOpen();
     } catch (IOException | ClassNotFoundException | InstantiationException
         | IllegalAccessException | FontFormatException
         | UnsupportedLookAndFeelException e) {

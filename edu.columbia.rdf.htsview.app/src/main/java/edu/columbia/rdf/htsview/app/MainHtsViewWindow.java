@@ -97,8 +97,6 @@ import org.jebtk.modern.ribbon.QuickAccessButton;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 import org.jebtk.modern.ribbon.RibbonMenuItem;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
-import org.jebtk.modern.scrollpane.ScrollBarLocation;
-import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.tabs.SizableTab;
 import org.jebtk.modern.widget.ModernClickWidget;
 import org.jebtk.modern.widget.ModernWidget;
@@ -121,8 +119,6 @@ import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapDialog;
 import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapTask;
 import edu.columbia.rdf.htsview.app.tracks.HTSTracksPanel;
 import edu.columbia.rdf.htsview.ngs.BctGuiFileFilter;
-import edu.columbia.rdf.htsview.ngs.Brt2GuiFileFilter;
-import edu.columbia.rdf.htsview.ngs.Brt3GuiFileFilter;
 import edu.columbia.rdf.htsview.tracks.AxisLimitsModel;
 import edu.columbia.rdf.htsview.tracks.HeightModel;
 import edu.columbia.rdf.htsview.tracks.LayoutRibbonSection;
@@ -917,9 +913,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     // BackgroundCanvas backgroundCanvas = new BackgroundCanvas(zoomCanvas);
 
-    ModernScrollPane scrollPane = new ModernScrollPane(mTracksFigurePanel)
-        .setScrollBarLocation(ScrollBarLocation.FLOATING)
-        .setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
+    ModernScrollPane scrollPane = new ModernScrollPane(mTracksFigurePanel);
+        //.setScrollBarLocation(ScrollBarLocation.FLOATING)
+        //.setScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
 
     // scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
     // ModernPanel panel = new ModernPanel(scrollPane);
@@ -1502,7 +1498,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
       MainMatCalcWindow window = MainMatCalc.main(getAppInfo(),
           new BioModuleLoader());
 
-      window.openMatrix(m);
+      window.openMatrices().open(m);
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     } catch (InstantiationException e) {

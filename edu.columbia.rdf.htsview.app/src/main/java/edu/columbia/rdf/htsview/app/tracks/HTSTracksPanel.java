@@ -35,6 +35,7 @@ import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.icons.CrossVectorIcon;
+import org.jebtk.modern.graphics.icons.PlusVectorIcon;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernPanel;
@@ -77,26 +78,26 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /** The m delete button. */
   private ModernClickWidget mDeleteButton = new RibbonButton(
       AssetService.getInstance().loadIcon("trash_bw", 16))
-          .setButtonStyle(ButtonStyle.ROUND);
+          .setButtonStyle(ButtonStyle.CIRCLE);
 
   /** The m tracks button. */
   private ModernClickWidget mTracksButton = new RibbonButton(
       AssetService.getInstance().loadIcon("tracks", 16))
-          .setButtonStyle(ButtonStyle.ROUND);
+          .setButtonStyle(ButtonStyle.CIRCLE);
 
   /** The m edit button. */
   private ModernClickWidget mEditButton = new RibbonButton(
       AssetService.getInstance().loadIcon("edit_bw", 16))
-          .setButtonStyle(ButtonStyle.ROUND);
+          .setButtonStyle(ButtonStyle.CIRCLE);
 
   /** The m clear button. */
   private ModernClickWidget mClearButton = new RibbonButton(
       AssetService.getInstance().loadIcon(CrossVectorIcon.class, 16))
-          .setButtonStyle(ButtonStyle.ROUND);
+          .setButtonStyle(ButtonStyle.CIRCLE);
 
   /** The m samples button. */
   private ModernClickWidget mSamplesButton = new RibbonButton("Samples",
-      AssetService.getInstance().loadIcon("samples", 16));
+      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
 
   /** The m search model. */
   private SearchModel mSearchModel = new SearchModel();
@@ -137,10 +138,10 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
 
     if (SettingsService.getInstance().getBool("edb.modules.edbw.enabled")) {
       mSamplesButton.setToolTip("Samples Database",
-          "Load ChIP-seq samples from database.");
+          "Load ChIP-seq samples.");
 
       box2.add(mSamplesButton);
-      box2.add(ModernPanel.createHGap());
+      //box2.add(ModernPanel.createHGap());
       box2.add(new RibbonSubSectionSeparator());
       box2.add(ModernPanel.createHGap());
 
@@ -151,17 +152,17 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
     // toolbar.add(mOpenButton);
     // toolbar.add(ModernPanel.createHGap());
 
-    mTracksButton.setToolTip("Annotation Tracks",
-        "Load additional annotation tracks.");
+    mTracksButton.setToolTip("Annotations",
+        "Annotate region.");
     box2.add(mTracksButton);
     // toolbar.add(ModernPanel.createHGap());
-    mEditButton.setToolTip("Edit Tracks", "Edit track properties.");
+    mEditButton.setToolTip("Edit", "Edit track properties.");
     box2.add(mEditButton);
     // toolbar.add(ModernPanel.createHGap());
-    mDeleteButton.setToolTip("Delete", "Delete selected tracks.");
+    mDeleteButton.setToolTip("Remove Tracks", "Remove selected tracks.");
     box2.add(mDeleteButton);
 
-    box2.setBorder(DOUBLE_BORDER);
+    //box2.setBorder(DOUBLE_BORDER);
 
     // box.add(box2);
 
@@ -209,7 +210,7 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
     } else if (e.getSource().equals(mEditButton)) {
       editTracks();
     } else if (e.getSource().equals(mDeleteButton)) {
-      deleteTracks();
+      removeTracks();
     } else if (e.getSource().equals(mClearButton)) {
       clearTracks();
     } else {

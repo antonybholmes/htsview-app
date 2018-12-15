@@ -90,7 +90,7 @@ public class DnaTask extends SwingWorker<Void, Void> {
 
       window = MainMatCalc.main(mParent.getAppInfo(), ml);
 
-      window.openMatrix(mMatrice);
+      window.openMatrices().open(mMatrice);
 
       window.runModule("DNA",
           ArgParser.longArg("genome", mGenomeModel.get().getAssembly()),
