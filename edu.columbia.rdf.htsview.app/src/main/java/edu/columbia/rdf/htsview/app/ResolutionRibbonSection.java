@@ -28,7 +28,7 @@ import edu.columbia.rdf.htsview.tracks.ResolutionModel;
 /**
  * Allows user to select the resolution to view sequences.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class ResolutionRibbonSection extends RibbonSection
     implements ModernClickListener, ChangeListener {

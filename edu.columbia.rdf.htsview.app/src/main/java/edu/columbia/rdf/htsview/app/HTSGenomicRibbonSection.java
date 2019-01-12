@@ -26,7 +26,7 @@ import org.jebtk.modern.ribbon.Ribbon;
  * Functions the same as {@code GenomicRegionRibbonSection}, but restricts users
  * to entering coordinates with a minimum size.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class HTSGenomicRibbonSection extends GenomicRegionRibbonSection {

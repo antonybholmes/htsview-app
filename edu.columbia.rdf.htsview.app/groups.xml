@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <groups all="false">
-  <group name="Beta" selected="false"/>
+  <group name="Beta" selected="true"/>
   <group name="Elodie" selected="true"/>
-  <group name="Other Lab" selected="false"/>
-  <group name="RDF" selected="false"/>
-  <group name="Released" selected="false"/>
+  <group name="Other Lab" selected="true"/>
+  <group name="RDF" selected="true"/>
+  <group name="Released" selected="true"/>
 </groups>

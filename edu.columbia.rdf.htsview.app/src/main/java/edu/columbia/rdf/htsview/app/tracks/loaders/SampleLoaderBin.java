@@ -34,7 +34,7 @@ import edu.columbia.rdf.htsview.tracks.sample.SampleTracks;
 /**
  * Base class for binary file readers that support .
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public abstract class SampleLoaderBin extends SampleLoaderFS {
 

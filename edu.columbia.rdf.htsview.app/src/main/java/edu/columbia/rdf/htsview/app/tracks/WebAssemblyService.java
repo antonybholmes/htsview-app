@@ -22,7 +22,7 @@ import edu.columbia.rdf.htsview.tracks.SampleAssembly;
  * Stores references to assembly services connecting to databases. This is so
  * only one connection object need be in existence.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class WebAssemblyService {

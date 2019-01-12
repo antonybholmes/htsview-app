@@ -147,7 +147,7 @@ import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleRibbonSection;
 /**
  * Display BedGraph and other track data.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class MainHtsViewWindow extends ModernRibbonWindow
@@ -451,7 +451,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
   /**
    * So we can respond to the user deciding whether to overwrite a file.
    * 
-   * @author Antony Holmes Holmes
+   * @author Antony Holmes
    *
    */
   private class ExportCallBack implements DialogEventListener {

@@ -20,7 +20,7 @@ import org.jebtk.modern.zoom.SettingsZoomModel;
 /**
  * Zoom model that responds to settings.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ReadsZoomModel extends SettingsZoomModel {

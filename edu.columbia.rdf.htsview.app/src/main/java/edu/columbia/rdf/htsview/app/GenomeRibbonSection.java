@@ -32,7 +32,7 @@ import org.jebtk.modern.ribbon.RibbonSize;
 /**
  * Allows user to select the resolution to view sequences.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class GenomeRibbonSection extends RibbonSection
     implements ModernClickListener {

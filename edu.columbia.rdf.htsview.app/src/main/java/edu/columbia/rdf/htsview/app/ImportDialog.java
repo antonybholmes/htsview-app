@@ -54,7 +54,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
    * Loads a list of the genomes in use in the chr database since this is what a
    * user can use for mapping purposes.
    * 
-   * @author Antony Holmes Holmes
+   * @author Antony Holmes
    *
    */
   public class GenomeChrCombo extends ModernComboBox {

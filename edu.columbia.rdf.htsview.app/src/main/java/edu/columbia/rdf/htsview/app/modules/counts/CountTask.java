@@ -150,7 +150,7 @@ public class CountTask extends SwingWorker<Void, Void> {
       int total = track.getAssembly()
           .getMappedReads(track.getSample(), mGenome, 100);
 
-      matrix.setColumnAnnotation("total-reads", i, total);
+      matrix.getColumnHeader().setAnnotation("total-reads", i, total);
     }
 
     matrix.setName("Counts");

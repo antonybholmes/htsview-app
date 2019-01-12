@@ -24,7 +24,7 @@ import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 /**
  * Vector based save icon.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class OpenTrack16VectorIcon extends ModernVectorIcon {

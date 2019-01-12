@@ -118,7 +118,7 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
 
       window.openFiles().read(mFile);
 
-      window.runModule("Line Graph", "--switch-tab");
+      window.runModule("Line Graph", "--plot", "--switch-tab");
 
       Graph2dWindow plotWindow = window.getCurrentPlotWindow();
 

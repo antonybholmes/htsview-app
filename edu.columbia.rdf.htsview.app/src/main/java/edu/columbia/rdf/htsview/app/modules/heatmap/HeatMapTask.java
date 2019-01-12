@@ -243,8 +243,8 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
       // writer.write(TextUtils.TAB_DELIMITER);
       // writer.write(gene.getSymbol());
 
-      m.setRowAnnotation("Id", i, region.getId());
-      m.setRowAnnotation("Location", i, region.getRegion().toString());
+      m.getIndex().setAnnotation("Id", i, region.getId());
+      m.getIndex().setAnnotation("Location", i, region.getRegion().toString());
 
       for (int j = 0; j < counts.length; ++j) {
         // System.err.println("heat " + i + " " + j + " " + counts.get(j) + " "
@@ -329,8 +329,8 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
         double[] counts = getCounts(sample, ext, mWindow);
 
-        m.setRowAnnotation("Id", i, refseq);
-        m.setRowAnnotation("Location", i, ext.getLocation());
+        m.getIndex().setAnnotation("Id", i, refseq);
+        m.getIndex().setAnnotation("Location", i, ext.getLocation());
 
         for (int j = 0; j < counts.length; ++j) {
           m.set(i, j, counts[j]);
@@ -412,8 +412,8 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
         double[] counts = countMap.get(region); // getCounts(ext, mWindow);
 
-        m.setRowAnnotation("Id", i, region.getLocation());
-        m.setRowAnnotation("Location", i, ext.getLocation());
+        m.getIndex().setAnnotation("Id", i, region.getLocation());
+        m.getIndex().setAnnotation("Location", i, ext.getLocation());
 
         for (int j = 0; j < counts.length; ++j) {
           m.set(i, j, counts[j]);
