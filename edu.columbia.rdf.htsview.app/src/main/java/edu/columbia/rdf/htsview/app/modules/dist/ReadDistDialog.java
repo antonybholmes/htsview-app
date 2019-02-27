@@ -29,8 +29,8 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
@@ -52,7 +52,6 @@ import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dataview.ModernDataModel;
-import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
@@ -67,6 +66,7 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernLineBorderPanel;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
+import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
@@ -90,7 +90,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
   private static final long serialVersionUID = 1L;
 
   /** The m samples button. */
-  private ModernButton mSamplesButton = new ModernDialogFlatButton(
+  private ModernButton mSamplesButton = new RibbonButton(
       "Samples...");
 
   /** The m file button. */

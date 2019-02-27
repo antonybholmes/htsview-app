@@ -40,7 +40,6 @@ import edu.columbia.rdf.htsview.app.modules.heatmap.HeatMapIdLocation;
 import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 import edu.columbia.rdf.matcalc.MainMatCalc;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.OpenFiles;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dWindow;
 

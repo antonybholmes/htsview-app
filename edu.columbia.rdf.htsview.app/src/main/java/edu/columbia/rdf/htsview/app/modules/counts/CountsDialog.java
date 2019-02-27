@@ -38,11 +38,10 @@ import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.ui.external.microsoft.AllXlsxGuiFileFilter;
 import org.jebtk.math.ui.external.microsoft.XlsxGuiFileFilter;
-import org.jebtk.modern.UI;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dataview.ModernDataModel;
-import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -56,6 +55,7 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.ModernLineBorderPanel;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
+import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
@@ -77,7 +77,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
   private static final long serialVersionUID = 1L;
 
   /** The m samples button. */
-  private ModernButton mSamplesButton = new ModernDialogFlatButton(
+  private ModernButton mSamplesButton = new RibbonButton(
       "Samples...");
 
   /** The m file button. */

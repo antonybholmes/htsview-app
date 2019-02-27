@@ -30,6 +30,7 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -97,7 +98,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
 
   /** The m samples button. */
   private ModernClickWidget mSamplesButton = new RibbonButton("Samples",
-      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16))
+      .setButtonStyle(ButtonStyle.PILL);
 
   /** The m search model. */
   private SearchModel mSearchModel = new SearchModel();
@@ -142,8 +144,8 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
 
       box2.add(mSamplesButton);
       //box2.add(ModernPanel.createHGap());
-      box2.add(new RibbonSubSectionSeparator());
-      box2.add(ModernPanel.createHGap());
+      //box2.add(new RibbonSubSectionSeparator());
+      box2.add(UI.createHGap(10));
 
     }
 

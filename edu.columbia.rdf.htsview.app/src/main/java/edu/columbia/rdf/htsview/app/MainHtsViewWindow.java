@@ -81,7 +81,6 @@ import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
-import org.jebtk.modern.font.FontRibbonSection;
 import org.jebtk.modern.graphics.icons.QuickOpenVectorIcon;
 import org.jebtk.modern.graphics.icons.QuickSaveVectorIcon;
 import org.jebtk.modern.help.ModernAboutDialog;
@@ -836,14 +835,14 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     //
 
     button = new RibbonLargeButton("Read Distribution",
-        AssetService.getInstance().loadIcon("read_dist", 32),
+        AssetService.getInstance().loadIcon("read_dist", 32, 24),
         AssetService.getInstance().loadIcon("read_dist", 24),
         "Read Distribution", "Read distribution plot");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);
 
     button = new RibbonLargeButton("Heat Map",
-        AssetService.getInstance().loadIcon("tss_heatmap", 32), "TSS Heat Map",
+        AssetService.getInstance().loadIcon("tss_heatmap", 32, 24), "TSS Heat Map",
         "Create TSS Heat Map");
     button.addClickListener(this);
     getRibbon().getToolbar("Tools").getSection("Tools").add(button);

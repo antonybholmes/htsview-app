@@ -18,7 +18,6 @@ package edu.columbia.rdf.htsview.app;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
-import org.jebtk.bioinformatics.genomic.SequenceReader;
 import org.jebtk.bioinformatics.genomic.SequenceService;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.tree.TreeNode;

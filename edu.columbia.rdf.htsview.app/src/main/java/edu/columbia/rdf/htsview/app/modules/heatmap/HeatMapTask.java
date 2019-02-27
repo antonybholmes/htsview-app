@@ -31,9 +31,9 @@ import java.util.TreeSet;
 import javax.swing.SwingWorker;
 
 import org.jebtk.bioinformatics.genomic.Gene;
+import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
-import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.GenomeModel;
