@@ -115,7 +115,7 @@ public class SegmentsPlotLayer extends AxesLayer {
     g2.setColor(Color.LIGHT_GRAY);
     g2.fillRect(0,
         y,
-        axes.toPlotX1(axes.getX1Axis().getMax()),
+        axes.toPlotX1(axes.getX1Axis().getLimits().getMax()),
         BedPlotTrack.BAR_HEIGHT * mRegions.size());
 
     for (Entry<String, List<Segment>> e : mRegions) {

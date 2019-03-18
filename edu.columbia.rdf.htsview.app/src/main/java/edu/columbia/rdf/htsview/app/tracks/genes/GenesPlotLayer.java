@@ -180,8 +180,8 @@ public class GenesPlotLayer extends AxesLayer {
     int textY;
     int textX = -20;
 
-    int minX = axes.toPlotX1(axes.getX1Axis().getMin());
-    int maxX = axes.toPlotX1(axes.getX1Axis().getMax());
+    int minX = axes.toPlotX1(axes.getX1Axis().getLimits().getMin());
+    int maxX = axes.toPlotX1(axes.getX1Axis().getLimits().getMax());
 
     int c = 0;
 

@@ -1288,7 +1288,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     int bins = displayRegion.getLength() / resolution;
 
-    // System.err.println("update res " + bins + " " + resolution);
+    System.err.println("update res " + bins + " " + resolution + " " + displayRegion);
 
     // Auto scale the resolution to match the region of interest,
     // Users can of course change it

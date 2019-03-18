@@ -228,6 +228,8 @@ public class MainHtsView {
       WebGenes genes = new WebGenes(
           SettingsService.getInstance().getUrl("htsview.genes.url"));
 
+      System.err.println("web genes");
+      
       GenesService.getInstance().put(genes);
     }
 

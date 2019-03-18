@@ -107,7 +107,9 @@ public class UCSCModule extends HTSViewModule implements ModernClickListener {
 
     mTracksButton.addClickListener(this);
 
-    mUrl = new TracksURL(EDBWLoginService.getInstance().getLogin());
+    if (EDBWLoginService.getInstance().getLogin() != null) {
+      mUrl = new TracksURL(EDBWLoginService.getInstance().getLogin());
+    }
   }
 
   @Override
