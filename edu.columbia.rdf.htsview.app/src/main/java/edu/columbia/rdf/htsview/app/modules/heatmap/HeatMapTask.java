@@ -36,6 +36,7 @@ import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.Properties;
 import org.jebtk.core.collections.CollectionUtils;
@@ -287,7 +288,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
 
       Iterable<GenomicElement> closestGenes = GenesService.getInstance()
           .getGenes(g)
-          .closestByTss(g, region.getRegion(), GenomicEntity.TRANSCRIPT);
+          .closestByTss(g, region.getRegion(), GenomicType.TRANSCRIPT);
 
       // System.err.println("sym " + closestGenes.get(0).getSymbol());
 
@@ -303,13 +304,13 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
       }
 
       for (GenomicElement gene : closestGenes) {
-        String symbol = gene.getProp(GenomicEntity.GENE_NAME_TYPE);
+        String symbol = gene.getProperty(GenomicEntity.GENE_NAME);
 
         if (used.contains(symbol)) {
           continue;
         }
 
-        tssMap.get(tssDistance).add(gene.getProp(GenomicEntity.REFSEQ_TYPE));
+        tssMap.get(tssDistance).add(gene.getProperty(GenomicEntity.REFSEQ_ID));
         used.add(symbol);
       }
     }
@@ -319,7 +320,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
     for (int tssDist : tssMap.keySet()) {
       for (String refseq : tssMap.get(tssDist)) {
         GenomicElement gene = GenesService.getInstance().getGenes(g)
-            .getElement(g, refseq, GenomicEntity.TRANSCRIPT);
+            .getElement(g, refseq, GenomicType.TRANSCRIPT);
 
         GenomicRegion tssRegion = Gene.tssRegion(gene);
 

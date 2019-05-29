@@ -22,8 +22,8 @@ import org.jebtk.bioinformatics.genomic.Gene;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
-import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 
 /**
@@ -96,7 +96,7 @@ public class HeatMapIdLocation {
 
       try {
         gene = GenesService.getInstance().getGenes(g)
-            .getElement(g, id, GenomicEntity.TRANSCRIPT);
+            .getElement(g, id, GenomicType.TRANSCRIPT);
       } catch (IOException e) {
         e.printStackTrace();
       }

@@ -28,6 +28,7 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
@@ -303,7 +304,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
     ModernDataModel model;
 
     if (BioPathUtils.ext().bed().test(file)) {
-      UCSCTrack bed = Bed.parseTracks("bed", file).get(0);
+      UCSCTrack bed = Bed.parseTracks(GenomicType.REGION, file).get(0);
 
       model = new BedTableModel(bed);
     } else if (BioPathUtils.ext().bedgraph().test(file)) {

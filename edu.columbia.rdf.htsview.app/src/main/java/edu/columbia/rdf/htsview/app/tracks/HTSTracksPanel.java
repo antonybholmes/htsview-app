@@ -24,6 +24,7 @@ import javax.swing.Box;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.ui.BioInfDialog;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.collections.CollectionUtils;
@@ -311,7 +312,7 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
               List<GenomicRegion> locations = peakAssembly
                   .downloadJsonPeaks(mGenomeModel.get(), sample, peaks);
 
-              Bed bed = Bed.create("bed", peaks.getName(), locations);
+              Bed bed = Bed.create(GenomicType.REGION, peaks.getName(), locations);
 
               mTrackList.getRoot().addChild(new TreeNode<Track>(peaks.getName(),
                   new PeaksPlotTrack(sample.getId(), peaks, bed)));

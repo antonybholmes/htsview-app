@@ -23,6 +23,7 @@ import java.util.List;
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
@@ -67,7 +68,7 @@ public class BedJsonParser extends TrackJsonParser {
     Path file = getFile(trackJson);
 
     if (FileUtils.exists(file)) {
-      List<UCSCTrack> beds = Bed.parseTracks("bed", file);
+      List<UCSCTrack> beds = Bed.parseTracks(GenomicType.REGION, file);
 
       for (UCSCTrack bed : beds) {
         bed.setName(name);

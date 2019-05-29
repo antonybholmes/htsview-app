@@ -26,6 +26,7 @@ import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.collections.TreeSetCreator;
@@ -128,7 +129,7 @@ public class GenesPlotSubFigure extends FixedYSubFigure {
 
     try {
       genes = GenesService.getInstance().getGenes(mGenome)
-          .find(mGenome, displayRegion, GenomicEntity.TRANSCRIPT);
+          .find(mGenome, displayRegion, GenomicType.TRANSCRIPT);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -146,22 +147,22 @@ public class GenesPlotSubFigure extends FixedYSubFigure {
     case COMPACT:
     case DENSE:
       for (GenomicElement g : genes) {
-        geneMap.get(g.getProp(GenomicEntity.GENE_NAME_TYPE)).add(g);
+        geneMap.get(g.getProperty(GenomicEntity.GENE_NAME)).add(g);
       }
 
       break;
     default:
       // full
       for (GenomicElement g : genes) {
-        String id = g.getProp(GenomicEntity.GENE_NAME_TYPE);
+        String id = g.getProperty(GenomicEntity.GENE_NAME);
 
-        String v = g.getProp(GenomicEntity.REFSEQ_TYPE);
+        String v = g.getProperty(GenomicEntity.REFSEQ_ID);
 
         if (!v.equals(TextUtils.NA)) {
           id += " (" + v + ")";
         }
 
-        v = g.getProp(GenomicEntity.TRANSCRIPT_ID_TYPE);
+        v = g.getProperty(GenomicEntity.TRANSCRIPT_ID);
 
         if (!v.equals(TextUtils.NA)) {
           id += " (" + v + ")";

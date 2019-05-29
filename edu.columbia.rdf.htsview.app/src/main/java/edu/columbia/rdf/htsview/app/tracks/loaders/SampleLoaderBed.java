@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.window.ModernWindow;
 
@@ -44,7 +45,7 @@ public class SampleLoaderBed extends SampleLoaderFS {
   @Override
   public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
       throws IOException {
-    List<UCSCTrack> beds = Bed.parseTracks("bed", file);
+    List<UCSCTrack> beds = Bed.parseTracks(GenomicType.REGION, file);
 
     Track ret = null;
 

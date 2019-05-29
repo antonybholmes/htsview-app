@@ -22,6 +22,7 @@ import java.util.List;
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.tree.ModernTree;
@@ -68,7 +69,7 @@ public class PeaksJsonParser extends TrackJsonParser {
     List<GenomicRegion> locations = WebAssemblyService.getInstance()
         .getPeakAssembly().downloadJsonPeaks(genome, id, peaks);
 
-    Bed bed = Bed.create("bed", peaks.getName(), locations);
+    Bed bed = Bed.create(GenomicType.REGION, peaks.getName(), locations);
     bed.setColor(color);
 
     rootNode.addChild(new TreeNode<Track>(peaks.getName(),

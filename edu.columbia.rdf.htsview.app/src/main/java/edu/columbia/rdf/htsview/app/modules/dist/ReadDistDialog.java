@@ -35,6 +35,7 @@ import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.ui.Bioinformatics;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.bioinformatics.ui.external.ucsc.BedGraphGuiFileFilter;
@@ -305,12 +306,12 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
     // Genome g = new Genome("refseq", genome);
 
     for (String refseq : GenesService.getInstance().getGenes(g)
-        .getIds(GenomicEntity.REFSEQ_TYPE)) {
+        .getIds(GenomicEntity.REFSEQ_ID)) {
       GenomicElement gene = null;
 
       try {
         gene = GenesService.getInstance().getGenes(g)
-            .getElement(g, refseq, GenomicEntity.TRANSCRIPT);
+            .getElement(g, refseq, GenomicType.TRANSCRIPT);
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -318,7 +319,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
       // GenomicRegion tss = Gene.tssRegion(gene);
 
       if (gene != null) {
-        genes.add(gene.getProp(GenomicEntity.GENE_NAME_TYPE));
+        genes.add(gene.getProperty(GenomicEntity.GENE_NAME));
       }
     }
 
@@ -373,7 +374,7 @@ public class ReadDistDialog extends ModernDialogHelpWindow {
     ModernDataModel model;
 
     if (BioPathUtils.ext().bed().test(file)) {
-      UCSCTrack bed = Bed.parseTracks("bed", file).get(0);
+      UCSCTrack bed = Bed.parseTracks(GenomicType.REGION, file).get(0);
 
       model = new BedTableModel(bed);
     } else if (BioPathUtils.ext().bedgraph().test(file)) {
