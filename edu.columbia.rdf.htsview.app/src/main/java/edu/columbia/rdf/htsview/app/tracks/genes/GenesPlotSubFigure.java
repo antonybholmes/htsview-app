@@ -117,7 +117,7 @@ public class GenesPlotSubFigure extends FixedYSubFigure {
       Color fillColor,
       PlotStyle style) throws IOException {
 
-    Genome genome = displayRegion.getChr().getGenome();
+    Genome genome = displayRegion.getGenome();
 
     if (mGenome == null
         || !genome.getAssembly().equals(mGenome.getAssembly())) {

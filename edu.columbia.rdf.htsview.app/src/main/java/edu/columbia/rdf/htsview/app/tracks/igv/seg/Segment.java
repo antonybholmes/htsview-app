@@ -16,12 +16,18 @@
 package edu.columbia.rdf.htsview.app.tracks.igv.seg;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
 /**
  * The Class Segment.
  */
 public class Segment extends GenomicRegion {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /** The m markers. */
   private int mMarkers;
@@ -38,8 +44,8 @@ public class Segment extends GenomicRegion {
    * @param markers the markers
    * @param mean the mean
    */
-  public Segment(Chromosome chr, int start, int end, int markers, double mean) {
-    super(chr, start, end);
+  public Segment(Genome genome, Chromosome chr, int start, int end, int markers, double mean) {
+    super(genome, chr, start, end);
 
     mMarkers = markers;
     mMean = mean;

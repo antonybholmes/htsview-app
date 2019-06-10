@@ -67,7 +67,7 @@ public class HTSGenomicRibbonSection extends GenomicRegionRibbonSection {
       if (region.getEnd() - region.getStart() < MIN_BASES) {
         int size = region.getChr().getSize();
 
-        region = GenomicRegion.create(region.getChr(),
+        region = new GenomicRegion(region,
             region.getStart(),
             Math.min(region.getStart() + MIN_BASES, size));
       }

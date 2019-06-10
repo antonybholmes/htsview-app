@@ -1261,7 +1261,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     Chromosome chr = GenomeService.getInstance().chr(genome, region.getChr());
 
     // Change the genomic reference to reflect the new genome
-    mGenomicModel.set(chr, region.getStart(), region.getEnd());
+    mGenomicModel.set(genome, chr, region.getStart(), region.getEnd());
 
     // try {
     // Force plot recreation

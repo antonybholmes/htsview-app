@@ -108,7 +108,7 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
 
     // Update the title to reflect changes
     currentAxes().getTitle()
-        .setText("Cytobands (" + displayRegion.getChr().getGenome() + ") - "
+        .setText("Cytobands (" + displayRegion.getGenome() + ") - "
             + displayRegion.getChr().toString());
 
     // set the graph limits

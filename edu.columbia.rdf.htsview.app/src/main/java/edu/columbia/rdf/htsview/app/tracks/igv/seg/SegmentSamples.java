@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.core.NameProperty;
 import org.jebtk.core.io.FileUtils;
@@ -126,8 +127,10 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
         tokens = TextUtils.tabSplit(line);
 
         String name = tokens.get(0);
+        Genome genome = GenomeService.getInstance().guessGenome(file);
         Chromosome chr = GenomeService.getInstance().guessChr(file,
             tokens.get(1));
+        
         int start = Integer.parseInt(tokens.get(2));
         int end = Integer.parseInt(tokens.get(3));
         int markers = Integer.parseInt(tokens.get(4));
@@ -142,7 +145,7 @@ public class SegmentSamples implements Iterable<String>, NameProperty {
         }
 
         samples.mSegments.get(name).get(chr)
-            .add(new Segment(chr, start, end, markers, mean));
+            .add(new Segment(genome, chr, start, end, markers, mean));
       }
     } finally {
       reader.close();

@@ -331,6 +331,7 @@ public class CountsDialog extends ModernDialogHelpWindow {
         // three column format
 
         region = new GenomicRegion(
+            GenomeService.getInstance().guessGenome(file),
             GenomeService.getInstance().guessChr(file,
                 model.getValueAsString(i, 0)),
             model.getValueAsInt(i, 1), model.getValueAsInt(i, 2));
