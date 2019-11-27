@@ -41,8 +41,8 @@ import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -1258,7 +1258,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     System.err.println("change");
 
     // Get the same chromosome on a different assembly
-    Chromosome chr = GenomeService.getInstance().chr(genome, region.getChr());
+    Chromosome chr = ChromosomeService.getInstance().chr(genome, region.getChr());
 
     // Change the genomic reference to reflect the new genome
     mGenomicModel.set(genome, chr, region.getStart(), region.getEnd());

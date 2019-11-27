@@ -30,6 +30,7 @@ import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
@@ -478,7 +479,7 @@ public class HeatMapDialog extends ModernDialogHelpWindow {
 
         region = new GenomicRegion(
             GenomeService.getInstance().guessGenome(file),
-            GenomeService.getInstance().guessChr(file,
+            ChromosomeService.getInstance().guessChr(file,
                 model.getValueAsString(i, 0)),
             Integer.parseInt(model.getValueAsString(i, 1)),
             Integer.parseInt(model.getValueAsString(i, 2)));

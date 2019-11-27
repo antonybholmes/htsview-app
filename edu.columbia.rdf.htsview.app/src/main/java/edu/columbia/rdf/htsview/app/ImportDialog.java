@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.swing.Box;
 
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.external.samtools.SamGuiFileFilter;
@@ -68,7 +69,7 @@ public class ImportDialog extends ModernDialogTaskWindow {
      * Instantiates a new genome chr combo.
      */
     public GenomeChrCombo() {
-      for (Genome g : GenomeService.getInstance()) {
+      for (Genome g : ChromosomeService.getInstance()) {
         addScrollMenuItem(g.getAssembly());
       }
     }

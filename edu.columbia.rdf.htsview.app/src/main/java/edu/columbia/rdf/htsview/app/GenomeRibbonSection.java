@@ -15,8 +15,8 @@
  */
 package edu.columbia.rdf.htsview.app;
 
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -85,7 +85,7 @@ public class GenomeRibbonSection extends RibbonSection
 
     // for (Genome genome : CollectionUtils
     // .sort(GenesService.getInstance().getGenomes())) {
-    for (Genome g : GenomeService.getInstance()) {
+    for (Genome g : ChromosomeService.getInstance()) {
       popup.addMenuItem(new ModernTwoLineMenuItem(g.getAssembly(),
           "Switch to the " + g.getAssembly() + " genome.", ICON));
     }

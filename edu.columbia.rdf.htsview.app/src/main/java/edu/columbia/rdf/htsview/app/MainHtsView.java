@@ -185,7 +185,7 @@ public class MainHtsView {
         e.printStackTrace();
       }
     } else {
-      MainHtsView.main(null, Genome.HG19, null);
+      MainHtsView.main(null, Genome.HUMAN_HG19_REFSEQ, null);
     }
   }
 
@@ -201,7 +201,7 @@ public class MainHtsView {
    */
   public static void main(EDBWLogin login) throws ServerException, IOException,
       ClassNotFoundException, SAXException, ParserConfigurationException {
-    main(login, Genome.HG19, null);
+    main(login, Genome.HUMAN_HG19_REFSEQ, null);
   }
 
   /**
