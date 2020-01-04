@@ -32,7 +32,9 @@ import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.AssetService;
 import org.jebtk.modern.UI;
+import org.jebtk.modern.button.ButtonStyle;
 import org.jebtk.modern.button.ModernButton;
+import org.jebtk.modern.button.ModernClickWidget;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
@@ -43,8 +45,6 @@ import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.search.SearchModel;
 import org.jebtk.modern.tree.ModernTree;
-import org.jebtk.modern.widget.ButtonStyle;
-import org.jebtk.modern.widget.ModernClickWidget;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
 import edu.columbia.rdf.edb.Sample;

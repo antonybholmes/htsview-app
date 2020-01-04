@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.core.http.UrlBuilder;
+import org.jebtk.core.http.URLPath;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
       .getLogger(PeakAssemblyWeb.class);
 
   /** The m auth V 1. */
-  private UrlBuilder mAuthV1;
+  private URLPath mAuthV1;
 
   /**
    * Instantiates a new track assembly web.
@@ -47,7 +47,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
    * @param url the login
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public PeakAssemblyWeb(UrlBuilder url) throws IOException {
+  public PeakAssemblyWeb(URLPath url) throws IOException {
     mAuthV1 = url;
   }
 
@@ -60,7 +60,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
   public List<PeakSet> getJsonPeaks(int sampleId) throws IOException {
     List<PeakSet> ret = new ArrayList<PeakSet>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("peaks").param("id", sampleId);
+    URLPath peaksUrl = mAuthV1.join("peaks").param("id", sampleId);
 
     LOG.info("peaks url: {}", peaksUrl);
 
@@ -87,7 +87,7 @@ public class PeakAssemblyWeb extends PeakAssembly {
       int peaksId) throws IOException {
     List<GenomicRegion> ret = new ArrayList<GenomicRegion>(1000);
 
-    UrlBuilder peaksUrl = mAuthV1.resolve("peaks").resolve(peaksId);
+    URLPath peaksUrl = mAuthV1.join("peaks").join(peaksId);
 
     LOG.info("peaks url: {}", peaksUrl);
 

@@ -33,7 +33,7 @@ import java.net.URISyntaxException;
 
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.core.http.URLUtils;
-import org.jebtk.core.http.UrlBuilder;
+import org.jebtk.core.http.URLPath;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.Join;
 import org.jebtk.modern.AssetService;
@@ -68,7 +68,7 @@ public class UCSCModule extends HTSViewModule implements ModernClickListener {
   private ModernButton mTracksButton = new RibbonLargeButton("UCSC",
       AssetService.getInstance().loadIcon(GBIcon.class, 24));
 
-  private static final UrlBuilder BASE_URL = new UrlBuilder(
+  private static final URLPath BASE_URL = URLPath.fromUrl(
       SettingsService.getInstance().getUrl("htsview.ucsc.tracks.base-url"));
 
   /**
@@ -122,7 +122,7 @@ public class UCSCModule extends HTSViewModule implements ModernClickListener {
   }
 
   private void tracks() throws URISyntaxException, IOException {
-    UrlBuilder url = mUrl;
+    URLPath url = mUrl;
 
     Join join = Join.onColon();
 
@@ -140,7 +140,7 @@ public class UCSCModule extends HTSViewModule implements ModernClickListener {
 
     Genome genome = mWindow.getGenomeModel().get();
 
-    UrlBuilder dispUrl = BASE_URL.param("org", genome.getName())
+    URLPath dispUrl = BASE_URL.param("org", genome.getName())
         .param("db", genome.getAssembly())
         .param("position", mWindow.getGenomicModel().get().getLocation()) // =chr3:187439165-187454285")
         .param("hgt.customText", url.toString());

@@ -15,7 +15,7 @@
  */
 package edu.columbia.rdf.htsview.app.modules;
 
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 import org.jebtk.modern.help.GuiAppInfo;
 
 import edu.columbia.rdf.htsview.app.MainHtsViewWindow;
@@ -25,7 +25,7 @@ import edu.columbia.rdf.htsview.app.MainHtsViewWindow;
  * extend the functionality of the base MatCalc application. Modules can access
  * the current matrix and add new matrices to the work flow as well as provide
  */
-public abstract class Module implements NameProperty {
+public abstract class Module implements NameGetter {
 
   /**
    * Gets the module info.

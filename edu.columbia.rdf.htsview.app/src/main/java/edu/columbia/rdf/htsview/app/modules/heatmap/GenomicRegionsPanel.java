@@ -22,12 +22,12 @@ import java.util.List;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.text.TextUtils;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.panel.ModernLineBorderPanel;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.text.ModernClipboardTextArea;
 import org.jebtk.modern.text.ModernTextArea;
-import org.jebtk.modern.widget.ModernWidget;
 
 /**
  * The Class RegionsPanel.

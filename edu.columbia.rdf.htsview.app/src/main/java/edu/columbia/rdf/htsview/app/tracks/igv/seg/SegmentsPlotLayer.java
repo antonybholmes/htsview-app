@@ -28,9 +28,9 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesLayer;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.colormap.ColorMap;
-import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 

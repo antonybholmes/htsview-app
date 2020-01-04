@@ -22,9 +22,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jebtk.core.tree.TreeNode;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
-import org.jebtk.modern.widget.ModernWidget;
 
 import edu.columbia.rdf.htsview.app.AnnotationTracksTree;
 import edu.columbia.rdf.htsview.tracks.Track;

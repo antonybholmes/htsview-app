@@ -27,7 +27,7 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.Io;
 import org.jebtk.core.io.PathUtils;
@@ -36,7 +36,7 @@ import org.jebtk.core.text.TextUtils;
 /**
  * The Class SegmentSamples.
  */
-public class SegmentSamples implements Iterable<String>, NameProperty {
+public class SegmentSamples implements Iterable<String>, NameGetter {
 
   /** The m segments. */
   private Map<String, ChrSegments> mSegments = new TreeMap<String, ChrSegments>();

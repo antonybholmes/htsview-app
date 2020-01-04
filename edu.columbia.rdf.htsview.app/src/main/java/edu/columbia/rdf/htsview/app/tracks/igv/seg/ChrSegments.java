@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 
 /**
  * The Class ChrSegments.
  */
-public class ChrSegments implements Iterable<Chromosome>, NameProperty {
+public class ChrSegments implements Iterable<Chromosome>, NameGetter {
 
   /** The m segments. */
   private Map<Chromosome, Segments> mSegments = new TreeMap<Chromosome, Segments>();

@@ -43,7 +43,7 @@ import org.jebtk.bioinformatics.genomic.SequenceService;
 import org.jebtk.bioinformatics.genomic.WebGenes;
 import org.jebtk.core.AppService;
 import org.jebtk.core.PluginService;
-import org.jebtk.core.http.UrlBuilder;
+import org.jebtk.core.http.URLPath;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.settings.SettingsService;
@@ -347,13 +347,13 @@ public class MainHtsView {
       // UrlBuilder url = SettingsService.getInstance()
       // .getSetting("edb.reads.chip-seq.remote-url").getUrlBuilder();
 
-      UrlBuilder seqUrl = login.getURL().resolve("seq");
+      URLPath seqUrl = login.getURL().join("seq");
 
       WebAssemblyService.getInstance()
           .setSampleAssembly(new SampleAssemblyWeb(seqUrl));
 
       WebAssemblyService.getInstance()
-          .setPeakAssembly(new PeakAssemblyWeb(seqUrl.resolve("chipseq")));
+          .setPeakAssembly(new PeakAssemblyWeb(seqUrl.join("chipseq")));
     }
 
     if (SettingsService.getInstance().getBool("htsview.dna.web-mode")) {
