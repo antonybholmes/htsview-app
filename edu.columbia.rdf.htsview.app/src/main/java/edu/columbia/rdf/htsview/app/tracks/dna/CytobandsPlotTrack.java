@@ -95,7 +95,8 @@ public class CytobandsPlotTrack extends AnnotationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
@@ -103,7 +104,7 @@ public class CytobandsPlotTrack extends AnnotationPlotTrack {
 
     // mPlot.setForwardCanvasEventsEnabled(false);
 
-    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    mSubFigure.update(genome, displayRegion, resolution, width, height, margin);
 
     // mPlot.setForwardCanvasEventsEnabled(true);
 

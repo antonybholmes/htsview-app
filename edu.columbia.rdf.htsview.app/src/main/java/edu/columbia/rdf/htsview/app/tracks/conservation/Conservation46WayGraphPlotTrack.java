@@ -30,6 +30,8 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class Conservation46WayGraphPlotTrack extends ConservationPlotTrack {
 
+  private static final long serialVersionUID = 1L;
+  
   /** The title. */
   public static String TITLE = "46-way Conservation Graph";
 
@@ -84,12 +86,13 @@ public class Conservation46WayGraphPlotTrack extends ConservationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
       int margin) throws IOException {
-    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    mSubFigure.update(genome, displayRegion, resolution, width, height, margin);
 
     return mSubFigure;
   }

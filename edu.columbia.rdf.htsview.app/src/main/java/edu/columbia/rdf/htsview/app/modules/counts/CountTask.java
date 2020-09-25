@@ -62,11 +62,12 @@ public class CountTask extends SwingWorker<Void, Void> {
    * @param window the window
    * @param average the average
    */
-  public CountTask(List<SamplePlotTrack> tracks, List<GenomicRegion> regions,
+  public CountTask(List<SamplePlotTrack> tracks, Genome genome,
+      List<GenomicRegion> regions,
       NormalizationMethod norm) {
     mTracks = tracks;
     mLocations = regions;
-    mGenome = regions.get(0).getGenome();
+    mGenome = genome;
     mNorm = norm;
   }
 
@@ -213,6 +214,6 @@ public class CountTask extends SwingWorker<Void, Void> {
    */
   private int getCounts(SamplePlotTrack track, GenomicRegion r)
       throws IOException {
-    return track.getAssembly().getStarts(track.getSample(), r, -1).length;
+    return track.getAssembly().getStarts(track.getSample(), mGenome, r, -1).length;
   }
 }

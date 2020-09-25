@@ -15,6 +15,7 @@
  */
 package edu.columbia.rdf.htsview.app;
 
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
@@ -65,7 +66,7 @@ public class HTSGenomicRibbonSection extends GenomicRegionRibbonSection {
       // MIN_SIZE
 
       if (region.getEnd() - region.getStart() < MIN_BASES) {
-        int size = region.getChr().getSize();
+        int size = ChromosomeService.getInstance().size(genome, region.mChr);
 
         region = new GenomicRegion(region,
             region.getStart(),

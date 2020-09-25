@@ -77,13 +77,14 @@ public class MouseConservationPlotTrack extends ConservationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
       int margin) throws IOException {
     // mSubFigure.setForwardCanvasEventsEnabled(false);
-    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    mSubFigure.update(genome, displayRegion, resolution, width, height, margin);
     // mSubFigure.setForwardCanvasEventsEnabled(true);
 
     return mSubFigure;

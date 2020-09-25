@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.core.http.URLUtils;
 import org.jebtk.core.http.URLPath;
+import org.jebtk.core.http.URLUtils;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.Join;
 import org.jebtk.modern.AssetService;

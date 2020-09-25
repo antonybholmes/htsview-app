@@ -19,6 +19,8 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.ext.ucsc.Cytobands;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.ui.external.ucsc.CytobandsRegionLayer;
 import org.jebtk.graphplot.figure.PlotStyle;
@@ -84,7 +86,8 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
@@ -94,7 +97,8 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
       Color fillColor,
       PlotStyle style) throws IOException {
 
-    super.update(displayRegion,
+    super.update(genome,
+        displayRegion,
         resolution,
         yMax,
         width,
@@ -104,14 +108,14 @@ public class CytobandsSubFigure extends MeasurementSubFigure {
         fillColor,
         style);
 
-    mLayer.setRegion(displayRegion);
+    mLayer.setRegion(genome, displayRegion);
 
     // Update the title to reflect changes
     currentAxes().getTitle()
-        .setText("Cytobands (" + displayRegion.getGenome() + ") - "
+        .setText("Cytobands (" + genome + ") - "
             + displayRegion.getChr().toString());
 
     // set the graph limits
-    currentAxes().getX1Axis().setLimits(1, displayRegion.getChr().getSize());
+    currentAxes().getX1Axis().setLimits(1, ChromosomeService.getInstance().size(genome, displayRegion.mChr));
   }
 }

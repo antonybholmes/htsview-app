@@ -44,8 +44,8 @@ public class Segment extends GenomicRegion {
    * @param markers the markers
    * @param mean the mean
    */
-  public Segment(Genome genome, Chromosome chr, int start, int end, int markers, double mean) {
-    super(genome, chr, start, end);
+  public Segment(Chromosome chr, int start, int end, int markers, double mean) {
+    super(chr, start, end);
 
     mMarkers = markers;
     mMean = mean;

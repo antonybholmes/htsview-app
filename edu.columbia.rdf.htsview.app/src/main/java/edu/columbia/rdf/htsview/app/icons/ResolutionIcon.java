@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.app.icons;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import org.jebtk.core.Props;
 import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.graphics.icons.ModernVectorIcon;
 
@@ -51,7 +52,7 @@ public class ResolutionIcon extends ModernVectorIcon {
       int y,
       int w,
       int h,
-      Object... params) {
+      Props props) {
     g2.setColor(Color.WHITE);
     g2.fillRect(x, y, w, h);
 

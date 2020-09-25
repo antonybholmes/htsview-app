@@ -146,7 +146,7 @@ public class SegmentSamples implements Iterable<String>, NameGetter {
         }
 
         samples.mSegments.get(name).get(chr)
-            .add(new Segment(genome, chr, start, end, markers, mean));
+            .add(new Segment(chr, start, end, markers, mean));
       }
     } finally {
       reader.close();

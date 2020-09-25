@@ -23,6 +23,7 @@ import java.util.Map;
 
 import javax.swing.SwingWorker;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultTreeMap;
 import org.jebtk.core.collections.DefaultTreeMapCreator;
@@ -74,6 +75,8 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
   /** The m average. */
   private boolean mAverage;
 
+  private Genome mGenome;
+
   /**
    * Instantiates a new read dist task.
    *
@@ -86,11 +89,14 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
    * @param average the average
    */
   public ReadDistTask(ModernRibbonWindow parent, String name,
-      List<SamplePlotTrack> tracks, List<HeatMapIdLocation> regions,
+      List<SamplePlotTrack> tracks,
+      Genome genome,
+      List<HeatMapIdLocation> regions,
       int padding, int window, boolean average) {
     mParent = parent;
     mName = name;
     mTracks = tracks;
+    mGenome = genome;
     mLocations = regions;
     mPadding = padding;
     mWindow = window;
@@ -234,12 +240,12 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
         GenomicRegion ext = GenomicRegion.extend(GenomicRegion
             .midRegion(location.getRegion()), mPadding, mPadding);
 
-        double[] counts = getCounts(track, ext, mWindow);
+        double[] counts = getCounts(track, mGenome, ext, mWindow);
 
         if (relative) {
           // Take the ratio of sample to input
 
-          double[] inputCounts = getCounts(inputSample, ext, mWindow);
+          double[] inputCounts = getCounts(inputSample, mGenome, ext, mWindow);
 
           for (int i = 0; i < bins; ++i) {
             // if (inputCounts.get(i) > 0) {
@@ -330,10 +336,11 @@ public class ReadDistTask extends SwingWorker<Void, Void> {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   private double[] getCounts(SamplePlotTrack track,
+      Genome genome,
       GenomicRegion ext,
       int mWindow) throws IOException {
     double[] counts = track.getAssembly()
-        .getRPM(track.getSample(), ext, mWindow);
+        .getRPM(track.getSample(), genome, ext, mWindow);
 
     /*
      * if (mInput != null) { List<Double> inputCounts =

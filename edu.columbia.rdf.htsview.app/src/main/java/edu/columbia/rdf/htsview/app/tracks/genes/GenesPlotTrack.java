@@ -265,7 +265,8 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
@@ -274,7 +275,7 @@ public abstract class GenesPlotTrack extends AnnotationPlotTrack {
     // Display some genes
     //
 
-    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    mSubFigure.update(genome, displayRegion, resolution, width, height, margin);
 
     // mPlot.setForwardCanvasEventsEnabled(true);
 

@@ -37,6 +37,7 @@ import org.jebtk.bioinformatics.genomic.GTBZParser;
 import org.jebtk.bioinformatics.genomic.GenesDB;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.bioinformatics.genomic.LazyGenes;
 import org.jebtk.bioinformatics.genomic.SequenceService;
@@ -63,8 +64,6 @@ import edu.columbia.rdf.htsview.app.tracks.WebAssemblyService;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBAM;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBC;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBRT2;
-import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderBed;
-import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderGEB;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderGFF;
 import edu.columbia.rdf.htsview.app.tracks.loaders.SampleLoaderSeg;
 import edu.columbia.rdf.htsview.app.tracks.peaks.PeakAssemblyWeb;
@@ -79,8 +78,9 @@ import edu.columbia.rdf.htsview.app.tracks.view.SampleFSJsonParser;
 import edu.columbia.rdf.htsview.app.tracks.view.SampleJsonParser;
 import edu.columbia.rdf.htsview.app.tracks.view.SegJsonParser;
 import edu.columbia.rdf.htsview.chipseq.ChipSeqRepositoryCache;
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.SampleLoaderBed;
+import edu.columbia.rdf.htsview.tracks.ext.ucsc.SampleLoaderBedGraph;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderABI;
-import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderBedGraph;
 import edu.columbia.rdf.htsview.tracks.loaders.SampleLoaderService;
 import edu.columbia.rdf.htsview.tracks.sample.SampleAssemblyWeb;
 import edu.columbia.rdf.htsview.tracks.view.ABIJsonParser;
@@ -241,7 +241,7 @@ public class MainHtsView {
 
         String namePrefix = "_" + db;
 
-        Genome genome = new Genome(g, db);
+        Genome genome = GenomeService.getInstance().get(g, db);
 
         CytobandsService.getInstance().load(genome,
             FileUtils.newBufferedReader(
@@ -381,7 +381,7 @@ public class MainHtsView {
     TrackParserService.getInstance().register(new ABIJsonParser());
 
     // SampleLoaderService.getInstance().register(new SampleLoaderBCT());
-    SampleLoaderService.getInstance().register(new SampleLoaderGEB());
+    //SampleLoaderService.getInstance().register(new SampleLoaderGEB());
     SampleLoaderService.getInstance().register(new SampleLoaderBAM());
     SampleLoaderService.getInstance().register(new SampleLoaderBC());
     SampleLoaderService.getInstance().register(new SampleLoaderBRT2());

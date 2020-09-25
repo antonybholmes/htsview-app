@@ -40,8 +40,6 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.file.BioPathUtils;
-import org.jebtk.bioinformatics.genomic.Chromosome;
-import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
@@ -302,23 +300,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
           | ParserConfigurationException e1) {
         e1.printStackTrace();
       }
-    }
-  }
-
-  /**
-   * The class GenomeEvents.
-   */
-  private class GenomeEvents implements ChangeListener {
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
-     */
-    @Override
-    public void changed(ChangeEvent e) {
-      changeGenome();
     }
   }
 
@@ -638,7 +619,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     mTracksFigure = new TracksFigure();
 
-    mTracksFigurePanel = new TracksFigurePanel(mTracksFigure, mGenomicModel);
+    mTracksFigurePanel = new TracksFigurePanel(mTracksFigure, mGenomeModel, mGenomicModel);
 
     mLocationsPanel = new LocationsPanel(this, mGenomeModel, mGenomicModel);
 
@@ -662,7 +643,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     GenomicRegion region = GenomicRegion.parse(mGenomeModel.get(),
         SettingsService.getInstance().getString("edb.reads.default-location"));
 
-    System.err.println("Default region " + region + " " + region.getGenome());
+    System.err.println("Default region " + region + " " + mGenomeModel.get());
     mGenomicModel.set(region);
 
     createRibbon();
@@ -677,7 +658,6 @@ public class MainHtsViewWindow extends ModernRibbonWindow
 
     addModulesUI();
 
-    mGenomeModel.addChangeListener(new GenomeEvents());
     mGenomicModel.addChangeListener(new GenomicEvents());
     // mSamplesModel.addSelectionListener(new SampleEvents());
     mResolutionModel.addChangeListener(new ResolutionEvents());
@@ -1246,30 +1226,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     mResolutionModel.set(mResolutionModel.getPrevious());
   }
 
-  /**
-   * Change the genome by updating the genomic position with the new chromosome
-   * on a different genome.
-   */
-  private void changeGenome() {
-    Genome genome = mGenomeModel.get();
 
-    GenomicRegion region = mGenomicModel.get();
-
-    System.err.println("change");
-
-    // Get the same chromosome on a different assembly
-    Chromosome chr = ChromosomeService.getInstance().chr(genome, region.getChr());
-
-    // Change the genomic reference to reflect the new genome
-    mGenomicModel.set(genome, chr, region.getStart(), region.getEnd());
-
-    // try {
-    // Force plot recreation
-    // recreatePlots();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-  }
 
   /**
    * Update resolution.
@@ -1378,7 +1335,9 @@ public class MainHtsViewWindow extends ModernRibbonWindow
       return;
     }
 
-    HeatMapTask task = new HeatMapTask(this, tracks, dialog.getInput(),
+    HeatMapTask task = new HeatMapTask(this, mGenomeModel.get(),
+        tracks, 
+        dialog.getInput(),
         dialog.getRegions(), dialog.getPadding(), dialog.getBinSize(),
         dialog.getSortType(), mGenomeModel);
 
@@ -1426,7 +1385,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     }
 
     ReadDistTask task = new ReadDistTask(this, dialog.getPlotName(),
-        sampleTracks, dialog.getRegions(), dialog.getPadding(),
+        sampleTracks, mGenomeModel.get(), dialog.getRegions(), dialog.getPadding(),
         dialog.getBinSize(), dialog.getAverage());
 
     task.doInBackground(); // execute();
@@ -1470,7 +1429,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     for (SamplePlotTrack track : sampleTracks) {
       try {
         starts.addAll(new IntArrayListView(
-            track.getAssembly().getStarts(track.getSample(), region, -1)));
+            track.getAssembly().getStarts(track.getSample(), mGenomeModel.get(), region, -1)));
 
         if (track.getAssembly().getReadLength(track.getSample()) > 0) {
           l = track.getAssembly().getReadLength(track.getSample());
@@ -1678,7 +1637,8 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     for (TreeNode<Track> node : mTracksPanel.getTree()) {
       Track track = node.getValue();
 
-      UCSCTrack bedGraph = track.getBedGraph(mGenomicModel.get(),
+      UCSCTrack bedGraph = track.getBedGraph(mGenomeModel.get(),
+          mGenomicModel.get(),
           mResolutionModel.get());
 
       if (bedGraph == null) {
@@ -1874,6 +1834,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
   private void saveJsonView(Path file) throws IOException {
     TrackView.saveJsonView(file,
         mTrackList,
+        mGenomeModel.get(),
         mGenomicModel.get(),
         mTitlePositionModel.get(),
         mWidthModel.get(),

@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.ArrayListCreator;
 import org.jebtk.core.collections.DefaultTreeMap;
@@ -113,7 +114,8 @@ public class SegmentsSubFigure extends FixedYSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion region,
+  public void update(Genome genome,
+      GenomicRegion region,
       int resolution,
       double yMax,
       int width,
@@ -136,7 +138,8 @@ public class SegmentsSubFigure extends FixedYSubFigure {
 
     mLayer.update(regions, mColorMap);
 
-    super.update(region,
+    super.update(genome,
+        region,
         resolution,
         yMax,
         width,

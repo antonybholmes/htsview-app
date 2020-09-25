@@ -82,6 +82,6 @@ public class Segments implements Iterable<Segment> {
       mUpdated = false;
     }
 
-    return mSearch.getFeatureSet(region);
+    return mSearch.getValues(region);
   }
 }

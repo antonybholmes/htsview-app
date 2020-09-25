@@ -139,7 +139,7 @@ public class Import {
 
       for (int window : mWindows) {
         for (Chromosome chr : Human.CHROMOSOMES) {
-          encodeSam16Bit(mSamFile, mDir, chr, window, mGenome, mReadLength);
+          encodeSam16Bit(mSamFile, mDir, mGenome, chr, window, mReadLength);
         }
       }
 
@@ -229,12 +229,12 @@ public class Import {
    */
   public static void encodeSam16Bit(Path samFile,
       Path dir,
+      Genome genome,
       Chromosome chr,
       int window,
-      Genome genome,
       int readLength) throws IOException, ParseException {
 
-    int size = (chr.getSize() / window) + 1;
+    int size = (ChromosomeService.getInstance().size(genome, chr) / window) + 1;
 
     LOG.info("Reading {} {} {}...", dir, samFile, size);
 

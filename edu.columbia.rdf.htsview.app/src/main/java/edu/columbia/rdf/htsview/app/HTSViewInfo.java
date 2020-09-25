@@ -16,7 +16,6 @@
 package edu.columbia.rdf.htsview.app;
 
 import org.jebtk.core.AppVersion;
-import org.jebtk.modern.AssetService;
 import org.jebtk.modern.help.GuiAppInfo;
 
 import edu.columbia.rdf.htsview.app.icons.HTSViewIcon;
@@ -32,10 +31,9 @@ public class HTSViewInfo extends GuiAppInfo {
    * Instantiates a new reads info.
    */
   public HTSViewInfo() {
-    super("HTS View", new AppVersion(11),
+    super("HTS View", new AppVersion(12),
         "Copyright (C) 2014-${year} Antony Holmes",
-        AssetService.getInstance().loadIcon(HTSViewIcon.class, 32),
-        AssetService.getInstance().loadIcon(HTSViewIcon.class, 128),
+        new HTSViewIcon(),
         "View read track data at multiple resolutions.");
   }
 

@@ -71,9 +71,9 @@ public class BedGraphJsonParser extends TrackJsonParser {
 
     if (FileUtils.exists(file)) {
       try {
-        List<UCSCTrack> bedGraphs = BedGraph.parse(file);
+        List<BedGraph> bedGraphs = BedGraph.parse(file);
 
-        for (UCSCTrack bedGraph : CollectionUtils.reverse(bedGraphs)) {
+        for (BedGraph bedGraph : CollectionUtils.reverse(bedGraphs)) {
           bedGraph.setColor(color);
 
           TrackTreeNode child = new TrackTreeNode(

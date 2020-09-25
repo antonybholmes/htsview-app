@@ -90,7 +90,8 @@ public class DnaRepeatMaskCanvasLayer extends AxesClippedLayer {
     int h = axes.getInternalSize().getH();
 
     try {
-      SequenceRegion sequence = mAssembly.getSequence(mDisplayRegion,
+      SequenceRegion sequence = mAssembly.getSequence(mGenome,
+          mDisplayRegion,
           RepeatMaskType.N);
 
       int start = mDisplayRegion.getStart();

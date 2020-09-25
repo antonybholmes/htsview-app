@@ -30,8 +30,6 @@ import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.UniqueXY;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.modern.graphics.CanvasMouseEvent;
-import org.jebtk.modern.graphics.CanvasMouseListener;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.status.StatusService;
 import org.jebtk.modern.theme.ModernTheme;
@@ -47,120 +45,7 @@ public class MouseHighlightPeakPlotLayer extends PlotSeriesLayer {
   /** The Constant COLOR. */
   private static final Color COLOR = ColorUtils.tint(Color.BLACK, 0.5);
 
-  /** The Constant SNAP_SIZE. */
-  private static final int SNAP_SIZE = 5;
-
-  /**
-   * The Class CanvasEvents.
-   */
-  private class CanvasEvents implements CanvasMouseListener {
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseClicked(
-     * org. abh.common.ui.graphics.CanvasMouseEvent)
-     */
-    @Override
-    public void canvasMouseClicked(CanvasMouseEvent e) {
-      // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseEntered(
-     * org. abh.common.ui.graphics.CanvasMouseEvent)
-     */
-    @Override
-    public void canvasMouseEntered(CanvasMouseEvent e) {
-      // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseExited(
-     * org. abh.common.ui.graphics.CanvasMouseEvent)
-     */
-    @Override
-    public void canvasMouseExited(CanvasMouseEvent e) {
-      reset();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMousePressed(
-     * org. abh.common.ui.graphics.CanvasMouseEvent)
-     */
-    @Override
-    public void canvasMousePressed(CanvasMouseEvent e) {
-      // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseReleased(
-     * org. abh.common.ui.graphics.CanvasMouseEvent)
-     */
-    @Override
-    public void canvasMouseReleased(CanvasMouseEvent e) {
-      // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseDragged(
-     * org. abh.common.ui.graphics.CanvasMouseEvent)
-     */
-    @Override
-    public void canvasMouseDragged(CanvasMouseEvent e) {
-      reset();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseMoved(org
-     * .abh .common.ui.graphics.CanvasMouseEvent)
-     */
-    @Override
-    public void canvasMouseMoved(CanvasMouseEvent e) {
-      if (mXy == null) {
-        return;
-      }
-
-      int x = e.getScaledPos().getX();
-
-      Point p = mXy.closestX(x);
-
-      // In cases where there is no data in the region, skip trying
-      // to draw the crosshairs
-      if (p != null) {
-        if (Math.abs(x - p.x) <= SNAP_SIZE) {
-          mPoint = p;
-
-          fireChanged();
-        }
-      }
-    }
-
-  }
-
+  
   /** The m xy. */
   private UniqueXY mXy;
 

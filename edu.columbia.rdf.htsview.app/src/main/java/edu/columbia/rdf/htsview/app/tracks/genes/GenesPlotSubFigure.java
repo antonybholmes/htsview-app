@@ -107,7 +107,8 @@ public class GenesPlotSubFigure extends FixedYSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
@@ -117,8 +118,6 @@ public class GenesPlotSubFigure extends FixedYSubFigure {
       Color fillColor,
       PlotStyle style) throws IOException {
 
-    Genome genome = displayRegion.getGenome();
-
     if (mGenome == null
         || !genome.getAssembly().equals(mGenome.getAssembly())) {
       // Cache the genome unless the assembly name ch
@@ -127,12 +126,9 @@ public class GenesPlotSubFigure extends FixedYSubFigure {
 
     Collection<GenomicElement> genes = null;
 
-    try {
-      genes = GenesService.getInstance().getGenes(mGenome)
-          .find(mGenome, displayRegion, GenomicType.TRANSCRIPT);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    genes = GenesService.getInstance().getGenes(mGenome)
+        .find(mGenome, displayRegion, GenomicType.TRANSCRIPT, 1);
+    
 
     if (genes == null) {
       genes = Collections.emptyList();
@@ -189,7 +185,8 @@ public class GenesPlotSubFigure extends FixedYSubFigure {
 
     mGenesLayer.update(geneMap, displayRegion);
 
-    super.update(displayRegion,
+    super.update(genome,
+        displayRegion,
         resolution,
         genes.size(),
         width,

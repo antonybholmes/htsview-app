@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.conservation.ConservationAssembly;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.PlotStyle;
 
@@ -94,7 +95,8 @@ public class Conservation46WayGraphPlotCanvas extends DnaSubFigure {
    * org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
@@ -103,7 +105,8 @@ public class Conservation46WayGraphPlotCanvas extends DnaSubFigure {
       Color lineColor,
       Color fillColor,
       PlotStyle style) throws IOException {
-    super.update(displayRegion,
+    super.update(genome,
+        displayRegion,
         resolution,
         yMax,
         width,
