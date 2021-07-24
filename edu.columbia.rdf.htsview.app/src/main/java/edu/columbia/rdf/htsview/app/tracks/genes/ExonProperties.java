@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
 
 import java.awt.Color;
 
-import org.jebtk.graphplot.figure.properties.LineFillProperties;
+import org.jebtk.graphplot.figure.props.LineFillProps;
 
 /**
  * Set the color and stroke of a line on a plot element.
@@ -25,7 +25,7 @@ import org.jebtk.graphplot.figure.properties.LineFillProperties;
  * @author Antony Holmes
  *
  */
-public class ExonProperties extends LineFillProperties {
+public class ExonProperties extends LineFillProps {
 
   /**
    * The constant serialVersionUID.

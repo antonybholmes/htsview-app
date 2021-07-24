@@ -18,8 +18,8 @@ package edu.columbia.rdf.htsview.app.tracks.genes;
 import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.event.ChangeListeners;
-import org.jebtk.graphplot.figure.properties.FontProperties;
-import org.jebtk.graphplot.figure.properties.LineProperties;
+import org.jebtk.graphplot.figure.props.FontProps;
+import org.jebtk.graphplot.figure.props.LineProps;
 
 /**
  * The Class GeneProperties.
@@ -33,10 +33,10 @@ public class GeneProperties extends ChangeListeners implements ChangeListener {
   protected ExonProperties mExons = new ExonProperties();
 
   /** The m line style. */
-  protected LineProperties mLineStyle = new LineProperties();
+  protected LineProps mLineStyle = new LineProps();
 
   /** The m font. */
-  protected FontProperties mFont = new FontProperties();
+  protected FontProps mFont = new FontProps();
 
   /**
    * Instantiates a new gene properties.
@@ -52,7 +52,7 @@ public class GeneProperties extends ChangeListeners implements ChangeListener {
    *
    * @return the line style
    */
-  public LineProperties getLineStyle() {
+  public LineProps getLineStyle() {
     return mLineStyle;
   }
 
@@ -61,7 +61,7 @@ public class GeneProperties extends ChangeListeners implements ChangeListener {
    *
    * @return the font
    */
-  public FontProperties getFont() {
+  public FontProps getFont() {
     return mFont;
   }
 

@@ -78,27 +78,27 @@ public class HTSTracksPanel extends TracksPanel implements ModernClickListener {
   /** The m delete button. */
   private ModernClickWidget mDeleteButton = new RibbonButton(
       AssetService.getInstance().loadIcon("trash_bw", 16))
-          .setButtonStyle(ButtonStyle.CIRCLE);
+          .setButtonStyle(ButtonStyle.ROUNDED);
 
   /** The m tracks button. */
   private ModernClickWidget mTracksButton = new RibbonButton(
       AssetService.getInstance().loadIcon("tracks", 16))
-          .setButtonStyle(ButtonStyle.CIRCLE);
+          .setButtonStyle(ButtonStyle.ROUNDED);
 
   /** The m edit button. */
   private ModernClickWidget mEditButton = new RibbonButton(
       AssetService.getInstance().loadIcon("edit_bw", 16))
-          .setButtonStyle(ButtonStyle.CIRCLE);
+          .setButtonStyle(ButtonStyle.ROUNDED);
 
   /** The m clear button. */
   private ModernClickWidget mClearButton = new RibbonButton(
       AssetService.getInstance().loadIcon(CrossVectorIcon.class, 16))
-          .setButtonStyle(ButtonStyle.CIRCLE);
+          .setButtonStyle(ButtonStyle.ROUNDED);
 
   /** The m samples button. */
   private ModernClickWidget mSamplesButton = new RibbonButton("Samples",
       AssetService.getInstance().loadIcon(PlusVectorIcon.class, 16))
-      .setButtonStyle(ButtonStyle.PILL);
+      .setButtonStyle(ButtonStyle.ROUNDED);
 
   /** The m search model. */
   private SearchModel mSearchModel = new SearchModel();

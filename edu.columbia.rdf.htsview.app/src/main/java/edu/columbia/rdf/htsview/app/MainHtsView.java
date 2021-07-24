@@ -240,6 +240,9 @@ public class MainHtsView {
         String db = PathUtils.namePrefix(dir2);
 
         String namePrefix = "_" + db;
+        
+        System.err.println("aha "+g+" "+db + " "+ SettingsService.getInstance().getBool("htsview.genes.web-mode"));
+        
 
         Genome genome = GenomeService.getInstance().get(g, db);
 
@@ -254,6 +257,8 @@ public class MainHtsView {
         // GenomeService.getInstance().load(dir.resolve(g + ".genome.txt.gz"));
 
         if (!SettingsService.getInstance().getBool("htsview.genes.web-mode")) {
+          System.err.println("hmm hh " + genome);
+          
           // Look for files locally
           List<Path> files = FileUtils.ls(dir2.resolve("genes"));
 
@@ -274,6 +279,7 @@ public class MainHtsView {
                   new LazyGenes(file, genome, GenesDB.gff3Parser()
                       .setKeepExons(true).setLevels(GenomicType.TRANSCRIPT)));
             } else if (filename.contains("gtbz")) {
+              System.err.println("hmm " + genome + " " + file);
               GenesService.getInstance().put(genome,
                   new GTBZGenes(file, genome, new GTBZParser()
                       .setKeepExons(true).setLevels(GenomicType.TRANSCRIPT)));
@@ -292,8 +298,12 @@ public class MainHtsView {
           }
         }
       }
+      
+      
     }
 
+    //System.exit(0);
+    
     /*
      * Path path = SettingsService.getInstance().getFile(
      * "htsview.annotation.ucsc.hg19.refseq.genes.gff");

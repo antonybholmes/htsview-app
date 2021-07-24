@@ -56,7 +56,7 @@ import edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack;
 import edu.columbia.rdf.matcalc.MainMatCalc;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.bio.BioModuleLoader;
-import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
+import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProps;
 
 /**
  * The Class HeatMapTask.
@@ -140,7 +140,7 @@ public class HeatMapTask extends SwingWorker<Void, Void> {
    */
   @Override
   public void done() {
-    Props properties = new HeatMapProperties();
+    Props properties = new HeatMapProps();
 
     properties.set("plot.colormap", ColorMap.createWhiteRedMap());
     properties.set("plot.aspect-ratio", new AspectRatio(0.1));

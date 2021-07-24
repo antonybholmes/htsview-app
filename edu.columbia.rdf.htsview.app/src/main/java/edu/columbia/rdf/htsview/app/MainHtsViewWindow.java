@@ -904,6 +904,7 @@ public class MainHtsViewWindow extends ModernRibbonWindow
     // panel.setBorder(ModernPanel.BORDER);
 
     setCard(new ModernComponent(scrollPane, ModernWidget.BORDER));
+    //setCard(mTracksFigurePanel);
 
     // mPanel = new Graph2dPanel(this,
     // mCanvas,

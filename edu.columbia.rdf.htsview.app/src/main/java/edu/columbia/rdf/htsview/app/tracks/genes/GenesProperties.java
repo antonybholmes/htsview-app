@@ -21,7 +21,7 @@ import org.jebtk.core.event.ChangeEvent;
 import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.event.ChangeListeners;
 import org.jebtk.core.settings.SettingsService;
-import org.jebtk.graphplot.figure.properties.LineProperties;
+import org.jebtk.graphplot.figure.props.LineProps;
 
 import edu.columbia.rdf.htsview.app.tracks.OtherGeneProperties;
 import edu.columbia.rdf.htsview.app.tracks.VariantGeneProperties;
@@ -44,7 +44,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
   private ExonProperties mUTR = new ExonProperties();
 
   /** The m style. */
-  private LineProperties mStyle = new LineProperties();
+  private LineProps mStyle = new LineProps();
 
   /** The m max genes. */
   private int mMaxGenes = SettingsService.getInstance()
@@ -182,7 +182,7 @@ public class GenesProperties extends ChangeListeners implements ChangeListener {
    *
    * @return the style
    */
-  public LineProperties getStyle() {
+  public LineProps getStyle() {
     return mStyle;
   }
 

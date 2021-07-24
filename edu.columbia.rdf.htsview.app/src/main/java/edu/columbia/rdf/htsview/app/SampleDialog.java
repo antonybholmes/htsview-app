@@ -131,7 +131,7 @@ public class SampleDialog extends ModernDialogTaskWindow
       content.setHeader(box);
     }
 
-    setSize(500, 200);
+    setSize(500, 250);
 
     if (mPeakAssembly != null) {
       List<PeakSet> samplePeaks = mPeakAssembly.getJsonPeaks(mSample);
